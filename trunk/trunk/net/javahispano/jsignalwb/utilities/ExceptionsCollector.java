@@ -32,10 +32,16 @@ public class ExceptionsCollector {
     }
 
     public void showExceptions(String s) {
+        int van =0;
         if (exceptions.size() > 0) {
             s = "<p><Font Color=RED>" + s + "</Font><p>";
             for (Exception e : exceptions) {
                 s += "<p>-" + e.getMessage();
+                van++;
+                if (van > 10) {
+                    s += "<p>- Hay más problemas....";
+                    break;
+                }
             }
             JOptionPane.showMessageDialog(parentComponent,
                                           "<html>" + s + "<p><p></html>",
