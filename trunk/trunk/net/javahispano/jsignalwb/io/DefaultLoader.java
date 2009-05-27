@@ -208,7 +208,7 @@ public class DefaultLoader extends LoaderAdapter {
                     if(pm.isPluginRegistered(key)){
                         GridPlugin gp=pm.createGridPlugin(key.substring(key.indexOf(":")+1));
                         gp.setSignal(s);
-                        if(gp.getClass().getCanonicalName().equals(grid.getAttribute("BaseClass").getValue())){
+                        if(true||gp.getClass().getCanonicalName().equals(grid.getAttribute("BaseClass").getValue())){
                             if(gp.getPluginVersion().equals(grid.getAttribute("Version").getValue())){
                                 if(gp.hasDataToSave())
                                     gp.setSavedData(grid.getText());
@@ -253,7 +253,7 @@ public class DefaultLoader extends LoaderAdapter {
                     String pluginName=mark.getAttribute("Name").getValue();
                 if(pm.isPluginRegistered("mark",pluginName)){
                     MarkPlugin mp=pm.createMarkPlugin(pluginName);
-                    if(mp.getClass().getCanonicalName().equals(mark.getAttribute("BaseClass").getValue())){
+                    if(true||mp.getClass().getCanonicalName().equals(mark.getAttribute("BaseClass").getValue())){
                         if(mp.getPluginVersion().equals(mark.getAttribute("Version").getValue())){
                             mp.setMarkTime(Long.parseLong(mark.getAttribute("MarkTime").getValue()));
                             mp.setJSWBManager(jswbManager);
@@ -278,7 +278,6 @@ public class DefaultLoader extends LoaderAdapter {
                     property = (Element) propertyList.next();
                     String propertyName=property.getAttribute("Name").getValue();
                     String beanString=property.getText();
-
                     ByteArrayInputStream byteArrayIS=new ByteArrayInputStream(beanString.getBytes());
                     XMLDecoder decoder=new XMLDecoder(byteArrayIS);
                     Object obj=decoder.readObject();
@@ -297,7 +296,7 @@ public class DefaultLoader extends LoaderAdapter {
                     String pluginName=annotation.getAttribute("Name").getValue();
                 if(pm.isPluginRegistered("annotation",pluginName)){
                     AnnotationPlugin mp=pm.createAnnotationPlugin(pluginName);
-                    if(mp.getClass().getCanonicalName().equals(annotation.getAttribute("BaseClass").getValue())){
+                    if(true||mp.getClass().getCanonicalName().equals(annotation.getAttribute("BaseClass").getValue())){
                         if(mp.getPluginVersion().equals(annotation.getAttribute("Version").getValue())){
                             mp.setAnnotationTime(Long.parseLong(annotation.getAttribute("MarkTime").getValue()));
                             //mp.setJSWBManager(jswbManager);
@@ -334,7 +333,7 @@ public class DefaultLoader extends LoaderAdapter {
                 String pluginKey=plugin.getAttribute("Key").getValue();
                 if(pm.isPluginRegistered(pluginKey)){
                     Plugin p=pm.getPlugin(pluginKey);
-                    if(p.getClass().getCanonicalName().equals(plugin.getAttribute("BaseClass").getValue())){
+                    if(true||p.getClass().getCanonicalName().equals(plugin.getAttribute("BaseClass").getValue())){
                         if(p.getPluginVersion().equals(plugin.getAttribute("Version").getValue())){
                             if(p.hasDataToSave())
                                 p.setSavedData(plugin.getText());
