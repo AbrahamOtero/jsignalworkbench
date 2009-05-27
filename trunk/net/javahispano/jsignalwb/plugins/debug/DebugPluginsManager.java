@@ -8,16 +8,19 @@ package net.javahispano.jsignalwb.plugins.debug;
 
 import java.util.ArrayList;
 
-import a.EraseInterval;
-import beats.ExportarLatiods;
-import beats.TestDeteccion;
-import beats.anotaciones.*;
-import net.javahispano.hrv.HRVLoader;
-import net.javahispano.hrv.MultiTXTLoader;
+import research.apneas.EraseInterval;
+import research.beats.ExportarLatiods;
+import research.beats.TestDeteccion;
+import research.beats.anotaciones.*;
+import research.beats.hrv.HRVLoader;
+import research.beats.hrv.MultiTXTLoader;
 import net.javahispano.jsignalwb.io.BasicLoader;
 import net.javahispano.jsignalwb.plugins.Plugin.PluginTypes;
 import net.javahispano.jsignalwb.plugins.PluginManager;
-import beats.asistencia.*;
+import research.beats.asistencia.*;
+import research.apneas.spo2.DetectorDesaturacionesWrapper;
+import net.javahispano.plugins.signalgeneration.SignalGenerationPlugin;
+import net.javahispano.testplugins.*;
 
 /**
  *
@@ -37,23 +40,23 @@ public class DebugPluginsManager {
          * Use this sintaxis
          * {@code plugins.add(new DebugPluginInfo(pluginType,pluginName,Plugin));}
          */
-   /*     plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Apnea Grid",
-                                        new a.grid.ApneaGrid()));
+   /**/     plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Apnea Grid",
+                                        new research.apneas.grid.ApneaGrid()));
         plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Respiratory effort Grid",
-                                        new a.grid.ApneaGrid()));
+                                        new research.apneas.grid.ApneaGrid()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Test",
                                         new DetectorDesaturacionesWrapper()));
         plugins.add(new DebugPluginInfo(PluginTypes.GRID, "SpO2 Grid",
-                                        new a.grid.SpO2Grid()));
+                                        new research.apneas.grid.SpO2Grid()));
         plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Snoring Grid",
-                                        new a.grid.SnoringGrid()));
+                                        new research.apneas.grid.SnoringGrid()));
         plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Default",
-                                        new a.grid.GridGris()));*/
+                                        new research.apneas.grid.GridGris()));/**/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
-                                        new net.javahispano.jsignalwb.plugins.basicstats.BasicStatisticsPlugin()));
+                                        new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
-                                        new net.javahispano.jsignalwb.plugins.basicstats.MobileMeanPlugin()));
+                                        new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "TRACE importer",
                                         new es.usc.gsi.trace.importer.TraceImporter()));
@@ -80,14 +83,14 @@ public class DebugPluginsManager {
                                         new BorrarMarcasEnIntervalo()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Apnea",
-                                        new a.ApneaAlgorithm()));
-      /*  plugins.add(new DebugPluginInfo(PluginTypes.GENERIC, "Signal Generation",
+                                        new research.apneas.ApneaAlgorithm()));
+      /**/  plugins.add(new DebugPluginInfo(PluginTypes.GENERIC, "Signal Generation",
                                         new SignalGenerationPlugin()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "SnoreAlgorithm",
-                                        new a.SnoreAlgorithm()));
-*/
-        /*
+                                        new research.apneas.SnoreAlgorithm()));
+/**/
+        /**/
                 plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
                        new PruebaDeConcurrenciaParaSwing ()));
 
@@ -97,14 +100,14 @@ public class DebugPluginsManager {
                        new AddSignalPropertiesPlugin()));
                 plugins.add(new DebugPluginInfo("algorithm","AddSinPlugin",
                        new AddSinPlugin()));
-         */
+         /**/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Derivada",
-                                        new a.Derivada()));
+                                        new research.apneas.Derivada()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar intervalo",
                                         new EraseInterval()));
 
-    /*    plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Filtro nasal",
-                                        new a.FiltroNasal()));*/
+    /* */   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Filtro nasal",
+                                        new research.apneas.FiltroNasal()));/**/
 
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "basicLoader",
                                         new BasicLoader()));
@@ -121,7 +124,7 @@ public class DebugPluginsManager {
                                         new LatidoAnotacion()));
 
 
-        /*
+        /**/
                  plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
                 new PruebaDeConcurrenciaParaSwing()));
                  plugins.add(new DebugPluginInfo("generic","AddToolBarElementsPlugin",
@@ -133,7 +136,7 @@ public class DebugPluginsManager {
          plugins.add(new DebugPluginInfo("generic","ShowSignalsPropertiesPlugin",
                 new ShowSignalsPropertiesPlugin()));
 
-         */
+        /* */
 
 
         // DONT REMOVE THIS CODE

@@ -48,7 +48,7 @@ public class DebugPluginInfo {
        }
 
     }
-    private PluginTypes getPluginType(String p) {
+    private static PluginTypes getPluginType(String p) {
         if (p.equals("algorithm")){
             return PluginTypes.ALGORITHM;
         }else if (p.equals("anotation")) {
