@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import research.apneas.gui.LimitacionFlujoMark;
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import research.beats.anotaciones.LimitacionAnotacion;
 
 public class ReduccionFlujo {

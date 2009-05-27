@@ -9,6 +9,8 @@ import javax.swing.Icon;
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.*;
 import research.beats.anotaciones.LatidoAnotacion;
+import net.javahispano.jsignalwb.plugins.defaults.*;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  *

@@ -8,6 +8,7 @@ import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.ui.LoaderExecutionJDialog;
 import net.javahispano.jsignalwb.ui.SaverExecutionJDialog;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * Fachada para realizar las operaciones de entrada y salida. Para funcionar

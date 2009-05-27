@@ -9,13 +9,13 @@ import java.util.Collection;
 import javax.swing.Icon;
 import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.plugins.AlgorithmRunner;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
 import net.javahispano.jsignalwb.IntervalSelectedListener;
 import net.javahispano.jsignalwb.IntervalSelectedEvent;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
 import java.util.TreeSet;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import java.util.SortedSet;
 import net.javahispano.jsignalwb.jsignalmonitor.*;
 

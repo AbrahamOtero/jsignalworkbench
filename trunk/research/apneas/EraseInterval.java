@@ -1,7 +1,7 @@
 package research.apneas;
 
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.plugins.AlgorithmRunner;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.SignalIntervalProperties;
 import net.javahispano.jsignalwb.Signal;

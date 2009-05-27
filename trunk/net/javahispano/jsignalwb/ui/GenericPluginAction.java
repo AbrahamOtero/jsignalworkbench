@@ -4,6 +4,7 @@ import net.javahispano.jsignalwb.JSWBManager;
 import javax.swing.Icon;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * <p>Title: </p>

@@ -23,7 +23,7 @@ import net.javahispano.jsignalwb.Signal;
  * @author Roman
  */
 public abstract class MarkPluginAdapter extends PluginAdapter implements MarkPlugin {
-    Signal signal=null;
+    protected Signal signal=null;
     public boolean isInterval() {
         return false;
     }

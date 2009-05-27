@@ -12,6 +12,7 @@ package net.javahispano.jsignalwb.plugins;
 import java.util.List;
 
 import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 
 /**

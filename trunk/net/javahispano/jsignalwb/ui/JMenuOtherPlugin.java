@@ -4,7 +4,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.Plugin;
-import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  *

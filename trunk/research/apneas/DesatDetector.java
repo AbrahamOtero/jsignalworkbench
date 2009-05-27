@@ -7,7 +7,7 @@ import java.util.List;
 
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import research.beats.anotaciones.LimitacionAnotacion;
 import research.beats.anotaciones.DesaturacionAnotacion;
 

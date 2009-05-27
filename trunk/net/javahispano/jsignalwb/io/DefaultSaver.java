@@ -14,6 +14,7 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 import javax.swing.Icon;
 import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patrón

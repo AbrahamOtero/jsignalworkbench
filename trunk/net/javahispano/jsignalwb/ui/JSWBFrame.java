@@ -16,6 +16,7 @@ import net.javahispano.jsignalwb.JSWBWindowListener;
 import net.javahispano.jsignalwb.jsignalmonitor.MoveScrollPanel;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.Plugin.*;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * ventana principal de la aplicación.No diseñado como parte del API.

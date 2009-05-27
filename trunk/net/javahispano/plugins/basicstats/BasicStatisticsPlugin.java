@@ -14,6 +14,7 @@ import java.io.Reader;
 import java.io.*;
 import net.javahispano.plugins.basicstats.UI.NewStatisticsDialog;
 import org.jdom.output.XMLOutputter;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * <p>Title: </p>

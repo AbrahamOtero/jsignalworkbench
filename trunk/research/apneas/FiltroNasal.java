@@ -4,7 +4,7 @@ import java.util.List;
 
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.plugins.AlgorithmRunner;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 /**
     /**
