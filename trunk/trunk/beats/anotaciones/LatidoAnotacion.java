@@ -15,7 +15,7 @@ package beats.anotaciones;
 public class LatidoAnotacion extends LimitacionAnotacion {
 
    public LatidoAnotacion () {
-        this.setTipo(LimitacionAnotacion.LATIDOS);
+        this.setTipo(LimitacionAnotacion.N);
     }
 
       public String getName() {

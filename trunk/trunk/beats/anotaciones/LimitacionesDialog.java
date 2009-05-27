@@ -26,7 +26,7 @@ import java.awt.Color;
  */
 public class LimitacionesDialog extends JDialog {
     LimitacionAnotacion limitacionAnotacion;
-boolean a = true;
+boolean apnea = true, desat = false, latido = false;
     private JPanel panel1 = new JPanel();
     private BorderLayout borderLayout1 = new BorderLayout();
     private JPanel jPanel1 = new JPanel();
@@ -47,26 +47,41 @@ boolean a = true;
             if (limitacionesAnotaciones.getTipo()==LimitacionAnotacion.APNEA ||
                   limitacionesAnotaciones.getTipo()==LimitacionAnotacion.HIPOAPNEA ) {
 
+        jLabel1.setText("Tipo de limitación: ");
                 jComboBox1.addItem("Apnea");
                 jComboBox1.addItem("Hipoapnea");
 
             } else {
-                jPanel2.remove(this.jComboBox1);
-                 if (limitacionesAnotaciones.getTipo()==LimitacionAnotacion.LATIDOS) {
-                   JLabel l = new JLabel( "Latido Normal");
+                //jPanel2.remove(this.jComboBox1);
+                 if (limitacionesAnotaciones.getTipo()<=0) {
+                  /* JLabel l = new JLabel( "Latido Normal");
                    l.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
                    l.setForeground(Color.blue);
-                   this.jPanel2.add(l);
+                   this.jPanel2.add(l);*/
+
+        jLabel1.setText("Tipo de Latido: ");
+                  jComboBox1.addItem("N");
+                jComboBox1.addItem("A");
+                jComboBox1.addItem("V");
+                jComboBox1.addItem("P");
+                jComboBox1.addItem("TV");
+                jComboBox1.addItem("Vrt");
+                jComboBox1.addItem("Prt");
+                apnea=false;
+                latido= true;
                  }
                  else{
-                     JLabel l = new JLabel( "Desaturación");
+                     jPanel2.remove(this.jComboBox1);
+                     JLabel l = new JLabel( "Desaturación                       ");
                      l.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
                    l.setForeground(Color.blue);
                      this.jPanel2.add(l);
 
+                     apnea=false;
+                desat= true;
                  }
 
-                 a=false;
+
             }
 
             jPanel2.add(jLabel2);
@@ -82,6 +97,35 @@ boolean a = true;
         if (limitacionAnotacion.getTipo() == LimitacionAnotacion.HIPOAPNEA) {
             jComboBox1.setSelectedItem("Hipoapnea");
         }
+        else         if (limitacionAnotacion.getTipo() == LimitacionAnotacion.N) {
+            jComboBox1.setSelectedItem("N");
+        }
+        else        if (limitacionAnotacion.getTipo() == LimitacionAnotacion.A) {
+            jComboBox1.setSelectedItem("A");
+        }
+        else        if (limitacionAnotacion.getTipo() == LimitacionAnotacion.V) {
+            jComboBox1.setSelectedItem("V");
+        }
+        else        if (limitacionAnotacion.getTipo() == LimitacionAnotacion.P) {
+            jComboBox1.setSelectedItem("P");
+        }
+        else        if (limitacionAnotacion.getTipo() == LimitacionAnotacion.TV) {
+            jComboBox1.setSelectedItem("TV");
+        }
+        else        if (limitacionAnotacion.getTipo() == LimitacionAnotacion.Vrt) {
+            jComboBox1.setSelectedItem("Vrt");
+        }
+        else        if (limitacionAnotacion.getTipo() == LimitacionAnotacion.Prt) {
+            jComboBox1.setSelectedItem("Prt");
+        }
+
+
+
+
+
+
+
+
         this.setVisible(true);
     }
 
@@ -99,7 +143,6 @@ boolean a = true;
         jButton3.addActionListener(new LimitacionesDialog_jButton3_actionAdapter(this));
         jLabel1.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
         jLabel1.setForeground(Color.blue);
-        jLabel1.setText("Tipo de limitación: ");
         jLabel2.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
         jLabel2.setForeground(Color.blue);
         jLabel2.setText("Creado automáticamente:");
@@ -139,13 +182,34 @@ boolean a = true;
      * hideJWindow
      */
     private void hideJWindow() {
-        if (a&&((String)jComboBox1.getSelectedItem()).equals("Apnea")) {
+        if (apnea&&((String)jComboBox1.getSelectedItem()).equals("Apnea")) {
             limitacionAnotacion.setTipo(LimitacionAnotacion.APNEA);
         }
-        else         if (a) {
+        else         if (apnea) {
             limitacionAnotacion.setTipo(LimitacionAnotacion.HIPOAPNEA);
         }
+        if (latido) {
+            if (((String) jComboBox1.getSelectedItem()).equals("N")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.N);
+            } else if (((String) jComboBox1.getSelectedItem()).equals("A")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.A);
+            } else if (((String) jComboBox1.getSelectedItem()).equals("V")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.V);
+            } else if (((String) jComboBox1.getSelectedItem()).equals("P")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.P);
 
+
+            } else if (((String) jComboBox1.getSelectedItem()).equals("TV")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.TV);
+            } else if (((String) jComboBox1.getSelectedItem()).equals("Vrt")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.Vrt);
+            } else if (((String) jComboBox1.getSelectedItem()).equals("Prt")) {
+                limitacionAnotacion.setTipo(LimitacionAnotacion.Prt);
+            }
+            if (!((String) jComboBox1.getSelectedItem()).equals("N")) {
+                this.limitacionAnotacion.setAutomatica( false);
+            }
+        }
         this.dispose();
     }
 

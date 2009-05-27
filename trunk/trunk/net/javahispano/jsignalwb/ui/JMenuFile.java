@@ -28,6 +28,7 @@ public class JMenuFile extends JMenu{
         add(new JMenuItem(new NewAction()));
         addSeparator();
         add(new JMenuItem(new OpenFileAction(jswbManager)));
+        add(new JMenuItem(new OpenFileAndAddSignalsAction(jswbManager)));
         addSeparator();
         add(new JMenuItem(new SaveAction(jswbManager)));
         add(new JMenuItem(new SaveAsAction(jswbManager.getParentWindow(),jswbManager)));

@@ -49,13 +49,22 @@ public class OpenFileAction extends AbstractAction {
         File file = chooser.getSelectedFile();
         if (result == JFileChooser.APPROVE_OPTION) {
             if (file != null) {
-                jswbManager.loadChannels(chooser.getLoaderSelected().getName(), file);
+                loadData(file);
                 EnvironmentConfiguration.getInstancia().setPathJFFicheros(
                         chooser.getCurrentDirectory().getAbsolutePath());
             } else {
                 JOptionPane.showMessageDialog(JSWBManager.getParentWindow(),
                         "The selected file is not a valid JSW project");
             }
+
+            EnvironmentConfiguration.getInstancia().setDefaultLoader(chooser.getLoaderSelected().getName());
+
+
         }
+    }
+
+    protected void loadData(File file) {
+        this.jswbManager.setDeleteSignalsInNextLoad(true);
+        jswbManager.loadChannels(chooser.getLoaderSelected().getName(), file);
     }
 }

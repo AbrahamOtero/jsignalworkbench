@@ -62,7 +62,10 @@ public class HRVLoader extends BasicLoader {
             sm.addSignal(newSignal);
             newSignal.adjustVisibleRange();
         }
-        JSWBManager.getJSWBManagerInstance().setJSMFrecuency(fs);
+       JSWBManager jsw = JSWBManager.getJSWBManagerInstance();
+       if (jsw.isDeleteSignalsInNextLoad()) {
+       jsw.setJSMFrecuency(fs);
+       }
         return flag;
     }
 
