@@ -208,7 +208,6 @@ public class DefaultLoader extends LoaderAdapter {
                     if(pm.isPluginRegistered(key)){
                         GridPlugin gp=pm.createGridPlugin(key.substring(key.indexOf(":")+1));
                         gp.setSignal(s);
-                        if(true||gp.getClass().getCanonicalName().equals(grid.getAttribute("BaseClass").getValue())){
                             if(gp.getPluginVersion().equals(grid.getAttribute("Version").getValue())){
                                 if(gp.hasDataToSave())
                                     gp.setSavedData(grid.getText());
@@ -216,9 +215,7 @@ public class DefaultLoader extends LoaderAdapter {
 
                             }else
                                 ec.addException(new Exception("The version of the plugin "+gp.getName()+" is not the same"));
-                        }else ec.addException(new Exception("The grid plugin "+gp.getName()+" has change and " +
-                                "is imposible to load the saved data"));
-                    }else
+                       }else
                         ec.addException(new Exception("The grid plugin "+ key +" is not registered"));
                 }
 
@@ -253,7 +250,6 @@ public class DefaultLoader extends LoaderAdapter {
                     String pluginName=mark.getAttribute("Name").getValue();
                 if(pm.isPluginRegistered("mark",pluginName)){
                     MarkPlugin mp=pm.createMarkPlugin(pluginName);
-                    if(true||mp.getClass().getCanonicalName().equals(mark.getAttribute("BaseClass").getValue())){
                         if(mp.getPluginVersion().equals(mark.getAttribute("Version").getValue())){
                             mp.setMarkTime(Long.parseLong(mark.getAttribute("MarkTime").getValue()));
                             mp.setJSWBManager(jswbManager);
@@ -266,8 +262,6 @@ public class DefaultLoader extends LoaderAdapter {
                                 ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
                         }else
                             ec.addException(new Exception("The version of the plugin "+mp.getName()+" is not the same"));
-                    }else ec.addException(new Exception("The mark plugin "+mp.getName()+" has change and " +
-                            "is imposible to load the saved data"));
                 }else
                     ec.addException(new Exception("The mark plugin "+pluginName+" is not registered"));
                 }
@@ -296,7 +290,6 @@ public class DefaultLoader extends LoaderAdapter {
                     String pluginName=annotation.getAttribute("Name").getValue();
                 if(pm.isPluginRegistered("annotation",pluginName)){
                     AnnotationPlugin mp=pm.createAnnotationPlugin(pluginName);
-                    if(true||mp.getClass().getCanonicalName().equals(annotation.getAttribute("BaseClass").getValue())){
                         if(mp.getPluginVersion().equals(annotation.getAttribute("Version").getValue())){
                             mp.setAnnotationTime(Long.parseLong(annotation.getAttribute("MarkTime").getValue()));
                             //mp.setJSWBManager(jswbManager);
@@ -309,8 +302,6 @@ public class DefaultLoader extends LoaderAdapter {
                                 ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
                         }else
                             ec.addException(new Exception("The version of the plugin "+mp.getName()+" is not the same"));
-                    }else ec.addException(new Exception("The annotation plugin "+mp.getName()+" has change and " +
-                            "is imposible to load the saved data"));
                 }else
                     ec.addException(new Exception("The annotation plugin "+pluginName+" is not registered"));
                 }
@@ -333,7 +324,6 @@ public class DefaultLoader extends LoaderAdapter {
                 String pluginKey=plugin.getAttribute("Key").getValue();
                 if(pm.isPluginRegistered(pluginKey)){
                     Plugin p=pm.getPlugin(pluginKey);
-                    if(true||p.getClass().getCanonicalName().equals(plugin.getAttribute("BaseClass").getValue())){
                         if(p.getPluginVersion().equals(plugin.getAttribute("Version").getValue())){
                             if(p.hasDataToSave())
                                 p.setSavedData(plugin.getText());
@@ -345,8 +335,6 @@ public class DefaultLoader extends LoaderAdapter {
                             }
                         }else
                             ec.addException(new Exception("The version of the plugin "+p.getName()+" is not the same"));
-                    }else ec.addException(new Exception("The plugin "+p.getName()+" has change and " +
-                            "is imposible to load the saved data"));
                 }else
                     ec.addException(new Exception("The plugin "+pluginKey+" is not registered"));
             }
