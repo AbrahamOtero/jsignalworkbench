@@ -17,6 +17,7 @@ import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.debug.DebugPluginsManager;
 import net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog;
 import net.javahispano.jsignalwb.ui.JSWBStatusBar;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * Esta clase actúa a modo de fachada del framework, permitiendo acceder a la

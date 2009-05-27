@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.AxesGridPlugin;
+import net.javahispano.jsignalwb.plugins.defaults.AxesGridPlugin;
 import net.javahispano.jsignalwb.jsignalmonitor.*;
 
 /**

@@ -10,8 +10,8 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.PluginManager;
-import net.javahispano.jsignalwb.plugins.PluginManagerPanel;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
+import net.javahispano.jsignalwb.plugins.framework.PluginManagerPanel;
 
 /**
  *

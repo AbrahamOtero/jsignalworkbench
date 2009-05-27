@@ -1,6 +1,6 @@
 package research.apneas.gui;
 
-import net.javahispano.jsignalwb.plugins.DefaultInstantMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultInstantMark;
 import net.javahispano.jsignalwb.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -9,6 +9,7 @@ import java.awt.geom.RoundRectangle2D;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
 import research.apneas.LimitacionFlujo;
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.defaults.*;
 
 /**
  * <p>Title: </p>

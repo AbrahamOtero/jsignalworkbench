@@ -7,6 +7,7 @@ import java.util.List;
 import net.javahispano.jsignalwb.jsignalmonitor.ChannelProperties;
 import net.javahispano.jsignalwb.plugins.*;
 import org.joda.time.DateTime;
+import net.javahispano.jsignalwb.plugins.defaults.*;
 
 /**
  * Representa una señal dentro de JSignalWorkbench. Contiene información tanto

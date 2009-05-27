@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.Loader;
-import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import net.javahispano.jsignalwb.plugins.Saver;
 import net.javahispano.jsignalwb.utilities.FileChooserFileFilter;
 import net.javahispano.jsignalwb.EnvironmentConfiguration;

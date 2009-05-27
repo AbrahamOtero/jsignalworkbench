@@ -16,7 +16,7 @@ import research.beats.hrv.HRVLoader;
 import research.beats.hrv.MultiTXTLoader;
 import net.javahispano.jsignalwb.io.BasicLoader;
 import net.javahispano.jsignalwb.plugins.Plugin.PluginTypes;
-import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import research.beats.asistencia.*;
 import research.apneas.spo2.DetectorDesaturacionesWrapper;
 import net.javahispano.plugins.signalgeneration.SignalGenerationPlugin;

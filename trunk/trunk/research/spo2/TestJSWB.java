@@ -3,7 +3,7 @@ package research.spo2;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 
 /**
  * <p>Title: </p>

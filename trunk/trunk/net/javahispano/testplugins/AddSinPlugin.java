@@ -11,7 +11,7 @@ import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.SignalIntervalProperties;
 import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.plugins.AxesGridPlugin;
+import net.javahispano.jsignalwb.plugins.defaults.AxesGridPlugin;
 
 /**
  *

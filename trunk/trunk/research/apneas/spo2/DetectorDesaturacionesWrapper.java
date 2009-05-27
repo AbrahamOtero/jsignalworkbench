@@ -5,7 +5,7 @@ import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.SignalNotFoundException;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import research.apneas.spo2.Desaturacion;
 import research.apneas.spo2.DetectorDesaturaciones;
 import research.apneas.EpisodioDesaturacion;

@@ -15,6 +15,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  *

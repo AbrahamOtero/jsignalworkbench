@@ -13,7 +13,7 @@ import javax.swing.SwingWorker;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.SignalIntervalProperties;
 import net.javahispano.jsignalwb.plugins.Algorithm;
-import net.javahispano.jsignalwb.plugins.AlgorithmRunner;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 /**
  *

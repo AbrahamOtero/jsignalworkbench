@@ -11,6 +11,8 @@ import javax.swing.filechooser.FileFilter;
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.io.BasicSaver;
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.defaults.*;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * <p>Title: </p>

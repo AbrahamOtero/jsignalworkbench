@@ -1,5 +1,7 @@
 package research.beats.anotaciones;
 
+import net.javahispano.jsignalwb.plugins.defaults.*;
+
 /**
  * <p>Title: </p>
  *

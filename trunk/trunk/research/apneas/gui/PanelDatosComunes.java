@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import org.joda.time.DateTime;
 import research.apneas.*;
 

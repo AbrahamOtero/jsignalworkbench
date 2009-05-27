@@ -1,6 +1,6 @@
 package research.beats.anotaciones;
 
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import net.javahispano.jsignalwb.JSWBManager;
 import javax.swing.JFrame;
 import java.awt.Window;

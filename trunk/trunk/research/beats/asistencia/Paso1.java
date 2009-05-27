@@ -10,7 +10,7 @@ import javax.swing.Icon;
 import research.beats.anotaciones.LatidoAnotacion;
 import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.plugins.AlgorithmRunner;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import java.awt.Color;
 import java.util.Collection;
 import net.javahispano.jsignalwb.JSWBManager;

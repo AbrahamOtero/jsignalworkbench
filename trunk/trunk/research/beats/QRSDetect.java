@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.plugins.DefaultInstantMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultInstantMark;
 
 /**
  *

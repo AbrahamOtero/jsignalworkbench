@@ -5,7 +5,7 @@ import java.awt.Window;
 import javax.swing.JFrame;
 
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import java.awt.Color;
 
 /**

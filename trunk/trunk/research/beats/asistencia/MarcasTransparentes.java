@@ -9,11 +9,11 @@ import java.util.Collection;
 import javax.swing.Icon;
 import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.plugins.AlgorithmRunner;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
 import net.javahispano.jsignalwb.plugins.MarkPluginAdapter;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 
 /**
  * <p>Title: </p>

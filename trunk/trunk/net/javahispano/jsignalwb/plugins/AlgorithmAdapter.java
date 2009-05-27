@@ -16,6 +16,8 @@ import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.SignalIntervalProperties;
 import net.javahispano.jsignalwb.SignalManager;
 import java.util.*;
+import net.javahispano.jsignalwb.plugins.defaults.*;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  *

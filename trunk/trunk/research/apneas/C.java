@@ -6,7 +6,7 @@ import java.util.*;
 
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.DefaultIntervalAnnotation;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalAnnotation;
 
 /**
  * <p>Title: </p>

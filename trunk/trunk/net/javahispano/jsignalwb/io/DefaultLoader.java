@@ -23,12 +23,13 @@ import net.javahispano.jsignalwb.plugins.GridPlugin;
 import net.javahispano.jsignalwb.plugins.LoaderAdapter;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
 import net.javahispano.jsignalwb.plugins.Plugin;
-import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import net.javahispano.jsignalwb.utilities.ExceptionsCollector;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
   * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patrón

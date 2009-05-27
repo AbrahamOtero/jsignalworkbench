@@ -20,8 +20,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.KeyStroke;
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.PluginLoadException;
+import net.javahispano.jsignalwb.plugins.framework.PluginLoadException;
 import net.javahispano.jsignalwb.plugins.Saver;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 
 

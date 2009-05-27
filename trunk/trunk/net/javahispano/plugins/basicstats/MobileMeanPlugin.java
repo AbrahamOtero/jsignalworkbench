@@ -6,6 +6,7 @@ import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.*;
 import javax.swing.Icon;
 import javax.swing.*;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * <p>Title: </p>

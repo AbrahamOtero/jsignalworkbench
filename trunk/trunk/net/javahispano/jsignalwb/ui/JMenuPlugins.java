@@ -25,6 +25,7 @@ import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.utilities.MenuListenerAdapter;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.Plugin.GUIPositions;
+import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  *
