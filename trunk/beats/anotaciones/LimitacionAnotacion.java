@@ -21,7 +21,8 @@ import java.awt.Color;
  * @version 0.5
  */
 public class LimitacionAnotacion extends DefaultIntervalMark {
-    public static final int APNEA =1, HIPOAPNEA=2, DESATURACION =3, LATIDOS = 0;
+    public static final int APNEA =1, HIPOAPNEA=2, DESATURACION =3, N = 0,
+    A  = -1, V  = -2, P = -3,TV = -4, Vrt  = -5, Prt = -6;
     private int tipo=1;
     private boolean automatica=false;
 
@@ -49,7 +50,7 @@ public class LimitacionAnotacion extends DefaultIntervalMark {
         this.tipo = tipo;
                this.setComentary(tipo+"");
                if (tipo == LimitacionAnotacion.APNEA ||
-                   tipo == LimitacionAnotacion.LATIDOS) {
+                   tipo <=0) {
                    this.setColor(Color.RED);
                } else if (tipo == LimitacionAnotacion.HIPOAPNEA) {
                this.setColor(Color.YELLOW);
@@ -79,8 +80,23 @@ public class LimitacionAnotacion extends DefaultIntervalMark {
             this.setTipo(LimitacionAnotacion.APNEA);
         }
 
-        if (this.getComentary().toLowerCase().equals("0")) {
-            this.setTipo(LimitacionAnotacion.LATIDOS);
+        if (this.getComentary().toLowerCase().equals("-1")) {
+            this.setTipo(LimitacionAnotacion.A);
+        }
+        if (this.getComentary().toLowerCase().equals("-2")) {
+            this.setTipo(LimitacionAnotacion.V);
+        }
+        if (this.getComentary().toLowerCase().equals("-3")) {
+            this.setTipo(LimitacionAnotacion.P);
+        }
+        if (this.getComentary().toLowerCase().equals("-4")) {
+            this.setTipo(LimitacionAnotacion.TV);
+        }
+        if (this.getComentary().toLowerCase().equals("-5")) {
+            this.setTipo(LimitacionAnotacion.Vrt);
+        }
+        if (this.getComentary().toLowerCase().equals("-6")) {
+            this.setTipo(LimitacionAnotacion.Prt);
         }
     }
 }

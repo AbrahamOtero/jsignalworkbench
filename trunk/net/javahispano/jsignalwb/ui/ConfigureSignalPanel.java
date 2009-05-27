@@ -51,7 +51,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
         datePicker1.addPropertyChangeListener(datePicker1.PROPERTY_NAME_DATE,this);
         applyButton.setEnabled(false);
         initPropertiesListeners();
-        cancelButton.grabFocus();
+        abscissaIntervalRadioButton.grabFocus();
     }
 
     public void changedUpdate(DocumentEvent evt){

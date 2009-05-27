@@ -47,9 +47,8 @@ public class MarkAction extends AbstractAction{
             jsmp.setIntervalSelection(true);
             jsmp.setFirstTimeClicked(jsmp.getTimeAtLocation((int)p.getX()-channels.getHLeftOffsetScale()));
             jsmp.setClicked(true);
-            
         }
-            
+
     }
 
 }

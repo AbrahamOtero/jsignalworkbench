@@ -72,10 +72,12 @@ public class DebugPluginsManager {
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Anotando latidos",
                                         new Paso1()));
-       plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Anotando evento respiratorios",
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Anotando evento respiratorios",
                                         new Paso2()));
-
-
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Marcas Transparentes",
+                                        new MarcasTransparentes()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Borrar marcas",
+                                        new BorrarMarcasEnIntervalo()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Apnea",
                                         new a.ApneaAlgorithm()));

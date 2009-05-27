@@ -10,15 +10,13 @@ import javax.swing.*;
 import javax.swing.Action;
 
 import net.javahispano.jsignalwb.io.IOManager;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorDataSource;
+import net.javahispano.jsignalwb.jsignalmonitor.*;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorAnnotation;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorMark;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.debug.DebugPluginsManager;
 import net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog;
 import net.javahispano.jsignalwb.ui.JSWBStatusBar;
-import net.javahispano.jsignalwb.jsignalmonitor.LookAndFeelConfiguration;
 
 /**
  * Esta clase actúa a modo de fachada del framework, permitiendo acceder a la
@@ -64,6 +62,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
     private static Font bigFont = new java.awt.Font("Tahoma", Font.BOLD, 13);
     private static Color fontColor = Color.BLUE;
     private List<SessionListener> sessionListenetList = new LinkedList<SessionListener>();
+    //Si true borra las señales actualmente cargadas al cargar las siguientes.
+    private static boolean deleteSignalsInNextLoad = true;
     static {
 
     }
@@ -172,6 +172,10 @@ public class JSWBManager implements JSignalMonitorDataSource,
 
     public static void setNormalFont(Font normalFont) {
         JSWBManager.normalFont = normalFont;
+    }
+
+    public void setDeleteSignalsInNextLoad(boolean deleteSignalsInNextLoad) {
+        this.deleteSignalsInNextLoad = deleteSignalsInNextLoad;
     }
 
     public JPanel getStatusBarPanel() {
@@ -860,7 +864,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
      */
     public boolean loadChannels(String loaderName, File f) {
         try {
-            if (!iOManager.loadSignals(f, loaderName, true)) {
+            System.out.println("aaaaaaaaaa"+this.deleteSignalsInNextLoad);
+            if (!iOManager.loadSignals(f, loaderName, deleteSignalsInNextLoad)) {
                 JOptionPane.showMessageDialog(getParentWindow(), "Alguna señal no se ha cargado");
             }
             sessionInfo.setLastFileOpenedPath(f.getAbsolutePath());
@@ -1338,7 +1343,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
         /*@todo bug
                  a veces se llama a este metodo como un valor de pos1 de -2147483648
          */
-        if (pos2 <= pos1) {
+        if (pos2 <= pos1||pos1<0 || pos2 <0) {
+        System.out.println("pos1 " + pos1 +" pos2 "+pos2 );
             return new float[1];
         }
         float[] partialValues = new float[pos2 - pos1];
@@ -1399,6 +1405,10 @@ public class JSWBManager implements JSignalMonitorDataSource,
 
     public static Color getFontColor() {
         return fontColor;
+    }
+
+    public boolean isDeleteSignalsInNextLoad() {
+        return deleteSignalsInNextLoad;
     }
 
     public PropertiesFileManager getPropertiesFileManager() {

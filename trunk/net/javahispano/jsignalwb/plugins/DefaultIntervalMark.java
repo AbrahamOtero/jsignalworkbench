@@ -28,6 +28,8 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     private JSWBManager jswbManager;
     private int extraheightPixels = 10;
     private MarkPaintInfo markPaintInfo;
+    private int innerTransparencyLevel = 50;
+    private int borderTransparencyLevel = 150;
     public DefaultIntervalMark() {
         markTime = 0;
         endTime = 0;
@@ -87,9 +89,9 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
             this.markPaintInfo=markPaintInfo;
             Stroke oldStroke = g2d.getStroke();
             Color color2 = new Color(color.getRed(), color.getGreen(),
-                                     color.getBlue(), 50);
+                                     color.getBlue(), innerTransparencyLevel);
             Color color3 = new Color(color.getRed(), color.getGreen(),
-                                     color.getBlue(), 150);
+                                     color.getBlue(), borderTransparencyLevel);
             int maxY = (int) Math.max(markPaintInfo.getPoint().getY(),
                                       markPaintInfo.getMaxValueY());
             int minY = (int) Math.min(markPaintInfo.getPoint().getY() +
@@ -171,6 +173,14 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
         return extraheightPixels;
     }
 
+    public int getInnerTransparencyLevel() {
+        return innerTransparencyLevel;
+    }
+
+    public int getBorderTransparencyLevel() {
+        return borderTransparencyLevel;
+    }
+
     public void setColor(Color color) {
         this.color = color;
         refreshBufferedImage();
@@ -184,6 +194,23 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
      */
     public void setExtraheightPixels(int extraheightPixels) {
         this.extraheightPixels = extraheightPixels;
+    }
+
+    /**
+     * Un valor de transparencia para la marca entre cero y 255.
+     *
+     * @param innerTransparencyLevel int
+     */
+    public void setInnerTransparencyLevel(int innerTransparencyLevel) {
+        this.innerTransparencyLevel = innerTransparencyLevel;
+    }
+    /**
+      * Un valor de transparencia para el borde de la marca entre cero y 255.
+      *
+      * @param innerTransparencyLevel int
+     */
+    public void setBorderTransparencyLevel(int borderTransparencyLevel) {
+        this.borderTransparencyLevel = borderTransparencyLevel;
     }
 
     private void refreshBufferedImage() {
@@ -205,7 +232,7 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
         DefaultIntervalMark i = (DefaultIntervalMark) o;
         if (i.getMarkTime() < this.getMarkTime()) {
             return 1;
-        } else if (i.getMarkTime() < this.getMarkTime()) {
+        } else if (i.getMarkTime() > this.getMarkTime()) {
             return -1;
         }
         return 0;
