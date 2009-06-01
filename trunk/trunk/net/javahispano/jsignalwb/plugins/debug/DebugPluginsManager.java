@@ -21,6 +21,8 @@ import research.beats.asistencia.*;
 import research.apneas.spo2.DetectorDesaturacionesWrapper;
 import net.javahispano.plugins.signalgeneration.SignalGenerationPlugin;
 import net.javahispano.testplugins.*;
+import research.mining.AssociateEvents;
+import research.mining.GenerateDescriptors;
 
 /**
  *
@@ -40,7 +42,7 @@ public class DebugPluginsManager {
          * Use this sintaxis
          * {@code plugins.add(new DebugPluginInfo(pluginType,pluginName,Plugin));}
          */
-   /**/     plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Apnea Grid",
+   /*/     plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Apnea Grid",
                                         new research.apneas.grid.ApneaGrid()));
         plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Respiratory effort Grid",
                                         new research.apneas.grid.ApneaGrid()));
@@ -72,6 +74,10 @@ public class DebugPluginsManager {
                 new TestDeteccion()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"ExportarLatidos",
                 new ExportarLatiods()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Asociar Eventos",
+                new AssociateEvents()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Generar descriptores",
+                new GenerateDescriptors()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM,"Anotando latidos",
                                         new Paso1()));
@@ -84,13 +90,13 @@ public class DebugPluginsManager {
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Apnea",
                                         new research.apneas.ApneaAlgorithm()));
-      /**/  plugins.add(new DebugPluginInfo(PluginTypes.GENERIC, "Signal Generation",
+      /*/  plugins.add(new DebugPluginInfo(PluginTypes.GENERIC, "Signal Generation",
                                         new SignalGenerationPlugin()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "SnoreAlgorithm",
                                         new research.apneas.SnoreAlgorithm()));
 /**/
-        /**/
+        /*/
                 plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
                        new PruebaDeConcurrenciaParaSwing ()));
 
@@ -106,7 +112,7 @@ public class DebugPluginsManager {
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar intervalo",
                                         new EraseInterval()));
 
-    /* */   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Filtro nasal",
+    /* /   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Filtro nasal",
                                         new research.apneas.FiltroNasal()));/**/
 
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "basicLoader",
@@ -124,7 +130,7 @@ public class DebugPluginsManager {
                                         new LatidoAnotacion()));
 
 
-        /**/
+        /*/
                  plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
                 new PruebaDeConcurrenciaParaSwing()));
                  plugins.add(new DebugPluginInfo("generic","AddToolBarElementsPlugin",

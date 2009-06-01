@@ -1,38 +1,34 @@
-/*
- * AlgorithmAdapter.java
- *
- * Created on 11 de abril de 2007, 13:28
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package net.javahispano.jsignalwb.plugins;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.SignalManager;
-import java.util.*;
-import net.javahispano.jsignalwb.plugins.defaults.*;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
-/**
- *
- * @author Roman
+import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultAlgorithmConfiguration;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
+
+/*
+ * @author This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   Abraham Otero
  */
 public abstract class AlgorithmAdapter extends PluginAdapter implements
         Algorithm {
 
     private boolean executionCanceled = false;
-    /** Por defecto no proporciona interfaz de usuario */
+
+    /**
+     * Por defecto no proporciona interfaz propia de ejecución.
+     *
+     * @return boolean
+     */
     public boolean hasOwnExecutionGUI() {
         return false;
     }
 
-    /** Por defecto lanzara una excepcion */
+
     public void launchExecutionGUI(JSWBManager jswbManager) {
         JDialog conf = new JDialog(jswbManager.getParentWindow(), "Execution GUI");
 
@@ -46,6 +42,11 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
         conf.setVisible(true);
     }
 
+    /**
+     * Por defecto no proporciona interfaz de usuario.
+     *
+     * @return boolean
+     */
     public boolean hasResultsGUI() {
         return false;
     }
@@ -53,9 +54,11 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     public void launchResultsGUI(JSWBManager jswbManager) {
         throw new UnsupportedOperationException("No results GUI defined");
     }
+
     /**
      * El usuario que implemente esta clase puede elegir sobre escribir sólo este método para
-     * procesar su señal.
+     * procesar su señal. A este método se le pasa el array de datos
+     * de la primera señal que haya seleccionado el usuario.
      *
      * @param sm SignalManager
      * @param signals List
@@ -67,12 +70,18 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     public void runAlgorithm(SignalManager sm,
                              List<SignalIntervalProperties> signals,
             AlgorithmRunner ar) {
-        if (signals.size()==1) {
-     this.runAlgorithm(sm, signals.get(0).getSignal().getValues());
- }
+        if (signals.size() == 1) {
+            this.runAlgorithm(sm, signals.get(0).getSignal().getValues());
+        }
 
     }
 
+    /**
+     * Devuelve 0; este valor indica que el algoritmo no tiene un número máximo
+     * de señales/intervalos a procesar.
+     *
+     * @return int
+     */
     public int numberOfSignalsNeeded() {
         return 0;
     }
@@ -81,10 +90,23 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
         executionCanceled = true;
     }
 
+    /**
+     * Devuelve true si la ejecución del algoritmo ha sido cancelada.
+     *
+     * @return boolean
+     */
     public boolean isExecutionCanceled() {
         return executionCanceled;
     }
 
+    /**
+     * Por defecto los algoritmo se muestran en el menú de plugins y en la barra
+     * de tareas. Este comportamiento puede cambiarse sobreescribiendo este
+     * método.
+     *
+     * @param gUIPositions GUIPositions
+     * @return boolean
+     */
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
         if (gUIPositions == GUIPositions.MENU) {
             return true;

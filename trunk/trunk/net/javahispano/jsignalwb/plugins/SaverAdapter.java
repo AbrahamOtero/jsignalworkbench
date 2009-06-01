@@ -29,9 +29,9 @@ public abstract class SaverAdapter extends PluginAdapter implements Saver {
      * @return boolean
      * @throws Exception
      */
-    public boolean save(File f, JSWBManager jswbManager) throws
+    public boolean save(File f) throws
             Exception {
-        return save(f, jswbManager.getSignalManager());
+        return save(f, JSWBManager.getSignalManager());
     }
 
     /**
@@ -77,12 +77,7 @@ public abstract class SaverAdapter extends PluginAdapter implements Saver {
     }
 
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-        if (gUIPositions == GUIPositions.MENU) {
-            return true;
-        } else if (gUIPositions == GUIPositions.TOOLBAR) {
-            return false;
-        }
-        return false;
+         return false;
     }
 
 

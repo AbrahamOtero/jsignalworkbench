@@ -18,6 +18,7 @@ import net.javahispano.jsignalwb.plugins.debug.DebugPluginsManager;
 import net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog;
 import net.javahispano.jsignalwb.ui.JSWBStatusBar;
 import net.javahispano.jsignalwb.plugins.framework.*;
+import net.javahispano.jsignalwb.utilities.*;
 
 /**
  * Esta clase actúa a modo de fachada del framework, permitiendo acceder a la
@@ -532,7 +533,6 @@ public class JSWBManager implements JSignalMonitorDataSource,
                  popup.show(null,(int)p.getX(),(int)p.getY());*/
         MarkPlugin mp = pluginManager.createMarkPlugin(kindOfMark);
         mp.setMarkTime(time);
-        mp.setJSWBManager(this);
         signalManager.addSignalMark(signalName, mp);
         refreshJSM(true);
         mp.showMarkInfo(getParentWindow());
@@ -546,7 +546,6 @@ public class JSWBManager implements JSignalMonitorDataSource,
         MarkPlugin mp = pluginManager.createMarkPlugin(kindOfMark);
         mp.setMarkTime(startTime);
         mp.setEndTime(endTime);
-        mp.setJSWBManager(this);
         signalManager.addSignalMark(signalName, mp);
         refreshJSM(true);
         mp.showMarkInfo(getParentWindow());
@@ -905,7 +904,11 @@ public class JSWBManager implements JSignalMonitorDataSource,
     public boolean saveChannelsAs(String saverName, File f, boolean newSession) {
         try {
             iOManager.saveSignals(f, saverName);
-            this.fireSessionEvent(new SessionEvent(newSession, true));
+            SessionEvent sesionEvt = new SessionEvent(newSession, true);
+            if (newSession) {//la llamada viene de "Save as"
+                sesionEvt.setSaveAs(true);
+            }
+            this.fireSessionEvent(sesionEvt);
             sessionInfo.setLastFileOpenedPath(f.getAbsolutePath());
             sessionInfo.setLastSaverUsed(saverName);
             setSaved(true);
@@ -1537,13 +1540,16 @@ public class JSWBManager implements JSignalMonitorDataSource,
         for (SessionListener elem : sessionListenetList) {
             //si la sesion no es nueva Pero esta guardada es que acabamos de cargarla
             if (newSessionCreatedEvent.isNewSession()) {
+                System.out.println("Lanzando dentro de nueva sesi+n");
                 elem.sessionCreated(newSessionCreatedEvent);
             }
             if (newSessionCreatedEvent.isSaved()
-                    &&!newSessionCreatedEvent.isNewSession()) {
+                    /*&&!newSessionCreatedEvent.isNewSession()*/) {
+                System.out.println("Lanzando evento de sesi\u2665n salvada");
                 elem.sessionSaved(newSessionCreatedEvent);
             }
             if (newSessionCreatedEvent.isNoSession()) {
+                System.out.println("Lanzando evento de no sesin");
                 elem.sessionDestroyed(newSessionCreatedEvent);
             }
         }

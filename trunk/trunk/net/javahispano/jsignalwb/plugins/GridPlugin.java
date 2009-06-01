@@ -1,20 +1,12 @@
-/*
- * GridPlugin.java
- *
- * Created on 4 de julio de 2007, 13:20
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package net.javahispano.jsignalwb.plugins;
 
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorGrid;
 import net.javahispano.jsignalwb.*;
 
-/**
- *
- * @author Roman
+/*
+ * @author This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   Abraham Otero
  */
 public interface GridPlugin extends Plugin,JSignalMonitorGrid{
 

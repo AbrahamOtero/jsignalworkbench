@@ -52,10 +52,7 @@ public class DetailPluginInfoPanel extends javax.swing.JPanel {
         algorithmPane.setVisible(false);
         if(pluginType.equals("Loader")){
             Loader loader=(Loader)plugin;
-            if(loader.isPartialAccesible())
-                jLabel18.setText("Yes");
-            else
-                jLabel18.setText("No");
+            jLabel18.setText("No");
             ArrayList<String> ext=loader.getAvalaibleExtensions();
             DefaultListModel dlm=new DefaultListModel();
             jList1.setModel(dlm);

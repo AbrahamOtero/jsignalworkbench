@@ -63,9 +63,9 @@ public class DefaultSaver extends SaverAdapter {
      * @throws IOException
      * @return boolean
      */
-    public boolean save(File f, JSWBManager jswbManager) throws
+    public boolean save(File f) throws
             IOException {
-        SignalManager sm=jswbManager.getSignalManager();
+        SignalManager sm=JSWBManager.getSignalManager();
         if(!f.exists())
             f.mkdir();
 
@@ -74,7 +74,7 @@ public class DefaultSaver extends SaverAdapter {
             f=new File(f,f.getName()+".txt");*/
         ArrayList<Signal> signalsArray = new ArrayList<Signal>(sm.getSignals());
         if (saveValues(signalsArray, f)) {
-            return saveXml(signalsArray, f, jswbManager);
+            return saveXml(signalsArray, f);
         }
         return false;
     }
@@ -160,21 +160,22 @@ public class DefaultSaver extends SaverAdapter {
      * @throws IOException
      * @return boolean
      */
-    protected boolean saveXml(ArrayList<Signal> signals, File f,
-            JSWBManager jswbManager) throws IOException {
-        PluginManager pm=jswbManager.getPluginManager();
+    protected boolean saveXml(ArrayList<Signal> signals, File f) throws IOException {
+        PluginManager pm=JSWBManager.getPluginManager();
         Element root = new Element("JSignalWorkBench");
         root.setAttribute("path", f.getName());
         for (Signal s : signals) {
             root.addContent(new XMLSignal(s));
         }
         Element annotations=new Element("Annotations");
-        for(AnnotationPlugin ap:jswbManager.getSignalManager().getAllAnnotations()){
+        for(AnnotationPlugin ap:JSWBManager.getSignalManager().getAllAnnotations()){
             annotations.addContent(new XMLAnnotation(ap));
         }
         root.addContent(annotations);
-        root.addContent(new XMLJSignalMonitor(jswbManager.getJSMFrecuency(),jswbManager.getJSMScrollValue(),
-                jswbManager.getJSMLeftPanelConfigurationString()));
+        root.addContent(new XMLJSignalMonitor(
+            JSWBManager.getJSWBManagerInstance().getJSMFrecuency(),
+             JSWBManager.getJSWBManagerInstance().getJSMScrollValue(),
+               JSWBManager.getJSWBManagerInstance().getJSMLeftPanelConfigurationString()));
         ArrayList<String> loadedPlugins=pm.getKeysOfLoadedPlugins();
         for(String key:loadedPlugins){
             if(!key.startsWith("mark:")&&!key.startsWith("annotation:")&&!key.startsWith("grid:")){

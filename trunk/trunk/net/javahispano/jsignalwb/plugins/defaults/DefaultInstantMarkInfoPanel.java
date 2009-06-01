@@ -25,6 +25,8 @@ import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.utilities.ui.*;
+import net.javahispano.jsignalwb.ui.*;
 
 /**
  *
@@ -91,7 +93,7 @@ public class DefaultInstantMarkInfoPanel extends javax.swing.JPanel implements P
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         markTitleTextField = new javax.swing.JTextField();
-        jTextFieldDate1 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate1 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         datePicker1 = new com.michaelbaranov.microba.calendar.DatePicker();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -454,7 +456,7 @@ public class DefaultInstantMarkInfoPanel extends javax.swing.JPanel implements P
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate1;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate1;
     private javax.swing.JLabel kindLabel;
     private javax.swing.JTextField markTitleTextField;
     private javax.swing.JLabel signalNameLabel;

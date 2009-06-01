@@ -52,7 +52,7 @@ public class BasicLoader extends LoaderAdapter {
         return ext;
     }
 
-    protected float[][] load(File f) throws Exception {
+    protected float[][] loadSignals(File f) throws Exception {
         float[][] values = null;
         FileReader fr = new FileReader(f);
                 BufferedReader input = new BufferedReader(fr);

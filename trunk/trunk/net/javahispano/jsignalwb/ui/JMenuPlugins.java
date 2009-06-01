@@ -22,7 +22,7 @@ import javax.swing.JMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.utilities.MenuListenerAdapter;
+
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.Plugin.GUIPositions;
 import net.javahispano.jsignalwb.plugins.framework.*;

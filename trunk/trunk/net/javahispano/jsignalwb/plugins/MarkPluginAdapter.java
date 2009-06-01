@@ -44,16 +44,11 @@ public abstract class MarkPluginAdapter extends PluginAdapter implements MarkPlu
         return getName();
     }
 
-    public void setJSWBManager(JSWBManager jswbManager) {
-    }
-
     public void setSignal(Signal signal){
-        System.out.println("ooooooooooooooooooo"+signal);
         this.signal=signal;
     }
 
     public Signal getSignal(){
-        System.out.println("aaa "+signal);
         return signal;
     }
 
@@ -72,12 +67,7 @@ public abstract class MarkPluginAdapter extends PluginAdapter implements MarkPlu
     }
 
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-        if (gUIPositions == GUIPositions.MENU) {
-            return true;
-        } else if (gUIPositions == GUIPositions.TOOLBAR) {
-            return false;
-        }
-        return false;
+         return false;
     }
 
 }

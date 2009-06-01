@@ -24,7 +24,7 @@ import net.javahispano.jsignalwb.plugins.LoaderAdapter;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
 import net.javahispano.jsignalwb.plugins.Plugin;
 import net.javahispano.jsignalwb.plugins.framework.PluginManager;
-import net.javahispano.jsignalwb.utilities.ExceptionsCollector;
+import net.javahispano.jsignalwb.framework.ExceptionsCollector;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -90,10 +90,9 @@ public class DefaultLoader extends LoaderAdapter {
      * @return true si la carga se realiza correctamente, fase en caso
      *   contrario.
      */
-    public boolean load(File file, JSWBManager jswbManager) throws
-            Exception {
+    public boolean load(File file) throws Exception {
         //PluginManager pm=jswbManager.getPluginManager();
-        SignalManager sm=jswbManager.getSignalManager();
+        SignalManager sm=JSWBManager.getSignalManager();
         if(file!=null &&file.getName().toLowerCase().endsWith(".jsw"))
             file=file.getParentFile();
         FileFilter ff=new FileFilter() {
@@ -109,7 +108,7 @@ public class DefaultLoader extends LoaderAdapter {
         if(file!=null&&file.isDirectory()&&file.listFiles(ff)!=null&&file.listFiles(ff).length>0){
                 file=file.listFiles(ff)[0];
                 ArrayList<Signal> signals = new ArrayList<Signal>();
-                if (loadValues(loadXml(file, signals, jswbManager), signals)) {
+                if (loadValues(loadXml(file, signals), signals)) {
                     boolean flag = true;
                     for (Signal s : signals) {
                         if (!sm.addSignal(s)) {
@@ -123,12 +122,12 @@ public class DefaultLoader extends LoaderAdapter {
 
   */
 
-                        jswbManager.setJSMLeftPanelConfigurationString(leftPanelConfig);
-                    jswbManager.setJSMFrecuency(frecuency);
+                    JSWBManager.getJSWBManagerInstance().setJSMLeftPanelConfigurationString(leftPanelConfig);
+                   JSWBManager.getJSWBManagerInstance().setJSMFrecuency(frecuency);
                     //genera eventos que pueden afectar a componentes Swing
-                    jswbManager.setJSMScrollValue(scrollValue);
+                    JSWBManager.getJSWBManagerInstance().setJSMScrollValue(scrollValue);
                     //refresca JSignalMonitor
-                    jswbManager.refreshJSM(false);
+                    JSWBManager.getJSWBManagerInstance().refreshJSM(false);
 
                     //JSWBManager.getJSWBManagerInstance().getJSM().repaintAll();
                     return flag;
@@ -162,10 +161,10 @@ public class DefaultLoader extends LoaderAdapter {
      * @throws Exception
      * @return archivo que contiene los datos.
      */
-    protected File loadXml(File f,ArrayList<Signal> signals,JSWBManager jswbManager) throws Exception{
+    protected File loadXml(File f,ArrayList<Signal> signals) throws Exception{
         try {
-            ExceptionsCollector ec=new ExceptionsCollector(jswbManager.getParentWindow());
-            PluginManager pm=jswbManager.getPluginManager();
+            ExceptionsCollector ec=new ExceptionsCollector(JSWBManager.getParentWindow());
+            PluginManager pm=JSWBManager.getPluginManager();
             SAXBuilder builder=new SAXBuilder();
             Document doc=builder.build(f);
             Element root=doc.getRootElement();
@@ -253,7 +252,6 @@ public class DefaultLoader extends LoaderAdapter {
                     MarkPlugin mp=pm.createMarkPlugin(pluginName);
                         if(mp.getPluginVersion().equals(mark.getAttribute("Version").getValue())){
                             mp.setMarkTime(Long.parseLong(mark.getAttribute("MarkTime").getValue()));
-                            mp.setJSWBManager(jswbManager);
                             if(Boolean.parseBoolean(mark.getAttribute("Interval").getValue()))
                                 mp.setEndTime(Long.parseLong(mark.getAttribute("EndTime").getValue()));
                             if(mp.hasDataToSave())
@@ -298,7 +296,7 @@ public class DefaultLoader extends LoaderAdapter {
                                 mp.setEndTime(Long.parseLong(annotation.getAttribute("EndTime").getValue()));
                             if(mp.hasDataToSave())
                                 mp.setSavedData(annotation.getText());
-                            jswbManager.getSignalManager().addAnnotation(mp);
+                            JSWBManager.getSignalManager().addAnnotation(mp);
                             /*else
                                 ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
                         }else

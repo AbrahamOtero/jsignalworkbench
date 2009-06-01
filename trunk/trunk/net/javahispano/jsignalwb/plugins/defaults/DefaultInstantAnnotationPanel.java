@@ -26,6 +26,8 @@ import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
 
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.utilities.ui.*;
+import net.javahispano.jsignalwb.ui.*;
 
 /**
  *
@@ -88,7 +90,7 @@ public class DefaultInstantAnnotationPanel extends javax.swing.JPanel implements
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         markTitleTextField = new javax.swing.JTextField();
-        jTextFieldDate1 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate1 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         datePicker1 = new com.michaelbaranov.microba.calendar.DatePicker();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -510,7 +512,7 @@ public class DefaultInstantAnnotationPanel extends javax.swing.JPanel implements
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate1;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate1;
     private javax.swing.JLabel kindLabel;
     private javax.swing.JTextField markTitleTextField;
     // End of variables declaration//GEN-END:variables

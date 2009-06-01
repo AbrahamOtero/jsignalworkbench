@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.utilities.LooKAndFeelDialog;
+
 
 /**
  *

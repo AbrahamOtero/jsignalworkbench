@@ -12,6 +12,8 @@ import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.utilities.ui.*;
+import net.javahispano.jsignalwb.ui.*;
 
 /**
  *
@@ -44,7 +46,7 @@ public class AxesGridPluginConfigureForm extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc=" Código Generado  ">//GEN-BEGIN:initComponents
     private void initComponents() {
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldDate2 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate2 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -199,7 +201,7 @@ public class AxesGridPluginConfigureForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate2;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate2;
     // Fin de declaración de variables//GEN-END:variables
 
 }

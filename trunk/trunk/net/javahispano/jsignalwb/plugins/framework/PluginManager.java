@@ -16,7 +16,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import net.javahispano.jsignalwb.utilities.ExceptionsCollector;
+import net.javahispano.jsignalwb.framework.ExceptionsCollector;
 import java.net.*;
 import java.util.jar.JarFile;
 import net.javahispano.jsignalwb.plugins.debug.DebugPluginInfo;

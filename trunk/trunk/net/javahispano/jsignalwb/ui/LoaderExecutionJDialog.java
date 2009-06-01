@@ -12,7 +12,7 @@ import java.io.File;
 import javax.swing.SwingWorker;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.Loader;
-import net.javahispano.jsignalwb.plugins.LoaderRunner;
+import net.javahispano.jsignalwb.plugins.framework.LoaderRunner;
 
 /**
  * No forma parte de la API
