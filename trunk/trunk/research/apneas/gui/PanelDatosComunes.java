@@ -16,6 +16,8 @@ import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import org.joda.time.DateTime;
 import research.apneas.*;
+import net.javahispano.jsignalwb.utilities.ui.*;
+import net.javahispano.jsignalwb.ui.*;
 
 /**
  *
@@ -51,8 +53,8 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         markTitleTextField = new javax.swing.JTextField();
-        jTextFieldDate1 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
-        jTextFieldDate2 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate1 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
+        jTextFieldDate2 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         datePicker2 = new com.michaelbaranov.microba.calendar.DatePicker();
         datePicker1 = new com.michaelbaranov.microba.calendar.DatePicker();
         jLabel4 = new javax.swing.JLabel();
@@ -209,8 +211,8 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate2;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate1;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate2;
     private javax.swing.JTextField markTitleTextField;
     private javax.swing.JTextField textFieldDuration;
     private javax.swing.JTextField textFieldPossibility;

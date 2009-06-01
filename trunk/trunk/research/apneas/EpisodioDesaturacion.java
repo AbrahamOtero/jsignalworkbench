@@ -17,7 +17,7 @@ public class EpisodioDesaturacion extends Intervalo {
 
     private float valorBasal;
 
-//@todo parﬂmetro
+//@todo par·metro
     private TrapezoidalDistribution caidaEnSaturacion = new
             TrapezoidalDistribution(3F, 5F, 70, 110F);
     private TrapezoidalDistribution pendienteAscenso;

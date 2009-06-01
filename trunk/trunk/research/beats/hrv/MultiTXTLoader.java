@@ -44,13 +44,11 @@ public class MultiTXTLoader extends BasicLoader {
         return ext;
     }
     protected boolean load(File f, SignalManager sm) throws Exception {
-        boolean flag = true;
-        //  float fs = obtenerFS(f);
-       float[] ecg = super.load(new File(f.getAbsoluteFile()+"\\ECG.txt"))[0];
-       float[] flujo = super.load(new File(f.getAbsoluteFile()+"\\Flow.txt"))[0];
-       float[] a = super.load(new File(f.getAbsoluteFile()+"\\Abdom.txt"))[0];
-       float[] t = super.load(new File(f.getAbsoluteFile()+"\\Torax.txt"))[0];
-       float[] sp02 = super.load(new File(f.getAbsoluteFile()+"\\SPO2.txt"))[0];
+       float[] ecg = super.loadSignals(new File(f.getAbsoluteFile()+"\\ECG.txt"))[0];
+       float[] flujo = super.loadSignals(new File(f.getAbsoluteFile()+"\\Flow.txt"))[0];
+       float[] a = super.loadSignals(new File(f.getAbsoluteFile()+"\\Abdom.txt"))[0];
+       float[] t = super.loadSignals(new File(f.getAbsoluteFile()+"\\Torax.txt"))[0];
+       float[] sp02 = super.loadSignals(new File(f.getAbsoluteFile()+"\\SPO2.txt"))[0];
        flujo = Resample.resampleFs(flujo,32,4,true);
        a = Resample.resampleFs(a,32,4,true);
        t = Resample.resampleFs(t,32,4,true);
@@ -64,16 +62,7 @@ public class MultiTXTLoader extends BasicLoader {
             newSignal.adjustVisibleRange();
         }
         JSWBManager.getJSWBManagerInstance().setJSMFrecuency(fs[0]);
-        return flag;
+        return true;
     }
 
-    private float obtenerFS(File f) {
-        String n = f.getName();
-        int i = n.indexOf('_');
-
-        int i2 = n.indexOf('.');
-         String s2 = n.substring(i+1,i2);
-         return 1/Float.parseFloat(s2);
-
-    }
 }
