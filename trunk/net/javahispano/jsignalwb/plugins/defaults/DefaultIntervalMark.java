@@ -49,6 +49,12 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
         this.markTime = markTime;
     }
 
+    /**
+     * Devuelve el número de milisegundos que han transcurrido desde el 1 de
+     * enero de 1970 hasta el principio de la marca.
+     *
+     * @return long
+     */
     public long getMarkTime() {
         return markTime;
     }
@@ -65,6 +71,12 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
         return true;
     }
 
+    /**
+     * Devuelve el número de milisegundos que han transcurrido desde el 1 de
+     * enero de 1970 hasta el fin de la marca.
+     *
+     * @return long
+     */
     public long getEndTime() {
         return endTime;
     }
@@ -161,7 +173,8 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     }
 
     public Color getColor() {
-        return color;
+        Color c = new Color (color.getRed(), color.getGreen(), color.getBlue());
+        return c;
     }
 
     /**

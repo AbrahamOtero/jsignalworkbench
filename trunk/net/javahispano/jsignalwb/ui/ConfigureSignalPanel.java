@@ -21,6 +21,7 @@ import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.SignalNotFoundException;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
+import net.javahispano.jsignalwb.utilities.ui.*;
 
 public class ConfigureSignalPanel extends javax.swing.JPanel implements PropertyChangeListener,DocumentListener{
     String signalName;
@@ -145,7 +146,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
         okButton = new javax.swing.JButton();
         applyButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jTextFieldDate1 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate1 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         datePicker1 = new com.michaelbaranov.microba.calendar.DatePicker();
         jPanel1 = new javax.swing.JPanel();
         abscissaZoomRadioButton = new javax.swing.JRadioButton();
@@ -645,7 +646,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate1;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate1;
     private javax.swing.JLabel magnitudeLabel;
     private javax.swing.JTextField magnitudeTextField;
     private javax.swing.JTextField maxVisibleTextField;

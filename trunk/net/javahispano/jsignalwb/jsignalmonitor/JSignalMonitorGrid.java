@@ -1,12 +1,3 @@
-/*
- * Grid.java
- *
- * Created on 20 de marzo de 2007, 12:09
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package net.javahispano.jsignalwb.jsignalmonitor;
 
 
@@ -14,9 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Window;
 
-/**
- *
- * @author Roman
+/*Interfaz que debe ser implementada por los grid que emplea {@link JSignalMonitor}.
+
+ * @author This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   Abraham Otero
  */
 public interface JSignalMonitorGrid {
 
@@ -34,7 +27,7 @@ public interface JSignalMonitorGrid {
 
     /**
      * Este método es invocado cuando el usuario desee cambiar algún parámetro de configuración del grid.
-     *
+     * Este es el sitio para lanzar la interfaz de usuario de configuracion del grid.
      * @param owner Window
      */
     public void launchConfigureGridGUI(Window owner);

@@ -16,24 +16,6 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
     private boolean executionCanceled = false;
 
     /**
-     *
-     * @return false.
-     */
-    public boolean isPartialAccesible() {
-        return false;
-    }
-
-
-    /**
-     * getPartialSignal
-     *
-     * @throws UnsupportedOperationException si se invoca.
-     */
-    public float[] getPartialSignal(int start, int distance) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * <p>Invoca al método  <code>load(File f, SignalManager sm)</code> con
      * los dos primeros argumentos que se le pasan y
      * devuelve el resultado de la invocación.</p>
@@ -47,9 +29,9 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
      * @return boolean
      * @throws Exception
      */
-    public boolean load(File f, JSWBManager jswbManager) throws
+    public boolean load(File f) throws
             Exception {
-        return load(f, jswbManager.getSignalManager());
+        return load(f, JSWBManager.getSignalManager());
     }
 
     /**
@@ -71,7 +53,7 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
      */
     protected boolean load(File f, SignalManager sm) throws Exception {
         boolean flag = true;
-        float[][] values = load(f);
+        float[][] values = loadSignals(f);
         if (values != null) {
         int i = 0;
             for (float[] val : values) {
@@ -98,7 +80,7 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
      * @return null
      * @throws Exception
      */
-    protected float[][] load(File f) throws Exception {
+    protected float[][] loadSignals(File f) throws Exception {
         return null;
     }
 
@@ -106,16 +88,16 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
         executionCanceled = true;
     }
 
+    /**
+     * Devuelve true si la ejecución ha sido cancelada.
+     *
+     * @return boolean
+     */
     public boolean isExecutionCanceled() {
         return executionCanceled;
     }
 
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-        if (gUIPositions == GUIPositions.MENU) {
-            return true;
-        } else if (gUIPositions == GUIPositions.TOOLBAR) {
-            return false;
-        }
         return false;
     }
 

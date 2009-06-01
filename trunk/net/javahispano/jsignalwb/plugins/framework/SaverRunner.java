@@ -26,7 +26,7 @@ public class SaverRunner extends SwingWorker<Boolean, Void>{
 
      protected Boolean doInBackground() throws Exception {
         try {
-            saver.save(file,JSWBManager.getJSWBManagerInstance());
+            saver.save(file);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
                     "Error ejecutando el plugin "+

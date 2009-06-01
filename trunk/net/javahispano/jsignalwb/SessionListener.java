@@ -21,8 +21,8 @@ public interface SessionListener {
     public void sessionSaved(SessionEvent event);
 
     /**
-     * Se invoca cuando una sesión de trabajo es destruida. Esto puede suceder porque se carga otra sesión de trabajo,
-     * o porque el usuario pulsa el botón de "Nuevo".
+     * Se invoca cuando una sesión de trabajo es destruida. Esto puede suceder
+     * porque se carga otra sesión de trabajo, o porque el usuario pulsa el botón de "Nuevo".
      *
      * @param event SessionEvent
      */

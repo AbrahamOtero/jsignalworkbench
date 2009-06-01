@@ -24,29 +24,6 @@ public interface Loader extends Plugin {
      * @return ArrayList
      */
     public ArrayList<String> getAvalaibleExtensions();
-
-    /**
-     * True si el loader concreto permite cargar una parte concreta de los datos
-     * y no el conjunto global de los mismos, false en caso contrario
-     *
-     * @return boolean
-     */
-    public boolean isPartialAccesible();
-
-    /**
-     * En caso de permitir el acceso parcial de datos, proporciona el fragmento
-     * de datos con comienzo temporal en start.
-     *
-     * @param start Instante correspondiente con el primer dato que se
-     *   solicita. Se mide en milisegundos a partir de 00:00:00 01/01/1970. Ver
-     *   {@link TimePositionConverter}.
-     * @param distance Instante correspondiente con el último dato parco se
-     *   solicitan datos. Se mide en milisegundos desde 00:00:00 01/01/1970.
-     *   Ver {@link TimePositionConverter}.
-     * @return datos solicitados.
-     */
-    public float[] getPartialSignal(int start, int distance);
-
     /**
      * Método que realiza la carga de los datos.
      *
@@ -56,8 +33,11 @@ public interface Loader extends Plugin {
      *   contrario.
      * @throws Exception
      */
-    public boolean load(File file, JSWBManager jswbManager) throws
+    public boolean load(File file) throws
             Exception;
-    
+
+    /** Comunica al loader que la ejecución debe ser cancelada. Es respondabilidad
+      *  del algoritmo gestionar esta parada de la ejecucion.
+     */
     public void cancelExecution();
 }

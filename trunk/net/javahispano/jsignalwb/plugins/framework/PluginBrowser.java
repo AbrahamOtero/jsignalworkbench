@@ -19,6 +19,7 @@ import java.util.jar.*;
 import net.javahispano.jsignalwb.utilities.*;
 
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.framework.*;
 
 /**
  *

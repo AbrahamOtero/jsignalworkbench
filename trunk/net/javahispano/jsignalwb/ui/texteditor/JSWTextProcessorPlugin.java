@@ -78,30 +78,22 @@ public class JSWTextProcessorPlugin extends WindowAdapter implements GenericPlug
     public void setFile(File file) {
         this.file = file;
         jSWTextProcessor = new JSWTextProcessor(file, this, this);
-        setFileIsInvalid(false);
+        setFileIsInvalid(false, true);
         hasSetFileBeenInvokedBeforeThisNewSessionCreatedEvent = true;
     }
 
-    public void save() {
-        if (!this.fileIsInvalid) {
-            jSWTextProcessor.saveFile();
-        }
-    }
-
     private void fileNotSavedWarning(String message) {
-        JOptionPane.showMessageDialog(JSWBManager.getParentWindow(),message, "About", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(JSWBManager.getParentWindow(), message, "About", JOptionPane.ERROR_MESSAGE);
     }
 
     public void launch(JSWBManager jswbManager) {
         if (this.fileIsInvalid) {
-                try {
-                    file = JSWBManager.getIOManager().createNameForPlugin(this);
-                }
-                catch (IOException ex1) {
-                    fileNotSavedWarning("It is not possible to create the file for the text processor.");
-                    ex1.printStackTrace();
-            }
-            catch (SessionNotSavedException ex) {
+            try {
+                file = JSWBManager.getIOManager().createNameForPlugin(this);
+            } catch (IOException ex1) {
+                fileNotSavedWarning("It is not possible to create the file for the text processor.");
+                ex1.printStackTrace();
+            } catch (SessionNotSavedException ex) {
                 fileNotSavedWarning("You have to save the work sesion before launching the text processor.");
                 return;
             }
@@ -120,11 +112,11 @@ public class JSWTextProcessorPlugin extends WindowAdapter implements GenericPlug
         if (frameSize.width > screenSize.width) {
             frameSize.width = screenSize.width;
         }
-        jSWTextProcessor.setLocation((screenSize.width - frameSize.width)/2, (screenSize.height - frameSize.height)/2);
+        jSWTextProcessor.setLocation((screenSize.width - frameSize.width) / 2,
+                                     (screenSize.height - frameSize.height) / 2);
         if (jSWTextProcessorBounds != null) {
             jSWTextProcessor.setBounds(jSWTextProcessorBounds);
-        }
-        else {
+        } else {
             jSWTextProcessor.setSize(400, 500);
             jSWTextProcessor.setLocationRelativeTo(JSWBManager.getParentWindow());
         }
@@ -147,38 +139,43 @@ public class JSWTextProcessorPlugin extends WindowAdapter implements GenericPlug
     }
 
     /**
-     * cuando se abre un nuevo archivo que no tiene informaci¾n del plugin
-     * no se ejecuta el mÚtodo de carga de datos y este mtodo tampoco hace su trabajo apropiadamente.
+     * cuando se abre un nuevo archivo que no tiene información del plugin
+     * no se ejecuta el mÚtodo de carga de datos y este mtodo tampoco hace su
+     * trabajo apropiadamente.
      * Hay que gestionar ese caso.
      * @param event SessionEvent
      */
     public void sessionCreated(SessionEvent event) {
         if (hasSetFileBeenInvokedBeforeThisNewSessionCreatedEvent) {
             hasSetFileBeenInvokedBeforeThisNewSessionCreatedEvent = false;
-        } else {
-            this.setFileIsInvalid(true);
         }
+        this.setFileIsInvalid(true, !event.isSaveAs());
     }
 
     public void sessionDestroyed(SessionEvent event) {
-        setFileIsInvalid(true);
+        setFileIsInvalid(true, true);
     }
 
     public boolean isFileIsInvalid() {
         return fileIsInvalid;
     }
 
-    public void setFileIsInvalid(boolean fileIsInvalid) {
+    public void setFileIsInvalid(boolean fileIsInvalid, boolean reset) {
         this.fileIsInvalid = fileIsInvalid;
-        if (this.fileIsInvalid) {
-            file = null;
-            this.inMemoryDucyment = null;
-            this.jSWTextProcessor = null;
-        }
+        file = null;
     }
 
     public void sessionSaved(SessionEvent event) {
-        if (!this.isFileIsInvalid()) {
+        if (this.isFileIsInvalid()) {
+            try {
+                this.setFileIsInvalid(false, false);
+                file = JSWBManager.getIOManager().createNameForPlugin(this);
+            } catch (IOException ex) {
+            } catch (SessionNotSavedException ex) {
+            }
+        }
+        if (jSWTextProcessor != null && file != null) {
+            jSWTextProcessor.setCurrFileName(file.toString());
             jSWTextProcessor.saveFile();
         }
     }

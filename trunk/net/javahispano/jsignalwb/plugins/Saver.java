@@ -26,8 +26,11 @@ public interface Saver extends Plugin {
      */
     public ArrayList<String> getAvalaibleExtension();
 
-    public boolean save(File f, JSWBManager jswbManager) throws
+    public boolean save(File f) throws
             Exception;
 
+    /** Comunica al loader que la ejecución debe ser cancelada. Es respondabilidad
+       *  del algoritmo gestionar esta parada de la ejecucion.
+     */
     public void cancelExecution();
 }

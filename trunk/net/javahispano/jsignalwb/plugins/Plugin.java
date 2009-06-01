@@ -7,7 +7,7 @@ import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  * <p>Interfaz que representa cualquier plugin dentro de JSignalWorkbench.
- * No se recomienda incrementar directamente esta interfaz; suele ser
+ * No se recomienda Implementar directamente esta interfaz; suele ser
  * preferible extender la clase {@link PluginAdapter}. </p>
  *
  * <p> Esta interfaz, además de un conjunto de métodos de utilidad, sólo
@@ -116,24 +116,27 @@ public interface Plugin {
     public void setFile(File file);
 
     /**
-     * Este metodo indica al plugin que la sesion de trabajo va a ser guardada.
-     */
-    public void save();
+      * indica si el plugin desea aparecer, representado a través de un {@link Action}, en distintas partes de la
+      * interfaz de usuario. Las opciones son las dadas por la enumeracion {@link GUIPositions}
+      *
+      * @param gUIPositions GUIPositions
+      * @return boolean
+      */
+       public boolean showInGUIOnthe(GUIPositions gUIPositions);
 
     /**
      * Representa las distintas partes de la interfaz de usuario donde un plugin puede quedar registrado a traves de un
-     * objeto {@link Action}.
+     * objeto {@link Action}. Un plugin puede aparecer en el menú de plugins,
+     * y/o en la barra de tareas de la herramienta.
      */
-    public enum GUIPositions { MENU, TOOLBAR};
-    public enum PluginTypes { ALGORITHM, GRID, MARK, ANNOTATION, GENERIC, LOADER, SAVER};
-
+    public enum GUIPositions {
+        MENU, TOOLBAR} ;
 
         /**
-         * indica si el plugin desea aparecer, representado a través de un {@link Action}, en distintas partes de la
-         * interfaz de usuario. Las opciones son las dadas por la enumeracion {@link GUIPositions}
-         *
-         * @param gUIPositions GUIPositions
-         * @return boolean
+         * Enumeración que representa los distintos tipos de plugin soportados
+         * por JSignalWorkbench.
          */
-        public boolean showInGUIOnthe(GUIPositions gUIPositions);
-}
+        public enum PluginTypes {
+            ALGORITHM, GRID, MARK, ANNOTATION, GENERIC, LOADER, SAVER} ;
+
+        }

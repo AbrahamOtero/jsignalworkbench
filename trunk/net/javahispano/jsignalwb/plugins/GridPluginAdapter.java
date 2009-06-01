@@ -1,15 +1,13 @@
 package net.javahispano.jsignalwb.plugins;
 
-import javax.swing.Icon;
-import net.javahispano.jsignalwb.JSWBManager;
 import java.awt.Window;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import net.javahispano.jsignalwb.jsignalmonitor.GridConfiguration;
-import java.io.File;
+
 import net.javahispano.jsignalwb.Signal;
 
 public abstract class GridPluginAdapter extends PluginAdapter implements GridPlugin {
+    /**
+     * Contiene la señal sobre la cual se está mostrando este grid.
+     */
     protected Signal signal;
     public GridPluginAdapter() {
     }
@@ -20,18 +18,24 @@ public abstract class GridPluginAdapter extends PluginAdapter implements GridPlu
     public void launchConfigureGridGUI(Window owner) {
     }
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-        if (gUIPositions == GUIPositions.MENU) {
-            return true;
-        } else if (gUIPositions == GUIPositions.TOOLBAR) {
-            return false;
-        }
         return false;
     }
+
+    /**
+     * getLeyendHeight
+     *
+     * @return 0
+     */
     public int getLeyendHeight() {
          return 0;
      }
 
-     public int getLeyendWidth() {
+    /**
+     * getLeyendWidth
+     *
+     * @return 0
+     */
+    public int getLeyendWidth() {
          return 0;
     }
 

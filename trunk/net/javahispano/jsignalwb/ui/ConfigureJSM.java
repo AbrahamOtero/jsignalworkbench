@@ -19,6 +19,7 @@ import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
 import java.text.DecimalFormat;
+import net.javahispano.jsignalwb.utilities.ui.*;
 
 /**
  *
@@ -102,7 +103,7 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
         applyButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldDate1 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate1 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         datePicker1 = new com.michaelbaranov.microba.calendar.DatePicker();
         jLabel2 = new javax.swing.JLabel();
 
@@ -300,7 +301,7 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JTextField jTextField1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate1;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate1;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
     private JWindow jw;

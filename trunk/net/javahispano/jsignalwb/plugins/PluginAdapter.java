@@ -30,12 +30,11 @@ import net.javahispano.jsignalwb.*;
  *   Abraham Otero
  */
 public abstract class PluginAdapter implements Plugin {
-//    private static int pluginIndex = 0;
 
     /**
      * Proporciona una descripcion corta del plugin
      *
-     * @return String
+     * @return Emplea el propio nombre del club y como descripcion
      */
     public String getShortDescription() {
         return getName();
@@ -44,7 +43,7 @@ public abstract class PluginAdapter implements Plugin {
     /**
      * Proporciona una descripcion mas extensa del plugin
      *
-     * @return String
+     * @return Emplea el propio nombre del club y como descripcion
      */
     public String getDescription() {
         return getName();
@@ -52,30 +51,24 @@ public abstract class PluginAdapter implements Plugin {
 
     /**
      * Proporciona un icono por defecto en caso de que el algoritmo no contenga
-     * uno propio
+     * uno propio.
      *
      * @return Icon
      */
     public Icon getIcon() {
-//        return new ImageIcon(Toolkit.getDefaultToolkit().createImage(
-//                JSWBManager.class.getResource("images/notAvailable.jpg")));
         return generateImage(getName());
     }
 
     /**
      * Por defecto no proporciona una interfaz de usuario de configuracion
      *
-     * @return boolean
+     * @return false
      */
     public boolean hasOwnConfigureGUI() {
         return false;
     }
 
-    /**
-     * Por defecto lanzara una excepcion
-     *
-     * @param jswbManager JSWBManager
-     */
+
     public void launchConfigureGUI(JSWBManager jswbManager) {
         throw new UnsupportedOperationException();
     }
@@ -83,7 +76,7 @@ public abstract class PluginAdapter implements Plugin {
     /**
      * Por defecto devuelve la version 1.0
      *
-     * @return String
+     * @return 1.0
      */
     public String getPluginVersion() {
         return "1.0";
@@ -92,29 +85,18 @@ public abstract class PluginAdapter implements Plugin {
     /**
      * hasDataToSave
      *
-     * @return boolean
+     * @return False
      */
     public boolean hasDataToSave() {
         return false;
     }
 
 
-
-    /**
-     * getDataToSave
-     *
-     * @return String
-     */
     public String getDataToSave() {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * setSavedData
-     *
-     * @param data String
-     */
-    public void setSavedData(String data) {
+     public void setSavedData(String data) {
         throw new UnsupportedOperationException();
     }
 
@@ -122,14 +104,17 @@ public abstract class PluginAdapter implements Plugin {
         return false;
     }
 
-    public void save() {
-        throw new UnsupportedOperationException();
-    }
-
     public void setFile(File file) {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Genera un icono con la primera y última letra de la cadena de texto que
+     * se le pasa.
+     *
+     * @param name String
+     * @return Icon
+     */
     protected Icon generateImage(String name){
         if (name.equals("")) {
             name= "No icon";
@@ -138,16 +123,11 @@ public abstract class PluginAdapter implements Plugin {
         BufferedImage bufferedImage=new BufferedImage(20,20,BufferedImage.TYPE_INT_RGB);
         char first=name.charAt(0);
         char last=name.charAt(name.length()-1);
-        //String length=String.valueOf(name.length()-2);
         Graphics2D g2d=bufferedImage.createGraphics();
         Font font=new Font(Font.SANS_SERIF, Font.BOLD, 13);
         g2d.setBackground(Color.LIGHT_GRAY);
         g2d.clearRect(0,0,20,20);
-//        g2d.setFont(font);
-//        g2d.setColor(Color.LIGHT_GRAY);
-        //g2d.drawString(length,2,18);
         g2d.setColor(Color.RED);
-//        font=new Font(Font.SANS_SERIF, Font.BOLD, 13);
         g2d.setFont(font);
         g2d.drawString(String.valueOf(first),1,10);
         g2d.drawString(String.valueOf(last),10,20);

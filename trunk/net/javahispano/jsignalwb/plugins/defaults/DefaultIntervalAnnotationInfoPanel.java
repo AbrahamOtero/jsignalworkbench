@@ -19,6 +19,8 @@ import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.utilities.ui.*;
+import net.javahispano.jsignalwb.ui.*;
 
 /**
  *
@@ -85,8 +87,8 @@ public class DefaultIntervalAnnotationInfoPanel extends javax.swing.JPanel imple
         jLabel3 = new javax.swing.JLabel();
         markTitleTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldDate1 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
-        jTextFieldDate2 = new net.javahispano.jsignalwb.utilities.JTextFieldDate();
+        jTextFieldDate1 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
+        jTextFieldDate2 = new net.javahispano.jsignalwb.ui.JTextFieldDate();
         datePicker1 = new com.michaelbaranov.microba.calendar.DatePicker();
         datePicker2 = new com.michaelbaranov.microba.calendar.DatePicker();
         jLabel5 = new javax.swing.JLabel();
@@ -402,8 +404,8 @@ public class DefaultIntervalAnnotationInfoPanel extends javax.swing.JPanel imple
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate1;
-    private net.javahispano.jsignalwb.utilities.JTextFieldDate jTextFieldDate2;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate1;
+    private net.javahispano.jsignalwb.ui.JTextFieldDate jTextFieldDate2;
     private javax.swing.JLabel kindLabel;
     private javax.swing.JTextField markTitleTextField;
     // End of variables declaration//GEN-END:variables
