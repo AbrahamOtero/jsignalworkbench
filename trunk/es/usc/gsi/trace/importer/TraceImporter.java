@@ -84,7 +84,7 @@ public class TraceImporter extends LoaderAdapter {
      * @return boolean
      * @throws Exception
      */
-    public boolean load(File file, JSWBManager jswbManager) throws
+    public boolean load(File file) throws
             Exception {
         GestorIO gestor_io = GestorIO.getGestorIO();
         String name = file.getPath();
@@ -104,7 +104,7 @@ public class TraceImporter extends LoaderAdapter {
 
             for (int i = 0; i < numeroSenales; i++) {
                 String unidades = gestorDatos.getAlmacen().getLeyenda(i);
-                jswbManager.getSignalManager().addSignal(gestorDatos.getNombreSenal(i),
+                JSWBManager.getSignalManager().addSignal(gestorDatos.getNombreSenal(i),
                              (float[]) gestorDatos.getDatos(i),
                              gestorDatos.getFsSenal(i), fecha, unidades);
             }

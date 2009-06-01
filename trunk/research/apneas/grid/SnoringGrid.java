@@ -12,7 +12,7 @@ import java.awt.Point;
 import java.awt.Graphics2D;
 import net.javahispano.jsignalwb.plugins.GridPluginAdapter;
 import java.awt.Window;
-import net.javahispano.jsignalwb.TimePositionConverter;
+import net.javahispano.jsignalwb.utilities.TimePositionConverter;
 
 public class SnoringGrid extends GridPluginAdapter {
 

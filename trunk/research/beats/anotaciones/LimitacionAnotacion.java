@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import java.awt.Color;
+import java.util.List;
+import java.util.LinkedList;
 
 /**
  * <p>Title: </p>
@@ -29,6 +31,28 @@ public class LimitacionAnotacion extends DefaultIntervalMark {
     public LimitacionAnotacion() {
        super ();
    }
+
+   private List<LimitacionAnotacion> toraxList =
+           new LinkedList<LimitacionAnotacion>();
+   private List<LimitacionAnotacion> abdomenList =
+            new LinkedList<LimitacionAnotacion>();
+
+   public void addToraxLimitation(LimitacionAnotacion l) {
+       this.toraxList.add(l);
+   }
+
+   public void addAbdomenLimitation(LimitacionAnotacion l) {
+       this.abdomenList.add(l);
+   }
+
+   public List<LimitacionAnotacion> getAbdomenList() {
+       return new LinkedList<LimitacionAnotacion>(abdomenList);
+   }
+
+   public List<LimitacionAnotacion> getToraxList() {
+       return toraxList;
+   }
+
 
     public String getName() {
         return "Limitacion de flujo";
@@ -99,4 +123,16 @@ public class LimitacionAnotacion extends DefaultIntervalMark {
             this.setTipo(LimitacionAnotacion.Prt);
         }
     }
+
+
+   /* public int compareTo(Object o) {
+    DefaultIntervalMark i = (DefaultIntervalMark) o;
+    if (i.getMarkTime() < this.getMarkTime()) {
+        return 1;
+    } else if (i.getMarkTime() > this.getMarkTime()) {
+        return -1;
+    }
+    return 0;//chapuza para que no haya problemas con duplicados
+}*/
+
 }
