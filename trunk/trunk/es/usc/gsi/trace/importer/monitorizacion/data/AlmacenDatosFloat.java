@@ -104,10 +104,10 @@ public class AlmacenDatosFloat extends AlmacenDatos {
         return datos;
     }
 
-    public void añadeSeñal(float[] nueva_senal, String nombre, String leyenda,
+    public void anhadeSenhal(float[] nueva_senal, String nombre, String leyenda,
                            String Leyenda_temporal, float fs,
                            float[] rango, int numero_datos) {
-        super.añadeSeñal(nombre, leyenda, Leyenda_temporal, fs, rango,
+        super.anhadeSenhal(nombre, leyenda, Leyenda_temporal, fs, rango,
                          numero_datos);
         float[][] datos_tmp = new float[datos.length + 1][];
         for (int i = 0; i < datos.length; i++) {
@@ -117,12 +117,12 @@ public class AlmacenDatosFloat extends AlmacenDatos {
         datos = datos_tmp;
     }
 
-    void eliminaSeñal(int numero_señal) {
-        super.eliminaSeñal(numero_señal);
+    void eliminaSenhal(int numero_senhal) {
+        super.eliminaSenhal(numero_senhal);
         float[][] datos_tmp = new float[datos.length - 1][];
         int cout = 0;
         for (int i = 0; i < datos.length; i++) {
-            if (i != numero_señal) {
+            if (i != numero_senhal) {
                 datos_tmp[cout] = datos[i];
                 cout++;
             }
@@ -131,7 +131,7 @@ public class AlmacenDatosFloat extends AlmacenDatos {
     }
 
     /**
-     * Devuelve la longitud maxima de la señal mas grande.
+     * Devuelve la longitud maxima de la senhal mas grande.
      * @return
      */
     public int getMaximoNumeroDeDatos() {

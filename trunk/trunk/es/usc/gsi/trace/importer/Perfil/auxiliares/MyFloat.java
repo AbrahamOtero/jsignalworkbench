@@ -17,7 +17,7 @@ public class MyFloat {
             //Ponemos como localidad la inglesa, pa que pille . en vez de ,
             Locale.setDefault(new Locale("en", "GB"));
             decimal_format = new DecimalFormat("###.###");
-            //Ahora que ya tengo un parseador "A la inglesa" volvemos pa espanaña:
+            //Ahora que ya tengo un parseador "A la inglesa" volvemos pa espananha:
             Locale.setDefault(default_locale);
             hay_parser = true;
         }

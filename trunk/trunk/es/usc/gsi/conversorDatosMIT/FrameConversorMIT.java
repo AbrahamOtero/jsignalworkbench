@@ -108,7 +108,7 @@ public class FrameConversorMIT extends JDialog {
         });
 
         guardarAlHdd.setToolTipText(
-                "Guarda en el disco duro las señales seleccionadas.");
+                "Guarda en el disco duro las senhales seleccionadas.");
         guardarAlHdd.setText("Guardar al HDD");
         guardarAlHdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(ActionEvent e) {

@@ -9,7 +9,7 @@ public class ParseadorFecha {
 
 // Argumento con formato de fecha de tipo hispano: dd/mm/yyyy hh:mm:ss
 // Devuelve el numero de segundos desde 1-1-1970
-    private static Locale formatoFechaLocal = new Locale("es", "ES"); // Formato de fecha local a España
+    private static Locale formatoFechaLocal = new Locale("es", "ES"); // Formato de fecha local a Espanha
     private static SimpleDateFormat conversorADate = new SimpleDateFormat(
             "dd/MM/yyyy HH:mm:ss", formatoFechaLocal);
 

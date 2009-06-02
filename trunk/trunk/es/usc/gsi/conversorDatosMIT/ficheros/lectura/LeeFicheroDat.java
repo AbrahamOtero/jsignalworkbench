@@ -21,7 +21,7 @@ public class LeeFicheroDat {
     private int muestrasParametrosAnteriores; // Numero de muestras de los parametros anteriores a este en el marco
     // en el cual leeremos. Hara las veces de un offset para desplazarse dentro del marco.
 
-    private float frecuenciaOriginal; // Frecuencia original a la cual se muestreo la señal
+    private float frecuenciaOriginal; // Frecuencia original a la cual se muestreo la senhal
     private float frecuenciaRemuestreo; // Frecuencia a la que queremos remuestrear
     private float factorConversion; // Factor de conversion de num muestras remuestreadas a num muestras originales
 
@@ -38,7 +38,7 @@ public class LeeFicheroDat {
     private int formato;
 
     private float stepBytes; // Numero de bytes por muestra <=> Numero de bytes que hay que avanzar para leer la siguiente muestra.
-    private int sizeArrayBytes; // Tamaño del array de bytes.
+    private int sizeArrayBytes; // Tamanho del array de bytes.
 
     private InterfazConversion algoritmoConversion; // Algoritmo de conversion propio para este formato.
 
@@ -308,7 +308,7 @@ public class LeeFicheroDat {
             }
             //@todo
             /*
-             añadido el -parametro.getOffset()
+             anhadido el -parametro.getOffset()
              y
              if (parametro.getGanancia()!=200) {
                 res[i]=(int) (res[i]/parametro.getGanancia());

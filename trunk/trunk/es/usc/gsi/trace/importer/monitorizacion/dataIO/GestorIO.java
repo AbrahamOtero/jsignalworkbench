@@ -40,7 +40,7 @@ public class GestorIO {
     /**
      *
      * @param archivo
-     * @param macacar_datos_antiguos si es true machaca los datos antiguos, si no los añade.
+     * @param macacar_datos_antiguos si es true machaca los datos antiguos, si no los anhade.
      * @return
      */
     public boolean cargarDatos(String archivo, boolean machacar_datos_antiguos) {
@@ -84,7 +84,7 @@ public class GestorIO {
                 GestorDatos.getInstancia().setAlmacen(almacen);
                 return true;
             }
-            //Si no añado los datos al archivo actual
+            //Si no anhado los datos al archivo actual
             else {
                 float[][] datos = (float[][]) almacen.getDatos();
                 String[] nombres_Vila = {"VLF", "LF", "HF", "HF/LF", "FC"};
@@ -93,7 +93,7 @@ public class GestorIO {
                 if (archivo.endsWith(".picos")) {
                     for (int i = 0; i < datos.length && i < nombres_Vila.length;
                                  i++) {
-                        gestor_fdatos.añadeSeñal(datos[i], nombres_Vila[i], "",
+                        gestor_fdatos.anhadeSenhal(datos[i], nombres_Vila[i], "",
                                                  "",
                                                  almacen.getFs(i),
                                                  almacen.getRango(i));
@@ -103,7 +103,7 @@ public class GestorIO {
                 //Si no se cargan sin nombre
                 else {
                     for (int i = 0; i < datos.length; i++) {
-                        gestor_fdatos.añadeSeñal(datos[i],
+                        gestor_fdatos.anhadeSenhal(datos[i],
                                                  almacen.getNombreSenal(i),
                                                  almacen.getLeyenda(i),
                                                  "",

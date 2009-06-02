@@ -51,7 +51,7 @@ abstract class CargarDatos {
      * @param canal
      * @return java.util.LinkedList
      * @todo Que devuelva null en la superclase
-     * Devuelve las anotaciones de una determinada señal.
+     * Devuelve las anotaciones de una determinada senhal.
      */
     java.util.TreeSet getAnotaciones() {
         return anotaciones;

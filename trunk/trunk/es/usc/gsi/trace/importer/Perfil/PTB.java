@@ -76,7 +76,7 @@ public class PTB implements PTBInterface, Serializable {
      * @param ptosig
      * @roseuid 37870819006A
      */
-    public void añadePtoSig(PtoSig ptosig) {
+    public void anhadePtoSig(PtoSig ptosig) {
         vectorPtoSig.addElement(ptosig);
         numeroPtoSig++;
     }
@@ -232,7 +232,7 @@ public class PTB implements PTBInterface, Serializable {
      * @param seleccion
      * @roseuid 37870819007E
      */
-    public void añadePtoSig(PtoSig ptosig, int numeroPtoSig, int seleccion) {
+    public void anhadePtoSig(PtoSig ptosig, int numeroPtoSig, int seleccion) {
         if (seleccion == PTBM.AÑADIR) {
             vectorPtoSig.addElement(ptosig);
             numeroPtoSig++;
@@ -267,11 +267,11 @@ public class PTB implements PTBInterface, Serializable {
      * @param seleccion
      * @roseuid 378708190082
      */
-    public void añadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
+    public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
                                  Restriccion restriccion_vieja, int seleccion) {
 
         ((PtoSig) vectorPtoSig.elementAt(ptosig))
-                .añadeRestriccion(ptb, ptosig, restriccion, restriccion_vieja,
+                .anhadeRestriccion(ptb, ptosig, restriccion, restriccion_vieja,
                                   /*numeroPtoSig,*/seleccion);
     }
 
@@ -347,7 +347,7 @@ public class PTB implements PTBInterface, Serializable {
     }
 
     /**Cada vez que el usuario defina una restriccion con el origen se invocara a este
-     * metodo y se añadira en una lista sus offsets correspondientes. Si se elimina, se
+     * metodo y se anhadira en una lista sus offsets correspondientes. Si se elimina, se
      * eliminara de esta lista.
      */
     public void addOffset(String has, float[] off) {

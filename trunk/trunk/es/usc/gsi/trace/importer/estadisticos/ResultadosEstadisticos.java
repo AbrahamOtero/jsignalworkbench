@@ -20,7 +20,7 @@ public class ResultadosEstadisticos implements Serializable {
     error_estandar, cociente_de_variacion;
     private float[] intervalo_de_confianza = new float[2];
     private HashMap percentiles = new HashMap();
-    private String comentario, fecha_inicio, fecha_fin, nombre_señal;
+    private String comentario, fecha_inicio, fecha_fin, nombre_senhal;
     private boolean tiene_percentiles = true;
 
     /**
@@ -36,7 +36,7 @@ public class ResultadosEstadisticos implements Serializable {
      * @param valores_percentiles
      * @param fecha_inicio
      * @param fecha_fin
-     * @param nombre_señal
+     * @param nombre_senhal
      */
     public ResultadosEstadisticos(float media_aritmetica, float mediana,
                                   float varianza,
@@ -46,7 +46,7 @@ public class ResultadosEstadisticos implements Serializable {
                                   int[] percentiles,
                                   float[] valores_percentiles,
                                   String fecha_inicio, String fecha_fin,
-                                  String nombre_señal) throws
+                                  String nombre_senhal) throws
             NotPercentilException {
         this.media_aritmetica = media_aritmetica;
         this.mediana = mediana;
@@ -57,7 +57,7 @@ public class ResultadosEstadisticos implements Serializable {
         this.intervalo_de_confianza = intervalo_de_confianza;
         this.fecha_fin = fecha_fin;
         this.fecha_inicio = fecha_inicio;
-        this.nombre_señal = nombre_señal;
+        this.nombre_senhal = nombre_senhal;
         if (percentiles != null) {
             this.tiene_percentiles = true;
             if (percentiles.length != valores_percentiles.length) {
@@ -169,8 +169,8 @@ public class ResultadosEstadisticos implements Serializable {
         return fecha_fin;
     }
 
-    public String getNombreSeñal() {
-        return nombre_señal;
+    public String getNombreSenhal() {
+        return nombre_senhal;
     }
 
     protected void setFechaInicio(String _fecha_inicio) {
@@ -183,10 +183,10 @@ public class ResultadosEstadisticos implements Serializable {
 
     /**
      * Permite modificar el nombnre de este estdistico.
-     * @param _nombre_señal
+     * @param _nombre_senhal
      */
-    public void setNombreSeñal(String _nombre_señal) {
-        nombre_señal = _nombre_señal;
+    public void setNombreSenhal(String _nombre_senhal) {
+        nombre_senhal = _nombre_senhal;
     }
 
     /**

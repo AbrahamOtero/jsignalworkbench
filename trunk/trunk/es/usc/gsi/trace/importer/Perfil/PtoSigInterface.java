@@ -27,17 +27,17 @@ public interface PtoSigInterface extends Serializable {
     public String getD();
 
     /**
-     * Añade, borra o modifica una restriccion.
+     * Anhade, borra o modifica una restriccion.
      * @param ptb - PTB con el que se tienen la restricion.
      * @param ptosig - PtoSig conj el que se tiene la restriccion.
-     * @param restriccion - Restriccion que se va a añadir, o la nueva si se va a
+     * @param restriccion - Restriccion que se va a anhadir, o la nueva si se va a
      * modificar. null si se va a borrar.
      * @param restriccion_vieja - Restriccion antigua si se va a modificar o borrar.
-     * Si se va a añadir null.
+     * Si se va a anhadir null.
      * @param seleccion - PTBM.BORAR/MODIFICAR/AÑADIR
      * @roseuid 3788C7600368
      */
-    public void añadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
+    public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
                                  Restriccion restriccion_vieja, int seleccion);
 
     /**

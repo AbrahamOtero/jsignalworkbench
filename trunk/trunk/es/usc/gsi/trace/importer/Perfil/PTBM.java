@@ -67,7 +67,7 @@ public class PTBM implements PTBMInterface, Serializable {
      * @param seleccion
      * @roseuid 3787081900A1
      */
-    public void añadePTB(PTB ptb, int numeroPTB, int seleccion) {
+    public void anhadePTB(PTB ptb, int numeroPTB, int seleccion) {
         if (seleccion == 1) {
             vectorPTB.addElement(ptb);
             PTBM.incrementaNumeroPTB();
@@ -202,9 +202,9 @@ public class PTBM implements PTBMInterface, Serializable {
      * @param selecion
      * @roseuid 3787081900B5
      */
-    public void añadePtoSig(PTB ptb, PtoSig ptosig, int numeroPtoSig,
+    public void anhadePtoSig(PTB ptb, PtoSig ptosig, int numeroPtoSig,
                             int selecion) {
-        ((PTB) vectorPTB.elementAt(vectorPTB.indexOf(ptb))).añadePtoSig(ptosig,
+        ((PTB) vectorPTB.elementAt(vectorPTB.indexOf(ptb))).anhadePtoSig(ptosig,
                 numeroPtoSig, selecion);
     }
 
@@ -217,11 +217,11 @@ public class PTBM implements PTBMInterface, Serializable {
      * @param selecion
      * @roseuid 3787081900BA
      */
-    public void añadeRestriccion(PTB ptb, PtoSig ptosig,
+    public void anhadeRestriccion(PTB ptb, PtoSig ptosig,
                                  Restriccion restriccion,
                                  Restriccion restriccion_vieja,
                                  int numeroPtoSig, int selecion) {
-        ((PTB) (vectorPTB.elementAt(vectorPTB.indexOf(ptb)))).añadeRestriccion(
+        ((PTB) (vectorPTB.elementAt(vectorPTB.indexOf(ptb)))).anhadeRestriccion(
                 ptb.getNumeroDePTB(),
                 ptosig.getNumeroDePtoSig(), restriccion,
                 restriccion_vieja, /*numeroPtoSig,*/ selecion);

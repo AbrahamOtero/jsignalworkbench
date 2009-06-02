@@ -46,7 +46,7 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
      * @return descripcion textual larga
      */
     public String getDescription() {
-        return "Permite importar señales de registros MIT-BIH. Importa nombre de señales, frecuencias de muestreo, fecha de comienzo del registro, etc.";
+        return "Permite importar senhales de registros MIT-BIH. Importa nombre de senhales, frecuencias de muestreo, fecha de comienzo del registro, etc.";
     }
 
     /**

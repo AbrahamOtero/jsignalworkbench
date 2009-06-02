@@ -247,7 +247,7 @@ public class RutinasEstadisticas {
                                                  boolean fuerza) throws
             CorrelacionException {
         //Punteros que empleare para denominar a datos 1 y dos una vez que, en caso de ser necesrio,
-        //Los halla ajustado para tener el mismo tamaño
+        //Los halla ajustado para tener el mismo tamanho
         float datos_t_1[], datos_t_2[];
         int longitud1 = datos1.length;
         int longitud2 = datos2.length;
@@ -289,7 +289,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Calcula la correlacion entre los dos vectores que se le pasan. Han de ser del mimo tamaño.
+     * Calcula la correlacion entre los dos vectores que se le pasan. Han de ser del mimo tamanho.
      * longitudes.
      * @param datos1
      * @param datos2
@@ -319,7 +319,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Elimina los 0 finales de las señales
+     * Elimina los 0 finales de las senhales
      * @param datos
      * @return
      */

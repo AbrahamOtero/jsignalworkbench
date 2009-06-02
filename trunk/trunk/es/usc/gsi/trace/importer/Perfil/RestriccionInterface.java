@@ -116,7 +116,7 @@ public interface RestriccionInterface extends Serializable {
 
     /**
      * Este el el metodo que permite resolver est restriccion. Para su reralizacion
-     * sera necesario que la restriccion tenga un acceso a la señal real de algum
+     * sera necesario que la restriccion tenga un acceso a la senhal real de algum
      * modo. Probablemente se cree un Objeto que se encapsule dentro de la restriccion
      * y que tenga acceso a los cauces de entrada.
      * @return float

@@ -97,7 +97,7 @@ public class PtoSig implements PtoSigInterface, Serializable {
      * @param seleccion
      * @roseuid 378708190034
      */
-    public void añadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
+    public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
                                  Restriccion restriccion_vieja, int seleccion) {
         if (seleccion == PTBM.AÑADIR) {
             vectorRestricciones.addElement(restriccion);

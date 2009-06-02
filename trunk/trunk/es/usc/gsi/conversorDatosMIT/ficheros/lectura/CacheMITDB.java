@@ -9,14 +9,14 @@ public class CacheMITDB {
     private RandomAccessFile entrada; // Fichero de entrada
     private byte[] buffer; // Array de almacenamiento en memoria
 
-    private byte[] bufferNormal; // Array de tamaño igual al especificado para este buffer.
-    private byte[] bufferFinal; // Array de tamaño igual al numero de bytes restantes.
+    private byte[] bufferNormal; // Array de tamanho igual al especificado para este buffer.
+    private byte[] bufferFinal; // Array de tamanho igual al numero de bytes restantes.
     // Se implementa este buffer para que el ultimo buffer que se lea
     // no devuelva una cantidad de 0's en el array debido a
     // que se intenta leer fuera del fichero. Por lo tanto,
-    // este ultimo buffer debe ser de tamaño menor al normal.
+    // este ultimo buffer debe ser de tamanho menor al normal.
 
-    private static final int TAMANHO_buffer = 10240; // Tamaño de la buffer: tamaño del array buffer.
+    private static final int TAMANHO_buffer = 10240; // Tamanho de la buffer: tamanho del array buffer.
 
     private int numLectura = 0; // Numero de veces que se ha rellenado el array
     private int numMaxLecturasNormales; // Numero de lecturas de buffers normales que podemos hacer
@@ -33,7 +33,7 @@ public class CacheMITDB {
             FileNotFoundException {
 
         this.numMaxLecturasNormales = (int) (ficheroDat.length() / bufferSize);
-        int bufferSizeFinal = (int) (ficheroDat.length() % bufferSize); // El tamaño del buffer final sera el del resto.
+        int bufferSizeFinal = (int) (ficheroDat.length() % bufferSize); // El tamanho del buffer final sera el del resto.
 
         entrada = new RandomAccessFile(ficheroDat, "r");
 

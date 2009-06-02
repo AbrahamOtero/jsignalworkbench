@@ -396,20 +396,20 @@ public class GestorDatos {
     }
 
     /**
-     * Mantiene la consistencia del mapeo cuando se añade una señal.
-     * La señal se añade antes de la posibilidad, por lo que abra que desplazar esta
+     * Mantiene la consistencia del mapeo cuando se anhade una senhal.
+     * La senhal se anhade antes de la posibilidad, por lo que abra que desplazar esta
      * una posicion hacia arriba.
      */
-    public void mantenconsitenciaAlAñadirSeñal() {
+    public void mantenconsitenciaAlAnhadirSenhal() {
         //Si hay posibilidad
         if (almacen.getPosibilidadTotal() != null) {
-            int numero_señales = almacen.getNumeroSenales();
+            int numero_senhales = almacen.getNumeroSenales();
             //Y si esta se esta monitorizando
-            if (this.mapea_senal_canal.get(new Integer(numero_señales)) != null) {
+            if (this.mapea_senal_canal.get(new Integer(numero_senhales)) != null) {
                 Integer num_canal = ((Integer)this.mapea_senal_canal.get(new
-                        Integer(numero_señales)));
-                Integer new_senal = new Integer(numero_señales);
-                this.mapea_senal_canal.remove(new Integer(numero_señales));
+                        Integer(numero_senhales)));
+                Integer new_senal = new Integer(numero_senhales);
+                this.mapea_senal_canal.remove(new Integer(numero_senhales));
                 this.mapea_senal_canal.put(new_senal, num_canal);
                 this.mapea_canal_senal.put(num_canal, new_senal);
                 referencias.eliminaReferencia(num_canal.intValue() - 1);
@@ -509,7 +509,7 @@ public class GestorDatos {
     }
 
     /**
-     * Permite averigura en que cana se esta monitorizando la señal senal
+     * Permite averigura en que cana se esta monitorizando la senhal senal
      * @param senal
      */
     public int getCanalDeSena(int num_canal) {
@@ -518,7 +518,7 @@ public class GestorDatos {
     }
 
     /**
-     * Añade una marca al canal especificado.
+     * Anhade una marca al canal especificado.
      * @param senal
      * @param anotacion
      */
@@ -664,7 +664,7 @@ public class GestorDatos {
      * El parametro devuelto es un array indicando para cada instante temporal la posibilidad
      * entre 0 y 100 de la ocurrencia de un determinado evento
      * @return
-     * @todo un pocio chapuza la forma de elegir el tamaño del vector de posibilidades
+     * @todo un pocio chapuza la forma de elegir el tamanho del vector de posibilidades
      * @todo ponerle una leyenda temporal a la posibilidad en caso de que no todas xsean iguales
      */
     public void setPosibilidadTotal(int primero, int ultimo, byte pos) {
@@ -828,7 +828,7 @@ public class GestorDatos {
 
 
     /**
-     * Devuelve loa fs de una señal espcificada.
+     * Devuelve loa fs de una senhal espcificada.
      * @param num_senal
      * @return
      */
@@ -841,7 +841,7 @@ public class GestorDatos {
      * @param num_senal
      * @return
      */
-    public float getFsSeñal(int num_senal) {
+    public float getFsSenhal(int num_senal) {
         return almacen.getFs(num_senal);
     }
 
@@ -854,7 +854,7 @@ public class GestorDatos {
     }
 
     /**
-     * añade una nueva señal al almacen de datos
+     * anhade una nueva senhal al almacen de datos
      * @todo: supone que el almacen de datos el float. No deviera serlo necesariamente.
      * @param nueva_senal
      * @param nombre
@@ -863,7 +863,7 @@ public class GestorDatos {
      * @param fs
      * @param rango
      */
-    public void añadeSeñal(float[] nueva_senal, String nombre, String leyenda,
+    public void anhadeSenhal(float[] nueva_senal, String nombre, String leyenda,
                            String Leyenda_temporal, float fs,
                            float[] rango) {
         //PUTO BUG Desmonitorizo la posibilidad antes de nada:
@@ -882,13 +882,13 @@ public class GestorDatos {
 
         }
 //Fin chapuza
-        ((AlmacenDatosFloat) (almacen)).añadeSeñal(nueva_senal, nombre, leyenda,
+        ((AlmacenDatosFloat) (almacen)).anhadeSenhal(nueva_senal, nombre, leyenda,
                 Leyenda_temporal, fs, rango, nueva_senal.length);
     }
 
 
     /**
-     * Añade un estadistico al actual almacen.
+     * Anhade un estadistico al actual almacen.
      * @param resultados
      */
     public void anadeEstadistico(ResultadosEstadisticos resultados) {
@@ -896,7 +896,7 @@ public class GestorDatos {
     }
 
     /**
-     * Añade una correlacion al actual almacen.
+     * Anhade una correlacion al actual almacen.
      * @param resultados
      */
     public void anadeCorrelacion(ResultadoCorrelacion resultados) {
@@ -915,9 +915,9 @@ public class GestorDatos {
 
     /**
      * Elimina la correlacion indicado por la key que se le pasa. La key de un estadistico es el
-     * nombre que tiene la primera señal, mas el nombre de la segunada, mas la fecha de incio de la
-     * primera señal, mas la fecha de inicio de la segunda señal mas la fecha de fin
-     * de la segunda señal, todos ellos cocatenados en un String.
+     * nombre que tiene la primera senhal, mas el nombre de la segunada, mas la fecha de incio de la
+     * primera senhal, mas la fecha de inicio de la segunda senhal mas la fecha de fin
+     * de la segunda senhal, todos ellos cocatenados en un String.
      * @param estadistico
      * @return
      */
@@ -1003,11 +1003,11 @@ public class GestorDatos {
     }
 
     /**
-     * Devuelve un array con los inidces de la sseñales que se estan monitorizando en este momento.
+     * Devuelve un array con los inidces de la ssenhales que se estan monitorizando en este momento.
      * @return
      * @todo: Leer la nota de abajo
      */
-    public int[] getSenañesMonitorizadas() {
+    public int[] getSenanhesMonitorizadas() {
         Object[] senales_object = this.mapea_canal_senal.entrySet().toArray();
         int[] senales_monitorizadas = new int[senales_object.length];
 //Necesario porque no se borran realmente los mapeos cuando se melimina un canal:
@@ -1043,8 +1043,8 @@ public class GestorDatos {
     }
 
     /**
-     * Elimina los posibles ceros finales de todos las señales del almacen y reajusta
-     * el tamaño tanto del registro como del monitor.
+     * Elimina los posibles ceros finales de todos las senhales del almacen y reajusta
+     * el tamanho tanto del registro como del monitor.
      */
     public void eliminaCerosFinalesDelRegistro() {
         int numSenales = this.getNumeroSenales();
@@ -1056,7 +1056,7 @@ public class GestorDatos {
                                            nuvosDatos.length);
             this.setDatos(i, nuvosDatos);
             //Reajustamos tambien la posibilidad
-            //Primero comprovamos si esta señal tiene posibilidad
+            //Primero comprovamos si esta senhal tiene posibilidad
             if (!almacen.isPosAsociada(i)) {
                 continue;
             }
@@ -1078,7 +1078,7 @@ public class GestorDatos {
             }
             almacen.setPosibilidadTotal(nuevaPosTotal);
         }
-        //Esto tambien cambia el tamaño del monitor
+        //Esto tambien cambia el tamanho del monitor
         this.setMaximaDuracionDelRegistro(nuevaLongitudMaxima);
 
     }

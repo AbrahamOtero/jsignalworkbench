@@ -21,11 +21,11 @@ public interface PTBInterface extends Serializable {
     public void setPTBM(PTBMInterface ptbm);
 
     /**
-     * Añade un PtoSig a este PTBM.
-     * @param ptosig - PtoSig que se le va a añadir a este PTB.
+     * Anhade un PtoSig a este PTBM.
+     * @param ptosig - PtoSig que se le va a anhadir a este PTB.
      * @roseuid 3788BB0A0144
      */
-    public void añadePtoSig(PtoSig ptosig);
+    public void anhadePtoSig(PtoSig ptosig);
 
     /**
      * Devuelve el numero de PtoSig que hay actualmente en este PTBM.
@@ -81,7 +81,7 @@ public interface PTBInterface extends Serializable {
     public void setPtoSig(PtoSig[] vptosig, int nptosig);
 
     /**
-     * Modifica los campos nombre, señal, unidades, comentario y unidades temporales
+     * Modifica los campos nombre, senhal, unidades, comentario y unidades temporales
      * de este PTB. Los inicializa a los valores que les pasamos.
      * @param nombre
      * @param parametro
@@ -111,32 +111,32 @@ public interface PTBInterface extends Serializable {
     public Restriccion[] getRestricciones(int ptosig);
 
     /**
-     * Añade, borra o modifica un PtoSig segun el selector que se le pase. Este metodo
-     * deberia de llevar toda la funcionalidad del  metodo añadePtoSig, y este deberia
+     * Anhade, borra o modifica un PtoSig segun el selector que se le pase. Este metodo
+     * deberia de llevar toda la funcionalidad del  metodo anhadePtoSig, y este deberia
      * "deprecarse".
-     * @param ptosig - PtoSIg que se va a añadir, o modificar. Si se va  a borrar no
+     * @param ptosig - PtoSIg que se va a anhadir, o modificar. Si se va  a borrar no
      * es necesario.
      * @param numeroPtoSig - Posicion que ocupa el PtoSIg que se va a modificar o
      * borrar. Si se va a crear no es necesario.
      * @param seleccion - PTBM.BORRAR/MODIFICAR/AÑADIR.
      * @roseuid 3788BB0A01DB
      */
-    public void añadePtoSig(PtoSig ptosig, int numeroPtoSig, int seleccion);
+    public void anhadePtoSig(PtoSig ptosig, int numeroPtoSig, int seleccion);
 
     /**
-     * añade, borra o modifica una restricion. OJO: se ha modificado para quitoer el
+     * anhade, borra o modifica una restricion. OJO: se ha modificado para quitoer el
      * int ptosig.
      * @param ptb - PTB con el cual se tienen la restriccion.
-     * @param ptosig - PtoSig que al que se le va a añadir/borrar/modificar la
+     * @param ptosig - PtoSig que al que se le va a anhadir/borrar/modificar la
      * restriccion.
-     * @param restriccion - Restriccion nueva en caso de que se vaya a añadir o
+     * @param restriccion - Restriccion nueva en caso de que se vaya a anhadir o
      * modificar. null si se va a borrar.
      * @param restriccion_vieja - restriccion antigua en caso de que se vaya a borrar
-     * o modificar. null si se va a ñadir.
+     * o modificar. null si se va a nhadir.
      * @param seleccion - PTBM:BORRAR/MODIFICAR/AÑADIR
      * @roseuid 3788BB0A01EF
      */
-    public void añadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
+    public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
                                  Restriccion restriccion_vieja, int seleccion);
 
     /**
