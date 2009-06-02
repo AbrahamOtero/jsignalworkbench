@@ -15,23 +15,24 @@ import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorAnnotation;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorMark;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.debug.DebugPluginsManager;
+import net.javahispano.jsignalwb.plugins.framework.PluginLoadException;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog;
 import net.javahispano.jsignalwb.ui.JSWBStatusBar;
-import net.javahispano.jsignalwb.plugins.framework.*;
-import net.javahispano.jsignalwb.utilities.*;
+import net.javahispano.jsignalwb.utilities.TimePositionConverter;
 
 /**
- * Esta clase actúa a modo de fachada del framework, permitiendo acceder a la
+ * Esta clase actua a modo de fachada del framework, permitiendo acceder a la
  * mayor parte de la funcionalidad expuesta en la API de JSignalWorkbench.
- * También proporciona métodos para acceder a {@link JSignalMonitor], {@link
+ * Tambien proporciona metodos para acceder a {@link JSignalMonitor], {@link
  * SignalManager} y a {@link PluginManager}, otras tres clases fachada que se
- * encargan de exponer funcionalidad relativa a la representacion de las señales,
- * las señales almacenadas en el entorno y los plugins disponibles,
- * respectivamente. No obstante, esta clase proporciona métodos para las
- * acciones más comunes que delegan su funcionalidad en otros métodos de estas
+ * encargan de exponer funcionalidad relativa a la representacion de las senhales,
+ * las senhales almacenadas en el entorno y los plugins disponibles,
+ * respectivamente. No obstante, esta clase proporciona metodos para las
+ * acciones mas comunes que delegan su funcionalidad en otros metodos de estas
  * dos fachadas.
  *
- * @author Román Segador y Abraham Otero
+ * @author Roman Segador y Abraham Otero
  *    Copyright 2006-2007. This software is under the Apache License Version 2.0
  *   (http://www.apache.org/licenses/).
  */
@@ -64,7 +65,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     private static Font bigFont = new java.awt.Font("Tahoma", Font.BOLD, 13);
     private static Color fontColor = Color.BLUE;
     private List<SessionListener> sessionListenetList = new LinkedList<SessionListener>();
-    //Si true borra las señales actualmente cargadas al cargar las siguientes.
+    //Si true borra las senhales actualmente cargadas al cargar las siguientes.
     private static boolean deleteSignalsInNextLoad = true;
     static {
 
@@ -103,7 +104,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
         jMenuBar = null;
         jToolBar = null;
         //font=new Font(Font.DIALOG,Font.BOLD,12);
-        if (develop || sessionInfo.isDebugMode()||true) {
+        if (develop || sessionInfo.isDebugMode() || true) {
             DebugPluginsManager.registerDebugPlugins(pluginManager);
             System.out.println("Cargados plugins debug");
         }
@@ -120,7 +121,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     public static JSWBManager getJSWBManagerInstance(boolean develop) {
         if (jswbManagerInstance != null) {
             throw new RuntimeException("A JSWBManager is already created." +
-                                     " Try to request a non develop instance");
+                                       " Try to request a non develop instance");
         }
         jswbManagerInstance = new JSWBManager(develop);
         return jswbManagerInstance;
@@ -193,13 +194,13 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Añade un {@link Action} a la barra de herramientas de la ventana
+     * Anhade un {@link Action} a la barra de herramientas de la ventana
      * principal.
      *
-     * @param action Action a añadir.
+     * @param action Action a anhadir.
      * @todo comprobar que funciona correctamente.
-     * @todo (Roman)Proporcionar métodos para eliminar acciones y para listar
-     *   todas las acciones que tiene añadidas en un determinado momento la
+     * @todo (Roman)Proporcionar metodos para eliminar acciones y para listar
+     *   todas las acciones que tiene anhadidas en un determinado momento la
      *   barra.
      */
     public void addJToolBarButton(Action action) {
@@ -322,12 +323,12 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Añade el componente que se le pasa como parámetro a la izquierda de
-     * {@link JSignalMonitor}. Provoca una validación (validate) de la ventana
-     * principal. Si ya había algún componente en esa posición será eliminado y
-     * se añadirá el componente nuevo.
+     * Anhade el componente que se le pasa como parametro a la izquierda de
+     * {@link JSignalMonitor}. Provoca una validacion (validate) de la ventana
+     * principal. Si ya habia algun componente en esa posicion sera eliminado y
+     * se anhadira el componente nuevo.
      *
-     * @param panel componente a añadir.
+     * @param panel componente a anhadir.
      * @todo comprobar que funciona correctamente.
      */
     public void setLeftComponent(JComponent component) {
@@ -341,12 +342,12 @@ public class JSWBManager implements JSignalMonitorDataSource,
 
 
     /**
-     * Añade el componente que se le pasa como parámetro a la derecha de
-     * {@link JSignalMonitor}. Provoca una validación (validate) de la ventana
-     * principal. Si ya había algún componente en esa posición será eliminado y
-     * se añadirá el componente nuevo.
+     * Anhade el componente que se le pasa como parametro a la derecha de
+     * {@link JSignalMonitor}. Provoca una validacion (validate) de la ventana
+     * principal. Si ya habia algun componente en esa posicion sera eliminado y
+     * se anhadira el componente nuevo.
      *
-     * @param panel componente a añadir.
+     * @param panel componente a anhadir.
      * @todo comprobar que funciona correctamente.
      */
     public void setRightComponent(JComponent component) {
@@ -359,12 +360,12 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Añade el componente que se le pasa como parámetro encima de
-     * {@link JSignalMonitor}. Provoca una validación (validate) de la ventana
-     * principal. Si ya había algún componente en esa posición será eliminado y
-     * se añadirá el componente nuevo.
+     * Anhade el componente que se le pasa como parametro encima de
+     * {@link JSignalMonitor}. Provoca una validacion (validate) de la ventana
+     * principal. Si ya habia algun componente en esa posicion sera eliminado y
+     * se anhadira el componente nuevo.
      *
-     * @param panel componente a añadir.
+     * @param panel componente a anhadir.
      * @todo comprobar que funciona correctamente.
      */
     public void setUpperComponent(JComponent component) {
@@ -377,12 +378,12 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Añade el componente que se le pasa como parámetro debajo de
-     * {@link JSignalMonitor}. Provoca una validación (validate) de la ventana
-     * principal. Si ya había algún componente en esa posición será eliminado y
-     * se añadirá el componente nuevo.
+     * Anhade el componente que se le pasa como parametro debajo de
+     * {@link JSignalMonitor}. Provoca una validacion (validate) de la ventana
+     * principal. Si ya habia algun componente en esa posicion sera eliminado y
+     * se anhadira el componente nuevo.
      *
-     * @param panel componente a añadir.
+     * @param panel componente a anhadir.
      * @todo comprobar que funciona correctamente.
      */
     public void setLowerComponent(JComponent component) {
@@ -395,7 +396,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Devuelve el {@link JSignalMonitor}que est\u2193 empleando la aplicación.
+     * Devuelve el {@link JSignalMonitor}que est\u2193 empleando la aplicacion.
      *
      * @return JSignalMonitor
      */
@@ -407,7 +408,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
      * Devuelve un HashMap cuyas claves son los diferentes tipos de plugins que
      * existen en el entorno y el objeto asociado con cada clave una lista de
      * todos los plugins de ese tipo asociados con dicha clave. Si no existiesen
-     * plugins de algún tipo la clave correspondiente no estaría en el HashMap.
+     * plugins de algun tipo la clave correspondiente no estaria en el HashMap.
      *
      * @return HashMap
      */
@@ -416,11 +417,11 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Indica si debe o no mostrarse una señal.
+     * Indica si debe o no mostrarse una senhal.
      *
-     * @param signalName nombre de la señal.
+     * @param signalName nombre de la senhal.
      * @param visible true si debe mostrarse, false en caso contrario.
-     * @return true si la acción se realizó correctamente, false en caso
+     * @return true si la accion se realizo correctamente, false en caso
      *   contrario.
      */
     public boolean setChannelVisible(String signalName, boolean visible) {
@@ -452,10 +453,10 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Elimina por completo la señal pasada como argumento.
+     * Elimina por completo la senhal pasada como argumento.
      *
-     * @param signalName nombre de la señal.
-     * @throws {@link SignalNotFoundException} si la señal a eliminar no
+     * @param signalName nombre de la senhal.
+     * @throws {@link SignalNotFoundException} si la senhal a eliminar no
      *   existe.
      */
     public void removeSignal(String signalName) throws SignalNotFoundException {
@@ -504,7 +505,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
             if (pos >= 0 && pos < signal.getValues().length) {
                 return signal.getValues()[pos];
             }
-            //si la señal no esta definida en ese instante
+            //si la senhal no esta definida en ese instante
             return Float.NaN;
         }
         throw new SignalNotFoundException(signalName, "Attempt of obtaining the value of a non existent signal");
@@ -671,8 +672,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
 
 
     /**
-     * Añade un {@link IntervalSelectedListener} a la lista de listeners que
-     * desean ser notificados de eventos de selección. Ademas indica a {@link
+     * Anhade un {@link IntervalSelectedListener} a la lista de listeners que
+     * desean ser notificados de eventos de seleccion. Ademas indica a {@link
      * JSignalMonitor} que debe seleccionar un intervalo.
      *
      * @param listener IntervalSelectedListener
@@ -684,11 +685,11 @@ public class JSWBManager implements JSignalMonitorDataSource,
 
 
     /**
-     * No diseñado como parte del API.
-     * @todo (Abraham) Sí lo considero una parte del API. Este metodo es el que
-     * se encarga de mostrar la interfaz de seleccion de señales previa a la ejecucion
+     * No disenhado como parte del API.
+     * @todo (Abraham) Si lo considero una parte del API. Este metodo es el que
+     * se encarga de mostrar la interfaz de seleccion de senhales previa a la ejecucion
      * de un algorithm. Si alguien desea crearse un acceso directo en, por ejemplo,
-     * un panel nuevo añadido a la aplicacion, para ejecutar determinado plugin,
+     * un panel nuevo anhadido a la aplicacion, para ejecutar determinado plugin,
      * debera llamar a este metodo. Sin embargo tambien es posible que le forcemos
      * a que utilice el AlgorithmAction para lanzarlo, con lo que ya no necesitaria
      * este metodo. Mi opinion es q deberia formar parte del API.
@@ -705,11 +706,11 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Muestra el cuadro de diálogo de configuración de un plugin.
+     * Muestra el cuadro de dialogo de configuracion de un plugin.
      *
      * @param pluginType tipo del plugin.
      * @param name nombre del plugin.
-     * @return True si la acción concluyó con éxito, false en caso contrario.
+     * @return True si la accion concluyo con exito, false en caso contrario.
      */
     public boolean showPluginConfiguration(String pluginType, String name) {
         Plugin plug = pluginManager.getPlugin(pluginType + ":" + name);
@@ -727,7 +728,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * No diseñado como parte del API.
+     * No disenhado como parte del API.
      * @todo (Abraham) Mismo caso que ShowAlgorithmExecution;
      */
     public boolean showAlgorithmResults(String algorithmName) {
@@ -744,7 +745,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * No diseñado como parte del API.
+     * No disenhado como parte del API.
      * //Documentacion en caso de ser API
      *  Metodo que lanzara la ejecucion del algoritmo que recibe como parametro
      *  sobre las senales que recibe como segundo parametro(Nombre). La ejecucion
@@ -759,8 +760,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
      *  // fin de la documentacion en caso de ser API
      * @todo (Abraham) Casi similar al de showPluginExecution. Creo que deberia formar
      *       parte de la API, ya que alguien puede querer ejecutar un algorithm
-     *       sin necesidad de tener que seleccionar señeles a modo de acceso. Por
-     *       ejemplo para ejecutar un algorithm para todas las señales completas le
+     *       sin necesidad de tener que seleccionar senheles a modo de acceso. Por
+     *       ejemplo para ejecutar un algorithm para todas las senhales completas le
      *       vale con llamar a este metodo con el Algorithm y una llamada a sm.getSignalsNames().
      *       No obstante si que es cierto que si incluimos estos metodos en la API puede llevar
      *       a confusion y que la gente los utilice directamente sin pasar por el
@@ -860,13 +861,13 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * No diseñado como parte del API.
+     * No disenhado como parte del API.
      */
     public boolean loadChannels(String loaderName, File f) {
         try {
-            System.out.println("aaaaaaaaaa"+this.deleteSignalsInNextLoad);
+            System.out.println("aaaaaaaaaa" + this.deleteSignalsInNextLoad);
             if (!iOManager.loadSignals(f, loaderName, deleteSignalsInNextLoad)) {
-                JOptionPane.showMessageDialog(getParentWindow(), "Alguna señal no se ha cargado");
+                JOptionPane.showMessageDialog(getParentWindow(), "Alguna senhal no se ha cargado");
             }
             sessionInfo.setLastFileOpenedPath(f.getAbsolutePath());
             sessionInfo.setLastLoaderUsed(loaderName);
@@ -877,7 +878,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
             JOptionPane.showMessageDialog(getParentWindow(), ex.getMessage());
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(getParentWindow(),  "Error al cargar el fichero:\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(getParentWindow(), "Error al cargar el fichero:\n" + ex.getMessage());
         }
         return true;
     }
@@ -905,7 +906,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
         try {
             iOManager.saveSignals(f, saverName);
             SessionEvent sesionEvt = new SessionEvent(newSession, true);
-            if (newSession) {//la llamada viene de "Save as"
+            if (newSession) { //la llamada viene de "Save as"
                 sesionEvt.setSaveAs(true);
             }
             this.fireSessionEvent(sesionEvt);
@@ -933,7 +934,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * No diseñado como parte del API.
+     * No disenhado como parte del API.
      */
     public void signalSizeActionPerformed(SignalSizeEvent evt) {
         Signal s = evt.getSignal();
@@ -956,14 +957,14 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Establece el valor máximo y mínimo a mostrar en pantalla para el eje de
-     * las ordenadas para la señal indicada.
+     * Establece el valor maximo y minimo a mostrar en pantalla para el eje de
+     * las ordenadas para la senhal indicada.
      *
-     * @param signalName Señal a la cual va a afectar el nuevo rango.
-     * @param minValue Valor mínimo del eje de ordenadas.
-     * @param maxValue Valor máximo del eje de ordenadas.
-     * @param abscissaValue valor de la señal en el q se representara la abscissa.
-     * @throws {@link SignalNotFoundException} si no hay una señal con el
+     * @param signalName Senhal a la cual va a afectar el nuevo rango.
+     * @param minValue Valor minimo del eje de ordenadas.
+     * @param maxValue Valor maximo del eje de ordenadas.
+     * @param abscissaValue valor de la senhal en el q se representara la abscissa.
+     * @throws {@link SignalNotFoundException} si no hay una senhal con el
      *   nombre indicado cargada y el entorno.
      */
     public void setSignalVisibleRange(String signalName,
@@ -972,13 +973,13 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Establece el valor máximo y mínimo a mostrar en pantalla para el eje de
-     * las ordenadas para todas las señales.
+     * Establece el valor maximo y minimo a mostrar en pantalla para el eje de
+     * las ordenadas para todas las senhales.
      *
-     * @param minValue Valor mínimo del eje de ordenadas.
-     * @param maxValue Valor máximo del eje de ordenadas.
-     * @param abscissaValue valor de la señal en el q se representara la abscissa.
-     * @throws {@link SignalNotFoundException} si no hay una señal con el
+     * @param minValue Valor minimo del eje de ordenadas.
+     * @param maxValue Valor maximo del eje de ordenadas.
+     * @param abscissaValue valor de la senhal en el q se representara la abscissa.
+     * @throws {@link SignalNotFoundException} si no hay una senhal con el
      *   nombre indicado cargada y el entorno.
      */
     public boolean setSignalVisibleRange(float abscissaValue, float maxValue) {
@@ -986,11 +987,11 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Establece como valores máximo y mínimo del eje de ordenadas de la señal que
-     * se le pasa como argumento el valor máximo y mínimo de la señal.
+     * Establece como valores maximo y minimo del eje de ordenadas de la senhal que
+     * se le pasa como argumento el valor maximo y minimo de la senhal.
      *
-     * @param signalName nombre de la señal.
-     * @throws {@link SignalNotFoundException} si no hay una señal con el
+     * @param signalName nombre de la senhal.
+     * @throws {@link SignalNotFoundException} si no hay una senhal con el
      *   nombre indicado cargada y el entorno.
      */
     public void adjustVisibleRange(String signalName) {
@@ -1002,8 +1003,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Establece como valores máximo y mínimo del eje de abcisas de todas las
-     * señales el valor máximo y mínimo de cada señal.
+     * Establece como valores maximo y minimo del eje de abcisas de todas las
+     * senhales el valor maximo y minimo de cada senhal.
      */
     public void adjustVisibleRange() {
         adjustVisibleRange(1);
@@ -1014,8 +1015,8 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Devuelve el contenedor del sistema operativo sobre el cual se está
-     * ejecutando JSignalWorkbench. Es útil para crear cuadros de diálogo
+     * Devuelve el contenedor del sistema operativo sobre el cual se esta
+     * ejecutando JSignalWorkbench. Es util para crear cuadros de dialogo
      * modales.
      *
      * @return Window
@@ -1051,9 +1052,9 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Modifica el tiempo máximo que será visualizado por {@Link JSignalMonitor}. Para
+     * Modifica el tiempo maximo que sera visualizado por {@Link JSignalMonitor}. Para
      * {@Link JSignalMonitor} este instante del tiempo es el final del registro de
-     * señal y no se mostraran instantes de tiempo posteriores a el.
+     * senhal y no se mostraran instantes de tiempo posteriores a el.
      *
      * @param maxTime Instante de tiempo medido en milisegundos.
      * Ver {@link TimePositionConverter}.
@@ -1075,16 +1076,16 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Modifica la frecuencia de representación de {@Link JSignalMonitor}. Aunque las
-     * distintas señales que esté visualizando {@Link JSignalMonitor} tengan distinta
+     * Modifica la frecuencia de representacion de {@Link JSignalMonitor}. Aunque las
+     * distintas senhales que este visualizando {@Link JSignalMonitor} tengan distinta
      * frecuencia un corte vertical sobre todos los ejes temporales que
      * representa {@Link JSignalMonitor} se corresponde siempre a un mismo instante del
      * tiempo. Para ello, {@Link JSignalMonitor} emplea una frecuencia ficticia de
-     * representación, que podría coincidir con la de alguna o todas las
-     * señales. Dicha frecuencia ficticia de representación se modifica a través
-     * de este método.
+     * representacion, que podria coincidir con la de alguna o todas las
+     * senhales. Dicha frecuencia ficticia de representacion se modifica a traves
+     * de este metodo.
      *
-     * @param frecuency Frecuencia de representación de {@Link JSignalMonitor}.
+     * @param frecuency Frecuencia de representacion de {@Link JSignalMonitor}.
      */
     public void setJSMFrecuency(float frecuency) {
         jSignalMonitor.setFrecuency(frecuency);
@@ -1115,7 +1116,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Devuelve el instante de tiempo al cual está apuntando el scroll
+     * Devuelve el instante de tiempo al cual esta apuntando el scroll
      * representado en milisegundos en {@Link JSignalMonitor}. Ver {@link TimePositionConverter}.
      *
      * @return long
@@ -1125,7 +1126,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Devuelve la frecuencia ficticia de representación de {@Link JSignalMonitor}. Ver
+     * Devuelve la frecuencia ficticia de representacion de {@Link JSignalMonitor}. Ver
      *  setFrecuency()
      *
      * @return float
@@ -1135,7 +1136,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Devuelve el alto, medido en píxeles, de cada uno de los canales representados
+     * Devuelve el alto, medido en pixeles, de cada uno de los canales representados
      * en {@Link JSignalMonitor}.
      *
      * @return int
@@ -1197,7 +1198,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
 
     /**
      *
-     * que se ejecute adecuadamente aunque no haya parámetros de la consola
+     * que se ejecute adecuadamente aunque no haya parametros de la consola
      * @todo obtener los plugin de desarrollo de un modo adecuado
      *
      * @param args the command line arguments
@@ -1208,7 +1209,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
      *
      * String path = null;
      * //pluginsPath = ".";
-     * boolean develop = false; //cierto sólo si se está usando el framework para el desarrollo de plugings
+     * boolean develop = false; //cierto solo si se esta usando el framework para el desarrollo de plugings
      * try {
      * develop = Boolean.parseBoolean(args[0]);
      * path = args[1];
@@ -1257,45 +1258,45 @@ public class JSWBManager implements JSignalMonitorDataSource,
             jToolBarItems=new ArrayList<JComponent>();
 
         /*addJToolBarButton(new OpenFileAction(this));
-          addJToolBarButton(new SaveAction(this));
-          HashMap<String, ArrayList<String>> plugins = pluginManager.getRegisteredPlugins();
-          ArrayList<String> algorithms = plugins.get("algorithm");
-          if (algorithms != null) {
-              addJToolBarSeparator();
-              addJToolBarButton(new JLabel(" Algorithms: "));
-              for (String algorithm : algorithms) {
-                  addJToolBarButton(new AlgorithmAction(algorithm,
-                          AlgorithmAction.RUN_ACTION, this));
+           addJToolBarButton(new SaveAction(this));
+           HashMap<String, ArrayList<String>> plugins = pluginManager.getRegisteredPlugins();
+           ArrayList<String> algorithms = plugins.get("algorithm");
+           if (algorithms != null) {
+               addJToolBarSeparator();
+               addJToolBarButton(new JLabel(" Algorithms: "));
+               for (String algorithm : algorithms) {
+                   addJToolBarButton(new AlgorithmAction(algorithm,
+                           AlgorithmAction.RUN_ACTION, this));
+               }
+
+           }
+
+           ArrayList<String> genericPlugins = plugins.get("generic");
+           if (genericPlugins != null) {
+               addJToolBarSeparator();
+               addJToolBarButton(new JLabel(" Generics: "));
+               for (String genericPlugin : genericPlugins) {
+                   addJToolBarButton(new GenericPluginAction(this,genericPlugin,
+                           GenericPluginAction.LAUNCH_ACTION));
+               }
+           }
+
+           addJToolBarSeparator();
+           addJToolBarButton(new AdjustSignalVisibleRangeAction(this));
+           addJToolBarSeparator();
+           addJToolBarButton(new JRadioButtonXY(jSignalMonitor));
+           addJToolBarButton(new JRadioButtonAddMarks(jSignalMonitor));
+           addJToolBarSeparator();
+           addJToolBarButton(new MoveScrollPanel(jSignalMonitor));
+           /*addJToolBarButton(new RemoveAllMarksAction(this));
+              addJToolBarButton(new RemoveAllAnnotationsAction(this));
+
+              if(parentWindow !=null && (parentWindow instanceof JFrame)){
+                  addJToolBarSeparator();
+                  addJToolBarButton(new LookAndFeelAction((JFrame)parentWindow));
               }
 
-          }
-
-          ArrayList<String> genericPlugins = plugins.get("generic");
-          if (genericPlugins != null) {
-              addJToolBarSeparator();
-              addJToolBarButton(new JLabel(" Generics: "));
-              for (String genericPlugin : genericPlugins) {
-                  addJToolBarButton(new GenericPluginAction(this,genericPlugin,
-                          GenericPluginAction.LAUNCH_ACTION));
-              }
-          }
-
-          addJToolBarSeparator();
-          addJToolBarButton(new AdjustSignalVisibleRangeAction(this));
-          addJToolBarSeparator();
-          addJToolBarButton(new JRadioButtonXY(jSignalMonitor));
-          addJToolBarButton(new JRadioButtonAddMarks(jSignalMonitor));
-          addJToolBarSeparator();
-          addJToolBarButton(new MoveScrollPanel(jSignalMonitor));
-          /*addJToolBarButton(new RemoveAllMarksAction(this));
-            addJToolBarButton(new RemoveAllAnnotationsAction(this));
-
-            if(parentWindow !=null && (parentWindow instanceof JFrame)){
-                addJToolBarSeparator();
-                addJToolBarButton(new LookAndFeelAction((JFrame)parentWindow));
-            }
-
-             }*/
+               }*/
 
       private void refreshJToolBar() {
           if (jToolBar != null && jToolBarItems != null) {
@@ -1347,17 +1348,17 @@ public class JSWBManager implements JSignalMonitorDataSource,
         /*@todo bug
                  a veces se llama a este metodo como un valor de pos1 de -2147483648
          */
-        if (pos2 <= pos1||pos1<0 || pos2 <0) {
-        System.out.println("pos1 " + pos1 +" pos2 "+pos2 );
+        if (pos2 <= pos1 || pos1 < 0 || pos2 < 0) {
+            System.out.println("pos1 " + pos1 + " pos2 " + pos2);
             return new float[1];
         }
         float[] partialValues = new float[pos2 - pos1];
         for (int index = pos1, index2 = 0; index < pos2; index++, index2++) {
             if (index < 0) {
                 partialValues[index2] = signalValues[0];
-            }else if(index >= signalValues.length){
-                partialValues[index2] = signalValues[signalValues.length-1];
-            }else {
+            } else if (index >= signalValues.length) {
+                partialValues[index2] = signalValues[signalValues.length - 1];
+            } else {
                 partialValues[index2] = signalValues[index];
             }
         }
@@ -1499,7 +1500,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
     /**
      * prepareClose
      *
-     * @param isEmptySession Cierto cuando se vaya a crear una nueva sesión vacía. Falso si se va a cerrar la herramienta.
+     * @param isEmptySession Cierto cuando se vaya a crear una nueva sesion vacia. Falso si se va a cerrar la herramienta.
      * @return boolean
      */
     public boolean prepareClose(boolean isEmptySession) {
@@ -1571,10 +1572,10 @@ public class JSWBManager implements JSignalMonitorDataSource,
     }
 
     /**
-     * Permite registrar un plugin que implemente la interfaz {@link  SessionListener} para escuchar eventos de sesión.
+     * Permite registrar un plugin que implemente la interfaz {@link  SessionListener} para escuchar eventos de sesion.
      *
      * @param n SessionListener
-     * @return boolean cierto si se registró correctamente.
+     * @return boolean cierto si se registro correctamente.
      */
     public boolean addSessionListener(SessionListener n) {
         return sessionListenetList.add(n);
@@ -1583,12 +1584,15 @@ public class JSWBManager implements JSignalMonitorDataSource,
     public boolean removeSessionListener(SessionListener n) {
         return sessionListenetList.remove(n);
     }
-    public void setDebugModeOnRestart(boolean debug){
-        if(debug)
+
+    public void setDebugModeOnRestart(boolean debug) {
+        if (debug) {
             DebugPluginsManager.registerDebugPlugins(pluginManager);
+        }
         sessionInfo.setDebugMode(debug);
     }
-    public boolean isDebugModeOnRestart(){
+
+    public boolean isDebugModeOnRestart() {
         return sessionInfo.isDebugMode();
     }
 }

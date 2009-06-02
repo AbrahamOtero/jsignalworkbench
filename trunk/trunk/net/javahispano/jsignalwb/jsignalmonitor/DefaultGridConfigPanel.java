@@ -8,8 +8,8 @@ package net.javahispano.jsignalwb.jsignalmonitor;
 
 import java.awt.Color;
 import java.awt.Window;
-import javax.swing.JColorChooser;
-import javax.swing.JWindow;
+
+import javax.swing.*;
 
 /**
  *
@@ -22,8 +22,8 @@ public class DefaultGridConfigPanel extends javax.swing.JPanel {
 
     /** Creates new form DemoGridPluginConfigPanel */
     public DefaultGridConfigPanel(DefaultGrid grid) {
-        originalConfig=grid.getDataToSave();
-        this.grid=grid;
+        originalConfig = grid.getDataToSave();
+        this.grid = grid;
         initComponents();
         LVCheckBox.setSelected(grid.isShowBigGrid());
         SVCheckBox.setSelected(grid.isShowSmallGrid());
@@ -36,22 +36,23 @@ public class DefaultGridConfigPanel extends javax.swing.JPanel {
         jButton1.setForeground(grid.getColor());
         //gridPreviewPanel gpp=new gridPreviewPanel(grid);
 //        gpp.setGrid(grid);
-       // gpp.setSize(jPanel1.getSize());
-       // jPanel1 = gpp;
+        // gpp.setSize(jPanel1.getSize());
+        // jPanel1 = gpp;
         //System.out.println(jPanel1.getClass().getCanonicalName());
         //jPanel1.repaint();
     }
 
-    public void showJWindow(Window owner){
-        jw=new JWindow(owner);
+    public void showJWindow(Window owner) {
+        jw = new JWindow(owner);
         //jw.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
         jw.add(this);
         jw.setSize(this.getPreferredSize());
         jw.setLocationRelativeTo(owner);
         jw.setVisible(true);
     }
-    private void hideJWindow(){
-      //@cambio dependencia JSW  JSWBManager.getJSWBManagerInstance().refreshJSM(false);
+
+    private void hideJWindow() {
+        //@cambio dependencia JSW  JSWBManager.getJSWBManagerInstance().refreshJSM(false);
         jw.dispose();
     }
 
@@ -124,28 +125,32 @@ public class DefaultGridConfigPanel extends javax.swing.JPanel {
 
         jLabel4.setText("Short Horizontal:");
 
-        LVSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        LVSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null,
+                Integer.valueOf(1)));
         LVSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 LVSpinnerStateChanged(evt);
             }
         });
 
-        SVSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        SVSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null,
+                Integer.valueOf(1)));
         SVSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SVSpinnerStateChanged(evt);
             }
         });
 
-        LHSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        LHSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null,
+                Integer.valueOf(1)));
         LHSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 LHSpinnerStateChanged(evt);
             }
         });
 
-        SHSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        SHSpinner.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null,
+                Integer.valueOf(1)));
         SHSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 SHSpinnerStateChanged(evt);
@@ -170,83 +175,103 @@ public class DefaultGridConfigPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel4))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(SVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(SHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(SVCheckBox)
-                        .addComponent(LHCheckBox)
-                        .addComponent(SHCheckBox)
-                        .addComponent(LVCheckBox))
-                    .addContainerGap())
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jButton1)
-                    .addGap(130, 130, 130)))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                                              .addComponent(jLabel1)
+                                              .addComponent(jLabel2)
+                                              .addComponent(jLabel3)
+                                              .addComponent(jLabel4))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                                              .addComponent(SVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addComponent(LHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addComponent(SHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addComponent(LVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 58,
+                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                                              .addComponent(jLabel5)
+                                              .addComponent(jLabel6)
+                                              .addComponent(jLabel7)
+                                              .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                                              .addComponent(SVCheckBox)
+                                              .addComponent(LHCheckBox)
+                                              .addComponent(SHCheckBox)
+                                              .addComponent(LVCheckBox))
+                                    .addContainerGap())
+                          .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jButton1)
+                                    .addGap(130, 130, 130)))
+                );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LHCheckBox, LVCheckBox, SHCheckBox, SVCheckBox});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LHCheckBox, LVCheckBox,
+                               SHCheckBox, SVCheckBox});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2,
+                               jLabel3, jLabel4});
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LHSpinner, LVSpinner, SHSpinner, SVSpinner});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {LHSpinner, LVSpinner,
+                               SHSpinner, SVSpinner});
 
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(LVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(SVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(LHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(SHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(LVCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SVCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LHCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SHCheckBox)))
-                .addContainerGap())
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                              .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.
+                Alignment.BASELINE)
+                .addComponent(jLabel1)
+                .addComponent(LVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.
+                Alignment.BASELINE)
+                .addComponent(jLabel2)
+                .addComponent(SVSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel6))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.
+                Alignment.BASELINE)
+                .addComponent(jLabel3)
+                .addComponent(LHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.
+                Alignment.BASELINE)
+                .addComponent(jLabel4)
+                .addComponent(SHSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel8))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                              .addComponent(jButton1))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                              .addComponent(LVCheckBox)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(SVCheckBox)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(LHCheckBox)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(SHCheckBox)))
+                          .addContainerGap())
+                );
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -265,79 +290,83 @@ public class DefaultGridConfigPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                              .addComponent(jButton2)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addContainerGap())
+                );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
-                .addContainerGap())
-        );
-    }// </editor-fold>//GEN-END:initComponents
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton2))
+                          .addContainerGap())
+                );
+    } // </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton3ActionPerformed
         hideJWindow();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    } //GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton2ActionPerformed
         grid.setSavedData(originalConfig);
         hideJWindow();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    } //GEN-LAST:event_jButton2ActionPerformed
 
-    private void LVCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LVCheckBoxActionPerformed
+    private void LVCheckBoxActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_LVCheckBoxActionPerformed
         grid.setShowBigGrid(LVCheckBox.isSelected());
-    }//GEN-LAST:event_LVCheckBoxActionPerformed
+    } //GEN-LAST:event_LVCheckBoxActionPerformed
 
-    private void SVCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SVCheckBoxActionPerformed
+    private void SVCheckBoxActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_SVCheckBoxActionPerformed
         grid.setShowSmallGrid(SVCheckBox.isSelected());
-    }//GEN-LAST:event_SVCheckBoxActionPerformed
+    } //GEN-LAST:event_SVCheckBoxActionPerformed
 
-    private void LHCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LHCheckBoxActionPerformed
+    private void LHCheckBoxActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_LHCheckBoxActionPerformed
         grid.setShowBigGridY(LHCheckBox.isSelected());
-    }//GEN-LAST:event_LHCheckBoxActionPerformed
+    } //GEN-LAST:event_LHCheckBoxActionPerformed
 
-    private void SHCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SHCheckBoxActionPerformed
+    private void SHCheckBoxActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_SHCheckBoxActionPerformed
         grid.setShowSmallGridY(SHCheckBox.isSelected());
-    }//GEN-LAST:event_SHCheckBoxActionPerformed
+    } //GEN-LAST:event_SHCheckBoxActionPerformed
 
-    private void LVSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LVSpinnerStateChanged
-        grid.setNumberOfBigDivisionsX((Integer)LVSpinner.getValue());
-    }//GEN-LAST:event_LVSpinnerStateChanged
+    private void LVSpinnerStateChanged(javax.swing.event.ChangeEvent evt) { //GEN-FIRST:event_LVSpinnerStateChanged
+        grid.setNumberOfBigDivisionsX((Integer) LVSpinner.getValue());
+    } //GEN-LAST:event_LVSpinnerStateChanged
 
-    private void SVSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SVSpinnerStateChanged
-        grid.setNumberOfDivisions((Integer)SVSpinner.getValue());
-    }//GEN-LAST:event_SVSpinnerStateChanged
+    private void SVSpinnerStateChanged(javax.swing.event.ChangeEvent evt) { //GEN-FIRST:event_SVSpinnerStateChanged
+        grid.setNumberOfDivisions((Integer) SVSpinner.getValue());
+    } //GEN-LAST:event_SVSpinnerStateChanged
 
-    private void LHSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LHSpinnerStateChanged
-        grid.setNumberOfBigDivisionsY((Integer)LHSpinner.getValue());
-    }//GEN-LAST:event_LHSpinnerStateChanged
+    private void LHSpinnerStateChanged(javax.swing.event.ChangeEvent evt) { //GEN-FIRST:event_LHSpinnerStateChanged
+        grid.setNumberOfBigDivisionsY((Integer) LHSpinner.getValue());
+    } //GEN-LAST:event_LHSpinnerStateChanged
 
-    private void SHSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_SHSpinnerStateChanged
-        grid.setNumberOfDivisionsY((Integer)SHSpinner.getValue());
-    }//GEN-LAST:event_SHSpinnerStateChanged
+    private void SHSpinnerStateChanged(javax.swing.event.ChangeEvent evt) { //GEN-FIRST:event_SHSpinnerStateChanged
+        grid.setNumberOfDivisionsY((Integer) SHSpinner.getValue());
+    } //GEN-LAST:event_SHSpinnerStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Color c=new JColorChooser().showDialog(this,"SelectColor",grid.getColor());
-        if(c!=null){
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton1ActionPerformed
+        Color c = new JColorChooser().showDialog(this, "SelectColor", grid.getColor());
+        if (c != null) {
             grid.setColor(c);
             jButton1.setForeground(c);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    } //GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

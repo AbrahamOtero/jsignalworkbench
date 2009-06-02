@@ -3,8 +3,8 @@ package es.usc.gsi.trace.importer.estadisticos;
 /**
  * @todo documentar
  */
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>

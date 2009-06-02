@@ -1,9 +1,9 @@
 package net.javahispano.jsignalwb;
 
 /**
- * Esta excepción se lanza cuando se le pide al API de JSignalWorkbench se
- * realice una operación sobre una señal que no existe. Habitualmente es indicio
- * de un error de programación por parte del código cliente.
+ * Esta excepcion se lanza cuando se le pide al API de JSignalWorkbench se
+ * realice una operacion sobre una senhal que no existe. Habitualmente es indicio
+ * de un error de programacion por parte del codigo cliente.
  *
  * @author Abraham Otero
  */
@@ -12,9 +12,9 @@ public class SignalNotFoundException extends RuntimeException {
     /**
      * SignalNotFoundException
      *
-     * @param signalName nombre de la señal que no se ha encontrado.
+     * @param signalName nombre de la senhal que no se ha encontrado.
      * @param msg mensajes de error.
-     * @param e Throwable que ha provocado esta excepción.
+     * @param e Throwable que ha provocado esta excepcion.
      */
     public SignalNotFoundException(String signalName, String msg, Throwable e) {
         super(generateMessage(msg, signalName), e);
@@ -25,7 +25,7 @@ public class SignalNotFoundException extends RuntimeException {
     /**
      * SignalNotFoundException
      *
-     * @param signalName nombre de la señal que no se ha encontrado.
+     * @param signalName nombre de la senhal que no se ha encontrado.
      * @param msg mensajes de error.
      */
     public SignalNotFoundException(String signalName, String msg) {
@@ -36,8 +36,8 @@ public class SignalNotFoundException extends RuntimeException {
     /**
      * getSignalName
      *
-     * @return Nombre de la señal sobre la cual se solicitó realizar una
-     *   operación y que no existe actualmente en el entorno.
+     * @return Nombre de la senhal sobre la cual se solicito realizar una
+     *   operacion y que no existe actualmente en el entorno.
      */
     public String getSignalName() {
         return signalName;

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class SessionInfo {
     private String lastFileOpenedPath;
@@ -21,12 +21,12 @@ public class SessionInfo {
     private boolean sessionSaved;
     private boolean debugMode;
     public SessionInfo() {
-        sessionSaved=true;
-        pluginsToDelete=new ArrayList<String>();
-        lastFileOpenedPath="";
-        lastLoaderUsed="";
-        lastSaverUsed="";
-        debugMode=true;
+        sessionSaved = true;
+        pluginsToDelete = new ArrayList<String>();
+        lastFileOpenedPath = "";
+        lastLoaderUsed = "";
+        lastSaverUsed = "";
+        debugMode = true;
     }
 
     public String getLastFileOpenedPath() {
@@ -52,12 +52,12 @@ public class SessionInfo {
     public void setLastSaverUsed(String lastSaverUsed) {
         this.lastSaverUsed = lastSaverUsed;
     }
-    
-    public void addPluginToDelete(String pluginToDelete){
+
+    public void addPluginToDelete(String pluginToDelete) {
         pluginsToDelete.add(pluginToDelete);
     }
-    
-    public List<String> getPluginsToDelete(){
+
+    public List<String> getPluginsToDelete() {
         return pluginsToDelete;
     }
 

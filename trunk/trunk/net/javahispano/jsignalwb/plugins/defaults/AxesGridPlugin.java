@@ -6,32 +6,28 @@
 
 package net.javahispano.jsignalwb.plugins.defaults;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Stroke;
-import java.awt.Window;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.jsignalmonitor.GridConfiguration;
-import net.javahispano.jsignalwb.Signal;
 import java.awt.*;
 import java.util.Date;
-import net.javahispano.jsignalwb.plugins.*;
+
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.Signal;
+import net.javahispano.jsignalwb.jsignalmonitor.GridConfiguration;
+import net.javahispano.jsignalwb.plugins.GridPluginAdapter;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class AxesGridPlugin extends GridPluginAdapter {
     private long yAxePosition = -1;
     private long distance = -1;
     private Stroke stroke;
-    private Signal signal=null;
+    private Signal signal = null;
     private String signalName;
 
     public AxesGridPlugin() {
         stroke = new BasicStroke(2);
-        this.setYAxePosition((new Date(2008-1900, 1, 1)).getTime());
+        this.setYAxePosition((new Date(2008 - 1900, 1, 1)).getTime());
     }
 
     public AxesGridPlugin(Signal s) {
@@ -75,7 +71,7 @@ public class AxesGridPlugin extends GridPluginAdapter {
         float max = gridconfig.getMaxValue();
         float range;
         String yLabel;
-        //calculamos el rango de representación
+        //calculamos el rango de representacion
         if (max * min > 0) {
             range = Math.abs(max - min);
         } else {
@@ -141,22 +137,23 @@ public class AxesGridPlugin extends GridPluginAdapter {
     }
 
     public boolean hasDataToSave() {
-        if(signal!=null)
+        if (signal != null) {
             return true;
+        }
         return false;
     }
 
     public void setSavedData(String data) {
         yAxePosition = Long.parseLong(data.substring(0, data.indexOf("|")));
-        data=data.substring( data.indexOf("|"),data.length());
-        distance = Long.parseLong(data.substring(1, data.indexOf("|",1)));
-        data=data.substring( data.indexOf("|",1),data.length());
-        this.signalName =data.substring(1, data.length());
+        data = data.substring(data.indexOf("|"), data.length());
+        distance = Long.parseLong(data.substring(1, data.indexOf("|", 1)));
+        data = data.substring(data.indexOf("|", 1), data.length());
+        this.signalName = data.substring(1, data.length());
 
     }
 
     public String getDataToSave() {
-        return "" + yAxePosition + "|" + distance+"|"+signal.getName();
+        return "" + yAxePosition + "|" + distance + "|" + signal.getName();
     }
 
 
@@ -166,8 +163,8 @@ public class AxesGridPlugin extends GridPluginAdapter {
 
     public void setYAxePosition(long yAxe) {
         this.yAxePosition = yAxe;
-        //si hace falta, y se inicializa la señal
-        if (signal==null) {
+        //si hace falta, y se inicializa la senhal
+        if (signal == null) {
             signal = JSWBManager.getJSWBManagerInstance().getSignalManager().getSignal(signalName);
         }
     }

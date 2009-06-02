@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -233,7 +233,7 @@ public class PTB implements PTBInterface, Serializable {
      * @roseuid 37870819007E
      */
     public void anhadePtoSig(PtoSig ptosig, int numeroPtoSig, int seleccion) {
-        if (seleccion == PTBM.AÑADIR) {
+        if (seleccion == PTBM.ANHADIR) {
             vectorPtoSig.addElement(ptosig);
             numeroPtoSig++;
         } else if (seleccion == PTBM.BORRAR) {
@@ -268,11 +268,11 @@ public class PTB implements PTBInterface, Serializable {
      * @roseuid 378708190082
      */
     public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
-                                 Restriccion restriccion_vieja, int seleccion) {
+                                  Restriccion restriccion_vieja, int seleccion) {
 
         ((PtoSig) vectorPtoSig.elementAt(ptosig))
                 .anhadeRestriccion(ptb, ptosig, restriccion, restriccion_vieja,
-                                  /*numeroPtoSig,*/seleccion);
+                                   /*numeroPtoSig,*/seleccion);
     }
 
     /**

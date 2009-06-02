@@ -7,25 +7,27 @@
 package net.javahispano.jsignalwb.jsignalmonitor.marks;
 
 import javax.swing.JPopupMenu;
-import net.javahispano.jsignalwb.jsignalmonitor.*;
+
+import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorDataSource;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class MarksPopupMenu extends JPopupMenu{
-    
-    public MarksPopupMenu(JSignalMonitorDataSource dataSource,String signalName,long time) {
+public class MarksPopupMenu extends JPopupMenu {
+
+    public MarksPopupMenu(JSignalMonitorDataSource dataSource, String signalName, long time) {
         super();
-        for(String markName:dataSource.getAvailableKindsOfInstantMarks()){
-            add(new AddMarkAction(markName,signalName,dataSource,time));
+        for (String markName : dataSource.getAvailableKindsOfInstantMarks()) {
+            add(new AddMarkAction(markName, signalName, dataSource, time));
         }
     }
-    public MarksPopupMenu(JSignalMonitorDataSource dataSource,String signalName,long startTime,long endTime) {
+
+    public MarksPopupMenu(JSignalMonitorDataSource dataSource, String signalName, long startTime, long endTime) {
         super();
-        
-        for(String markName:dataSource.getAvailableKindsOfIntervalMarks()){            
-            add(new AddMarkAction(markName,signalName,dataSource,startTime,endTime));            
+
+        for (String markName : dataSource.getAvailableKindsOfIntervalMarks()) {
+            add(new AddMarkAction(markName, signalName, dataSource, startTime, endTime));
         }
     }
 }

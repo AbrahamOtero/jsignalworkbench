@@ -9,10 +9,9 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import javax.swing.*;
+import javax.swing.JRadioButtonMenuItem;
 
-import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.utilities.*;
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
@@ -24,7 +23,7 @@ public class JRadioButtonMenuItemVisible extends JRadioButtonMenuItem {
     /** Creates a new instance of JMenuVisible */
     public JRadioButtonMenuItemVisible(JSWBManager jswbManager, String signalName) {
         super(new VisibleAction(jswbManager, signalName));
-        
+
         if (jswbManager.getSignalManager().getSignal(signalName).getProperties().
             isVisible()) {
             setSelected(true);
@@ -32,12 +31,13 @@ public class JRadioButtonMenuItemVisible extends JRadioButtonMenuItem {
             setSelected(false);
         }
     }
-    
-    public String getActionCommand(){
-        if(isSelected())
+
+    public String getActionCommand() {
+        if (isSelected()) {
             return "true";
-        else 
+        } else {
             return "false";
+        }
     }
 
 }

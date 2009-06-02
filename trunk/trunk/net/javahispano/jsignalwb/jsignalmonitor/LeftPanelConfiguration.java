@@ -8,7 +8,7 @@ package net.javahispano.jsignalwb.jsignalmonitor;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class LeftPanelConfiguration {
     private boolean arrowsVisible;
@@ -18,17 +18,18 @@ public class LeftPanelConfiguration {
     private boolean zoomVisible;
     private boolean pointVisible;
     public LeftPanelConfiguration() {
-        this(true,true, false, false, false,true);
+        this(true, true, false, false, false, true);
     }
-    public LeftPanelConfiguration(boolean arrowsVisible,boolean nameVisible,
-            boolean magnitudeVisible,boolean frecuencyVisible,boolean zoomVisible,
-            boolean pointVisible){
-        this.arrowsVisible=arrowsVisible;
-        this.nameVisible=nameVisible;
-        this.magnitudeVisible=magnitudeVisible;
-        this.frecuencyVisible=frecuencyVisible;
-        this.zoomVisible=zoomVisible;
-        this.pointVisible=pointVisible;
+
+    public LeftPanelConfiguration(boolean arrowsVisible, boolean nameVisible,
+                                  boolean magnitudeVisible, boolean frecuencyVisible, boolean zoomVisible,
+                                  boolean pointVisible) {
+        this.arrowsVisible = arrowsVisible;
+        this.nameVisible = nameVisible;
+        this.magnitudeVisible = magnitudeVisible;
+        this.frecuencyVisible = frecuencyVisible;
+        this.zoomVisible = zoomVisible;
+        this.pointVisible = pointVisible;
     }
 
     public boolean isArrowsVisible() {
@@ -78,25 +79,28 @@ public class LeftPanelConfiguration {
     public void setPointVisible(boolean pointVisible) {
         this.pointVisible = pointVisible;
     }
-    public boolean[] getProperties(){
-        boolean properties[]=new boolean[6];
-        properties[0]=arrowsVisible;
-        properties[1]=nameVisible;
-        properties[2]=magnitudeVisible;
-        properties[3]=frecuencyVisible;
-        properties[4]=zoomVisible;
-        properties[5]=pointVisible;
+
+    public boolean[] getProperties() {
+        boolean properties[] = new boolean[6];
+        properties[0] = arrowsVisible;
+        properties[1] = nameVisible;
+        properties[2] = magnitudeVisible;
+        properties[3] = frecuencyVisible;
+        properties[4] = zoomVisible;
+        properties[5] = pointVisible;
         return properties;
     }
-    public void setProperties(boolean properties[]){
-        if(properties.length!=6)
+
+    public void setProperties(boolean properties[]) {
+        if (properties.length != 6) {
             throw new RuntimeException("Left panel configuration needs exactly 6 arguments");
-        arrowsVisible=properties[0];
-        nameVisible=properties[1];
-        magnitudeVisible=properties[2];
-        frecuencyVisible=properties[3];
-        zoomVisible=properties[4];
-        pointVisible=properties[5];
+        }
+        arrowsVisible = properties[0];
+        nameVisible = properties[1];
+        magnitudeVisible = properties[2];
+        frecuencyVisible = properties[3];
+        zoomVisible = properties[4];
+        pointVisible = properties[5];
     }
 
 

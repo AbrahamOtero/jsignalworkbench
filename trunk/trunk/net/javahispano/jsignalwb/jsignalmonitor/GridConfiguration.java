@@ -8,15 +8,15 @@
 package net.javahispano.jsignalwb.jsignalmonitor;
 
 /**
- * Esta clase contiene información que puede resultar útil para dibujar un grid sobre un canal como el valor en magnitud
- * mínimo y máximo que se están pintando en el canal, la frecuencia de muestreo que se emplea en visualización, etc.
+ * Esta clase contiene informacion que puede resultar util para dibujar un grid sobre un canal como el valor en magnitud
+ * minimo y maximo que se estan pintando en el canal, la frecuencia de muestreo que se emplea en visualizacion, etc.
  * Se trata de una clase inmutable.
  */
 public class GridConfiguration {
     /*     *  scrollValue --> Indica el valor del primer punto que ha de
      *                  pintarse en el grid
-     *  vZoom--> valor del zoom vertical actualmente (1 para tamaño actual)
-     *  frec--> valor del zoom horizontal actualmente (1 para tamaño actual)
+     *  vZoom--> valor del zoom vertical actualmente (1 para tamanho actual)
+     *  frec--> valor del zoom horizontal actualmente (1 para tamanho actual)
      **/
 //    private float minValue;
     private float maxValue;
@@ -27,7 +27,7 @@ public class GridConfiguration {
 
     /** Creates a new instance of GridConfiguration */
     GridConfiguration(float maxValue, float abscissaValue, int abscissaPosition,
-                             float vZoom, float hZoom) {
+                      float vZoom, float hZoom) {
         this.frec = hZoom;
         this.vZoom = vZoom;
         this.abscissaPosition = abscissaPosition;
@@ -38,7 +38,7 @@ public class GridConfiguration {
 
 
     /**
-     * Devuelve el zoom que se está aplicando en el eje horizontal.
+     * Devuelve el zoom que se esta aplicando en el eje horizontal.
      *
      * @return float
      */
@@ -47,8 +47,8 @@ public class GridConfiguration {
     }
 
     /**
-     * Devuelve la frecuencia de muestreo que se está empleando para visualizar en pantalla la señal. No tiene porque
-     * coincidir con la frecuencia de muestreo real de la señal.
+     * Devuelve la frecuencia de muestreo que se esta empleando para visualizar en pantalla la senhal. No tiene porque
+     * coincidir con la frecuencia de muestreo real de la senhal.
      *
      * @return float
      */
@@ -65,8 +65,8 @@ public class GridConfiguration {
     }
 
     /**
-     * Devuelve el valor de magnitud con el que se corresponde el píxel más bajo que se puede dibujar sobre el canal. Es
-     * el valor mínimo que se puede representar sobre ese canal para la configuración de visualización actual.
+     * Devuelve el valor de magnitud con el que se corresponde el pixel mas bajo que se puede dibujar sobre el canal. Es
+     * el valor minimo que se puede representar sobre ese canal para la configuracion de visualizacion actual.
      *
      * @return float
      */
@@ -75,8 +75,8 @@ public class GridConfiguration {
     }
 
     /**
-     * Devuelve el valor de magnitud con el que se corresponde el píxel más alto que se puede dibujar sobre el canal. Es
-     * el valor máximo que se puede representar sobre ese canal para la configuración de visualización actual.
+     * Devuelve el valor de magnitud con el que se corresponde el pixel mas alto que se puede dibujar sobre el canal. Es
+     * el valor maximo que se puede representar sobre ese canal para la configuracion de visualizacion actual.
      *
      * @return float
      */

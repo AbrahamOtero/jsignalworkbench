@@ -1,7 +1,7 @@
 package es.usc.gsi.conversorDatosMIT.utilidades;
 
 
-import java.util.*;
+import java.util.StringTokenizer;
 
 public class ParseadorCadena {
 

@@ -9,27 +9,26 @@
 
 package net.javahispano.jsignalwb.io;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
 import net.javahispano.jsignalwb.plugins.SaverAdapter;
 
 /**
- * {@link Saver} básico que almacena sólo los valores de las señales cargados en
- * el entorno en un fichero ASCII donde cada señal se almacena como una columna
+ * {@link Saver} basico que almacena solo los valores de las senhales cargados en
+ * el entorno en un fichero ASCII donde cada senhal se almacena como una columna
  * separadas por tabulaciones.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public class BasicSaver extends SaverAdapter {
 
 
-    public String getName(){
+    public String getName() {
         return "Basic Saver";
     }
 
@@ -42,16 +41,19 @@ public class BasicSaver extends SaverAdapter {
         ext.add("txt");
         return ext;
     }
+
     public boolean save(File f, float[][] data, boolean addTXT) throws Exception {
-        if (addTXT && !f.getName().toLowerCase().endsWith(".txt")){
+        if (addTXT && !f.getName().toLowerCase().endsWith(".txt")) {
             f = new File(f.getPath() + ".txt");
         }
-        return this.save(f,data);
+        return this.save(f, data);
     }
+
     public boolean save(File f, float[][] data) throws Exception {
-        if(f.exists()){
-            if(JOptionPane.showConfirmDialog(null,
-                "overwirte "+f.getCanonicalPath()+"?","OverWrite",JOptionPane.YES_NO_OPTION)!=0){
+        if (f.exists()) {
+            if (JOptionPane.showConfirmDialog(null,
+                                              "overwirte " + f.getCanonicalPath() + "?", "OverWrite",
+                                              JOptionPane.YES_NO_OPTION) != 0) {
                 return false;
             }
         }

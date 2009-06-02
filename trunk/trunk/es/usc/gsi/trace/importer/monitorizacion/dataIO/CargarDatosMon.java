@@ -2,10 +2,11 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.dataIO;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
-import es.usc.gsi.trace.importer.jsignalmonold.*;
-import es.usc.gsi.trace.importer.monitorizacion.data.*;
+import es.usc.gsi.trace.importer.jsignalmonold.SamplesToDate;
+import es.usc.gsi.trace.importer.monitorizacion.data.AlmacenDatos;
 
 /**
  * Carga los datos referentes a una monitorizacion ya realizada. Peuede haber en

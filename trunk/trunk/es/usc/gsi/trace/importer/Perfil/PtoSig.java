@@ -2,8 +2,8 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.Vector;
 
 /**
  * @author Abraham Otero Quintana
@@ -98,8 +98,8 @@ public class PtoSig implements PtoSigInterface, Serializable {
      * @roseuid 378708190034
      */
     public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
-                                 Restriccion restriccion_vieja, int seleccion) {
-        if (seleccion == PTBM.AÑADIR) {
+                                  Restriccion restriccion_vieja, int seleccion) {
+        if (seleccion == PTBM.ANHADIR) {
             vectorRestricciones.addElement(restriccion);
         } else if (seleccion == PTBM.MODIFICAR) {
             int index = vectorRestricciones.indexOf(restriccion_vieja);

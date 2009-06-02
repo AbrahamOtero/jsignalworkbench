@@ -1,6 +1,6 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import javax.swing.*;
+import javax.swing.JScrollPane;
 
 public class ScrollPanelFichero extends JScrollPane {
 

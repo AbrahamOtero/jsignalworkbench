@@ -1,7 +1,5 @@
 package research.apneas.spo2;
 
-import research.apneas.spo2.Desaturacion;
-
 import static java.lang.Math.*;
 import java.util.Arrays;
 
@@ -14,10 +12,10 @@ public class DetectorDesaturaciones {
     //variables para almacenar los datos en un buffer y para suavizar la entrada
     private final int tamanoBuffer = 120; //120 segundos
     private float[] datos = new float[tamanoBuffer];
-    private float pasado, presente = 0, futuro = 0;//para calcular la mediana de tres
+    private float pasado, presente = 0, futuro = 0; //para calcular la mediana de tres
 
-    //Para el cálculo del valor basal
-    private float valorBasal = 100; //aquí se almacena el valor basal
+    //Para el calculo del valor basal
+    private float valorBasal = 100; //aqui se almacena el valor basal
     private final int tiempoCalculoBasal = 10; //el valor basal se refresca cada 10 segundos
 
     //para llevar cuenta del tiempo
@@ -26,23 +24,23 @@ public class DetectorDesaturaciones {
     private int indice = -1; //posicion del buffer donde se guarda la siguiente muestra
 
     //variables que controlan los distintos estados de la deteccoin
-    private boolean cicloActivado = false;//true cuando el buffer se ha llenado
-    private boolean epezadaDesat = false;//true cuando parece que ha comenzado una desaturacion
-    private boolean notificadoInicio = false;//true cuando estamos seguros de que ha comenzado y se ha notificado
-    private boolean buscandoFinDesat = false;//true cuando estamos buscando el fin de la desaturacion (rampla de su vida)
-    private boolean caidaMinimaDeLaDesatCumplida = false;//true cuando una desaturacion  en proceso presenta la caida mínima
-    private boolean duracionMinimaDeLaDesat = false;//true cuando una desaturacion  en proceso presenta la duracion mínima
-    private int desatFinContador = 0;//contador para ayudar a buscar el fin de una desaturacion
-    private int desatFinContador2 = 0;//contador para ayudar a buscar el fin de una desaturacion
+    private boolean cicloActivado = false; //true cuando el buffer se ha llenado
+    private boolean epezadaDesat = false; //true cuando parece que ha comenzado una desaturacion
+    private boolean notificadoInicio = false; //true cuando estamos seguros de que ha comenzado y se ha notificado
+    private boolean buscandoFinDesat = false; //true cuando estamos buscando el fin de la desaturacion (rampla de su vida)
+    private boolean caidaMinimaDeLaDesatCumplida = false; //true cuando una desaturacion  en proceso presenta la caida minima
+    private boolean duracionMinimaDeLaDesat = false; //true cuando una desaturacion  en proceso presenta la duracion minima
+    private int desatFinContador = 0; //contador para ayudar a buscar el fin de una desaturacion
+    private int desatFinContador2 = 0; //contador para ayudar a buscar el fin de una desaturacion
 
-    //para ir almacenando información sobre la desaturación cuando todava está en detencion
-    private int tiempoPrincipioDesat;//tiempo al principio de la desaturación
-    private float valorPrincipioDesat;//valor al principio
-    private float valorMinDesat = Float.MAX_VALUE;//Valor mínimo que ha alcanzado
+    //para ir almacenando informacion sobre la desaturacion cuando todava esta en detencion
+    private int tiempoPrincipioDesat; //tiempo al principio de la desaturacion
+    private float valorPrincipioDesat; //valor al principio
+    private float valorMinDesat = Float.MAX_VALUE; //Valor minimo que ha alcanzado
 
-    //para el cálculo del grado de posibilidad de cada desaturacion
+    //para el calculo del grado de posibilidad de cada desaturacion
 
-    //comienzo del soporte de la distribucion de posibilidad trapezoidal que indica la caida mínima
+    //comienzo del soporte de la distribucion de posibilidad trapezoidal que indica la caida minima
     //de una desaturacion para ser considerada relevante
     private final float limiteDesaturacionP0 = 3;
     //comienzo del nucleo de la distribucin anterior; el fin del nucleo es infinito
@@ -62,18 +60,18 @@ public class DetectorDesaturaciones {
             1 / (limiteDesaturacionP1 - limiteDesaturacionP0);
     private final float bMagnitudDistribucionTrapezoidal =
             -limiteDesaturacionP0 * mTiempoDistribucionTrapezoidal;
-    private int valoVasalMinimo=91;
-    private float valoVasalMaximo=100;
+    private int valoVasalMinimo = 91;
+    private float valoVasalMaximo = 100;
 
 
     /**
-     * Se le van pasando las muestras de la SpO2. Devuelve null cuando no haya detección. Devuelve
-     * un objeto de tipo Desaturación cuando está seguro de que ha identificado una desaturación; a
-     * continuación devuelve null hasta que está seguro que la desaturación identificada ha
-     * terminado. En ese momento, devuelve un segundo objeto de tipo Desaturación en el cual se
-     * reúne toda la información relevante de la desaturación. La primera debe ser considerada como
-     * un mero aviso sin información (sin valor de posibilidad asociada, sin valor mínimo de
-     * desaturación...).
+     * Se le van pasando las muestras de la SpO2. Devuelve null cuando no haya deteccion. Devuelve
+     * un objeto de tipo Desaturacion cuando esta seguro de que ha identificado una desaturacion; a
+     * continuacion devuelve null hasta que esta seguro que la desaturacion identificada ha
+     * terminado. En ese momento, devuelve un segundo objeto de tipo Desaturacion en el cual se
+     * reune toda la informacion relevante de la desaturacion. La primera debe ser considerada como
+     * un mero aviso sin informacion (sin valor de posibilidad asociada, sin valor minimo de
+     * desaturacion...).
      *
      * @param nuevoDato float
      * @return Desaturacion
@@ -90,7 +88,7 @@ public class DetectorDesaturaciones {
             return null;
         }
         nuevoDato = medianaDeTres();
-        if (indice == tamanoBuffer) { //si se llenó
+        if (indice == tamanoBuffer) { //si se lleno
             //comienza a funcionar el comportamiento cilico
             if (!cicloActivado) {
                 cicloActivado = true;
@@ -109,10 +107,10 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Método que indica que ya no hay más datos o que se para la detección por cualquier motivo. En
-     * caso de estar a medio de detectar una desaturación, se devolverá dicha desaturación. En caso
-     * contrario, el método de volver a null. Una vez este método ha sido invocado el detector queda
-     * inservible y deberá descartarse.
+     * Metodo que indica que ya no hay mas datos o que se para la deteccion por cualquier motivo. En
+     * caso de estar a medio de detectar una desaturacion, se devolvera dicha desaturacion. En caso
+     * contrario, el metodo de volver a null. Una vez este metodo ha sido invocado el detector queda
+     * inservible y debera descartarse.
      *
      * @return Desaturacion
      */
@@ -159,7 +157,7 @@ public class DetectorDesaturaciones {
             }
             datosCopia = Arrays.copyOfRange(datos, 0, indice);
         } else {
-            //En entornos con memoria limitada quizás sea mejor reutilizar un array y no crear nuevos
+            //En entornos con memoria limitada quizas sea mejor reutilizar un array y no crear nuevos
             datosCopia = (float[]) datos.clone();
         }
         Arrays.sort(datosCopia);
@@ -192,14 +190,14 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Esta es la función que realmente controla los distintos estados por los cuales va pasando la
-     * detección de los episodios de desaturación. anadeDato delega todo el trabajo en ella.
+     * Esta es la funcion que realmente controla los distintos estados por los cuales va pasando la
+     * deteccion de los episodios de desaturacion. anadeDato delega todo el trabajo en ella.
      *
      * @return Desaturacion
      */
     private Desaturacion compruebaDesaturacion() {
         if (valorBasal - datos[indice] > limiteDesaturacionP0) {
-            //Empezó otra antes de que las heurísticas marcasen el fin de la anterior
+            //Empezo otra antes de que las heuristicas marcasen el fin de la anterior
             if (buscandoFinDesat) {
                 if (notificadoInicio) {
                     return transicionASinDeteccion();
@@ -241,10 +239,10 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Cuando comienza a haber evidencia de que hay una desaturación (se cae en lo que corresponda
-     * por debajo del nivel basal) se llama a este método para ver dónde empezó realmente la caída;
-     * el propósito de este método es "subir" por una pendiente negativa para encontrar el punto en
-     * el que comenzó el descenso.
+     * Cuando comienza a haber evidencia de que hay una desaturacion (se cae en lo que corresponda
+     * por debajo del nivel basal) se llama a este metodo para ver donde empezo realmente la caida;
+     * el proposito de este metodo es "subir" por una pendiente negativa para encontrar el punto en
+     * el que comenzo el descenso.
      *
      * @return int
      */
@@ -254,12 +252,12 @@ public class DetectorDesaturaciones {
         int indice2 = this.corrigeIndice(indice - 2);
         int indice6 = this.corrigeIndice(indice2 - 4);
         int indice10 = this.corrigeIndice(indice6 - 4);
-        int indice14 = this.corrigeIndice(indice10 - 4);  //miramos hasta 14 sec atrás
+        int indice14 = this.corrigeIndice(indice10 - 4); //miramos hasta 14 sec atras
 
         while (datos[indice0] < datos[indice2] || datos[indice0] < datos[indice6] ||
                datos[indice0] < datos[indice10] || datos[indice0] < datos[indice14]) {
             principio--;
-            indice0 = corrigeIndice(--indice0);//OJO tiene que ser *pre*decremento
+            indice0 = corrigeIndice(--indice0); //OJO tiene que ser *pre*decremento
             indice2 = corrigeIndice(--indice2);
             indice6 = corrigeIndice(--indice6);
             indice10 = corrigeIndice(--indice10);
@@ -271,8 +269,8 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Se encarga de crear la desaturación inicial y realiza la transición entre los estados
-     * "Detección Iniciada" y "Detección Iniciada y Notificada".
+     * Se encarga de crear la desaturacion inicial y realiza la transicion entre los estados
+     * "Deteccion Iniciada" y "Deteccion Iniciada y Notificada".
      *
      * @return Desaturacion
      */
@@ -285,7 +283,7 @@ public class DetectorDesaturaciones {
 
     /**
      * Comprueba si se dan las condiciones para pasar de los estados "Buscando Final" a "Sin
-     * Desaturación". En caso afirmativo, realiza la transición.
+     * Desaturacion". En caso afirmativo, realiza la transicion.
      *
      * @return Desaturacion
      */
@@ -296,9 +294,9 @@ public class DetectorDesaturaciones {
             return transicionASinDeteccion();
         }
         desatFinContador2++;
-        if (datos[indice]-0.5F > datos[corrigeIndice(indice - 1)]) {
+        if (datos[indice] - 0.5F > datos[corrigeIndice(indice - 1)]) {
             desatFinContador = 0;
-        desatFinContador2 = 0;
+            desatFinContador2 = 0;
             return null;
         } else {
             desatFinContador++;
@@ -307,8 +305,8 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Crea la desaturación de notificación de final del desaturación y hace que el estado del
-     * detector pase a ser "Sin Detección".
+     * Crea la desaturacion de notificacion de final del desaturacion y hace que el estado del
+     * detector pase a ser "Sin Deteccion".
      *
      * @return Desaturacion
      */
@@ -319,7 +317,7 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Crea la desaturación de final de desaturación.
+     * Crea la desaturacion de final de desaturacion.
      *
      * @param fin int
      * @return Desaturacion
@@ -333,9 +331,9 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * El instante en el que "estamos seguros" de que la desaturación ha terminado puede ser
-     * posterior al instante en el que realmente ha terminado. Este método trata de buscar el
-     * momento en el que realmente terminó.
+     * El instante en el que "estamos seguros" de que la desaturacion ha terminado puede ser
+     * posterior al instante en el que realmente ha terminado. Este metodo trata de buscar el
+     * momento en el que realmente termino.
      *
      * @param fin int
      * @return int
@@ -357,7 +355,7 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Evalúa los criterios borrosos de duración y de caída de la desaturación.
+     * Evalua los criterios borrosos de duracion y de caida de la desaturacion.
      *
      * @param d Desaturacion
      */
@@ -369,7 +367,7 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Comprueba el grado de cumplimiento borroso de la duración de una desaturación.
+     * Comprueba el grado de cumplimiento borroso de la duracion de una desaturacion.
      *
      * @param duracion int
      * @return float
@@ -385,7 +383,7 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Comprueba el grado de satisfacción borroso de la magnitud de la caída de una desaturación.
+     * Comprueba el grado de satisfaccion borroso de la magnitud de la caida de una desaturacion.
      *
      * @return float
      */
@@ -401,7 +399,7 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Modifica el estado interno del detector para que pase a ser "Sin Detección".
+     * Modifica el estado interno del detector para que pase a ser "Sin Deteccion".
      */
     private void cancelarBusquedaFin() {
         buscandoFinDesat = false;
@@ -413,9 +411,9 @@ public class DetectorDesaturaciones {
     }
 
     /**
-     * Método auxiliar que corrige el valor de un índice que apunta al buffer interno
-     * de datos y que se le pasa con argumento. Éste índice siempre se decrementa
-     * (no tiene sentido ir hacia el futuro en los datos). Cuando el índice alcanza cero,
+     * Metodo auxiliar que corrige el valor de un indice que apunta al buffer interno
+     * de datos y que se le pasa con argumento. Este indice siempre se decrementa
+     * (no tiene sentido ir hacia el futuro en los datos). Cuando el indice alcanza cero,
      * debo volver a tamanoBuffer -1;
      *
      * @param i int
@@ -434,7 +432,7 @@ public class DetectorDesaturaciones {
 
     /**
      * Permite establecer un origen de tiempos medido en milisegundos del 1 de enero de 1970. Por
-     * defecto es 0. Sólo se usa para situar de modo absoluto los objetos de tipo desaturación.
+     * defecto es 0. Solo se usa para situar de modo absoluto los objetos de tipo desaturacion.
      *
      * @param tiempoInicial long
      */

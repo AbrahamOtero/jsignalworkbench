@@ -1,11 +1,11 @@
 package net.javahispano.plugins.temporalseries.demos;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.javahispano.jsignalwb.SignalManager;
-import net.javahispano.plugins.temporalseries.TemporalSeriesAlgorithm;
 import net.javahispano.plugins.temporalseries.TemporalSeries;
-import java.util.*;
+import net.javahispano.plugins.temporalseries.TemporalSeriesAlgorithm;
 
 /**
  * <p>Title: </p>
@@ -40,21 +40,21 @@ public class SumaSenoCuadrado extends TemporalSeriesAlgorithm {
      */
     public void processTemporalSeries(SignalManager sm, List<TemporalSeries> signals) {
         Iterator<TemporalSeries> it = signals.iterator();
-        if (signals.size()!=2) {
-            System.out.println("Error en el número de señales seleccionadas");
+        if (signals.size() != 2) {
+            System.out.println("Error en el numero de senhales seleccionadas");
             return;
         }
-        TemporalSeries seno=it.next();
-        TemporalSeries cuadrado=it.next();
+        TemporalSeries seno = it.next();
+        TemporalSeries cuadrado = it.next();
         TemporalSeries tmp;
-        if (!seno.getName().toLowerCase().contains( "seno")) {
-            tmp=seno;
-            seno=cuadrado;
-            cuadrado=tmp;
+        if (!seno.getName().toLowerCase().contains("seno")) {
+            tmp = seno;
+            seno = cuadrado;
+            cuadrado = tmp;
         }
         for (int i = Math.min(seno.getMinIndex(), cuadrado.getMinIndex());
-        i < Math.max(seno.getMaxIndex(), cuadrado.getMaxIndex()); i++) {
-            cuadrado.setValueAt(i,cuadrado.getValueAt(i)+seno.getValueAt(i));
+                     i < Math.max(seno.getMaxIndex(), cuadrado.getMaxIndex()); i++) {
+            cuadrado.setValueAt(i, cuadrado.getValueAt(i) + seno.getValueAt(i));
         }
     }
 }

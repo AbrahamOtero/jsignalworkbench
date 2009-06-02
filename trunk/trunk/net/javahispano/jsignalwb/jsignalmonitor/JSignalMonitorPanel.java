@@ -78,33 +78,31 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
         add(splitPanel2, BorderLayout.CENTER);
 
     }
-    public void printSignals(int orientation){
-           PrintUtilities printUtilities = new PrintUtilities(this);
-           printUtilities.setOrientation(orientation);
-           try {
-             printUtilities.printComponent(this.channels);
-           }
-           catch (PrinterException ex) {
-             ex.printStackTrace();
-             JOptionPane.showConfirmDialog(this, "Error attempting to print", "Error",
-                                           JOptionPane.ERROR_MESSAGE);
-           }
-           this.repaint();
+
+    public void printSignals(int orientation) {
+        PrintUtilities printUtilities = new PrintUtilities(this);
+        printUtilities.setOrientation(orientation);
+        try {
+            printUtilities.printComponent(this.channels);
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+            JOptionPane.showConfirmDialog(this, "Error attempting to print", "Error",
+                                          JOptionPane.ERROR_MESSAGE);
+        }
+        this.repaint();
     }
 
-    public void printAll(int orientation){
-       PrintUtilities printUtilities = new PrintUtilities(this);
-       printUtilities.setOrientation(orientation);
-       try {
-         printUtilities.printComponent(this);
-       }
-       catch (PrinterException ex) {
-         ex.printStackTrace();
-         JOptionPane.showConfirmDialog(this, "Error attempting to print", "Error", JOptionPane.ERROR_MESSAGE);
-       }
-       this.repaint();
-}
-
+    public void printAll(int orientation) {
+        PrintUtilities printUtilities = new PrintUtilities(this);
+        printUtilities.setOrientation(orientation);
+        try {
+            printUtilities.printComponent(this);
+        } catch (PrinterException ex) {
+            ex.printStackTrace();
+            JOptionPane.showConfirmDialog(this, "Error attempting to print", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        this.repaint();
+    }
 
 
     public long getScrollValue() {
@@ -166,7 +164,7 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
     }
 
     /** actualiza los valores del scroll. Debe ser invocado cuando varie el maximo o minimo valor
-     *  representado o cuando se modifique el tamaño del panel*/
+     *  representado o cuando se modifique el tamanho del panel*/
     public void refreshScrollBar() {
         //long tempValue=getScrollValue();
         //System.out.println(TimeRepresentation.timeToString(tempValue));
@@ -357,21 +355,24 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
         long end = jsmProperties.getTimeAtLocation((channels.getSize().width - channels.getHLeftOffsetScale() - 10));
         return end - start;
     }
-    public void showAnnotationsPanel(boolean show){
-        if(show){
+
+    public void showAnnotationsPanel(boolean show) {
+        if (show) {
             splitPanel2.setDividerLocation(splitPanel2.getLastDividerLocation());
-        }else{
+        } else {
             splitPanel2.setDividerLocation(0);
         }
     }
-    public void showLeftPanel(boolean show){
-        if(show){
+
+    public void showLeftPanel(boolean show) {
+        if (show) {
             splitPanel.setDividerLocation(splitPanel.getLastDividerLocation());
-        }else{
+        } else {
             splitPanel.setDividerLocation(0);
             jScrollBar.setVisible(false);
         }
     }
+
     public int getVScaleOffset() {
         return channels.getVScaleOffset();
     }
@@ -387,11 +388,13 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
     public void setHLeftOffsetScale(int hLeftOffsetScale) {
         channels.setHLeftOffsetScale(hLeftOffsetScale);
     }
-    public float getFrecForFullView(){
+
+    public float getFrecForFullView() {
         return jsmProperties.getFrecForFullView(
                 channels.getSize().width - channels.getHLeftOffsetScale() - 10);
     }
-    public float getFrecForTimeInterval(long startTime, long endTime){
+
+    public float getFrecForTimeInterval(long startTime, long endTime) {
         return jsmProperties.getFrecForTimeInterval(startTime, endTime,
                 channels.getSize().width - channels.getHLeftOffsetScale() - 10);
     }

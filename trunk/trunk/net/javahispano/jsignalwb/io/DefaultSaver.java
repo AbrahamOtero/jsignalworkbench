@@ -3,28 +3,23 @@ package net.javahispano.jsignalwb.io;
 import java.io.*;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalManager;
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import javax.swing.Icon;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
- * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patrón
- * template method permitiendo que el usuario defina sólo un formato diferente
- * para el archivo que contiene las señales muestreadas y conserve el formato
- * XML de JSignalWorkbench donde se almacena la configuración del entorno,
- * anotaciones, información de los plugin y demás; o viceversa.
+ * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patron
+ * template method permitiendo que el usuario defina solo un formato diferente
+ * para el archivo que contiene las senhales muestreadas y conserve el formato
+ * XML de JSignalWorkbench donde se almacena la configuracion del entorno,
+ * anotaciones, informacion de los plugin y demas; o viceversa.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public class DefaultSaver extends SaverAdapter {
@@ -52,9 +47,9 @@ public class DefaultSaver extends SaverAdapter {
      * almacenamiento de datos y el de propiedades sin necesidad de modificar el
      * otro.</p>
      *
-     * <p> Invoca en un primer lugar al método
+     * <p> Invoca en un primer lugar al metodo
      * <code>saveValues(ArrayList<Signal> signals, File f) </code> y, si este
-     * método devuelve true, invoca a continuación al método <code> </code>
+     * metodo devuelve true, invoca a continuacion al metodo <code> </code>
      * </p>.
      *
      * @param f File
@@ -65,11 +60,12 @@ public class DefaultSaver extends SaverAdapter {
      */
     public boolean save(File f) throws
             IOException {
-        SignalManager sm=JSWBManager.getSignalManager();
-        if(!f.exists())
+        SignalManager sm = JSWBManager.getSignalManager();
+        if (!f.exists()) {
             f.mkdir();
+        }
 
-        f=new File(f,f.getName()+".txt");
+        f = new File(f, f.getName() + ".txt");
         /*if(f.isDirectory())
             f=new File(f,f.getName()+".txt");*/
         ArrayList<Signal> signalsArray = new ArrayList<Signal>(sm.getSignals());
@@ -86,12 +82,12 @@ public class DefaultSaver extends SaverAdapter {
     /**
      * <p>El objetivo es almacenar en el fichero indicado en f los valores de
      * las senales(unicamente los valores) contenidas en signals. El fichero es
-     * un fichero ASCII donde cada señal se almacena con una columna en las
+     * un fichero ASCII donde cada senhal se almacena con una columna en las
      * distintas columnas se separan mediante tabulaciones. </p>
      *
-     * <p> El usuario puede sobrescribir este método para almacenar los valores
-     * de las señales en cualquier otro formato de archivo. El método de poner a
-     * devolver true sólo cuando las señales se hayan almacenado de un modo
+     * <p> El usuario puede sobrescribir este metodo para almacenar los valores
+     * de las senhales en cualquier otro formato de archivo. El metodo de poner a
+     * devolver true solo cuando las senhales se hayan almacenado de un modo
      * correcto. </p>
      *
      * @param signals ArrayList
@@ -120,7 +116,7 @@ public class DefaultSaver extends SaverAdapter {
                 for (Signal s : signals) {
                     values = s.getValues();
                     if (index < values.length) {
-                        pw.print((int)values[index]);
+                        pw.print((int) values[index]);
                     }
                     pw.print("\t");
                     if (s.hasEmphasisLevel() && index < s.getEmphasisLevel().length) {
@@ -146,12 +142,12 @@ public class DefaultSaver extends SaverAdapter {
      * valores de las senales Postcondiciones--> devolvera true en caso de
      * transcurrir normalmente y false en caso contrario. </p>
      *
-     * <p> Este método es responsable de almacenar: nombres, magnitudes,
-     * frecuencias de muestreo, y cualquier información relativa a las señales,
+     * <p> Este metodo es responsable de almacenar: nombres, magnitudes,
+     * frecuencias de muestreo, y cualquier informacion relativa a las senhales,
      * inclusive aquella que se emplea para representarlos en pantalla; toda la
-     * información que los distintos plugin cargados en el entorno deseen
-     * almacenar; toda la información de configuración de JSignalWorkbench; y
-     * toda información relativa a las marcas y anotaciones. </p>
+     * informacion que los distintos plugin cargados en el entorno deseen
+     * almacenar; toda la informacion de configuracion de JSignalWorkbench; y
+     * toda informacion relativa a las marcas y anotaciones. </p>
      *
      * @param signals ArrayList
      * @param f File
@@ -161,29 +157,30 @@ public class DefaultSaver extends SaverAdapter {
      * @return boolean
      */
     protected boolean saveXml(ArrayList<Signal> signals, File f) throws IOException {
-        PluginManager pm=JSWBManager.getPluginManager();
+        PluginManager pm = JSWBManager.getPluginManager();
         Element root = new Element("JSignalWorkBench");
         root.setAttribute("path", f.getName());
         for (Signal s : signals) {
             root.addContent(new XMLSignal(s));
         }
-        Element annotations=new Element("Annotations");
-        for(AnnotationPlugin ap:JSWBManager.getSignalManager().getAllAnnotations()){
+        Element annotations = new Element("Annotations");
+        for (AnnotationPlugin ap : JSWBManager.getSignalManager().getAllAnnotations()) {
             annotations.addContent(new XMLAnnotation(ap));
         }
         root.addContent(annotations);
         root.addContent(new XMLJSignalMonitor(
-            JSWBManager.getJSWBManagerInstance().getJSMFrecuency(),
-             JSWBManager.getJSWBManagerInstance().getJSMScrollValue(),
-               JSWBManager.getJSWBManagerInstance().getJSMLeftPanelConfigurationString()));
-        ArrayList<String> loadedPlugins=pm.getKeysOfLoadedPlugins();
-        for(String key:loadedPlugins){
-            if(!key.startsWith("mark:")&&!key.startsWith("annotation:")&&!key.startsWith("grid:")){
-                Plugin plugin=pm.getPlugin(key);
-                if(plugin!=null)
-                    if(plugin.hasDataToSave()||plugin.createFile()){
-                        root.addContent(new XMLPlugin(key,plugin));
+                JSWBManager.getJSWBManagerInstance().getJSMFrecuency(),
+                JSWBManager.getJSWBManagerInstance().getJSMScrollValue(),
+                JSWBManager.getJSWBManagerInstance().getJSMLeftPanelConfigurationString()));
+        ArrayList<String> loadedPlugins = pm.getKeysOfLoadedPlugins();
+        for (String key : loadedPlugins) {
+            if (!key.startsWith("mark:") && !key.startsWith("annotation:") && !key.startsWith("grid:")) {
+                Plugin plugin = pm.getPlugin(key);
+                if (plugin != null) {
+                    if (plugin.hasDataToSave() || plugin.createFile()) {
+                        root.addContent(new XMLPlugin(key, plugin));
                     }
+                }
             }
         }
         Document doc = new Document(root);

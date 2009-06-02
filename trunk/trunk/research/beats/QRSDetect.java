@@ -8,7 +8,7 @@ import net.javahispano.jsignalwb.plugins.defaults.DefaultInstantMark;
 
 /**
  *
- * @author Santiago Fernández Dapena
+ * @author Santiago Fernandez Dapena
  */
 public class QRSDetect {
     private int preBlank = SampleRate.getMs195();
@@ -72,7 +72,7 @@ public class QRSDetect {
     }
 
     /**
-     * Realiza la búsqueda de los QRS presentes en el ECG
+     * Realiza la busqueda de los QRS presentes en el ECG
      *
      * @param datum int
      * @param time int
@@ -189,7 +189,7 @@ public class QRSDetect {
 
                     if (newPeak > detThresh) {
                         //copia las primeras 7 posiciones de qrsbuf a qrsbuf empezando
-                        //por la posición 1
+                        //por la posicion 1
                         qrsbuf = desplazarDerechaArray(qrsbuf);
                         qrsbuf[0] = newPeak;
                         qmean = mean(qrsbuf, 8);
@@ -300,8 +300,8 @@ public class QRSDetect {
     }
 
     /**
-     * Devuelve la altura de un pico cuando la señal cae por debajo de la mitad
-     * de su máximo o si han pasado más de 95 ms.
+     * Devuelve la altura de un pico cuando la senhal cae por debajo de la mitad
+     * de su maximo o si han pasado mas de 95 ms.
      *
      * @param datum int
      * @param init int
@@ -326,13 +326,13 @@ public class QRSDetect {
             }
         }
 
-        //Si el valor de un Máximo cae por debajo de la mitad estamos seguros de que es pico
+        //Si el valor de un Maximo cae por debajo de la mitad estamos seguros de que es pico
         else if (datum < (max / 2)) {
             pk = max;
             max = 0;
             timeSinceMax = 0;
         }
-        //Si han pasado más de 95 ms desde el maximo Lo convertimos en pico
+        //Si han pasado mas de 95 ms desde el maximo Lo convertimos en pico
         else if (timeSinceMax > SampleRate.getMs95()) {
             pk = max;
             max = 0;
@@ -344,8 +344,8 @@ public class QRSDetect {
     }
 
     /**
-     * Realiza la comoprobación de si ha ocurrido un cambio en la línea
-     * base. Busca pendientes positivas y negativas de prácticamente la
+     * Realiza la comoprobacion de si ha ocurrido un cambio en la linea
+     * base. Busca pendientes positivas y negativas de practicamente la
      * misma magnitud en una ventana de 220 ms.
      *
      * @param dBuf int[]
@@ -406,7 +406,7 @@ public class QRSDetect {
     }
 
     /**
-     * Calcula el umbral de detección a partir de las medias de los valores
+     * Calcula el umbral de deteccion a partir de las medias de los valores
      * de qrs y de ruido
      *
      * @param qmean int

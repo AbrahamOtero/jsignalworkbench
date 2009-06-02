@@ -10,15 +10,14 @@
 package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JToggleButton;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorModeEvent;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorModeListener;
+
+import net.javahispano.jsignalwb.jsignalmonitor.*;
 
 /**
  *
  * @author Roman
  */
-public class JToggleButtonXY extends JToggleButton implements JSignalMonitorModeListener{
+public class JToggleButtonXY extends JToggleButton implements JSignalMonitorModeListener {
 
     /**
      * Creates a new instance of JRadioButtonXY
@@ -32,15 +31,17 @@ public class JToggleButtonXY extends JToggleButton implements JSignalMonitorMode
     }
 
     public String getActionCommand() {
-        if(isSelected())
+        if (isSelected()) {
             return "true";
-        else
+        } else {
             return "false";
+        }
     }
 
     public void jSignalMonitorModeActionPerformed(JSignalMonitorModeEvent e) {
-        if(e.getMode() == JSignalMonitorModeEvent.REPRESENT_XY_VALUES)
+        if (e.getMode() == JSignalMonitorModeEvent.REPRESENT_XY_VALUES) {
             setSelected(e.getValue());
+        }
     }
 
 

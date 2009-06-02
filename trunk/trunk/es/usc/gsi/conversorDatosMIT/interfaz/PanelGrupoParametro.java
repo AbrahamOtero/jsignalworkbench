@@ -1,12 +1,12 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.awt.*;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.*;
 
 import javax.swing.*;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.Parametro;
 
 public class PanelGrupoParametro extends JPanel implements ActionListener,
         ItemListener {

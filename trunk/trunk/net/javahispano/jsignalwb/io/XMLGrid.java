@@ -11,16 +11,17 @@ import org.jdom.Element;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-class XMLGrid extends Element{
+class XMLGrid extends Element {
 
     public XMLGrid(GridPlugin grid) {
         super("Grid");
-        String gridData="";
-        if(grid.hasDataToSave())
-            gridData=grid.getDataToSave();
-        addContent(new XMLPlugin("grid:"+grid.getName(),grid));
+        String gridData = "";
+        if (grid.hasDataToSave()) {
+            gridData = grid.getDataToSave();
+        }
+        addContent(new XMLPlugin("grid:" + grid.getName(), grid));
     }
 
 }

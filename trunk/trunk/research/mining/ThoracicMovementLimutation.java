@@ -27,7 +27,7 @@ public class ThoracicMovementLimutation extends FluxLimitation {
      * @return String
      */
     public String genrateDescriptors(DETAILLEVEL level) {
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aqui todos los descriptores
         return "";
     }
 }

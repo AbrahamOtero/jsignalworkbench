@@ -59,13 +59,13 @@ public class Intervalo implements Comparable {
         return 0;
     }
 
-  /*  public boolean equals(Object o) {
-        if (o instanceof Intervalo) {
-            Intervalo i = (Intervalo) o;
-            return i.principio == this.principio;
-        }
-        return false;
-    }*/
+    /*  public boolean equals(Object o) {
+          if (o instanceof Intervalo) {
+              Intervalo i = (Intervalo) o;
+              return i.principio == this.principio;
+          }
+          return false;
+      }*/
 
     public boolean seSolapaCon(Intervalo i) {
         if (i.principio <= this.principio && i.fin <= fin && i.fin > principio ||
@@ -77,7 +77,7 @@ public class Intervalo implements Comparable {
     }
 
     public Intervalo desplazaEnTiempo(int segundos) {
-        segundos =   (int) (segundos* frecuencia);
+        segundos = (int) (segundos * frecuencia);
         Intervalo i = new Intervalo(principio + segundos, fin + segundos, posibilidad);
         i.setFrecuencia(frecuencia);
         i.setPosibilidad(posibilidad);
@@ -93,7 +93,7 @@ public class Intervalo implements Comparable {
      */
     public int distanciaCon(Intervalo i) {
         //anterior implementacin espacioreturn (int) ((i.principio - fin) / frecuencia);
-        return (int) (min(abs((i.principio - fin)), abs(principio-i.fin))/ frecuencia);
+        return (int) (min(abs((i.principio - fin)), abs(principio - i.fin)) / frecuencia);
     }
 
     /**

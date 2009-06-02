@@ -2,12 +2,14 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.data;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.*;
 
-import es.usc.gsi.trace.importer.Perfil.*;
-import es.usc.gsi.trace.importer.estadisticos.*;
-import es.usc.gsi.trace.importer.jsignalmonold.annotations.*;
+import es.usc.gsi.trace.importer.Perfil.PTBMInterface;
+import es.usc.gsi.trace.importer.estadisticos.ResultadoCorrelacion;
+import es.usc.gsi.trace.importer.estadisticos.ResultadosEstadisticos;
+import es.usc.gsi.trace.importer.jsignalmonold.annotations.Annotation;
+import es.usc.gsi.trace.importer.jsignalmonold.annotations.Mark;
 
 
 public abstract class AlmacenDatos implements Serializable {
@@ -481,8 +483,8 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     void anhadeSenhal(String nombre, String leyenda, String Leyenda_temporal,
-                    float fs,
-                    float[] rango, int numero_datos) {
+                      float fs,
+                      float[] rango, int numero_datos) {
         int nueva_num_senales = numero_senales + 1; //this.marcas.length+1;
         if (pos_total != null) {
             nueva_num_senales++;

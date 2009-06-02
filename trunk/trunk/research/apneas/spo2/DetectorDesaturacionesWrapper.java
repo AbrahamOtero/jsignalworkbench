@@ -1,19 +1,12 @@
 package research.apneas.spo2;
 
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.SignalManager;
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalNotFoundException;
+import java.awt.Color;
+import java.util.ArrayList;
+
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
-import research.apneas.spo2.Desaturacion;
-import research.apneas.spo2.DetectorDesaturaciones;
-import research.apneas.EpisodioDesaturacion;
-import research.apneas.Utilidades;
-import research.apneas.Intervalo;
-
-import java.util.ArrayList;
-import java.awt.*;
+import research.apneas.*;
 
 /**
  * <p>Title: </p>
@@ -32,7 +25,7 @@ public class DetectorDesaturacionesWrapper extends AlgorithmAdapter {
 
 
     public DetectorDesaturacionesWrapper() {
-        
+
     }
 
     public DetectorDesaturacionesWrapper(Signal signal) {
@@ -50,15 +43,15 @@ public class DetectorDesaturacionesWrapper extends AlgorithmAdapter {
         return test(datos, signal);
     }
 
-    private   ArrayList<EpisodioDesaturacion>  test(float[] datos, Signal signal) {
-         ArrayList<EpisodioDesaturacion> des = new  ArrayList<EpisodioDesaturacion>();
+    private ArrayList<EpisodioDesaturacion> test(float[] datos, Signal signal) {
+        ArrayList<EpisodioDesaturacion> des = new ArrayList<EpisodioDesaturacion>();
         DetectorDesaturaciones b = new DetectorDesaturaciones();
         b.setTiempoInicial(inicioAbsoluto);
         float periodo = 1 / signal.getSRate();
         //Si el periodo de muestreo no es un entero
         if (Math.abs(Math.round(1 / periodo) - 1 / periodo) > 0.05F) {
             throw new RuntimeException(
-                    "Error; la señal de saturación no tiene una periodo adecuada ");
+                    "Error; la senhal de saturacion no tiene una periodo adecuada ");
         }
 
         int paso = Math.round(1 / periodo);
@@ -74,24 +67,24 @@ public class DetectorDesaturacionesWrapper extends AlgorithmAdapter {
             // System.out.println("*****************************Valor basal "+b.getValorBasal());
 
             if (d != null) {
-               // System.out.println(d.toString());
+                // System.out.println(d.toString());
                 if (!d.isInicioSolo() && true) {
-                  //   System.out.println(d.toString());
-                    int principio = d.getComienzo()*paso;  //el detector trabaja en segundos
-                    int fin = d.getFin() *paso;          //el detector trabaja en segundos
-                    int medio = (principio+ fin)/2;
-                    Intervalo ip=new Intervalo(principio, medio,(int)(d.getPos()*100));
-                    Intervalo iff=new Intervalo(medio,fin,(int)(d.getPos()*100));
+                    //   System.out.println(d.toString());
+                    int principio = d.getComienzo() * paso; //el detector trabaja en segundos
+                    int fin = d.getFin() * paso; //el detector trabaja en segundos
+                    int medio = (principio + fin) / 2;
+                    Intervalo ip = new Intervalo(principio, medio, (int) (d.getPos() * 100));
+                    Intervalo iff = new Intervalo(medio, fin, (int) (d.getPos() * 100));
                     ip.setDatos(datos);
-                    iff.setDatos(datos);             
+                    iff.setDatos(datos);
                     ip.setFrecuencia(signal.getSRate());
                     iff.setFrecuencia(signal.getSRate());
                     iff.setFechaBase(inicioAbsoluto);
                     ip.setFechaBase(inicioAbsoluto);
-                    EpisodioDesaturacion e = new EpisodioDesaturacion(ip,iff,d.getValorBasal());
+                    EpisodioDesaturacion e = new EpisodioDesaturacion(ip, iff, d.getValorBasal());
                     e.setDatos(datos);
 
-                 //   DetectorDesaturacionesWrapper.generarEpisodioDesaturacion(e,Color.yellow,signal);
+                    //   DetectorDesaturacionesWrapper.generarEpisodioDesaturacion(e,Color.yellow,signal);
                     des.add(e);
                 }
             }
@@ -101,7 +94,7 @@ public class DetectorDesaturacionesWrapper extends AlgorithmAdapter {
 
     static void generarEpisodioDesaturacion(EpisodioDesaturacion e, Color color,
                                             Signal satO2) throws SignalNotFoundException {
-    //    color= Utilidades.getColor((short)e.getPosibilidad());
+        //    color= Utilidades.getColor((short)e.getPosibilidad());
         DefaultIntervalMark m = new DefaultIntervalMark();
         long t = e.getPrincipioAbsoluto();
         m.setMarkTime(t);
@@ -113,17 +106,18 @@ public class DetectorDesaturacionesWrapper extends AlgorithmAdapter {
             m.setColor(color);
         }
 
-        String texto = "Duración: " + e.getDuracionEpisodio() + ",\n" +
-                       "Valor mínimo: " + e.getMinimo() + ",\n" +
-                       "Caída en la saturación: " + e.getCaidaSatO2() + ",\n" +
+        String texto = "Duracion: " + e.getDuracionEpisodio() + ",\n" +
+                       "Valor minimo: " + e.getMinimo() + ",\n" +
+                       "Caida en la saturacion: " + e.getCaidaSatO2() + ",\n" +
                        "Posibilidad: " + e.getPosibilidad() + ",\n" +
-                       "Tiempo de caída: " + e.getTiempoBajada() + ",\n" +
+                       "Tiempo de caida: " + e.getTiempoBajada() + ",\n" +
                        "Tiempo de subida: " + e.getTiempoSubida();
         m.setComentary(texto);
-        m.setTitle("Episodio de desaturación");
+        m.setTitle("Episodio de desaturacion");
         JSWBManager.getJSWBManagerInstance().getSignalManager().addSignalMark(
-           satO2.getName(), m);
+                satO2.getName(), m);
     }
+
     public String getName() {
         return "Test";
     }

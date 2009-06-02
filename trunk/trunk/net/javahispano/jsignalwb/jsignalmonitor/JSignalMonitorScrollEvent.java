@@ -4,25 +4,25 @@ package net.javahispano.jsignalwb.jsignalmonitor;
  * Evento que se genera a cambiar el valor del scroll de JSignalMonitor.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 class JSignalMonitorScrollEvent {
     private long scrollValue;
     private long oldScrollValue;
     /** Creates a new instance of ScrollValueChangeEvent */
-    JSignalMonitorScrollEvent(long scrollValue,long oldScrollValue) {
-        this.scrollValue=scrollValue;
-        this.oldScrollValue=oldScrollValue;
+    JSignalMonitorScrollEvent(long scrollValue, long oldScrollValue) {
+        this.scrollValue = scrollValue;
+        this.oldScrollValue = oldScrollValue;
     }
 
     /**
      * Devuelve el instante del tiempo, medido en milisegundos desde 00:00:00
-     * 01/01/1970, al que está apuntando ahora el de scroll.
+     * 01/01/1970, al que esta apuntando ahora el de scroll.
      *
      * @return long
      */
-    public long getScrollValue(){
+    public long getScrollValue() {
         return scrollValue;
     }
 
@@ -33,7 +33,7 @@ class JSignalMonitorScrollEvent {
      *
      * @return long
      */
-    public long getOldScrollValue(){
+    public long getOldScrollValue() {
         return oldScrollValue;
     }
 

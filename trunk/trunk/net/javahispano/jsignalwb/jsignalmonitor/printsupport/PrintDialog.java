@@ -3,12 +3,13 @@ package net.javahispano.jsignalwb.jsignalmonitor.printsupport;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
 
 /**
- *No está diseñado para formar parte del API pública.
+ *No esta disenhado para formar parte del API publica.
  * @author Abraham Otero
  * @version 0.5
  */
@@ -40,7 +41,7 @@ public class PrintDialog extends JDialog {
     private JLabel jLabel2 = new JLabel();
     public PrintDialog(Window owner, String title, JSignalMonitor jsm) {
         super(owner, title);
-        this.jsm=jsm;
+        this.jsm = jsm;
         color = jsm.getJSMProperties().getLookAndFeelConfiguration().getColorFont();
         font = jsm.getJSMProperties().getLookAndFeelConfiguration().getMediumFont();
         try {

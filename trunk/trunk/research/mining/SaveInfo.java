@@ -23,13 +23,13 @@ public class SaveInfo {
     }
 
     /**
-     * Este método debe devolver una cadena de caracteres conteniendo  toda la
-     * información a guardar en el fichero.
+     * Este metodo debe devolver una cadena de caracteres conteniendo  toda la
+     * informacion a guardar en el fichero.
      *
      * @return String
      */
     public String genrateDescriptors() {
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aqui todos los descriptores
         return "Nada";
     }
 

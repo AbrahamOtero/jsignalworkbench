@@ -5,13 +5,13 @@ import java.util.List;
 
 
 public class FluxLimitation extends TemporalEvent {
-    //Energía de la señal normalizada por la duración del episodio
+    //Energia de la senhal normalizada por la duracion del episodio
     private float energy;
-    //Buscar 10 segundos de señal de flujo respiratorio sin limitación justo antes
-    //de la señal y calcular su energía normalizada por su duración.
+    //Buscar 10 segundos de senhal de flujo respiratorio sin limitacion justo antes
+    //de la senhal y calcular su energia normalizada por su duracion.
     private float basalEnergyBefore;
-    //Buscar 10 segundos de señal de flujo respiratorio sin limitación justo Despues
-    //de la señal y calcular su energía normalizada por su duración.
+    //Buscar 10 segundos de senhal de flujo respiratorio sin limitacion justo Despues
+    //de la senhal y calcular su energia normalizada por su duracion.
     private float basalEnergyAfter;
     //si es hipoapnea o apnea
     private Type type;
@@ -48,16 +48,16 @@ public class FluxLimitation extends TemporalEvent {
      * EVERYTHING: {absoluteBeginingTime: HH:MM:SS} \t {GEN_LIM} \t {duration}
      * \t {type: A|H}  \t {energy}  \t {Tipo : basalEnergyBefore}   \t {Tipo :
      * basalEnergyAfter}  \t
-     * //info de la t más grande \t {duration}  \t {type: A|H}  \t {energy}  \t
+     * //info de la t mas grande \t {duration}  \t {type: A|H}  \t {energy}  \t
      * {Tipo : basalEnergyBefore}   \t {Tipo : basalEnergyAfter}  \t
-     * //info de la a más grande \t {duration}  \t {type: A|H}  \t {energy}  \t
+     * //info de la a mas grande \t {duration}  \t {type: A|H}  \t {energy}  \t
      * {Tipo : basalEnergyBefore}   \t {Tipo : basalEnergyAfter}  \n
      *
      * @param level DETAILLEVEL
      * @return String
      */
     public String genrateDescriptors(DETAILLEVEL level) {
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aqui todos los descriptores
         return "";
     }
 
@@ -65,7 +65,7 @@ public class FluxLimitation extends TemporalEvent {
         abdominalLimitations.add(l);
     }
 
-    public void addToraxLimitation (ThoracicMovementLimutation l) {
+    public void addToraxLimitation(ThoracicMovementLimutation l) {
         thoracicLimitations.add(l);
     }
 

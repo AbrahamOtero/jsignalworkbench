@@ -9,21 +9,15 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import javax.swing.AbstractAction;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.KeyStroke;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.framework.PluginLoadException;
-import net.javahispano.jsignalwb.plugins.Saver;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
+import javax.swing.*;
+
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.Saver;
+import net.javahispano.jsignalwb.plugins.framework.PluginLoadException;
 
 
 /**
@@ -37,29 +31,29 @@ public class SaveAsAction extends AbstractAction {
     /**
      * Creates a new instance of SaveAsAction
      */
-    public SaveAsAction(Component component,JSWBManager jswbManager) {
+    public SaveAsAction(Component component, JSWBManager jswbManager) {
         this.component = component;
-        this.jswbManager=jswbManager;
-        this.chooser=new JSWFileChooser(jswbManager.getPluginManager());
+        this.jswbManager = jswbManager;
+        this.chooser = new JSWFileChooser(jswbManager.getPluginManager());
 
-        Image image=Toolkit.getDefaultToolkit().createImage(
+        Image image = Toolkit.getDefaultToolkit().createImage(
                 JSWBManager.class.getResource("images/save.jpg"));
-        Icon icon=new ImageIcon(image.getScaledInstance(20,20,Image.SCALE_SMOOTH));
-        this.putValue(SMALL_ICON,icon);
+        Icon icon = new ImageIcon(image.getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        this.putValue(SMALL_ICON, icon);
         this.putValue(NAME, "Save As");
-        this.putValue(SHORT_DESCRIPTION,"Save As...");
-        this.putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke("ctrl shift S"));
+        this.putValue(SHORT_DESCRIPTION, "Save As...");
+        this.putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift S"));
     }
 
     public void actionPerformed(ActionEvent e) {
         try {
             //chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int result=chooser.showSaveDialog(component);
-            File file=chooser.getSelectedFile();
-            if(file!=null && result==JFileChooser.APPROVE_OPTION){
-                if(chooser.isSaverSelected()){
-                    Saver saver=chooser.getSaverSelected();
-                    jswbManager.saveChannelsAs(saver.getName(),file, true);
+            int result = chooser.showSaveDialog(component);
+            File file = chooser.getSelectedFile();
+            if (file != null && result == JFileChooser.APPROVE_OPTION) {
+                if (chooser.isSaverSelected()) {
+                    Saver saver = chooser.getSaverSelected();
+                    jswbManager.saveChannelsAs(saver.getName(), file, true);
                 }
             }
         } catch (PluginLoadException ex) {

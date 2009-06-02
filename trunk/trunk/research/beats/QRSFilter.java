@@ -7,7 +7,7 @@ package research.beats;
 
 /**
  *
- * @author Santiago Fernández Dapena
+ * @author Santiago Fernandez Dapena
  */
 
 public class QRSFilter {
@@ -40,9 +40,9 @@ public class QRSFilter {
     }
 
     /**
-     * Toma las muestras de un ECG como entrada y devuelve la muestra de una señal
-     * que es una estimación de la energia en el ancho de banda de un QRS. Es decir,
-     * la señal tiene una protuberancia cuando ocurre un QRS.
+     * Toma las muestras de un ECG como entrada y devuelve la muestra de una senhal
+     * que es una estimacion de la energia en el ancho de banda de un QRS. Es decir,
+     * la senhal tiene una protuberancia cuando ocurre un QRS.
      *
      * @param datum
      * @return int
@@ -59,7 +59,7 @@ public class QRSFilter {
     }
 
     /**
-     * Realiza un filtro paso alto según la siguiente ecuación:
+     * Realiza un filtro paso alto segun la siguiente ecuacion:
      * y[n] = y[n-1] + x[n] - x[n-128 ms]
      * z[n] = x[n-64 ms] - y[n]
      *
@@ -98,7 +98,7 @@ public class QRSFilter {
     }
 
     /**
-     * Realiza un filtro paso bajo según la ecuación:
+     * Realiza un filtro paso bajo segun la ecuacion:
      * y[n] = 2*y[n-1] - y[n-2] + x[n] - 2*x[t-24 ms] + x[t-48 ms]
      *
      * @param datum int
@@ -139,7 +139,7 @@ public class QRSFilter {
     }
 
     /**
-     * Realiza la media de los valores de la señal en las últimas WINDOW_WIDTH muestras
+     * Realiza la media de los valores de la senhal en las ultimas WINDOW_WIDTH muestras
      *
      * @param datum int
      * @param init int
@@ -173,7 +173,7 @@ public class QRSFilter {
     }
 
     /**
-     * Realiza una derivada según la ecuación:
+     * Realiza una derivada segun la ecuacion:
      * y[n] = x[n] - x[n - 10ms]
      *
      * @param x int
@@ -202,7 +202,7 @@ public class QRSFilter {
     }
 
     /**
-     * Realiza una derivada según la ecuación:
+     * Realiza una derivada segun la ecuacion:
      * y[n] = x[n] - x[n - 10ms]
      *
      * @param x int

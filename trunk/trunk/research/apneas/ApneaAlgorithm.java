@@ -1,17 +1,16 @@
 package research.apneas;
 
+import java.awt.Color;
 import static java.lang.Math.*;
 import java.util.*;
+import java.util.List;
 
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
-import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalAnnotation;
-import javax.swing.*;
 import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import research.apneas.spo2.DetectorDesaturacionesWrapper;
-import java.awt.Color;
 
 /**
  * <p>Title: </p>
@@ -52,7 +51,7 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
     //que se estaba considerando para el episodio
     private int duracionMaximaEpisodiosDesaturacion = 100;
 
-    //parparámetros ventilación
+    //parparametros ventilacion
     /**
      * se dan en tanto por ciento
      */
@@ -71,7 +70,7 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
     private int finVentanaBasalFlujoApnea = 200;
     //se usa para determinar el ancho de la ventana para promediar la apnea
     //***tiene una gran influencia en los resultados****
-     /*Borra del parámetro de abajo. No se usa.
+     /*Borra del parametro de abajo. No se usa.
       */
      private int anchoVentanaValorMedioApnea = 1;
     private int anchoVentanaValorMedioHipoApnea = 2;
@@ -143,7 +142,7 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
         }
         /* else{
              JOptionPane.showMessageDialog(JSWBManager.getJSWBManagerInstance().getParentWindow(),
-                     "No se han seleccionado las señales correctas o no tienen el hombre adecuado",
+                     "No se han seleccionado las senhales correctas o no tienen el hombre adecuado",
                      "Error", JOptionPane.ERROR_MESSAGE);
              return;
          }*/
@@ -152,38 +151,38 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
         //  float frecuencia = nasal.getSRate();
 
         /*/
-                TreeSet<Intervalo> hipoapneasIntervalos = calcularDescensosFlujo(nasal, datosNasal, frecuencia, false);
-                //
+               TreeSet<Intervalo> hipoapneasIntervalos = calcularDescensosFlujo(nasal, datosNasal, frecuencia, false);
+               //
 
-                TreeSet<Intervalo> apneasIntervalos = calcularDescensosFlujo(nasal, datosNasal, frecuencia, true);
-                //
-              for (Intervalo elem : apneasIntervalos) {
-                             ReduccionFlujo.generarMarca(elem, nasal.getName(), "Apnea", Color.BLACK);
-              }
+               TreeSet<Intervalo> apneasIntervalos = calcularDescensosFlujo(nasal, datosNasal, frecuencia, true);
+               //
+             for (Intervalo elem : apneasIntervalos) {
+                            ReduccionFlujo.generarMarca(elem, nasal.getName(), "Apnea", Color.BLACK);
+             }
 
-              for (Intervalo elem : hipoapneasIntervalos) {
-                             ReduccionFlujo.generarMarca(elem, nasal.getName(), "Hipoapnea", Color.BLACK);
-              }
-                /**/
+             for (Intervalo elem : hipoapneasIntervalos) {
+                            ReduccionFlujo.generarMarca(elem, nasal.getName(), "Hipoapnea", Color.BLACK);
+             }
+               /**/
 
 
 
         /**/
         /*/
-              C c = new C(hipoapneasIntervalos, apneasIntervalos, episodios, nasal,satO2);
-            /**/
+             C c = new C(hipoapneasIntervalos, apneasIntervalos, episodios, nasal,satO2);
+           /**/
 
 
 
         /*/
-               Hipoapnea episodiosDeHipoapnea = new Hipoapnea(sm);
-               episodiosDeHipoapnea.setRelacionTemporal(relacionTemporal);
-               episodiosDeHipoapnea.setEpisodios(episodios);
-               episodiosDeHipoapnea.setHipoapneasIntervalos(hipoapneasIntervalos);
-               episodiosDeHipoapnea.setFrecuencia(nasal.getSRate());
+              Hipoapnea episodiosDeHipoapnea = new Hipoapnea(sm);
+              episodiosDeHipoapnea.setRelacionTemporal(relacionTemporal);
+              episodiosDeHipoapnea.setEpisodios(episodios);
+              episodiosDeHipoapnea.setHipoapneasIntervalos(hipoapneasIntervalos);
+              episodiosDeHipoapnea.setFrecuencia(nasal.getSRate());
 
-               episodiosDeHipoapnea.detectar();
-                /**/
+              episodiosDeHipoapnea.detectar();
+               /**/
     }
 
     private void generarRepresetacionAnotaciones(Signal nasal, TreeSet<Intervalo> hipoapneasIntervalos,
@@ -204,7 +203,7 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
         TreeSet<Intervalo> apneasCopia = new TreeSet<Intervalo>(apneasIntervalos);
         TreeSet<Intervalo> hipoapneasCopia = new TreeSet<Intervalo>(hipoapneasIntervalos);
         for (Intervalo apnea : apneasCopia) {
-            //obtenemos la apnea detectada Que comience justo después de la hipoapnea que estamos analizando
+            //obtenemos la apnea detectada Que comience justo despues de la hipoapnea que estamos analizando
             Intervalo h = (Intervalo) hipoapneasCopia.floor(
                     apnea);
             //si la apnea esta contenida
@@ -396,9 +395,9 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
                    finIntervaloSegundoFiltroEnergia + "*" +
                    considerarSoloOndasNegativas + "*" +
                    this.ventanaCalculoDeltas /* + "*" +
-                                              persistenciaFlujo + "*" +
+                   persistenciaFlujo + "*" +
 //la relacipnTemporal
-                                                         this.relacionTemporal.toShortString() */
+                              this.relacionTemporal.toShortString() */
                    ;
 
         System.out.println("por decir algo " + s);
@@ -406,12 +405,12 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
     }
 
     /**
-     * Este método es invocado por el entorno al cargar el plugin para
-     * pasarle una cadena de caracteres con los datos que el plugin le pidió
-     * que almacenarse en la última ejecución.
+     * Este metodo es invocado por el entorno al cargar el plugin para
+     * pasarle una cadena de caracteres con los datos que el plugin le pidio
+     * que almacenarse en la ultima ejecucion.
      *
-     * @param string datos que el plugin pidió al entorno que almacenarse en
-     *   la última ejecución
+     * @param string datos que el plugin pidio al entorno que almacenarse en
+     *   la ultima ejecucion
      * @todo Implement this net.javahispano.jsignalwb.plugins.Plugin method
      */
     public void setSavedData(String string) {
@@ -510,9 +509,9 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
     }
 
     /**
-     * Devuelve la versión del plugin.
+     * Devuelve la version del plugin.
      *
-     * @return Versión del plugin
+     * @return Version del plugin
      * @todo Implement this net.javahispano.jsignalwb.plugins.Plugin method
      */
     public String getPluginVersion() {
@@ -520,10 +519,10 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
     }
 
     /**
-     * Devuelve una de extinción textual corta sobre la funcionalidad del
+     * Devuelve una de extincion textual corta sobre la funcionalidad del
      * plugin.
      *
-     * @return descripción textual corta
+     * @return descripcion textual corta
      * @todo Implement this net.javahispano.jsignalwb.plugins.Plugin method
      */
     public String getShortDescription() {

@@ -6,15 +6,15 @@ import java.io.IOException;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import net.javahispano.jsignalwb.ui.LoaderExecutionJDialog;
 import net.javahispano.jsignalwb.ui.SaverExecutionJDialog;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * Fachada para realizar las operaciones de entrada y salida. Para funcionar
  * correctamente requiere un {@link PluginManager}, para obtener los plugins en los cuales
- * delegará la carga y el almacenamiento de los datos, y {@link SignalManager}, para poder
- * modificar las señales y el resto de la información de la sesión de trabajo.
+ * delegara la carga y el almacenamiento de los datos, y {@link SignalManager}, para poder
+ * modificar las senhales y el resto de la informacion de la sesion de trabajo.
  */
 public class IOManager {
     private PluginManager pm;
@@ -47,7 +47,7 @@ public class IOManager {
      *
      * @param path direccion del archivo cargar.
      * @param nombre del {@link Loader}a emplear.
-     * @param clear true si se desea borrar todas las señales existentes antes
+     * @param clear true si se desea borrar todas las senhales existentes antes
      * de realizar la carga, false en caso contrario.
      * @throws Exception
      * @return true si la carga se realiza correctamente, false en caso contrario.
@@ -69,7 +69,7 @@ public class IOManager {
      *
      * @param f archivo cargar.
      * @param nombre del {@link Loader}a emplear.
-     * @param clear true si se desea borrar todas las señales existentes antes
+     * @param clear true si se desea borrar todas las senhales existentes antes
      * de realizar la carga, false en caso contrario.
      * @throws Exception
      * @return true si la carga se realiza correctamente, false en caso contrario.
@@ -92,7 +92,7 @@ public class IOManager {
      * almacenara en la ubicacion indicada en absolutePath, con el nombre
      * indicado en path(y path.xml para el archivo xml)
      *
-     * @param path dirección del archivo.
+     * @param path direccion del archivo.
      * @param saverName nombre del {@link Saver a emplear}
      * @throws Exception
      */
@@ -106,7 +106,7 @@ public class IOManager {
      * almacenara en la ubicacion indicada en absolutePath, con el nombre
      * indicado en path(y path.xml para el archivo xml)
      *
-     * @param path dirección del archivo.
+     * @param path direccion del archivo.
      * @param saverName nombre del {@link Saver a emplear}
      * @throws Exception
      */
@@ -125,7 +125,7 @@ public class IOManager {
     }
 
     /**
-     * Devuelve el archivo con el cual se está trabajando en este momento.
+     * Devuelve el archivo con el cual se esta trabajando en este momento.
      *
      * @return File
      */
@@ -136,16 +136,16 @@ public class IOManager {
     /**
      * Permite a un plugin solicitar que se le cree un archivo con el cual pueda trabajar.
      * En JSignalWorkbench se instala un nuevo plugin si la herramienta es empleada para abrir un archivo que no fue
-     * guardado con una instancia de JSignalWorkbench que tuviese instalado dicho plugin, JSignalWorkbench no llamará al
-     * plugin para inicializarlo. Estos plugin deben gestionar su propia inicialización implementando la interfaz {@link
-     * SessionListener}; en caso de que para dicha inicialización requieran de un archivo deberán emplear este método
+     * guardado con una instancia de JSignalWorkbench que tuviese instalado dicho plugin, JSignalWorkbench no llamara al
+     * plugin para inicializarlo. Estos plugin deben gestionar su propia inicializacion implementando la interfaz {@link
+     * SessionListener}; en caso de que para dicha inicializacion requieran de un archivo deberan emplear este metodo
      * para obtenerlo.
      *
-     * @param p Plugin que solicita la creación del archivo.
-     * @return File te ha creado el método.
-     * @throws SessionNotSavedException Si se invoca este método sin que la sesión de trabajo esté guardada se lanzará
-     *   esta excepción.
-     * @throws IOException Si, por cualquier motivo, no se puede crear el chivo se lanzará esta excepción.
+     * @param p Plugin que solicita la creacion del archivo.
+     * @return File te ha creado el metodo.
+     * @throws SessionNotSavedException Si se invoca este metodo sin que la sesion de trabajo este guardada se lanzara
+     *   esta excepcion.
+     * @throws IOException Si, por cualquier motivo, no se puede crear el chivo se lanzara esta excepcion.
      */
     public File createNameForPlugin(Plugin p) throws SessionNotSavedException, IOException {
         if (currentFile == null) {
@@ -157,8 +157,8 @@ public class IOManager {
     }
 
     /**
-     * Indica que, en caso de estarse trabajando sobre un archivo, dicho archivo ha pasado a ser inválido. La clase se
-     * olvida de su existencia y pasa a no tener ningún archivo de trabajo asociado.
+     * Indica que, en caso de estarse trabajando sobre un archivo, dicho archivo ha pasado a ser invalido. La clase se
+     * olvida de su existencia y pasa a no tener ningun archivo de trabajo asociado.
      */
     public void invalidateFile() {
         currentFile = null;

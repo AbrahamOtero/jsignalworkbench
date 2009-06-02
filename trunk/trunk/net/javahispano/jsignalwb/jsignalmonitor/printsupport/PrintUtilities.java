@@ -9,118 +9,118 @@ import javax.swing.RepaintManager;
 /**
  * <p>Title: Herraienta de monitorizacion</p>
  *
- * <p>Description: Pequeña clase de utilidad para imprimir componentes. La clase
- * muestra el cuadro de diálogo de impresión estándar de la plataforma y
- * permitirá al usuario imprimir el componente que se le pasó como parámetro.
- * Es posible configurar la orientación y tamaño por defecto del papel aunque,
- * habitualmente, el cuadro de diálogo que se presentará al usuario permitirá
- * cambiar estos parámetros.
+ * <p>Description: Pequenha clase de utilidad para imprimir componentes. La clase
+ * muestra el cuadro de dialogo de impresion estandar de la plataforma y
+ * permitira al usuario imprimir el componente que se le paso como parametro.
+ * Es posible configurar la orientacion y tamanho por defecto del papel aunque,
+ * habitualmente, el cuadro de dialogo que se presentara al usuario permitira
+ * cambiar estos parametros.
  * </p>
  *
- * <p>Copyright: Copyright (c) Abraham Otero y Román Segador 2007. este código se distribuye
+ * <p>Copyright: Copyright (c) Abraham Otero y Roman Segador 2007. este codigo se distribuye
  * bajo licencia Apache 2.0</p>
  *
  * @version 1.0
  */
 public class PrintUtilities implements Printable {
-  private Component componentToBePrinted;
-  private int defaultPaperHeight = 849; //A4
-  private int defaultPaperWidht = 597; //A4
-  private int orientation = PageFormat.PORTRAIT; //por defecto se imprime en vertical
+    private Component componentToBePrinted;
+    private int defaultPaperHeight = 849; //A4
+    private int defaultPaperWidht = 597; //A4
+    private int orientation = PageFormat.PORTRAIT; //por defecto se imprime en vertical
 
-  /**
-   * modo de impresión: LANDSCAPE
-   */
-  public static final int LANDSCAPE = PageFormat.LANDSCAPE;
-  /**
-   * modo de impresión: PORTRAIT
-   */
-  public static final int PORTRAIT = PageFormat.PORTRAIT;
-  /**
-   * modo de impresión: REVERSE_LANDSCAPE
-   */
-  public static final int REVERSE_LANDSCAPE = PageFormat.REVERSE_LANDSCAPE;
-
-
-  /**
-   * construye un objeto de tipo PrintUtilities
-   *
-   * @param componentToBePrinted componente que deseamos que imprima.
-   */
-  public PrintUtilities(Component componentToBePrinted) {
-    this.componentToBePrinted = componentToBePrinted;
-  }
-
-  /**
-   * Imprime el componente que se le pasa como parámetro.
-   * Mostrará el cuadro de diálogo de impresión estándar de la plataforma y
-   * permitirá al usuario imprimir el componente que se le pasó como parámetro.
-   *
-   * @param componentToBePrinted Componente a imprimir
-   * @throws PrinterException
-   */
-  public static void printComponent(Component componentToBePrinted) throws
-      PrinterException {
-    new PrintUtilities(componentToBePrinted).print();
-  }
+    /**
+     * modo de impresion: LANDSCAPE
+     */
+    public static final int LANDSCAPE = PageFormat.LANDSCAPE;
+    /**
+     * modo de impresion: PORTRAIT
+     */
+    public static final int PORTRAIT = PageFormat.PORTRAIT;
+    /**
+     * modo de impresion: REVERSE_LANDSCAPE
+     */
+    public static final int REVERSE_LANDSCAPE = PageFormat.REVERSE_LANDSCAPE;
 
 
-  /**
-   * Imprime el componente que se le pasa como parámetro. Mostrará el cuadro de
-   * diálogo de impresión estándar de la plataforma y permitirá al usuario
-   * imprimir el componente que se le pasó como parámetro.
-   *
-   * @param componentToBePrinted Componente a imprimir
-   * @param orientation orientación con la que imprime
-   * @throws PrinterException
-   */
-  public static void printComponent(Component componentToBePrinted, int orientation) throws PrinterException {
-    PrintUtilities p = new PrintUtilities(componentToBePrinted);
-    p.setOrientation(orientation);
-    p.print();
-  }
-
-
-  /**
-   * Imprime el componente que se le pasa como parámetro. Mostrará el cuadro de
-   * diálogo de impresión estándar de la plataforma y permitirá al usuario
-   * imprimir el componente que se le pasó como parámetro.
-   *
-   * @param componentToBePrinted Componente a imprimir
-   * @param orientation orientación con la que imprime por defecto
-   * @param height altura por defecto del papel
-   * @param width ancho por defecto del papel
-   * @throws PrinterException
-   */
-  public static void printComponent(Component componentToBePrinted, int orientation, int height, int width) throws
-      PrinterException {
-    PrintUtilities p = new PrintUtilities(componentToBePrinted);
-    p.setOrientation(orientation);
-    p.setDefaultPaperHeight(height);
-    p.setDefaultPaperWidht(width);
-    p.print();
-  }
-
-  /**
-   * Imprime el correspondiente componente.
-   * Mostrará el cuadro de diálogo de impresión estándar de la plataforma.
-   *
-   * @throws PrinterException
-   */
-  public void print() throws PrinterException {
-    PrinterJob printJob = PrinterJob.getPrinterJob();
-    PageFormat pageFormat = new PageFormat();
-    pageFormat.setOrientation(orientation);
-    Paper paper = new Paper();
-    paper.setSize(defaultPaperWidht, defaultPaperHeight);
-    pageFormat.setPaper(paper);
-    printJob.setPrintable(this, pageFormat);
-    if (printJob.printDialog()) {
-      printJob.print();
+    /**
+     * construye un objeto de tipo PrintUtilities
+     *
+     * @param componentToBePrinted componente que deseamos que imprima.
+     */
+    public PrintUtilities(Component componentToBePrinted) {
+        this.componentToBePrinted = componentToBePrinted;
     }
-  }
 
-  /**
+    /**
+     * Imprime el componente que se le pasa como parametro.
+     * Mostrara el cuadro de dialogo de impresion estandar de la plataforma y
+     * permitira al usuario imprimir el componente que se le paso como parametro.
+     *
+     * @param componentToBePrinted Componente a imprimir
+     * @throws PrinterException
+     */
+    public static void printComponent(Component componentToBePrinted) throws
+            PrinterException {
+        new PrintUtilities(componentToBePrinted).print();
+    }
+
+
+    /**
+     * Imprime el componente que se le pasa como parametro. Mostrara el cuadro de
+     * dialogo de impresion estandar de la plataforma y permitira al usuario
+     * imprimir el componente que se le paso como parametro.
+     *
+     * @param componentToBePrinted Componente a imprimir
+     * @param orientation orientacion con la que imprime
+     * @throws PrinterException
+     */
+    public static void printComponent(Component componentToBePrinted, int orientation) throws PrinterException {
+        PrintUtilities p = new PrintUtilities(componentToBePrinted);
+        p.setOrientation(orientation);
+        p.print();
+    }
+
+
+    /**
+     * Imprime el componente que se le pasa como parametro. Mostrara el cuadro de
+     * dialogo de impresion estandar de la plataforma y permitira al usuario
+     * imprimir el componente que se le paso como parametro.
+     *
+     * @param componentToBePrinted Componente a imprimir
+     * @param orientation orientacion con la que imprime por defecto
+     * @param height altura por defecto del papel
+     * @param width ancho por defecto del papel
+     * @throws PrinterException
+     */
+    public static void printComponent(Component componentToBePrinted, int orientation, int height, int width) throws
+            PrinterException {
+        PrintUtilities p = new PrintUtilities(componentToBePrinted);
+        p.setOrientation(orientation);
+        p.setDefaultPaperHeight(height);
+        p.setDefaultPaperWidht(width);
+        p.print();
+    }
+
+    /**
+     * Imprime el correspondiente componente.
+     * Mostrara el cuadro de dialogo de impresion estandar de la plataforma.
+     *
+     * @throws PrinterException
+     */
+    public void print() throws PrinterException {
+        PrinterJob printJob = PrinterJob.getPrinterJob();
+        PageFormat pageFormat = new PageFormat();
+        pageFormat.setOrientation(orientation);
+        Paper paper = new Paper();
+        paper.setSize(defaultPaperWidht, defaultPaperHeight);
+        pageFormat.setPaper(paper);
+        printJob.setPrintable(this, pageFormat);
+        if (printJob.printDialog()) {
+            printJob.print();
+        }
+    }
+
+    /**
      * The <code>Printable</code> interface is implemented
      * by the <code>print</code> methods of the current
      * page painter, which is called by the printing
@@ -187,101 +187,100 @@ public class PrintUtilities implements Printable {
      * @see java.awt.print.Pageable
      * @see java.awt.print.PageFormat
      * @see java.awt.print.PrinterJob
- */
-  public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
-    if (pageIndex > 0) {
-      return NO_SUCH_PAGE;
-    }
-    else {
-      disableDoubleBuffering(componentToBePrinted);
-      Graphics2D g2d = (Graphics2D) g;
-      //intento frustrado de rotar
-          //  g2d.rotate(Math.PI/2);
+     */
+    public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
+        if (pageIndex > 0) {
+            return NO_SUCH_PAGE;
+        } else {
+            disableDoubleBuffering(componentToBePrinted);
+            Graphics2D g2d = (Graphics2D) g;
+            //intento frustrado de rotar
+            //  g2d.rotate(Math.PI/2);
             //g2d.translate(0,-componentToBePrinted.getHeight());
 
-     //movemos el gráfico al area donde se puede imprimir
-      g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+            //movemos el grafico al area donde se puede imprimir
+            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
-      float xRatio = ( (float) pageFormat.getImageableWidth()) / componentToBePrinted.getWidth();
-      float yRatio = ( (float) pageFormat.getImageableHeight()) / componentToBePrinted.getHeight();
-      float ratio = Math.min(xRatio, yRatio); //para no distorsionar la imagen
-      g2d.scale(ratio, ratio);
+            float xRatio = ((float) pageFormat.getImageableWidth()) / componentToBePrinted.getWidth();
+            float yRatio = ((float) pageFormat.getImageableHeight()) / componentToBePrinted.getHeight();
+            float ratio = Math.min(xRatio, yRatio); //para no distorsionar la imagen
+            g2d.scale(ratio, ratio);
 
-      componentToBePrinted.paint(g2d);
-      enableDoubleBuffering(componentToBePrinted);
-      return PAGE_EXISTS;
+            componentToBePrinted.paint(g2d);
+            enableDoubleBuffering(componentToBePrinted);
+            return PAGE_EXISTS;
+        }
     }
-  }
 
 
-  private static void disableDoubleBuffering(Component c) {
-    RepaintManager currentManager = RepaintManager.currentManager(c);
-    currentManager.setDoubleBufferingEnabled(false);
-  }
+    private static void disableDoubleBuffering(Component c) {
+        RepaintManager currentManager = RepaintManager.currentManager(c);
+        currentManager.setDoubleBufferingEnabled(false);
+    }
 
 
-  private static void enableDoubleBuffering(Component c) {
-    RepaintManager currentManager = RepaintManager.currentManager(c);
-    currentManager.setDoubleBufferingEnabled(true);
-  }
+    private static void enableDoubleBuffering(Component c) {
+        RepaintManager currentManager = RepaintManager.currentManager(c);
+        currentManager.setDoubleBufferingEnabled(true);
+    }
 
 
-  /**
-   * getDefaultPaperHeight
-   *
-   * @return Altura del papel por defecto
-   */
-  public int getDefaultPaperHeight() {
-    return defaultPaperHeight;
-  }
+    /**
+     * getDefaultPaperHeight
+     *
+     * @return Altura del papel por defecto
+     */
+    public int getDefaultPaperHeight() {
+        return defaultPaperHeight;
+    }
 
 
-  /**
-   * getDefaultPaperWidht
-   *
-   * @return ancho del papel por defecto
-   */
-  public int getDefaultPaperWidht() {
-    return defaultPaperWidht;
-  }
+    /**
+     * getDefaultPaperWidht
+     *
+     * @return ancho del papel por defecto
+     */
+    public int getDefaultPaperWidht() {
+        return defaultPaperWidht;
+    }
 
 
-  /**
-   * getOrientation
-   *
-   * @return Orientación del papel por defecto
-   */
-  public int getOrientation() {
-    return orientation;
-  }
+    /**
+     * getOrientation
+     *
+     * @return Orientacion del papel por defecto
+     */
+    public int getOrientation() {
+        return orientation;
+    }
 
 
-  /**
-   * setDefaultPaperWidht
-   *
-   * @param defaultPaperWidht ancho del papel por defecto
-   */
-  public void setDefaultPaperWidht(int defaultPaperWidht) {
-    this.defaultPaperWidht = defaultPaperWidht;
-  }
+    /**
+     * setDefaultPaperWidht
+     *
+     * @param defaultPaperWidht ancho del papel por defecto
+     */
+    public void setDefaultPaperWidht(int defaultPaperWidht) {
+        this.defaultPaperWidht = defaultPaperWidht;
+    }
 
 
-  /**
-   * setDefaultPaperHeight
-   *
-   * @param defaultPaperHeight altura del papel por defecto
-   */
-  public void setDefaultPaperHeight(int defaultPaperHeight) {
-    this.defaultPaperHeight = defaultPaperHeight;
-  }
+    /**
+     * setDefaultPaperHeight
+     *
+     * @param defaultPaperHeight altura del papel por defecto
+     */
+    public void setDefaultPaperHeight(int defaultPaperHeight) {
+        this.defaultPaperHeight = defaultPaperHeight;
+    }
 
 
-  /**
-   * setOrientation
-   *
-   * @param orientation Orientación del papel por defecto
-   */
-  public void setOrientation(int orientation) {
-    this.orientation = orientation;
-  }
+    /**
+     * setOrientation
+     *
+     * @param orientation Orientacion del papel por defecto
+     */
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
 }

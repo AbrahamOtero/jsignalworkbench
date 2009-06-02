@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.StringTokenizer;
+
 import javax.swing.*;
 
 import net.javahispano.jsignalwb.*;
@@ -139,8 +140,8 @@ public class JSWTextProcessorPlugin extends WindowAdapter implements GenericPlug
     }
 
     /**
-     * cuando se abre un nuevo archivo que no tiene información del plugin
-     * no se ejecuta el mÚtodo de carga de datos y este mtodo tampoco hace su
+     * cuando se abre un nuevo archivo que no tiene informacion del plugin
+     * no se ejecuta el mUtodo de carga de datos y este mtodo tampoco hace su
      * trabajo apropiadamente.
      * Hay que gestionar ese caso.
      * @param event SessionEvent

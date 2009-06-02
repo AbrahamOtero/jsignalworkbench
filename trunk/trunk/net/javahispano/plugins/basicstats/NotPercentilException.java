@@ -14,11 +14,11 @@ public class NotPercentilException extends Exception {
 
     public NotPercentilException(String mensaje, int percetil_pedido) {
         super(mensaje);
-        this.percentilPedido =  percetil_pedido;
+        this.percentilPedido = percetil_pedido;
     }
 
     /**
-     * Devuelve el valor del cual se pidió un percentil como un String.
+     * Devuelve el valor del cual se pidio un percentil como un String.
      * @return
      */
     public int getPercentilPedido() {

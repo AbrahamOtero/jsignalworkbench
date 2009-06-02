@@ -1,9 +1,7 @@
 package net.javahispano.jsignalwb.plugins;
 
-import java.io.*;
-import java.util.*;
-
-import net.javahispano.jsignalwb.*;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Interfaz que implementan todos los plugings que permitan cargar datos en
@@ -11,7 +9,7 @@ import net.javahispano.jsignalwb.*;
  * o {@link DefaultLoader} en vez de implementar esta interfaz.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public interface Loader extends Plugin {
@@ -24,8 +22,9 @@ public interface Loader extends Plugin {
      * @return ArrayList
      */
     public ArrayList<String> getAvalaibleExtensions();
+
     /**
-     * Método que realiza la carga de los datos.
+     * Metodo que realiza la carga de los datos.
      *
      * @param file archiva cargar.
      * @param jswbManager {@link JSWBManager}
@@ -36,8 +35,8 @@ public interface Loader extends Plugin {
     public boolean load(File file) throws
             Exception;
 
-    /** Comunica al loader que la ejecución debe ser cancelada. Es respondabilidad
-      *  del algoritmo gestionar esta parada de la ejecucion.
+    /** Comunica al loader que la ejecucion debe ser cancelada. Es respondabilidad
+     *  del algoritmo gestionar esta parada de la ejecucion.
      */
     public void cancelExecution();
 }

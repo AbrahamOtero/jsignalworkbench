@@ -1,13 +1,12 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.awt.*;
-import java.io.*;
-import java.util.*;
+import java.awt.Color;
+import java.io.File;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.TitledBorder;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
 
 public class PanelInfo extends JPanel {
 
@@ -17,8 +16,8 @@ public class PanelInfo extends JPanel {
     private JLabel labelDatos = new JLabel();
 
     public PanelInfo(FicheroHead fh, int modo) {
-        // AÑADIR TODA LA INFORMACION PERTINENTE AL FICHERO
-        // Y TAMBIÉN A LOS PARÁMETROS GENERALES LEIDOS DEL FICHERO.
+        // ANHADIR TODA LA INFORMACION PERTINENTE AL FICHERO
+        // Y TAMBIEN A LOS PARAMETROS GENERALES LEIDOS DEL FICHERO.
         File localizacion = null;
         String textoLabel = "";
         String fechaInicioMuestreo = "";
@@ -40,9 +39,11 @@ public class PanelInfo extends JPanel {
                          "<b>Localization:</b> " + localizacion.getPath() +
                          "<br>" +
                          "<b>Begin:</b> " +
-                         "18:56:58 11/05/2004" /*fechaInicioMuestreo*/ + "<br>" +
+                         "18:56:58 11/05/2004"
+                         /*fechaInicioMuestreo*/ + "<br>" +
                          "<b>End:</b>" +
-                         "18:59:21 11/05/2004" /*fechaFinMuestreo*/ + "<br>" +
+                         "18:59:21 11/05/2004"
+                         /*fechaFinMuestreo*/ + "<br>" +
                          "<b>Number of samples:</b> " + numMuestras + "<br>" +
                          "<b>Base sampling rate:</b> " +
                          frecuenciaMuestreoFrame + " Hz" +

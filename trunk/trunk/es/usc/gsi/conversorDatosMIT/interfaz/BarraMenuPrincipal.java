@@ -1,8 +1,6 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.util.*;
-
-import javax.swing.*;
+import javax.swing.JMenuBar;
 
 public class BarraMenuPrincipal extends JMenuBar {
 

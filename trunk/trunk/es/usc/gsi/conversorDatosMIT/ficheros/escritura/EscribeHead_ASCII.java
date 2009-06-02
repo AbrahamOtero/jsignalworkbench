@@ -4,13 +4,13 @@
 package es.usc.gsi.conversorDatosMIT.ficheros.escritura;
 
 import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import es.usc.gsi.conversorDatosMIT.ficheros.*;
-import es.usc.gsi.conversorDatosMIT.ficheros.lectura.*;
-import es.usc.gsi.conversorDatosMIT.interfaz.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.lectura.LeeFicheroDat;
+import es.usc.gsi.conversorDatosMIT.interfaz.ControladorInterfaz;
 
 public class EscribeHead_ASCII extends Thread implements Cancelar {
 
@@ -101,7 +101,7 @@ public class EscribeHead_ASCII extends Thread implements Cancelar {
          } catch (Exception e) {
              controlFicheros.cierraIndicadorProgreso();
              JOptionPane.showMessageDialog(controlInterfaz.getPanelPrincipal(),
-                     "Error al crear fichero de exportacion");
+                                           "Error al crear fichero de exportacion");
              System.out.println("Error al crear fichero de exportacion");
 //      throw new ErrorExportandoException();
          }
@@ -185,7 +185,7 @@ public class EscribeHead_ASCII extends Thread implements Cancelar {
 
 //*******************************************************************************
 
-// INCLUIR MÉTODO PARA CERRAR TODOS LOS FICHEROS ABIERTOS
+// INCLUIR METODO PARA CERRAR TODOS LOS FICHEROS ABIERTOS
      public void cierraFicheros() {
 
          for (int i = 0; i < arrayLectores.length; i++) {

@@ -1,20 +1,19 @@
 package net.javahispano.plugins.basicstats;
 
+import java.io.*;
 import java.util.*;
 
 import javax.swing.*;
 
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.*;
-import org.jdom.*;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
-import org.jdom.input.SAXBuilder;
-import java.io.StringReader;
-import java.io.Reader;
-import java.io.*;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
+import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import net.javahispano.plugins.basicstats.UI.NewStatisticsDialog;
+import org.jdom.*;
+import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * <p>Title: </p>
@@ -54,7 +53,7 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
      * @return String
      */
     public String getDescription() {
-        return "Calcula un conjunto de estadísticos básicos";
+        return "Calcula un conjunto de estadisticos basicos";
     }
 
     /**
@@ -73,7 +72,7 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
      *   method
      */
     public String getName() {
-        return "Estadístico Basico";
+        return "Estadistico Basico";
     }
 
     /**
@@ -90,7 +89,7 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
      */
     public String getShortDescription() {
         return
-                "Calcula un conjunto de estadísticos básicos de un modo aproximado.";
+                "Calcula un conjunto de estadisticos basicos de un modo aproximado.";
     }
 
     /**
@@ -102,13 +101,13 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
     }
 
     /**
-     *@todo averiguar por qué no se puede usar un cuadro de diálogo modal
+     *@todo averiguar por que no se puede usar un cuadro de dialogo modal
      * @param sm SignalManager
      * @param signals Enumeration
      */
     public void runAlgorithm(SignalManager sm,
-                           List<SignalIntervalProperties> signals,
-          AlgorithmRunner ar) {
+                             List<SignalIntervalProperties> signals,
+            AlgorithmRunner ar) {
         //Signal signal = sm.getSignal((String) signals.nextElement());
         Signal signal = signals.get(0).getSignal();
         float[] data = signal.getValues();
@@ -139,22 +138,24 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
         try {
             doc = db.build((Reader) sr);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Ha sucedido un error al recuperar la información de sesiones pasadas en el plugin estadístico básico",
+            JOptionPane.showMessageDialog(null,
+                    "Ha sucedido un error al recuperar la informacion de sesiones pasadas en el plugin estadistico basico",
                                           "Error", JOptionPane.ERROR_MESSAGE);
-                    ex.printStackTrace();
-                    return;
+            ex.printStackTrace();
+            return;
         } catch (JDOMException ex) {
-            JOptionPane.showMessageDialog(null, "Ha sucedido un error al recuperar la información de sesiones pasadas en el plugin estadístico básico",
+            JOptionPane.showMessageDialog(null,
+                    "Ha sucedido un error al recuperar la informacion de sesiones pasadas en el plugin estadistico basico",
                                           "Error", JOptionPane.ERROR_MESSAGE);
-                    ex.printStackTrace();
-                    return;
+            ex.printStackTrace();
+            return;
         }
 
         List estadisticos = recuperaEstadisticos(doc.getRootElement());
         Iterator it = estadisticos.iterator();
         while (it.hasNext()) {
-            ResultadosEstadisticos r = (ResultadosEstadisticos)it.next();
-            statisticsCollection.put(r.getKey()+"a",r);
+            ResultadosEstadisticos r = (ResultadosEstadisticos) it.next();
+            statisticsCollection.put(r.getKey() + "a", r);
         }
 
     }
@@ -165,7 +166,7 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
 
 
     /**
-     * Almacena los estádisticos, si los hay.
+     * Almacena los estadisticos, si los hay.
      * @param root
      */
     private Element guardaEstadisticos() {
@@ -194,7 +195,7 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
             String comentario = estadistico.getComentario();
             //Creamos el elemeto estaditico y le ponemos sus atributos
             Element estadistico_xml = new Element("Estadistico");
-            estadistico_xml.setAttribute("Nombre", estadistico.getNombreSeñal());
+            estadistico_xml.setAttribute("Nombre", estadistico.getNombreSenhal());
             estadistico_xml.setAttribute("Media", Float.toString(media));
             estadistico_xml.setAttribute("Mediana", Float.toString(mediana));
             estadistico_xml.setAttribute("Varianza", Float.toString(varianza));
@@ -228,64 +229,66 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
                     estadistico_xml.addContent(percentil_xml);
                 }
             }
-            //Por ultimo creamos y añadimos el elemento comentaio
+            //Por ultimo creamos y anhadimos el elemento comentaio
             Element comentario_xml = new Element("Comentario");
             comentario_xml.setText(comentario);
             estadistico_xml.addContent(comentario_xml);
 
-            //Añadimos el elemento estadistico creado a la raiz
+            //Anhadimos el elemento estadistico creado a la raiz
             root.addContent(estadistico_xml);
         }
         return root;
     }
-    private List recuperaEstadisticos(Element root){
-      LinkedList resultado = new LinkedList();
-      List list_estadisticos = root.getChildren("Estadistico");
-      Iterator it = list_estadisticos.iterator();
-      while (it.hasNext()) {
-        try {
-          Element estadistico_xml = (Element)it.next();
-          float media = estadistico_xml.getAttribute("Media").getFloatValue();
-          float mediana = estadistico_xml.getAttribute("Mediana").getFloatValue();
-          float varianza = estadistico_xml.getAttribute("Varianza").getFloatValue();
-          float desviacion_tipica = estadistico_xml.getAttribute("DesviacionTipica").getFloatValue();
-          float error_estandar = estadistico_xml.getAttribute("ErrorEstandar").getFloatValue();
-          float cociente_de_variacion = estadistico_xml.getAttribute("CocienteDeVariacion").getFloatValue();
-          String fecha_inicio = estadistico_xml.getAttribute("FechaInicio").getValue();
-          String fecha_fin = estadistico_xml.getAttribute("FechaFin").getValue();
-          String nombre = estadistico_xml.getAttribute("Nombre").getValue();
-          float[] intervalo_de_confianza = new float[2];
-          intervalo_de_confianza[0] = estadistico_xml.getAttribute("IntervaloDeConfianzaInicio").getFloatValue();
-          intervalo_de_confianza[1] = estadistico_xml.getAttribute("IntervaloDeConfianzaFin").getFloatValue();
-          String comentario = estadistico_xml.getChild("Comentario").getText();
 
-          //Cojemos la lista de percentiles
-          List list_percentiles= estadistico_xml.getChildren("Percentiles");
-          Iterator it2 = list_percentiles.iterator();
-          int num_percentiles = list_percentiles.size();
-          int[] percentiles_float = new int[num_percentiles];
-          float[] valores_percentiles = new float[num_percentiles];
-          int cuantos_van = 0;
-          while (it2.hasNext()) {
-            Element percentil_xml = (Element)it2.next();
-            percentiles_float[cuantos_van] = percentil_xml.getAttribute("Percentil").getIntValue();
-            valores_percentiles[cuantos_van] = percentil_xml.getAttribute("ValorPercentil").getFloatValue();
-            cuantos_van++;
-          }
-          ResultadosEstadisticos estadistico = new ResultadosEstadisticos(media, mediana, varianza,
-              desviacion_tipica, error_estandar, cociente_de_variacion,intervalo_de_confianza, percentiles_float,
-              valores_percentiles,fecha_inicio, fecha_fin,nombre);
-          estadistico.setComentario(comentario);
-          resultado.add(estadistico);
+    private List recuperaEstadisticos(Element root) {
+        LinkedList resultado = new LinkedList();
+        List list_estadisticos = root.getChildren("Estadistico");
+        Iterator it = list_estadisticos.iterator();
+        while (it.hasNext()) {
+            try {
+                Element estadistico_xml = (Element) it.next();
+                float media = estadistico_xml.getAttribute("Media").getFloatValue();
+                float mediana = estadistico_xml.getAttribute("Mediana").getFloatValue();
+                float varianza = estadistico_xml.getAttribute("Varianza").getFloatValue();
+                float desviacion_tipica = estadistico_xml.getAttribute("DesviacionTipica").getFloatValue();
+                float error_estandar = estadistico_xml.getAttribute("ErrorEstandar").getFloatValue();
+                float cociente_de_variacion = estadistico_xml.getAttribute("CocienteDeVariacion").getFloatValue();
+                String fecha_inicio = estadistico_xml.getAttribute("FechaInicio").getValue();
+                String fecha_fin = estadistico_xml.getAttribute("FechaFin").getValue();
+                String nombre = estadistico_xml.getAttribute("Nombre").getValue();
+                float[] intervalo_de_confianza = new float[2];
+                intervalo_de_confianza[0] = estadistico_xml.getAttribute("IntervaloDeConfianzaInicio").getFloatValue();
+                intervalo_de_confianza[1] = estadistico_xml.getAttribute("IntervaloDeConfianzaFin").getFloatValue();
+                String comentario = estadistico_xml.getChild("Comentario").getText();
+
+                //Cojemos la lista de percentiles
+                List list_percentiles = estadistico_xml.getChildren("Percentiles");
+                Iterator it2 = list_percentiles.iterator();
+                int num_percentiles = list_percentiles.size();
+                int[] percentiles_float = new int[num_percentiles];
+                float[] valores_percentiles = new float[num_percentiles];
+                int cuantos_van = 0;
+                while (it2.hasNext()) {
+                    Element percentil_xml = (Element) it2.next();
+                    percentiles_float[cuantos_van] = percentil_xml.getAttribute("Percentil").getIntValue();
+                    valores_percentiles[cuantos_van] = percentil_xml.getAttribute("ValorPercentil").getFloatValue();
+                    cuantos_van++;
+                }
+                ResultadosEstadisticos estadistico = new ResultadosEstadisticos(media, mediana, varianza,
+                        desviacion_tipica, error_estandar, cociente_de_variacion, intervalo_de_confianza,
+                        percentiles_float,
+                        valores_percentiles, fecha_inicio, fecha_fin, nombre);
+                estadistico.setComentario(comentario);
+                resultado.add(estadistico);
+            } catch (NotPercentilException ex) {
+                ex.printStackTrace();
+            } catch (DataConversionException ex) {
+                ex.printStackTrace();
+            }
         }
-        catch (NotPercentilException ex) {
-          ex.printStackTrace();
-        }catch (DataConversionException ex) {
-          ex.printStackTrace();
-        }
-      }
-      return resultado;
+        return resultado;
     }
+
     public boolean hasOwnExecutionGUI() {
         return false;
     }

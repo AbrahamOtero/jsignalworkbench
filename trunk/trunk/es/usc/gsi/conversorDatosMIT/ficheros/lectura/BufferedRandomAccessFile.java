@@ -1,6 +1,7 @@
 package es.usc.gsi.conversorDatosMIT.ficheros.lectura;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 
 public class BufferedRandomAccessFile {
 

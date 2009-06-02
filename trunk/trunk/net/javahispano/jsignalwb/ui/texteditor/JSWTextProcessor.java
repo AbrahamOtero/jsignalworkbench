@@ -276,7 +276,7 @@ public class JSWTextProcessor extends JFrame {
 
 
     /**
-     * Comprueba si el archivo está o no guardado.
+     * Comprueba si el archivo esta o no guardado.
      *
      * @return true si esta guardado, false en caso contrario.
      */
@@ -431,7 +431,7 @@ public class JSWTextProcessor extends JFrame {
                                       "<html></head><body><p><font color=\"#FF0000\" size=\"5\">About</font>" +
                                       "</p><p><font " +
                                       "color=\"#0000FF\" size=\"4\">" +
-                                      "</font></p><p><font color=\"#0000FF\" size=\"4\"> text editor.<br>"+
+                                      "</font></p><p><font color=\"#0000FF\" size=\"4\"> text editor.<br>" +
                                       "Developed by Abraham Otero and Roman Segador</font></p></body></html>",
                                       "About", JOptionPane.INFORMATION_MESSAGE);
     }

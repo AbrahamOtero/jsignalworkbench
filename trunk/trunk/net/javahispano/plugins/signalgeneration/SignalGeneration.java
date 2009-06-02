@@ -1,32 +1,14 @@
 package net.javahispano.plugins.signalgeneration;
 
-import java.awt.BorderLayout;
-import java.awt.Frame;
-
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import java.awt.Dimension;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import javax.swing.JCheckBox;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JScrollPane;
-import java.util.LinkedList;
-import javax.swing.Box;
-import java.awt.Component;
-import net.javahispano.jsignalwb.*;
 import java.util.*;
-import javax.swing.JTabbedPane;
+
 import javax.swing.*;
-import java.awt.FlowLayout;
-import java.awt.*;
-import net.javahispano.jsignalwb.plugins.*;
-import net.javahispano.plugins.temporalseries.*;
+
+import net.javahispano.jsignalwb.*;
+import net.javahispano.plugins.temporalseries.TemporalSeries;
 
 public class SignalGeneration extends JDialog {
 
@@ -294,7 +276,7 @@ public class SignalGeneration extends JDialog {
 
         try {
             longitud = leerYValidarJTextFiel(this.tDuracion,
-                                             "Revise la duración de la señal");
+                                             "Revise la duracion de la senhal");
             muestreo = leerYValidarJTextFiel(tRate,
                                              "Revise la frecuencia de muestreo");
             inicio = leerYValidarJTextFiel(this.tPrincipio,
@@ -308,13 +290,13 @@ public class SignalGeneration extends JDialog {
         SignalManager signalManager = JSWBManager.getJSWBManagerInstance().
                                       getSignalManager();
         if (nombre.equals("")) {
-            mostrarError("Es necesario introducir un nombre para la señal");
+            mostrarError("Es necesario introducir un nombre para la senhal");
 
             return;
         } else if (signalManager.exists(nombre) &&
                    !this.jCheckBorrar.isSelected()) {
             mostrarError(
-                    "Ya existe una señal con ese nombre. Introduzca otro nombre diferente");
+                    "Ya existe una senhal con ese nombre. Introduzca otro nombre diferente");
             return;
         }
 
@@ -330,17 +312,17 @@ public class SignalGeneration extends JDialog {
 
             try {
                 ascenso = leerYValidarJTextFiel(tSquareSubida,
-                                                " Valor incorrecto para la duración del tramo desubida");
+                                                " Valor incorrecto para la duracion del tramo desubida");
                 descenso = leerYValidarJTextFiel(tSquarBajada,
-                                                 " Valor incorrecto para la duración del tramo debajada");
+                                                 " Valor incorrecto para la duracion del tramo debajada");
                 arriba = leerYValidarJTextFiel(tSquareArriba,
-                                               " Valor incorrecto para la duración del tramo alto");
+                                               " Valor incorrecto para la duracion del tramo alto");
                 abajo = leerYValidarJTextFiel(tSquareAbajo,
-                                              " Valor incorrecto para la duración del tramo bajo");
+                                              " Valor incorrecto para la duracion del tramo bajo");
                 minimo = leerYValidarJTextFiel(tSquareMinimum,
-                                               " Valor incorrecto para el valor mínimo");
+                                               " Valor incorrecto para el valor minimo");
                 maximo = leerYValidarJTextFiel(tSquareMaximum,
-                                               " Valor incorrecto para el valor máximo");
+                                               " Valor incorrecto para el valor maximo");
             } catch (Exception ex2) {
                 return;
             }
@@ -373,7 +355,7 @@ public class SignalGeneration extends JDialog {
 
         TemporalSeries signal = new TemporalSeries(nombre, datos, (float) muestreo, 0,
                 "Unidades");
-        signal.setMinIndex((int)inicio);
+        signal.setMinIndex((int) inicio);
         signalManager.addSignal(signal);
         JSWBManager.getJSWBManagerInstance().setJSMFrecuency((float) muestreo);
         JSWBManager.getJSignalMonitor().setShowTimeLeyend(false);
@@ -385,20 +367,20 @@ public class SignalGeneration extends JDialog {
 
     private long calcularPrincipio(SignalManager signalManager) {
         long principio;
-//si vamos a borrar todas las señales tomamos el instante actual
+//si vamos a borrar todas las senhales tomamos el instante actual
         if (this.jCheckBorrar.isSelected()) {
             signalManager.removeAllSignals();
             principio = (new Date()).getTime();
 
         }
-//en caso contrario el mínimo de los principios de las señales añadidas
+//en caso contrario el minimo de los principios de las senhales anhadidas
         else {
             Collection<Signal> s = signalManager.getSignals();
             principio = Long.MAX_VALUE;
             for (Signal elem : s) {
                 if (elem instanceof TemporalSeries) {
-                   // principio = Math.min(principio,
-                     //                    ((TemporalSeries) elem).getTimeOrigin());
+                    // principio = Math.min(principio,
+                    //                    ((TemporalSeries) elem).getTimeOrigin());
                     //todas tienen el mismo principio, no hay que buscar m\u2663s
                     return principio;
                 }
@@ -509,11 +491,11 @@ public class SignalGeneration extends JDialog {
             frecuencia = elem.getFrecuencia();
             desfase = elem.getDesfase();
             inicio *= muestreo;
-            for (int i = (int)inicio; i < datos.length+(int)inicio; i++) {
-                datos[i-(int)inicio] += (float) (amplitud *
-                                     Math.sin(frecuencia *
-                                              ((i) / muestreo) +
-                                              desfase));
+            for (int i = (int) inicio; i < datos.length + (int) inicio; i++) {
+                datos[i - (int) inicio] += (float) (amplitud *
+                        Math.sin(frecuencia *
+                                 ((i) / muestreo) +
+                                 desfase));
             }
         }
         if (offset != 0) {

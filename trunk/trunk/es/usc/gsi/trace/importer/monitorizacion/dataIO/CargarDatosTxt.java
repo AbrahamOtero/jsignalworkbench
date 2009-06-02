@@ -3,7 +3,8 @@
 package es.usc.gsi.trace.importer.monitorizacion.dataIO;
 
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 /**
  * Carga los todos de un archivo .txt, en el cual los datos se almacenan como

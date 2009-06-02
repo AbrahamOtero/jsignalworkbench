@@ -6,17 +6,12 @@
 
 package net.javahispano.jsignalwb.plugins.defaults;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import net.javahispano.jsignalwb.plugins.*;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class InstantIconMark extends DefaultInstantMark{
+public class InstantIconMark extends DefaultInstantMark {
 
     public InstantIconMark() {
         super();

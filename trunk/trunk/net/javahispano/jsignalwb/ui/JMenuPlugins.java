@@ -10,22 +10,17 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
-import net.javahispano.jsignalwb.JSWBManager;
 
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.Plugin;
 import net.javahispano.jsignalwb.plugins.Plugin.GUIPositions;
-import net.javahispano.jsignalwb.plugins.framework.*;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 
 /**
  *
@@ -52,35 +47,36 @@ public class JMenuPlugins extends JMenu {
         PluginManager pluginManager = JSWBManager.getPluginManager();
         HashMap<String, ArrayList<String>> plugins = pluginManager.getRegisteredPlugins();
         Set<String> kindPlugins = plugins.keySet();
-        List<String> kind=new LinkedList<String>(kindPlugins);
+        List<String> kind = new LinkedList<String>(kindPlugins);
         Collections.sort(kind);
-        Iterator<String> it=kind.iterator();
-        boolean flag=false;
+        Iterator<String> it = kind.iterator();
+        boolean flag = false;
         while (it.hasNext()) {
-            String pluginType=it.next();
-            flag=false;
-            if(pluginType.equals("algorithm") || pluginType.equals("generic")){
+            String pluginType = it.next();
+            flag = false;
+            if (pluginType.equals("algorithm") || pluginType.equals("generic")) {
                 JMenu jMenu = new JMenu(pluginType);
                 ArrayList<String> plug = plugins.get(pluginType);
                 for (String s : plug) {
-                    Plugin plugin=pluginManager.getPlugin(pluginType+":"+s);
-                    if(plugin.showInGUIOnthe(GUIPositions.MENU)){
+                    Plugin plugin = pluginManager.getPlugin(pluginType + ":" + s);
+                    if (plugin.showInGUIOnthe(GUIPositions.MENU)) {
                         if (pluginType.equals("algorithm")) {
                             jMenu.add(new JMenuAlgorithm(s, jswbManager));
-                            flag=true;
+                            flag = true;
                         } else if (pluginType.equals("generic")) {
                             jMenu.add(new JMenuGenericPlugin(s,
-                                                              jswbManager));
-                            flag=true;
+                                    jswbManager));
+                            flag = true;
                         }
                     }
                 }
-                if(flag)
+                if (flag) {
                     add(jMenu);
+                }
             }
         }
         addSeparator();
-        add(new JMenuItem(new ShowPluginManagerAction(jswbManager,jswbManager.getParentWindow())));
+        add(new JMenuItem(new ShowPluginManagerAction(jswbManager, jswbManager.getParentWindow())));
     }
 
 }

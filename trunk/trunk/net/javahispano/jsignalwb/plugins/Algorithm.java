@@ -12,21 +12,21 @@ package net.javahispano.jsignalwb.plugins;
 import java.util.List;
 
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.framework.*;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 
 /**
  * <p> Esta interfaz representa a los plugin que son algoritmos de procesado de
- * señal. Dichos algoritmos pueden tener, opcionalmente, una interfaz gráfica de
- * configuración y una interfaz gráfica para mostrar los resultados de la
- * ejecución. Opcionalmente, también pueden tener una interfaz gráfica de
- * ejecución en la cual el usuario pueda elegir que señales desea procesar. En
- * caso de que el algoritmo no proporcione una interfaz gráfica para la
- * ejecución se empleará una interfaz gráfica genérica que proporciona
+ * senhal. Dichos algoritmos pueden tener, opcionalmente, una interfaz grafica de
+ * configuracion y una interfaz grafica para mostrar los resultados de la
+ * ejecucion. Opcionalmente, tambien pueden tener una interfaz grafica de
+ * ejecucion en la cual el usuario pueda elegir que senhales desea procesar. En
+ * caso de que el algoritmo no proporcione una interfaz grafica para la
+ * ejecucion se empleara una interfaz grafica generica que proporciona
  * JSignalWorkbench. </p>
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public interface Algorithm extends Plugin {
@@ -34,17 +34,17 @@ public interface Algorithm extends Plugin {
 
     /**
      * Indica si el algoritmo posee una interfaz de usuario para mostrar los
-     * resultados de la ejecución que deba ser invocada una vez se ha ejecutado.
+     * resultados de la ejecucion que deba ser invocada una vez se ha ejecutado.
      *
      * @return cierto si se debe mostrar una interfaz de usuario propio del
-     *   algoritmo, falso si no se debe de realizar ninguna acción
+     *   algoritmo, falso si no se debe de realizar ninguna accion
      */
     public boolean hasResultsGUI();
 
     /**
      * Lanza la interfaz grafica que el algoritmo emplea para ejecutarse
      *
-     * @param jswbManager JSWBManager del entorno de ejecución.
+     * @param jswbManager JSWBManager del entorno de ejecucion.
      */
     public void launchResultsGUI(JSWBManager jswbManager);
 
@@ -65,9 +65,9 @@ public interface Algorithm extends Plugin {
     public void launchExecutionGUI(JSWBManager jswbManager);
 
     /**
-     * Ejecuta el algoritmo. Aquí es donde debe ir el código que procese las
-     * señales. Las señales que debe ser procesadas se obtienen a partir del
-     * List<SignalIntervalProperties>. Puede interactuarse con las señales
+     * Ejecuta el algoritmo. Aqui es donde debe ir el codigo que procese las
+     * senhales. Las senhales que debe ser procesadas se obtienen a partir del
+     * List<SignalIntervalProperties>. Puede interactuarse con las senhales
      * almacenadas en el entorno a partir del {@link SignalManager}.</p>
      *
      * <p> Es recomendable cuando un algoritmo realice un procesado
@@ -82,16 +82,16 @@ public interface Algorithm extends Plugin {
      */
     public void runAlgorithm(SignalManager sm,
                              List<SignalIntervalProperties> signals,
-                             AlgorithmRunner ar);
+            AlgorithmRunner ar);
 
     /**
-     * Indica el numero de señanles que necesita el algorimo para ejecutarse.
+     * Indica el numero de senhanles que necesita el algorimo para ejecutarse.
      *
-     * @return Número de señales que necesita el algoritmo.
+     * @return Numero de senhales que necesita el algoritmo.
      */
     public int numberOfSignalsNeeded();
-    
-    /** Comunica al algoritmo que la ejecución debe ser cancelada. Es respondabilidad
+
+    /** Comunica al algoritmo que la ejecucion debe ser cancelada. Es respondabilidad
      *  del algoritmo gestionar esta parada de la ejecucion.
      */
     public void cancelExecution();

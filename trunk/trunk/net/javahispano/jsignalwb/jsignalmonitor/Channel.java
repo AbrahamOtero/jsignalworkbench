@@ -6,24 +6,19 @@
 
 package net.javahispano.jsignalwb.jsignalmonitor;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.image.ImageObserver;
-
-
 
 
 /**
  *
  * @author Roman Segador
  */
-class Channel implements ImageObserver{
+class Channel implements ImageObserver {
     //private boolean visible;
     private int points[];
     //private int xPoints[];
-    private Color colors[]= null;
+    private Color colors[] = null;
     private InfoLabel infoLabel;
     private JSignalMonitorGrid grid;
     private int abscissaPosition;
@@ -44,7 +39,7 @@ class Channel implements ImageObserver{
     public Channel(ChannelProperties channelProperties, InfoLabel infoLabel,
                    JSignalMonitorGrid grid) {
         points = new int[1];
-       // xPoints = new int[1];
+        // xPoints = new int[1];
         setInfoLabel(infoLabel);
         setGrid(grid);
         setChannelProperties(channelProperties);
@@ -54,14 +49,15 @@ class Channel implements ImageObserver{
     }
 
     public void setPoints(float[] points) {
-        this.points=new int[points.length];
+        this.points = new int[points.length];
         applyZoom(points);
     }
 
-    private int[] getXPositions(int nPoints,int firstValue){
-        int xPoints[]=new int[nPoints];
-        for(int index=0;index<nPoints;index++,firstValue++)
-            xPoints[index]=firstValue;
+    private int[] getXPositions(int nPoints, int firstValue) {
+        int xPoints[] = new int[nPoints];
+        for (int index = 0; index < nPoints; index++, firstValue++) {
+            xPoints[index] = firstValue;
+        }
         return xPoints;
     }
 
@@ -94,30 +90,32 @@ class Channel implements ImageObserver{
     }
 
     public void paintData(Graphics2D g2d, Point p) {
-        paintData(g2d,p,0,0);
+        paintData(g2d, p, 0, 0);
     }
-    public void paintData(Graphics2D g2d, Point p,int startOffset, int endOffset) {
+
+    public void paintData(Graphics2D g2d, Point p, int startOffset, int endOffset) {
         //float[] data = this.getPoints();
         g2d.setColor(getChannelProperties().getDataColor());
         g2d.setStroke(getChannelProperties().getDataStroke());
         //System.out.println(data.length+" "+this.getChannelProperties().getName());
         //int mod=position%getChannelProperties().getPointDist();
-        int actualValue = (int)p.getX();
+        int actualValue = (int) p.getX();
         boolean paintColors = channelProperties.hasEmphasis();
         //@todo bug - creo q solucionado
         //bajo ciertas condiciones aunque paintColors= true el array de colores
-        //no ha sido inicializado(En tu código original en ese caso el array tenía
-        //tamaño 1 y el índice se sala de el.
-        if (paintColors&& colors!=null||startOffset!=0||endOffset!=0) {
-            actualValue+=startOffset;
-            for (int i = startOffset; i < (points.length - 1 -endOffset);) {
-                if(paintColors)
+        //no ha sido inicializado(En tu codigo original en ese caso el array tenia
+        //tamanho 1 y el indice se sala de el.
+        if (paintColors && colors != null || startOffset != 0 || endOffset != 0) {
+            actualValue += startOffset;
+            for (int i = startOffset; i < (points.length - 1 - endOffset); ) {
+                if (paintColors) {
                     g2d.setColor(colors[i]);
-                g2d.drawLine(actualValue,points[i],++actualValue,points[++i]);
+                }
+                g2d.drawLine(actualValue, points[i], ++actualValue, points[++i]);
             }
-        }else{
-            g2d.setColor(this.channelProperties.getDataColor());            
-            g2d.drawPolyline(getXPositions(points.length,actualValue),points,points.length);
+        } else {
+            g2d.setColor(this.channelProperties.getDataColor());
+            g2d.drawPolyline(getXPositions(points.length, actualValue), points, points.length);
         }
     }
 
@@ -127,7 +125,7 @@ class Channel implements ImageObserver{
                 g2d.drawImage(marks[index].getImage(), p+ getChannelProperties().,(int)p.getY()+50,this);
             }
         }
-    }*/
+         }*/
 
     public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {
         return false;
@@ -143,9 +141,10 @@ class Channel implements ImageObserver{
     }
 
     private void applyZoom(float[] points) {
-        float zoom=this.getChannelProperties().getZoom();
+        float zoom = this.getChannelProperties().getZoom();
         for (int index = 0; index < points.length; index++) {
-            this.points[index] = (int)(abscissaPosition -((points[index] - getChannelProperties().getAbscissaValue()) * zoom));
+            this.points[index] = (int) (abscissaPosition -
+                                        ((points[index] - getChannelProperties().getAbscissaValue()) * zoom));
 
         }
     }
@@ -166,12 +165,14 @@ class Channel implements ImageObserver{
         channelProperties.setVisible(visible);
     }
 
-    public boolean isInvadeNearChannels(){
+    public boolean isInvadeNearChannels() {
         return channelProperties.isInvadeNearChannels();
     }
-    public void setInvadeNearChannels(boolean invade){
+
+    public void setInvadeNearChannels(boolean invade) {
         channelProperties.setInvadeNearChannels(invade);
     }
+
     public ChannelProperties getChannelProperties() {
         return channelProperties;
     }
@@ -181,25 +182,27 @@ class Channel implements ImageObserver{
     }
 
     public boolean setColors(short[] colors) {
-        
-        if(this.points.length == colors.length){
-            this.colors=new Color[colors.length];
-            for(int index=0;index<colors.length;index++){
-                this.colors[index]=getColor(colors[index]);
+
+        if (this.points.length == colors.length) {
+            this.colors = new Color[colors.length];
+            for (int index = 0; index < colors.length; index++) {
+                this.colors[index] = getColor(colors[index]);
             }
             return true;
+        } else {
+            return false;
         }
-        else return false;
     }
 
-    public void refreshGridConfig(float frec){
-        gridConfig=new GridConfiguration(channelProperties.getMaxValue(),
-                            channelProperties.getAbscissaValue(),
-                            abscissaPosition,
-                            channelProperties.getZoom(),
-                            frec);
+    public void refreshGridConfig(float frec) {
+        gridConfig = new GridConfiguration(channelProperties.getMaxValue(),
+                                           channelProperties.getAbscissaValue(),
+                                           abscissaPosition,
+                                           channelProperties.getZoom(),
+                                           frec);
     }
-    public GridConfiguration getGridConfiguration(){
+
+    public GridConfiguration getGridConfiguration() {
         return gridConfig;
     }
 }

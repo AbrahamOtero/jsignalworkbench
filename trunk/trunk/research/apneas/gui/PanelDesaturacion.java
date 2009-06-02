@@ -88,73 +88,98 @@ public class PanelDesaturacion extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldRiseSlope, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldFallSlope, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldFall, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldMinimum, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textFieldFallDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textFieldRiseDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelDatosComunes1, 0, 0, Short.MAX_VALUE)
-                        .addGap(31, 31, 31))))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addGap(10, 10, 10)
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                TRAILING, false)
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                          .addComponent(jLabel9)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                           javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addComponent(textFieldRiseSlope, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                          .addComponent(jLabel8)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                           javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addComponent(textFieldFallSlope, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                          .addComponent(jLabel4)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                           javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addComponent(textFieldFall, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                          .addComponent(jLabel7)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                           javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addComponent(textFieldMinimum, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                          .addComponent(jLabel5)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                           javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addComponent(textFieldFallDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                          .addComponent(jLabel6)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(textFieldRiseDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                              .addContainerGap())
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addComponent(panelDatosComunes1, 0, 0, Short.MAX_VALUE)
+                                              .addGap(31, 31, 31))))
+                );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelDatosComunes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(textFieldFall, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(textFieldMinimum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textFieldFallDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(textFieldRiseDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(textFieldFallSlope, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(textFieldRiseSlope, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addComponent(panelDatosComunes1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(textFieldFall, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(textFieldMinimum, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(textFieldFallDuration, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(textFieldRiseDuration, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel8)
+                                    .addComponent(textFieldFallSlope, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel9)
+                                    .addComponent(textFieldRiseSlope, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+    } // </editor-fold>//GEN-END:initComponents
 
     public long getPrincipio() {
         return this.panelDatosComunes1.getPrincipio();
@@ -212,7 +237,7 @@ public class PanelDesaturacion extends javax.swing.JPanel {
     private javax.swing.JTextField textFieldRiseSlope;
     // End of variables declaration//GEN-END:variables
 
-    public boolean validateData(){
+    public boolean validateData() {
         try {
             Float.parseFloat(textFieldFall.getText());
             Float.parseFloat(textFieldFallSlope.getText());
@@ -225,12 +250,13 @@ public class PanelDesaturacion extends javax.swing.JPanel {
         }
         return true;
     }
+
     public float getFallInSpO2() {
         return Float.parseFloat(textFieldFall.getText());
     }
 
     public void setFallInSpO2(float fallInSpO2) {
-        textFieldFall.setText(""+fallInSpO2);
+        textFieldFall.setText("" + fallInSpO2);
     }
 
     public float getFallSlope() {
@@ -238,7 +264,7 @@ public class PanelDesaturacion extends javax.swing.JPanel {
     }
 
     public void setFallSlope(float fallSlope) {
-        textFieldFallSlope.setText(""+fallSlope);
+        textFieldFallSlope.setText("" + fallSlope);
     }
 
     public float getRiseSlope() {
@@ -246,7 +272,7 @@ public class PanelDesaturacion extends javax.swing.JPanel {
     }
 
     public void setRiseSlope(float riseSlope) {
-        textFieldRiseSlope.setText(""+riseSlope);
+        textFieldRiseSlope.setText("" + riseSlope);
     }
 
     public float getRiseDuration() {
@@ -254,16 +280,17 @@ public class PanelDesaturacion extends javax.swing.JPanel {
     }
 
     public void setRiseDuration(float riseDuration) {
-        textFieldRiseDuration.setText(""+riseDuration);
+        textFieldRiseDuration.setText("" + riseDuration);
     }
 
-    public /** Creates new form PanelDesaturacion */
-    float getFallDuration() {
+    public
+    /** Creates new form PanelDesaturacion */
+            float getFallDuration() {
         return Float.parseFloat(textFieldFallDuration.getText());
     }
 
     public void setFallDuration(float fallDuration) {
-       textFieldFallDuration.setText(""+fallDuration);
+        textFieldFallDuration.setText("" + fallDuration);
     }
 
     public float getMinimumValue() {
@@ -271,7 +298,7 @@ public class PanelDesaturacion extends javax.swing.JPanel {
     }
 
     public void setMinimumValue(float minimumValue) {
-         textFieldMinimum.setText(""+minimumValue);
+        textFieldMinimum.setText("" + minimumValue);
     }
 
 }

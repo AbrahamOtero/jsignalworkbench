@@ -13,13 +13,13 @@ import java.awt.image.BufferedImage;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.MarkPluginAdapter;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable{
+public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable {
     private long markTime;
     private long endTime;
     private String title;
@@ -50,7 +50,7 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     }
 
     /**
-     * Devuelve el número de milisegundos que han transcurrido desde el 1 de
+     * Devuelve el numero de milisegundos que han transcurrido desde el 1 de
      * enero de 1970 hasta el principio de la marca.
      *
      * @return long
@@ -72,7 +72,7 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     }
 
     /**
-     * Devuelve el número de milisegundos que han transcurrido desde el 1 de
+     * Devuelve el numero de milisegundos que han transcurrido desde el 1 de
      * enero de 1970 hasta el fin de la marca.
      *
      * @return long
@@ -99,33 +99,33 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
 
     public void paint(Graphics2D g2d, MarkPaintInfo markPaintInfo) {
         //if(this.markPaintInfo==null || !this.markPaintInfo.equals(markPaintInfo)){
-            this.markPaintInfo=markPaintInfo;
-            Stroke oldStroke = g2d.getStroke();
-            Color color2 = new Color(color.getRed(), color.getGreen(),
-                                     color.getBlue(), innerTransparencyLevel);
-            Color color3 = new Color(color.getRed(), color.getGreen(),
-                                     color.getBlue(), borderTransparencyLevel);
-            int maxY = (int) Math.max(markPaintInfo.getPoint().getY(),
-                                      markPaintInfo.getMaxValueY());
-            int minY = (int) Math.min(markPaintInfo.getPoint().getY() +
-                                      markPaintInfo.getHeight(),
-                                      markPaintInfo.getMinValueY());
-    //g2d.fillRect((int)markPaintInfo.getPoint().getX(),maxY,markPaintInfo.getWidth(),minY-maxY);
-            g2d.setColor(color3);
+        this.markPaintInfo = markPaintInfo;
+        Stroke oldStroke = g2d.getStroke();
+        Color color2 = new Color(color.getRed(), color.getGreen(),
+                                 color.getBlue(), innerTransparencyLevel);
+        Color color3 = new Color(color.getRed(), color.getGreen(),
+                                 color.getBlue(), borderTransparencyLevel);
+        int maxY = (int) Math.max(markPaintInfo.getPoint().getY(),
+                                  markPaintInfo.getMaxValueY());
+        int minY = (int) Math.min(markPaintInfo.getPoint().getY() +
+                                  markPaintInfo.getHeight(),
+                                  markPaintInfo.getMinValueY());
+        //g2d.fillRect((int)markPaintInfo.getPoint().getX(),maxY,markPaintInfo.getWidth(),minY-maxY);
+        g2d.setColor(color3);
 
-            g2d.setStroke(new BasicStroke(3));
+        g2d.setStroke(new BasicStroke(3));
 
-            int x = markPaintInfo.getPoint().x;
-            int y = maxY - extraheightPixels - 2;
-            int width = markPaintInfo.getWidth();
-            int height = minY - maxY + 2 * extraheightPixels + 3;
-            g2d.draw(new java.awt.geom.RoundRectangle2D.Float(x - 2, y, width + 3,
-                    height, 15, 15));
-            g2d.setColor(color2);
-            g2d.fillRect(x, y, width, height);
-            //dejamos las cosas tal y como estaban
-            g2d.setStroke(oldStroke);
-       // }
+        int x = markPaintInfo.getPoint().x;
+        int y = maxY - extraheightPixels - 2;
+        int width = markPaintInfo.getWidth();
+        int height = minY - maxY + 2 * extraheightPixels + 3;
+        g2d.draw(new java.awt.geom.RoundRectangle2D.Float(x - 2, y, width + 3,
+                height, 15, 15));
+        g2d.setColor(color2);
+        g2d.fillRect(x, y, width, height);
+        //dejamos las cosas tal y como estaban
+        g2d.setStroke(oldStroke);
+        // }
     }
 
     public JSWBManager getJSWBManager() {
@@ -173,15 +173,15 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     }
 
     public Color getColor() {
-        Color c = new Color (color.getRed(), color.getGreen(), color.getBlue());
+        Color c = new Color(color.getRed(), color.getGreen(), color.getBlue());
         return c;
     }
 
     /**
      * getExtraheightPixels
      *
-     * @return Número de píxeles que se sumarán y restarán a los valores
-     *   máximos y mínimos, respectivamente, del intervalo de la marca.
+     * @return Numero de pixeles que se sumaran y restaran a los valores
+     *   maximos y minimos, respectivamente, del intervalo de la marca.
      */
     public int getExtraheightPixels() {
         return extraheightPixels;
@@ -202,8 +202,8 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
 
     /**
      *
-     * @param extraheightPixels Número de píxeles que se sumarán y restarán a
-     *   los valores máximos y mínimos, respectivamente, del intervalo de la
+     * @param extraheightPixels Numero de pixeles que se sumaran y restaran a
+     *   los valores maximos y minimos, respectivamente, del intervalo de la
      *   marca.
      */
     public void setExtraheightPixels(int extraheightPixels) {
@@ -218,10 +218,11 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     public void setInnerTransparencyLevel(int innerTransparencyLevel) {
         this.innerTransparencyLevel = innerTransparencyLevel;
     }
+
     /**
-      * Un valor de transparencia para el borde de la marca entre cero y 255.
-      *
-      * @param innerTransparencyLevel int
+     * Un valor de transparencia para el borde de la marca entre cero y 255.
+     *
+     * @param innerTransparencyLevel int
      */
     public void setBorderTransparencyLevel(int borderTransparencyLevel) {
         this.borderTransparencyLevel = borderTransparencyLevel;
@@ -251,7 +252,8 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
         }
         return 0;
     }
+
     public int hashCode() {
-        return (int) (this.getMarkTime()|this.getEndTime());
-        }
+        return (int) (this.getMarkTime() | this.getEndTime());
+    }
 }

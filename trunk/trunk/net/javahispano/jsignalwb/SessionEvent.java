@@ -2,26 +2,27 @@ package net.javahispano.jsignalwb;
 
 
 /**
- * Evento que se genera cuando se crea, destruye o guarda una sesión de trabajo.
+ * Evento que se genera cuando se crea, destruye o guarda una sesion de trabajo.
  */
 public class SessionEvent {
-    private boolean  newSession,saved,noSession,saveAs= false;
+    private boolean newSession, saved, noSession, saveAs = false;
     SessionEvent(boolean created, boolean saved) {
-        this.saved=saved;
-        this.newSession=created;
-        this.noSession= false;
+        this.saved = saved;
+        this.newSession = created;
+        this.noSession = false;
     }
-   SessionEvent(boolean saved) {
-        this.saved=saved;
-        this.newSession= false;
-        this.noSession= true;
+
+    SessionEvent(boolean saved) {
+        this.saved = saved;
+        this.newSession = false;
+        this.noSession = true;
     }
 
     /**
      * isNewSession
      *
-     * @return Cierto si la sesión de trabajo que generó el evento es una nueva sesión; esto es, si se acaba de cargar
-     *   en la herramienta. Devolverá falso si la sesión ya estaba cargada.
+     * @return Cierto si la sesion de trabajo que genero el evento es una nueva sesion; esto es, si se acaba de cargar
+     *   en la herramienta. Devolvera falso si la sesion ya estaba cargada.
      */
     public boolean isNewSession() {
         return newSession;
@@ -30,8 +31,8 @@ public class SessionEvent {
     /**
      * isNoSession
      *
-     * @return Devolverá cierto si no hay ninguna sesión en el entorno en este momento. Sucede cuando el usuario pulsa
-     *   el botón de "Nuevo".
+     * @return Devolvera cierto si no hay ninguna sesion en el entorno en este momento. Sucede cuando el usuario pulsa
+     *   el boton de "Nuevo".
      */
     public boolean isNoSession() {
         return noSession;
@@ -40,7 +41,7 @@ public class SessionEvent {
     /**
      * isSaved
      *
-     * @return Cierto si la sesión de trabajo que generó el evento está guardada, falso en caso contrario.
+     * @return Cierto si la sesion de trabajo que genero el evento esta guardada, falso en caso contrario.
      */
     public boolean isSaved() {
         return saved;

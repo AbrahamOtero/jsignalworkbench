@@ -6,31 +6,28 @@
 
 package research.apneas.gui;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyVetoException;
+import java.beans.*;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
+
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
-import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import org.joda.time.DateTime;
-import research.apneas.*;
-import net.javahispano.jsignalwb.utilities.ui.*;
-import net.javahispano.jsignalwb.ui.*;
+import research.apneas.LimitacionFlujo;
 
 /**
  *
  * @author  b
  */
-public class PanelDatosComunes extends javax.swing.JPanel implements PropertyChangeListener{
+public class PanelDatosComunes extends javax.swing.JPanel implements PropertyChangeListener {
 
 
     private LimitacionFlujo dim;
-    private long principio,fin;
+    private long principio, fin;
     private float duracion;
     private boolean usarEnEstadisticas;
-    private byte  posibilidad;
+    private byte posibilidad;
     private String evento;
 
     /** Creates new form PanelDatosComunes */
@@ -38,7 +35,7 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
         initComponents();
         this.datePicker1.addPropertyChangeListener(this);
         this.datePicker2.addPropertyChangeListener(this);
-        this.dim=dim;
+        this.dim = dim;
     }
 
     /** This method is called from within the constructor to
@@ -118,87 +115,111 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxStatistics))
-                    .addComponent(textFieldPossibility, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(textFieldDuration, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(jTextFieldDate2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDate1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(markTitleTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                          .addGap(43, 43, 43)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                              .addComponent(jLabel6)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(jCheckBoxStatistics))
+                                    .addComponent(textFieldPossibility, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                    .addComponent(textFieldDuration, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldDate2, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE, 139,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDate1, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                    .addComponent(markTitleTextField, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addContainerGap())
+                );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldDate1, jTextFieldDate2, markTitleTextField, textFieldDuration, textFieldPossibility});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldDate1,
+                        jTextFieldDate2, markTitleTextField, textFieldDuration, textFieldPossibility});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {datePicker1, datePicker2});
 
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(markTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(jTextFieldDate2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addContainerGap()
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                .addComponent(jLabel3)
+                .addComponent(markTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                              javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                              javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                TRAILING)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(textFieldDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textFieldPossibility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBoxStatistics)
-                    .addComponent(jLabel6))
-                .addContainerGap(101, Short.MAX_VALUE))
-        );
+                          .addComponent(jLabel1)
+                          .addComponent(jTextFieldDate2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(datePicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addGap(37, 37, 37)
+                                              .addComponent(jLabel2)))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(textFieldDuration, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(textFieldPossibility, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxStatistics)
+                                    .addComponent(jLabel6))
+                          .addContainerGap(101, Short.MAX_VALUE))
+                );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {datePicker1, datePicker2});
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldDate1, jTextFieldDate2, markTitleTextField, textFieldDuration, textFieldPossibility});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldDate1, jTextFieldDate2,
+                        markTitleTextField, textFieldDuration, textFieldPossibility});
 
-    }// </editor-fold>//GEN-END:initComponents
+    } // </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldDate1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDate1FocusLost
+    private void jTextFieldDate1FocusLost(java.awt.event.FocusEvent evt) { //GEN-FIRST:event_jTextFieldDate1FocusLost
         updateDuration();
-    }//GEN-LAST:event_jTextFieldDate1FocusLost
+    } //GEN-LAST:event_jTextFieldDate1FocusLost
 
-    private void jTextFieldDate2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDate2FocusLost
+    private void jTextFieldDate2FocusLost(java.awt.event.FocusEvent evt) { //GEN-FIRST:event_jTextFieldDate2FocusLost
         updateDuration();
-    }//GEN-LAST:event_jTextFieldDate2FocusLost
+    } //GEN-LAST:event_jTextFieldDate2FocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -219,20 +240,21 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
     // End of variables declaration//GEN-END:variables
 
     public void propertyChange(PropertyChangeEvent evt) {
-                if("date".equals(evt.getPropertyName())){
-            if(evt.getSource().equals(datePicker1)){
-            Date date=datePicker1.getDate();
-            if(date!=null)
-                jTextFieldDate1.setText(TimeRepresentation.timeToString(
-                        swapDateNoChangeTime(
-                        dim.getPrincipioAbsoluto(),date.getTime())));
-            }
-            else if(evt.getSource().equals(datePicker2)){
-            Date date=datePicker2.getDate();
-            if(date!=null)
-                jTextFieldDate2.setText(TimeRepresentation.timeToString(
-                        swapDateNoChangeTime(
-                        dim.getFinAbsoluto(),date.getTime())));
+        if ("date".equals(evt.getPropertyName())) {
+            if (evt.getSource().equals(datePicker1)) {
+                Date date = datePicker1.getDate();
+                if (date != null) {
+                    jTextFieldDate1.setText(TimeRepresentation.timeToString(
+                            swapDateNoChangeTime(
+                                    dim.getPrincipioAbsoluto(), date.getTime())));
+                }
+            } else if (evt.getSource().equals(datePicker2)) {
+                Date date = datePicker2.getDate();
+                if (date != null) {
+                    jTextFieldDate2.setText(TimeRepresentation.timeToString(
+                            swapDateNoChangeTime(
+                                    dim.getFinAbsoluto(), date.getTime())));
+                }
             }
             updateDuration();
         }
@@ -240,16 +262,16 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
 
     private void updateDuration() {
         if (!jTextFieldDate2.getText().equals("__:__:__.___ || __/__/____") &&
-                !jTextFieldDate1.getText().equals("__:__:__.___ || __/__/____")) {
-            float d = (TimeRepresentation.stringToMillis(jTextFieldDate2.getText())-
-                       TimeRepresentation.stringToMillis(jTextFieldDate1.getText()))/1000;
-            this.textFieldDuration.setText(""+d);
-            this.duracion=d;
+            !jTextFieldDate1.getText().equals("__:__:__.___ || __/__/____")) {
+            float d = (TimeRepresentation.stringToMillis(jTextFieldDate2.getText()) -
+                       TimeRepresentation.stringToMillis(jTextFieldDate1.getText())) / 1000;
+            this.textFieldDuration.setText("" + d);
+            this.duracion = d;
         }
     }
 
-        /**
-    * @param old long
+    /**
+     * @param old long
      * @param newTime long
      * @return long
      */
@@ -287,11 +309,11 @@ public class PanelDatosComunes extends javax.swing.JPanel implements PropertyCha
     }
 
     public void setPosibilidad(byte posibilidad) {
-        this.textFieldPossibility.setText(""+posibilidad);
+        this.textFieldPossibility.setText("" + posibilidad);
     }
 
     public void setEvento(String evento) {
-        this.markTitleTextField.setText(""+ evento);
+        this.markTitleTextField.setText("" + evento);
     }
 
     public float getDuracion() {

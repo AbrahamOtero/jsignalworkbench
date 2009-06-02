@@ -38,8 +38,8 @@ public class CacheMITDB {
         entrada = new RandomAccessFile(ficheroDat, "r");
 
         this.bufferNormal = new byte[bufferSize];
-        this.bufferFinal = new byte[bufferSizeFinal]; // IMPORTANTE: ¿QUE OCURRE SI bufferSizeFinal=0?
-        // ADEMÁS: MEJORAR ESTO. SI NO, EXISTIRÁN 2 ARRAYS ABIERTOS EN MEMORIA A LA VEZ.
+        this.bufferFinal = new byte[bufferSizeFinal]; // IMPORTANTE: QUE OCURRE SI bufferSizeFinal=0?
+        // ADEMAS: MEJORAR ESTO. SI NO, EXISTIRAN 2 ARRAYS ABIERTOS EN MEMORIA A LA VEZ.
         this.llenaBuffer();
 
     }
@@ -102,7 +102,7 @@ public class CacheMITDB {
             buffer = bufferNormal;
         }
 
-        posicionLecturaActual = (long) numLectura * buffer.length; // INCORRECTO: CALCULAR LA POSICIÓN REAL TENIENDO EN CUENTA SI ESTAMOS USANDO BUFFERFINAL O NO.
+        posicionLecturaActual = (long) numLectura * buffer.length; // INCORRECTO: CALCULAR LA POSICION REAL TENIENDO EN CUENTA SI ESTAMOS USANDO BUFFERFINAL O NO.
         try {
             entrada.seek(posicionLecturaActual);
             res = entrada.read(buffer);

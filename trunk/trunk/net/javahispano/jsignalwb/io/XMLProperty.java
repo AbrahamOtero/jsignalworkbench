@@ -7,26 +7,26 @@
 package net.javahispano.jsignalwb.io;
 
 import java.beans.XMLEncoder;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+
 import org.jdom.Element;
 
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class XMLProperty extends Element{
-    
+public class XMLProperty extends Element {
+
     public XMLProperty(String name, Object bean) {
         super("Property");
-        setAttribute("Name",name);
-        ByteArrayOutputStream byteArrayOS=new ByteArrayOutputStream();
-        XMLEncoder encoder=new XMLEncoder(byteArrayOS);
+        setAttribute("Name", name);
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        XMLEncoder encoder = new XMLEncoder(byteArrayOS);
         encoder.writeObject(bean);
         encoder.close();
-        String beanValue=byteArrayOS.toString();
+        String beanValue = byteArrayOS.toString();
         setText(beanValue);
     }
-    
+
 }

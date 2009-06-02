@@ -9,20 +9,20 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 
-import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.utilities.*;
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
  * @author Roman
  */
 public class RemoveAction extends AbstractAction {
-   private JSWBManager jswbManager;
-   private String signalName;
+    private JSWBManager jswbManager;
+    private String signalName;
     /** Creates a new instance of RemoveAction */
     public RemoveAction(JSWBManager jswbManager, String signalName) {
         this.jswbManager = jswbManager;

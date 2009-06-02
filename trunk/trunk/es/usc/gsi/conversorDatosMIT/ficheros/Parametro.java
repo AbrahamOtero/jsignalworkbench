@@ -258,12 +258,12 @@ public class Parametro {
     }
 
     // Corrector de nombre del parametro
-    // SÓLO CORRIGE LA ÚLTIMA CIFRA. SI HUBIESE 2 CIFRAS AL FINAL
-    // DEL NOMBRE DEL PARÁMETRO, ERROR!!!
+    // SOLO CORRIGE LA ULTIMA CIFRA. SI HUBIESE 2 CIFRAS AL FINAL
+    // DEL NOMBRE DEL PARAMETRO, ERROR!!!
     private void corrigeNombre() {
 
         String[] terminacion = {"I", "II", "III", "V", "aVL", "aVR", "aVF",
-                "SaO2", "Resp"};
+                               "SaO2", "Resp"};
         int indice;
         String nuevoNombre;
 
@@ -282,7 +282,8 @@ public class Parametro {
             this.nombreParametro = nuevoNombre;
 
         } catch (NumberFormatException e) {
-                /*No es necesario corregir nombres*/}
+            /*No es necesario corregir nombres*/
+        }
 
     }
 

@@ -9,10 +9,10 @@
 
 package net.javahispano.jsignalwb.framework;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Component;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,14 +32,14 @@ public class ExceptionsCollector {
     }
 
     public void showExceptions(String s) {
-        int van =0;
+        int van = 0;
         if (exceptions.size() > 0) {
             s = "<p><Font Color=RED>" + s + "</Font><p>";
             for (Exception e : exceptions) {
                 s += "<p>-" + e.getMessage();
                 van++;
                 if (van > 10) {
-                    s += "<p>- Hay más problemas....";
+                    s += "<p>- Hay mas problemas....";
                     break;
                 }
             }

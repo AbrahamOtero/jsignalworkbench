@@ -1,15 +1,16 @@
 package es.usc.gsi.conversorDatosMIT;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
 import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
 
 //import conversorDatosMIT.ficheros.*;
-import es.usc.gsi.conversorDatosMIT.interfaz.*;
-import net.javahispano.jsignalwb.*;
+import es.usc.gsi.conversorDatosMIT.interfaz.ControladorInterfaz;
+import es.usc.gsi.conversorDatosMIT.interfaz.PanelPrincipal;
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>
@@ -49,7 +50,7 @@ public class FrameConversorMIT extends JDialog {
     public FrameConversorMIT(Window frame, JSWBManager jswbManager) {
         super(frame, "Convertidor de formato MIT a ASCII", Dialog.ModalityType.APPLICATION_MODAL);
         conversor = ControladorInterfaz.getControlador().
-                                       getPanelPrincipal();
+                    getPanelPrincipal();
         try {
             jbInit();
         } catch (Exception e) {
@@ -59,10 +60,10 @@ public class FrameConversorMIT extends JDialog {
         panel_anadir_conversor.add(conversor, BorderLayout.CENTER);
         this.setLocationRelativeTo(frame);
         this.jswbManager = jswbManager;
-/*        Point d = frame.getLocation();
-        Dimension t = frame.getSize();
-        setLocation((int) (d.x + t.getWidth() / 2 - 300),
-                    (int) ((d.y) + t.getHeight() / 2 - 250));*/
+        /*        Point d = frame.getLocation();
+                Dimension t = frame.getSize();
+                setLocation((int) (d.x + t.getWidth() / 2 - 300),
+                            (int) ((d.y) + t.getHeight() / 2 - 250));*/
     }
 
     private void jbInit() throws Exception {
@@ -159,7 +160,7 @@ public class FrameConversorMIT extends JDialog {
     }
 
     void abrir_archivo_actionPerformed(ActionEvent e) {
-       archivoAbierto =  conversor.abrirFichero(archivoAbierto);
+        archivoAbierto = conversor.abrirFichero(archivoAbierto);
     }
 
     void cerrar_vista_actionPerformed(ActionEvent e) {
@@ -178,9 +179,8 @@ public class FrameConversorMIT extends JDialog {
 
         PideDatosAlConversor pide_datos = new PideDatosAlConversor(conversor, jswbManager);
 
-       pide_datos.cargarDatos();
-            dispose();
-
+        pide_datos.cargarDatos();
+        dispose();
 
     }
 

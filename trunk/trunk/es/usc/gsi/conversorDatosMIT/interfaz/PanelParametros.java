@@ -1,8 +1,9 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
 
 public class PanelParametros extends JPanel {
 

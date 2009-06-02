@@ -1,19 +1,18 @@
 package research.mining;
 
-import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
-import net.javahispano.jsignalwb.Signal;
 import java.util.TreeSet;
-import research.beats.anotaciones.LimitacionAnotacion;
-import research.beats.anotaciones.DesaturacionAnotacion;
+
 import javax.swing.Icon;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.MarkPlugin;
-import net.javahispano.jsignalwb.utilities.TimePositionConverter;
+
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
+import net.javahispano.jsignalwb.plugins.MarkPlugin;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
+import net.javahispano.jsignalwb.utilities.TimePositionConverter;
+import research.beats.anotaciones.DesaturacionAnotacion;
+import research.beats.anotaciones.LimitacionAnotacion;
 
 public class GenerateDescriptors extends AlgorithmAdapter {
 
@@ -24,7 +23,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
 
 
     /**
-     * Este es el método de JSignalWorkbench llamará desde el botón que creará
+     * Este es el metodo de JSignalWorkbench llamara desde el boton que creara
      * en la barra de tareas para este algoritmo.
      *
      * @param sm SignalManager
@@ -34,7 +33,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
         initialize(sm);
-        //Al añadir las anotaciones a un arbol se ordenan por su instante de inicio
+        //Al anhadir las anotaciones a un arbol se ordenan por su instante de inicio
         TreeSet<DesaturacionAnotacion> desatAnnotationTree = getMarksAsTree(sato2Signal);
 
         TreeSet<Desaturation> desatTree = new TreeSet<Desaturation>();
@@ -45,32 +44,33 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         SaveInfo generateInfo = new SaveInfo(desatTree);
 
     }
+
     /**
-     * Se le pasa una anotación que representa una limitación de flujo
+     * Se le pasa una anotacion que representa una limitacion de flujo
      * respiratorio y devuelve un objeto de tipo {@link Desaturation} conteniendo todos los
-     * descriptores del evento representado por la anotación. Entre los
+     * descriptores del evento representado por la anotacion. Entre los
      * descriptores, se encuentran las limitaciones de flujo respiratorio
-     *asociadas con la limitación.
+     *asociadas con la limitacion.
      *
      * @param limitationAnnotation LimitacionAnotacion
      * @return FluxLimitation
      */
     private Desaturation generateDesaturation(DesaturacionAnotacion desatAnnotation) throws RuntimeException {
         System.out.println("Desaturacion: \n\t Principio: " + desatAnnotation.getMarkTime()
-                           + " \n\t Índice del array correspondiente con el principio " +
+                           + " \n\t Indice del array correspondiente con el principio " +
                            TimePositionConverter.timeToPosition(desatAnnotation.getMarkTime(), sato2Signal)
                            + " \n\t Instante representado como hora natural " +
                            TimeRepresentation.timeToString(desatAnnotation.getMarkTime(), true)
-                           + " \n\t Valor de la saturación de oxigeno en ese punto " +
+                           + " \n\t Valor de la saturacion de oxigeno en ese punto " +
                            sato2[TimePositionConverter.timeToPosition(desatAnnotation.getMarkTime(), sato2Signal)]
                            + " \n\t Final: " + desatAnnotation.getEndTime()
-                           + " \n\t Índice del array correspondiente con el principio " +
+                           + " \n\t Indice del array correspondiente con el principio " +
                            TimePositionConverter.timeToPosition(desatAnnotation.getEndTime(), sato2Signal)
                            + " \n\t Instante representado como hora natural " +
                            TimeRepresentation.timeToString(desatAnnotation.getEndTime(), false, true, false) //no fecha, si hora, no milisegundos
-                           + " \n\t Valor de la saturación de oxigeno en ese punto " +
+                           + " \n\t Valor de la saturacion de oxigeno en ese punto " +
                            sato2[TimePositionConverter.timeToPosition(desatAnnotation.getEndTime(), sato2Signal)]
-                           + " \n\t Duración en segundos " +
+                           + " \n\t Duracion en segundos " +
                            //Dividimos por 1000 para pasar de milisegundos a segundos
                            (desatAnnotation.getEndTime() - desatAnnotation.getMarkTime()) / 1000
                 );
@@ -81,7 +81,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         //en la linea que esta a continuacion: los que devuelve su instante de inicio y el fin
         desaturation.setDuration(desatAnnotation.getEndTime() - desatAnnotation.getMarkTime());
         //...
-        //@Emma generar aquí todos los episodios
+        //@Emma generar aqui todos los episodios
         List<LimitacionAnotacion> limAnnotationList = desatAnnotation.getLimitationsList();
         for (LimitacionAnotacion limAnnotation : limAnnotationList) {
             FluxLimitation fluxLimitation = generateLimitation(limAnnotation);
@@ -91,20 +91,20 @@ public class GenerateDescriptors extends AlgorithmAdapter {
     }
 
     /**
-     * Se le pasa una anotación que representa una limitación de flujo
+     * Se le pasa una anotacion que representa una limitacion de flujo
      * respiratorio y devuelve un objeto de tipo {@link FluxLimitation} conteniendo todos los
-     * descriptores del evento representado por la anotación. Entre los
+     * descriptores del evento representado por la anotacion. Entre los
      * descriptores, se encuentran las limitaciones de movimiento abdominal y
-     * torácico asociadas con la limitación.
+     * toracico asociadas con la limitacion.
      *
      * @param limitationAnnotation LimitacionAnotacion
      * @return FluxLimitation
      */
     private FluxLimitation generateLimitation(LimitacionAnotacion limitationAnnotation) {
-        System.out.println("\t\tLimitación de flujo: " + limitationAnnotation.getMarkTime());
+        System.out.println("\t\tLimitacion de flujo: " + limitationAnnotation.getMarkTime());
 
         FluxLimitation fluxLimitation = new FluxLimitation();
-        //@Emma generar aquí todos los Episodios
+        //@Emma generar aqui todos los Episodios
         List<LimitacionAnotacion> abdomenAnnotationList = limitationAnnotation.getAbdomenList();
         for (LimitacionAnotacion abdomenAnnotationLimitation : abdomenAnnotationList) {
             AbdominalMovementLimutation abdomenLimitation = generateAbdomenLimitation(abdomenAnnotationLimitation);
@@ -119,40 +119,40 @@ public class GenerateDescriptors extends AlgorithmAdapter {
     }
 
     /**
-     * Se le pasa una anotación que representa una limitación de movimiento
+     * Se le pasa una anotacion que representa una limitacion de movimiento
      * abdominal y devuelve un objeto tipo {@link AbdominalMovementLimutation} conteniendo todos los
-     * descriptores del evento representado por la anotación.
+     * descriptores del evento representado por la anotacion.
      *
      * @param thoraxLimitacionAnotacion LimitacionAnotacion
      * @return ThoracicMovementLimutation
      */
     private AbdominalMovementLimutation generateAbdomenLimitation(LimitacionAnotacion abdominalLimitationAnnotation) {
-        System.out.println("\t\t\tLimitación de movimiento abdominal: " + abdominalLimitationAnnotation.getMarkTime());
+        System.out.println("\t\t\tLimitacion de movimiento abdominal: " + abdominalLimitationAnnotation.getMarkTime());
         AbdominalMovementLimutation abdominalLimitation = new AbdominalMovementLimutation();
-        //@Emma generar aquí todos los episodios
+        //@Emma generar aqui todos los episodios
         return abdominalLimitation;
     }
 
     /**
-     * Se le pasa una anotación que representa una limitación de movimiento
-     * torácico y devuelve un objeto tipo {@link ThoracicMovementLimutation} conteniendo todos los
-     * descriptores del evento representado por la anotación.
+     * Se le pasa una anotacion que representa una limitacion de movimiento
+     * toracico y devuelve un objeto tipo {@link ThoracicMovementLimutation} conteniendo todos los
+     * descriptores del evento representado por la anotacion.
      *
      * @param thoraxLimitacionAnotacion LimitacionAnotacion
      * @return ThoracicMovementLimutation
      */
     private ThoracicMovementLimutation generateThoraxLimitation(LimitacionAnotacion thoraxLimitacionAnotacion) {
-        System.out.println("\t\t\tLimitación de movimiento torácico: " + thoraxLimitacionAnotacion.getMarkTime());
+        System.out.println("\t\t\tLimitacion de movimiento toracico: " + thoraxLimitacionAnotacion.getMarkTime());
         ThoracicMovementLimutation thoraxLimitacion = new ThoracicMovementLimutation();
-         //@Emma generar aquí todos los episodios
+        //@Emma generar aqui todos los episodios
         return thoraxLimitacion;
     }
 
 
     /**
-     * Usando la API de JSignalWorkbench obtiene las cuatro señales, junto con
+     * Usando la API de JSignalWorkbench obtiene las cuatro senhales, junto con
      * sus correspondientes arrays de datos, sobre los que vamos a trabajar.
-     * También obtiene la frecuencia de muestreo de las señales. Todos estos
+     * Tambien obtiene la frecuencia de muestreo de las senhales. Todos estos
      * datos se guardan en atributos de la clase.
      *
      * @param sm SignalManager
@@ -178,7 +178,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         this.runAlgorithm(jswbManager.getSignalManager(), null, null);
     }
 
-//**************Lo que hay aquí abajo no es relevante para ti ******************
+//**************Lo que hay aqui abajo no es relevante para ti ******************
      private TreeSet<DesaturacionAnotacion> getMarksAsTree(Signal sato2) {
          List<MarkPlugin> listMarkPlugins = sato2.getAllMarks();
          TreeSet<DesaturacionAnotacion> limTree = new TreeSet<DesaturacionAnotacion>();

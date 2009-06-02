@@ -9,23 +9,15 @@
 
 package net.javahispano.jsignalwb.jsignalmonitor;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import net.javahispano.jsignalwb.*;
+import java.awt.*;
+
 import javax.swing.*;
-import java.awt.event.MouseListener;
 
 /**
  *
  * @author Roman
  */
-class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
+class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener {
     private Channel channel;
     private JSignalMonitorPanel jsmp;
     private JLabel name;
@@ -38,24 +30,24 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
     private JLabel configure;
     private JLabel configureArrows;
     private LeftPanelConfiguration configuration;
-     private ImageIcon icon, iconH;
+    private ImageIcon icon, iconH;
 
     private Font font;
     /** Creates a new instance of ChannelInfoPanel */
-    public ChannelInfoPanel(Channel channel,JSignalMonitorPanel jsmp) {
-        this.channel=channel;
-        this.jsmp=jsmp;
-        this.configuration=jsmp.getJSignalMonitorProperties().getLeftPanelConfiguration();
-        FlowLayout fl=new FlowLayout(FlowLayout.LEFT,5,0);
+    public ChannelInfoPanel(Channel channel, JSignalMonitorPanel jsmp) {
+        this.channel = channel;
+        this.jsmp = jsmp;
+        this.configuration = jsmp.getJSignalMonitorProperties().getLeftPanelConfiguration();
+        FlowLayout fl = new FlowLayout(FlowLayout.LEFT, 5, 0);
 
         setLayout(fl);
         setBackground(Color.WHITE);
         Font tmp = jsmp.getJSignalMonitorProperties().getLookAndFeelConfiguration().getSmallFont();
-        font= new Font(tmp.getFontName(),Font.PLAIN,tmp.getSize()-2);
-        configure=new JLabel();
+        font = new Font(tmp.getFontName(), Font.PLAIN, tmp.getSize() - 2);
+        configure = new JLabel();
 
-        icon=new javax.swing.ImageIcon(ChannelInfoPanel.class.getResource("images/more.png"));
-        iconH=new javax.swing.ImageIcon(ChannelInfoPanel.class.getResource("images/moreH.png"));
+        icon = new javax.swing.ImageIcon(ChannelInfoPanel.class.getResource("images/more.png"));
+        iconH = new javax.swing.ImageIcon(ChannelInfoPanel.class.getResource("images/moreH.png"));
 
         configure.setIcon(icon);
         configure.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -65,7 +57,7 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
                 showInfoConfigPanel();
             }
         });
-        configureArrows=new JLabel();
+        configureArrows = new JLabel();
 
         configureArrows.setIcon(icon);
         configureArrows.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -74,40 +66,41 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showInfoConfigPanel();
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-     JLabel c = (JLabel) evt.getSource();
-     c.setIcon(iconH);
- }
 
- public void mouseExited(java.awt.event.MouseEvent evt) {
-     JLabel c = (JLabel) evt.getSource();
-     c.setIcon(icon);
- }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JLabel c = (JLabel) evt.getSource();
+                c.setIcon(iconH);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLabel c = (JLabel) evt.getSource();
+                c.setIcon(icon);
+            }
 
         });
         add(configure);
 
         configure.setVisible(false);
         setArrowsVisible(true);
-        arrows.add(configureArrows,BorderLayout.CENTER);
+        arrows.add(configureArrows, BorderLayout.CENTER);
         this.add(Box.createHorizontalStrut(1000));
         setNameVisible(true);
         setMagnitudeVisible(true);
         setFrecuencyVisible(true);
         setZoomVisible(true);
 
-
         //setPointVisible(true);
     }
 
-    public void showInfoConfigPanel(){
+    public void showInfoConfigPanel() {
         new ChannelInfoConfigPanel(jsmp).showJWindow(jsmp);
     }
-    public void setNameVisible(boolean visible){
+
+    public void setNameVisible(boolean visible) {
         //nameVisible=visible;
-        if(visible){
-            if(name==null){
-                name=new JLabel();
+        if (visible) {
+            if (name == null) {
+                name = new JLabel();
                 name.setFont(font);
                 name.setForeground(
                         jsmp.getJSignalMonitorProperties().getLookAndFeelConfiguration().getColorFont());
@@ -116,59 +109,63 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
                 add(name);
             }
         }
-            name.setVisible(visible);
+        name.setVisible(visible);
 
     }
-    public void setMagnitudeVisible(boolean visible){
+
+    public void setMagnitudeVisible(boolean visible) {
         //magnitudeVisible=visible;
-        if(visible){
-            if(magnitude==null){
-                magnitude=new JLabel();
+        if (visible) {
+            if (magnitude == null) {
+                magnitude = new JLabel();
                 magnitude.setForeground(Color.BLUE);
                 magnitude.setFont(font);
                 magnitude.setToolTipText("The magnitude of the values....");
             }
-            magnitude.setText("Mag: "+channel.getChannelProperties().getMagnitude());
+            magnitude.setText("Mag: " + channel.getChannelProperties().getMagnitude());
             add(magnitude);
-        }else
+        } else {
             remove(magnitude);
+        }
     }
 
-    public void setZoomVisible(boolean visible){
+    public void setZoomVisible(boolean visible) {
         //zoomVisible=visible;
-        if(visible){
-            if(zoom==null){
-                zoom=new JLabel();
+        if (visible) {
+            if (zoom == null) {
+                zoom = new JLabel();
                 zoom.setForeground(Color.BLUE);
                 zoom.setFont(font);
                 zoom.setToolTipText("The zoom for the vertical values...");
             }
-            zoom.setText("Zoom: "+channel.getChannelProperties().getZoom());
+            zoom.setText("Zoom: " + channel.getChannelProperties().getZoom());
             add(zoom);
-        }else
+        } else {
             remove(zoom);
+        }
     }
 
-    public void setFrecuencyVisible(boolean visible){
+    public void setFrecuencyVisible(boolean visible) {
         //frecuencyVisible=visible;
-        if(visible){
-            if(frecuency == null){
+        if (visible) {
+            if (frecuency == null) {
                 frecuency = new JLabel();
                 frecuency.setForeground(Color.BLUE);
                 frecuency.setFont(font);
                 frecuency.setToolTipText("Zoom for time scale...");
             }
-            frecuency.setText("Zoom H.: "+jsmp.getDataRate());
+            frecuency.setText("Zoom H.: " + jsmp.getDataRate());
             add(frecuency);
-        }else
+        } else {
             remove(frecuency);
+        }
     }
 
-    public void setArrowsVisible(boolean visible){
+    public void setArrowsVisible(boolean visible) {
         //arrowsVisible=visible;
-        if(visible){
-            if(arrows==null){
-                arrows=new ChannelArrowsControlPanel(channel.getChannelProperties().getName(),jsmp);
+        if (visible) {
+            if (arrows == null) {
+                arrows = new ChannelArrowsControlPanel(channel.getChannelProperties().getName(), jsmp);
                 add(Box.createHorizontalStrut(10));
                 add(arrows);
             }
@@ -177,12 +174,12 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
         arrows.setVisible(visible);
     }
 
-    public void setPointVisible(boolean visible){
+    public void setPointVisible(boolean visible) {
         //pointVisible=visible;
-        if(visible){
-            if(point==null){
-                point=new JLabel();
-                value=new JLabel();
+        if (visible) {
+            if (point == null) {
+                point = new JLabel();
+                value = new JLabel();
                 point.setForeground(Color.BLUE);
                 point.setFont(font);
                 point.setToolTipText("The time at the mouse position...");
@@ -195,32 +192,36 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
             add(point);
             add(value);
 
-        }else{
-            if(point!=null && value!=null){
+        } else {
+            if (point != null && value != null) {
                 remove(point);
                 remove(value);
             }
         }
     }
 
- /*   public void setInvadeNearChannels(boolean invade){
-        if(invade!=channel.isInvadeNearChannels()){
-            channel.setInvadeNearChannels(invade);
-            jsmp.refresh();
-        }
-    }*/
+    /*   public void setInvadeNearChannels(boolean invade){
+           if(invade!=channel.isInvadeNearChannels()){
+               channel.setInvadeNearChannels(invade);
+               jsmp.refresh();
+           }
+       }*/
 
-    public void refreshValues(){
-        if(zoom!=null)
-            zoom.setText("Zoom: "+channel.getChannelProperties().getZoom());
-        if(frecuency!=null)
-            frecuency.setText("Zoom H.: "+jsmp.getDataRate());
-        if(magnitude!=null)
-            magnitude.setText("Mag: "+channel.getChannelProperties().getMagnitude());
+    public void refreshValues() {
+        if (zoom != null) {
+            zoom.setText("Zoom: " + channel.getChannelProperties().getZoom());
+        }
+        if (frecuency != null) {
+            frecuency.setText("Zoom H.: " + jsmp.getDataRate());
+        }
+        if (magnitude != null) {
+            magnitude.setText("Mag: " + channel.getChannelProperties().getMagnitude());
+        }
     }
-    public void refreshFields(){
+
+    public void refreshFields() {
         setArrowsVisible(configuration.isArrowsVisible());
-       this.add(Box.createHorizontalStrut(1000));
+        this.add(Box.createHorizontalStrut(1000));
         setNameVisible(configuration.isNameVisible());
         this.add(Box.createHorizontalStrut(1000));
         setMagnitudeVisible(configuration.isMagnitudeVisible());
@@ -229,28 +230,30 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
         this.add(Box.createHorizontalStrut(1000));
 
         setZoomVisible(configuration.isZoomVisible());
-        if(jsmp.getJSignalMonitorProperties().isRepresentingValues() &&
-                configuration.isPointVisible())
+        if (jsmp.getJSignalMonitorProperties().isRepresentingValues() &&
+            configuration.isPointVisible()) {
             setPointVisible(true);
-        else
+        } else {
             setPointVisible(false);
+        }
     }
 
 
-
     public void MouseTimeChangeActionPerformed(long time) {
-        if(point!=null){
-            point.setText("X: "+TimeRepresentation.timeToString(time,false,true,true));
-            if(time>=channel.getChannelProperties().getStartTime() &&
-                    time<channel.getChannelProperties().getEndTime()){
-                float channelValue=jsmp.getDataSource().getChannelValueAtTime(
-                                channel.getChannelProperties().getName(),time);
-                if(Float.isNaN(channelValue))
+        if (point != null) {
+            point.setText("X: " + TimeRepresentation.timeToString(time, false, true, true));
+            if (time >= channel.getChannelProperties().getStartTime() &&
+                time < channel.getChannelProperties().getEndTime()) {
+                float channelValue = jsmp.getDataSource().getChannelValueAtTime(
+                        channel.getChannelProperties().getName(), time);
+                if (Float.isNaN(channelValue)) {
                     value.setText("Y: --.--");
-                else
-                    value.setText("Y: "+channelValue);
-            }else
+                } else {
+                    value.setText("Y: " + channelValue);
+                }
+            } else {
                 value.setText("Y: --.--");
+            }
         }
     }
 
@@ -317,9 +320,9 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
         add(ok);
         this.validate();
         this.repaint();
-    }
+         }
 
-    public void actionPerformed(ActionEvent e) {
+         public void actionPerformed(ActionEvent e) {
         if("ok".equals(e.getActionCommand())){
             remove(arrowsCheckBox);
             remove(nameCheckBox);
@@ -342,37 +345,37 @@ class ChannelInfoPanel extends JPanel implements MouseTimeChangeListener{
             repaint();
 
         }
+         }
+     */
+    public String getChannelName() {
+        return channel.getChannelProperties().getName();
     }
-*/
-    public String getChannelName(){
-       return  channel.getChannelProperties().getName();
-    }
-   /* public boolean isArrowsVisible() {
-        return arrowsVisible;
-    }
+    /* public boolean isArrowsVisible() {
+         return arrowsVisible;
+     }
 
-    public boolean isNameVisible() {
-        return nameVisible;
-    }
+     public boolean isNameVisible() {
+         return nameVisible;
+     }
 
-    public boolean isMagnitudeVisible() {
-        return magnitudeVisible;
-    }
+     public boolean isMagnitudeVisible() {
+         return magnitudeVisible;
+     }
 
-    public boolean isFrecuencyVisible() {
-        return frecuencyVisible;
-    }
+     public boolean isFrecuencyVisible() {
+         return frecuencyVisible;
+     }
 
-    public boolean isZoomVisible() {
-        return zoomVisible;
-    }
+     public boolean isZoomVisible() {
+         return zoomVisible;
+     }
 
-    public boolean isPointVisible() {
-        return pointVisible;
-    }*/
-   /* public boolean isInvadeNearChannels(){
-        return channel.isInvadeNearChannels();
-    }*/
+     public boolean isPointVisible() {
+         return pointVisible;
+     }*/
+    /* public boolean isInvadeNearChannels(){
+         return channel.isInvadeNearChannels();
+     }*/
 
 
 

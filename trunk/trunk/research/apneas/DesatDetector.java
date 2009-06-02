@@ -7,9 +7,8 @@ import java.util.List;
 
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
-import research.beats.anotaciones.LimitacionAnotacion;
 import research.beats.anotaciones.DesaturacionAnotacion;
+import research.beats.anotaciones.LimitacionAnotacion;
 
 public class DesatDetector {
 
@@ -37,7 +36,7 @@ public class DesatDetector {
     //fin par\u2193metros relacionados con la base de conocimiento
 
     //almacenan los episodios de descenso y ascenso desaturacion,
-    //junto con los episodios de desaturación
+    //junto con los episodios de desaturacion
 
     private TreeSet<Intervalo> descensos = new TreeSet<Intervalo>();
     private TreeSet<Intervalo> ascensos = new TreeSet<Intervalo>();
@@ -76,7 +75,7 @@ public class DesatDetector {
         datosFiltrados = Utilidades.calculaMediaMovilClone(datos, (int) (this.ventanaFiltroMediano * frecuencia));
         logger.debugNivel1("SatO2 filtrada", datosFiltrados);
 
-        valorBasal = Utilidades.calcularBasalMaximos(datosFiltrados, ventanaBasalSatO2, ventanaBasalSatO2/5);
+        valorBasal = Utilidades.calcularBasalMaximos(datosFiltrados, ventanaBasalSatO2, ventanaBasalSatO2 / 5);
         this.logger.debugNivel1("Valor basal", valorBasal);
 
         posibilidadPrincipio = calcularPrincipio(datosFiltrados);
@@ -116,9 +115,9 @@ public class DesatDetector {
     }
 
     /**
-     * Una vez todos los episodios de desaturación han sido identificados correctamente, a veces
-     * (muy raramente) existen solápese entre el final de un episodio y el principio del siguiente.
-     * Este método, visualmente, Resuelve ese problema.
+     * Una vez todos los episodios de desaturacion han sido identificados correctamente, a veces
+     * (muy raramente) existen solapese entre el final de un episodio y el principio del siguiente.
+     * Este metodo, visualmente, Resuelve ese problema.
      */
     private void resuelveSolapes() {
         Iterator<EpisodioDesaturacion> i = episodios.iterator();
@@ -136,11 +135,11 @@ public class DesatDetector {
     }
 
     /**
-     * calcula los episodios de desaturación aparte de la informaci+n de los
-     * ascensos y los descensos sobre la señal desaturacin.
+     * calcula los episodios de desaturacion aparte de la informaci+n de los
+     * ascensos y los descensos sobre la senhal desaturacin.
      */
     private void calcularEpisodios() {
-        //analizamos toda la señal
+        //analizamos toda la senhal
         Intervalo intervaloOrigen = new Intervalo(0, 0, 0); //para obtener el primer elemento
         Intervalo descenso = null, ascenso = null, siguienteDescenso = null, siguienteAscenso = null;
         descenso = descensos.ceiling(intervaloOrigen);
@@ -151,7 +150,7 @@ public class DesatDetector {
         if (ascenso != null) {
             siguienteAscenso = ascensos.ceiling(ascenso.desplazaEnTiempo(1));
         }
-        //después de pedir un nuevo ascenso o descenso siempre se vuelve al bucle
+        //despues de pedir un nuevo ascenso o descenso siempre se vuelve al bucle
         //es aqui donde se comprueba si no hay mßs elementos.
         while (descenso != null && ascenso != null && siguienteDescenso != null && siguienteAscenso != null) {
             //Si el ascenso comienza antes del descenso podemos despreciarlo por no estar emparejado
@@ -198,7 +197,7 @@ public class DesatDetector {
                         }
                         continue;
                     }
-                    //Si no hay un ascenso claro Fundimos ambos descensos, a pesar de que están lejos
+                    //Si no hay un ascenso claro Fundimos ambos descensos, a pesar de que estan lejos
                     descenso.setFin(siguienteDescenso.getFin());
                     descenso.setPosibilidad(Math.max(descenso.getPosibilidad(), siguienteDescenso.getPosibilidad()));
                     descensos.remove(siguienteDescenso);
@@ -216,11 +215,11 @@ public class DesatDetector {
                             break;
                         }
                     }
-                    //Si toda la señal Presentan un valor bajo entre ambos los unimos
+                    //Si toda la senhal Presentan un valor bajo entre ambos los unimos
                     if (!hayRecuperacionEnMedio) {
                         //Si  hay un ascenso entre ambos creamos un episodio y continuamos
                         //(la condicion es un poco rara pero a veces se da  en algun registro)
-                        //si sé borrarse esto apenas habría una pérdida de precision en el algoritmo
+                        //si se borrarse esto apenas habria una perdida de precision en el algoritmo
                         if (descenso.getFin() < ascenso.getPrincipio() &&
                             ascenso.getPrincipio() < siguienteDescenso.getPrincipio()) {
                             construyeEpisodioDesaturacion(descenso, ascenso);
@@ -297,7 +296,7 @@ public class DesatDetector {
                             break;
                         }
                     }
-                    //Si toda la señal Presentan un valor bajo entre ambos los unimos
+                    //Si toda la senhal Presentan un valor bajo entre ambos los unimos
                     if (!hayRecuperacionEnMedio) {
                         ascenso.setFin(siguienteAscenso.getFin());
                         ascenso.setPosibilidad(Math.max(ascenso.getPosibilidad(), siguienteAscenso.getPosibilidad()));
@@ -315,9 +314,9 @@ public class DesatDetector {
                 }
             }
             //Si aunque el principio del descenso era anterior al principio del ascenso resulta que el fin
-           //del descenso es posterior al fin del ascenso "Falta" un descenso
+            //del descenso es posterior al fin del ascenso "Falta" un descenso
             if (ascenso.getFin() < descenso.getFin()) {
-                //Añadimos el ascenso que falta; la posibilidad de 70 es completamente arbitraria
+                //Anhadimos el ascenso que falta; la posibilidad de 70 es completamente arbitraria
                 Intervalo descensoNuevo = new Intervalo(ascenso.getFin() + 1, descenso.getFin(), 70);
                 descensoNuevo.setFrecuencia(descenso.getFrecuencia());
                 descensoNuevo.setFechaBase(descenso.getFechaBase());
@@ -360,9 +359,9 @@ public class DesatDetector {
 
     /**
      * genera las marcas que representan los episodios de desaturaci¾n y el
-     * colorido de la señal.
+     * colorido de la senhal.
      *
-     * @todo éste no es el mejor sitio para este mÚtodo.
+     * @todo este no es el mejor sitio para este mUtodo.
      */
     private void generarMarcasYEnfasis(ArrayList<EpisodioDesaturacion> episodios) {
         Iterator<EpisodioDesaturacion> i = episodios.iterator();
@@ -377,14 +376,14 @@ public class DesatDetector {
                 p[j] = (short) e.getPosibilidad();
             }
             Signal s = sm.getSignal(satO2.getName());
-      //      s.setEmphasisLevel(p);
+            //      s.setEmphasisLevel(p);
 
         }
     }
 
     static void generarEpisodioDesaturacion(EpisodioDesaturacion e, Color color,
                                             Signal satO2) throws SignalNotFoundException {
-    //    color= Utilidades.getColor((short)e.getPosibilidad());
+        //    color= Utilidades.getColor((short)e.getPosibilidad());
         DesaturacionAnotacion m = new DesaturacionAnotacion();
         long t = e.getPrincipioAbsoluto();
         m.setMarkTime(t);
@@ -396,25 +395,25 @@ public class DesatDetector {
             m.setColor(color);
         }
 
-        String texto = "Duración: " + e.getDuracionEpisodio() + ",\n" +
-                       "Valor mínimo: " + e.getMinimo() + ",\n" +
-                       "Caída en la saturación: " + e.getCaidaSatO2() + ",\n" +
+        String texto = "Duracion: " + e.getDuracionEpisodio() + ",\n" +
+                       "Valor minimo: " + e.getMinimo() + ",\n" +
+                       "Caida en la saturacion: " + e.getCaidaSatO2() + ",\n" +
                        "Posibilidad: " + e.getPosibilidad() + ",\n" +
-                       "Tiempo de caída: " + e.getTiempoBajada() + ",\n" +
+                       "Tiempo de caida: " + e.getTiempoBajada() + ",\n" +
                        "Tiempo de subida: " + e.getTiempoSubida();
         m.setComentary(texto);
-        m.setTitle("Episodio de desaturación");
+        m.setTitle("Episodio de desaturacion");
         m.setTipo(LimitacionAnotacion.DESATURACION);
         m.setAutomatica(true);
         m.setColor(Color.CYAN);
         JSWBManager.getJSWBManagerInstance().getSignalManager().addSignalMark(
-            satO2.getName(), m);
+                satO2.getName(), m);
     }
 
     /**
      * Genera objetos {@link Intervalo} delimitando todos los descensos
-     * encontrados en la saturación de oxígeno.
-     *@cambió antes del onceno de noviembre no se bien porque este método comprobaba que
+     * encontrados en la saturacion de oxigeno.
+     *@cambio antes del onceno de noviembre no se bien porque este metodo comprobaba que
      * ciertas condiciones con los valores de principio y fin de los intervalos se cumpliesen.
      * @param posibilidadPrincipio float[]
      */
@@ -446,7 +445,7 @@ public class DesatDetector {
     }
 
     /**
-     * Comprueba que al final de un evento la señal esté aproximadamente un determinado valor
+     * Comprueba que al final de un evento la senhal este aproximadamente un determinado valor
      * borroso.
      *
      * @param posibilidadFin float[]
@@ -476,7 +475,7 @@ public class DesatDetector {
     }
 
     /**
-     * Comprueba que al principio de un evento la señal esté en torno a un determinado valor borroso.
+     * Comprueba que al principio de un evento la senhal este en torno a un determinado valor borroso.
      *
      * @param posibilidadPrincipio float[]
      * @param datos float[]
@@ -506,9 +505,9 @@ public class DesatDetector {
     }
 
     /**
-     * Busca descensos en la señal de saturación de oxígeno empleando criterio
+     * Busca descensos en la senhal de saturacion de oxigeno empleando criterio
      * de pendiente. Previamente debe haberse calculado el valor basal de la
-     * señal.
+     * senhal.
      *
      * @return float[]
      */
@@ -541,9 +540,9 @@ public class DesatDetector {
     }
 
     /**
-     * Busca ascensos en la señal de saturación de oxígeno empleando criterio
+     * Busca ascensos en la senhal de saturacion de oxigeno empleando criterio
      * dependiente. Previamente debe haberse calculado el valor basal de la
-     * señal.
+     * senhal.
      *
      * @return float[]
      */
@@ -582,7 +581,7 @@ public class DesatDetector {
     }
 
     /**
-     * Distribución de posibilidad que indica los valores posibles para datos
+     * Distribucion de posibilidad que indica los valores posibles para datos
      * [i]- valorBasal[i] para que datos[i] pueda considerarse que es un valor
      * "normal".
      *
@@ -593,11 +592,11 @@ public class DesatDetector {
     }
 
     /**
-     * Distribución de posibilidad que indica los valores posibles para datos
+     * Distribucion de posibilidad que indica los valores posibles para datos
      * [i]- valorBasal[i] para que datos[i] pueda considerarse que es un valor
-     * correspondiente con una desaturación; se usa para comprobar que el final
-     * de una caída en la saturación de oxígeno o el principio de una subida
-     * pueden efectivamente delimitar los episodios de desaturación.
+     * correspondiente con una desaturacion; se usa para comprobar que el final
+     * de una caida en la saturacion de oxigeno o el principio de una subida
+     * pueden efectivamente delimitar los episodios de desaturacion.
      *
      * @param valorAdmisibleFinCaida TrapezoidalDistribution
      */
@@ -622,7 +621,7 @@ public class DesatDetector {
     }
 
     public void setPrincipioVentanaBasalSatO2(int principioVentanaBasalSatO2) {
-        this.ventanaBasalSatO2 = (int) (principioVentanaBasalSatO2*satO2.getSRate());
+        this.ventanaBasalSatO2 = (int) (principioVentanaBasalSatO2 * satO2.getSRate());
     }
 
     public void setVentanaPendientesSaO2(int ventanaPendientesSaO2) {

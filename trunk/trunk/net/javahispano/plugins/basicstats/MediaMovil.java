@@ -15,7 +15,7 @@ public class MediaMovil {
 
     /**
      * Se le pasa un array de dtos y la longitud de una ventana temporal, y calcula la media
-     * móvil. Machaca el array que se le pasa.
+     * movil. Machaca el array que se le pasa.
      * @param datos
      * @param ventana
      * @return
@@ -29,7 +29,7 @@ public class MediaMovil {
         }
         if (ventana <= 0) {
             throw (new MediaMovilException(
-                    "Imposible calcular media móvil con esa ventana", ventana));
+                    "Imposible calcular media movil con esa ventana", ventana));
         }
 
         for (int i = 0; i < datos.length - ventana; i++) {
@@ -54,7 +54,7 @@ public class MediaMovil {
 
     /**
      * Se le pasa un array de dtos y la longitud de una ventana temporal, y calcula la media
-     * móvil. No machaca el array que se le pasa.
+     * movil. No machaca el array que se le pasa.
      * @param datos
      * @param ventana
      * @return

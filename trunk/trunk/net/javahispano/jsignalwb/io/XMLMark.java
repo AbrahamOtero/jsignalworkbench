@@ -11,24 +11,26 @@ import org.jdom.Element;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class XMLMark extends Element{
-    
+public class XMLMark extends Element {
+
     public XMLMark(MarkPlugin mp) {
         super("Mark");
         setAttribute("Name", mp.getName());
         setAttribute("BaseClass", mp.getClass().getCanonicalName());
         setAttribute("Version", mp.getPluginVersion());
-        setAttribute("MarkTime",String.valueOf(mp.getMarkTime()));
-        if(mp.isInterval()){
-            setAttribute("Interval",String.valueOf(true));
-            setAttribute("EndTime",String.valueOf(mp.getEndTime()));
-        }else
-            setAttribute("Interval",String.valueOf(false));
-        if(mp.hasDataToSave())
+        setAttribute("MarkTime", String.valueOf(mp.getMarkTime()));
+        if (mp.isInterval()) {
+            setAttribute("Interval", String.valueOf(true));
+            setAttribute("EndTime", String.valueOf(mp.getEndTime()));
+        } else {
+            setAttribute("Interval", String.valueOf(false));
+        }
+        if (mp.hasDataToSave()) {
             setText(mp.getDataToSave());
-    }    
-    
-    
+        }
+    }
+
+
 }

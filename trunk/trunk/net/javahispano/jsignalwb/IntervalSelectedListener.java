@@ -14,7 +14,7 @@ package net.javahispano.jsignalwb;
  * @author Roman
  */
 public interface IntervalSelectedListener {
-    
-   public void intervalSelectedActionPerformed(IntervalSelectedEvent evt);
-    
+
+    public void intervalSelectedActionPerformed(IntervalSelectedEvent evt);
+
 }

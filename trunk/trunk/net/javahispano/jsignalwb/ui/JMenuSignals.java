@@ -10,30 +10,28 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.utilities.*;
-import net.javahispano.jsignalwb.utilities.ui.*;
 
 
 /**
  *
  * @author Roman
  */
-public class JMenuSignals extends JMenu{
+public class JMenuSignals extends JMenu {
     JSWBManager jswbManager;
     /** Creates a new instance of JMenuSignals */
     public JMenuSignals(JSWBManager jswbManager) {
         super("Signals");
         setMnemonic(KeyEvent.VK_S);
-        this.jswbManager=jswbManager;
-        MenuListener ml=new MenuListenerAdapter() {
+        this.jswbManager = jswbManager;
+        MenuListener ml = new MenuListenerAdapter() {
             public void menuSelected(javax.swing.event.MenuEvent evt) {
                 jMenuSelected(evt);
             }
@@ -45,17 +43,16 @@ public class JMenuSignals extends JMenu{
         List<String>
                 signalNames = new ArrayList<String>(jswbManager.getSignalManager().getSignalsNames());
         removeAll();
-        if(signalNames.size()==0){
-            JMenuItem jmi=new JMenuItem("No signals Loaded");
+        if (signalNames.size() == 0) {
+            JMenuItem jmi = new JMenuItem("No signals Loaded");
             jmi.setEnabled(false);
             add(jmi);
-        }
-        else{
+        } else {
             Collections.sort(signalNames);
-            for(String name:signalNames){
-                add(new JMenuSignal(jswbManager,name));
+            for (String name : signalNames) {
+                add(new JMenuSignal(jswbManager, name));
             }
-        }       
+        }
     }
 
 }

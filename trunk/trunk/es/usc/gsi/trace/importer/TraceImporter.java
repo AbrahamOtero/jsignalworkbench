@@ -1,15 +1,15 @@
 package es.usc.gsi.trace.importer;
 
-import java.io.*;
+import java.io.File;
 import java.util.*;
 
-import javax.swing.*;
+import javax.swing.Icon;
 
-import es.usc.gsi.trace.importer.jsignalmonold.*;
-import es.usc.gsi.trace.importer.monitorizacion.data.*;
-import es.usc.gsi.trace.importer.monitorizacion.dataIO.*;
-import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.*;
+import es.usc.gsi.trace.importer.jsignalmonold.SamplesToDate;
+import es.usc.gsi.trace.importer.monitorizacion.data.GestorDatos;
+import es.usc.gsi.trace.importer.monitorizacion.dataIO.GestorIO;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.LoaderAdapter;
 
 /**
  * <p>Title: </p>
@@ -105,8 +105,8 @@ public class TraceImporter extends LoaderAdapter {
             for (int i = 0; i < numeroSenales; i++) {
                 String unidades = gestorDatos.getAlmacen().getLeyenda(i);
                 JSWBManager.getSignalManager().addSignal(gestorDatos.getNombreSenal(i),
-                             (float[]) gestorDatos.getDatos(i),
-                             gestorDatos.getFsSenal(i), fecha, unidades);
+                        (float[]) gestorDatos.getDatos(i),
+                        gestorDatos.getFsSenal(i), fecha, unidades);
             }
             return true;
         }
@@ -115,34 +115,34 @@ public class TraceImporter extends LoaderAdapter {
 
 
     private long obtenerFecha(String fechaBaseConversor) {
-    StringTokenizer tk = new StringTokenizer(fechaBaseConversor);
-    String horaMinSeg = tk.nextToken();
-    String diaMesAno  = tk.nextToken();
-    SamplesToDate.getInstancia().setFechaBase(new Date(0));
-    tk = new StringTokenizer(horaMinSeg, ":", false);
-    int hora = 0, minutos = 0, segundos = 0;
-    try {
-        hora = Integer.parseInt(tk.nextToken());
-        minutos = Integer.parseInt(tk.nextToken());
-        segundos = Integer.parseInt(tk.nextToken());
-    } catch (NumberFormatException ex) {
-        ex.printStackTrace();
-        return 0;
-    }
-    tk = new StringTokenizer(diaMesAno, "/", false);
-    int ano = 0, mes = 0, dia = 0;
-    try {
-        dia = Integer.parseInt(tk.nextToken());
-        mes = Integer.parseInt(tk.nextToken());
-        ano = Integer.parseInt(tk.nextToken());
-    } catch (NumberFormatException ex) {
-        ex.printStackTrace();
-        return 0;
-    }
+        StringTokenizer tk = new StringTokenizer(fechaBaseConversor);
+        String horaMinSeg = tk.nextToken();
+        String diaMesAno = tk.nextToken();
+        SamplesToDate.getInstancia().setFechaBase(new Date(0));
+        tk = new StringTokenizer(horaMinSeg, ":", false);
+        int hora = 0, minutos = 0, segundos = 0;
+        try {
+            hora = Integer.parseInt(tk.nextToken());
+            minutos = Integer.parseInt(tk.nextToken());
+            segundos = Integer.parseInt(tk.nextToken());
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+        tk = new StringTokenizer(diaMesAno, "/", false);
+        int ano = 0, mes = 0, dia = 0;
+        try {
+            dia = Integer.parseInt(tk.nextToken());
+            mes = Integer.parseInt(tk.nextToken());
+            ano = Integer.parseInt(tk.nextToken());
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            return 0;
+        }
 
-    Calendar d = new GregorianCalendar(ano, mes, dia, hora, minutos,
-                                       segundos);
-    return d.getTime().getTime();
-}
+        Calendar d = new GregorianCalendar(ano, mes, dia, hora, minutos,
+                                           segundos);
+        return d.getTime().getTime();
+    }
 
 }

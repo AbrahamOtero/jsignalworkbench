@@ -1,11 +1,10 @@
 package net.javahispano.jsignalwb.ui;
 
-import javax.swing.Action;
-import javax.swing.JMenu;
-import javax.swing.JOptionPane;
-import javax.swing.*;
 import java.awt.event.*;
-import net.javahispano.jsignalwb.*;
+
+import javax.swing.*;
+
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  * <p>Title: </p>

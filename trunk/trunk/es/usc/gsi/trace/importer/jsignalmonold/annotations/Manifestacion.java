@@ -1,6 +1,6 @@
 package es.usc.gsi.trace.importer.jsignalmonold.annotations;
 
-import java.util.*;
+import java.util.LinkedList;
 
 
 /**

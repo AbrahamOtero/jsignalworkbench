@@ -1,7 +1,7 @@
-
 package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JRadioButtonMenuItem;
+
 import net.javahispano.jsignalwb.JSWBManager;
 
 /**
@@ -18,13 +18,14 @@ public class JRadioButtonMenuItemDebugModeOnRestart extends JRadioButtonMenuItem
             setSelected(false);
         }
     }
-    
-    
-    public String getActionCommand(){
-        if(isSelected())
+
+
+    public String getActionCommand() {
+        if (isSelected()) {
             return "true";
-        else 
+        } else {
             return "false";
+        }
     }
 
 }

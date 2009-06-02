@@ -9,7 +9,8 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import javax.swing.event.*;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 /**
  *

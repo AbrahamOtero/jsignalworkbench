@@ -7,27 +7,30 @@
 package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JRadioButtonMenuItem;
+
 import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class JRadioButtonMenuItemShowEmphasisLevel extends JRadioButtonMenuItem{
-    
+public class JRadioButtonMenuItemShowEmphasisLevel extends JRadioButtonMenuItem {
+
     public JRadioButtonMenuItemShowEmphasisLevel(String signalName) {
         super(new ShowEmphasisLevelAction(signalName));
-        
+
         if (JSWBManager.getJSWBManagerInstance().getSignalHasEmphasis(signalName)) {
             setSelected(true);
         } else {
             setSelected(false);
         }
     }
-    public String getActionCommand(){
-        if(isSelected())
+
+    public String getActionCommand() {
+        if (isSelected()) {
             return "true";
-        else 
+        } else {
             return "false";
+        }
     }
 }

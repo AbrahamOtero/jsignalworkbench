@@ -8,6 +8,9 @@ package net.javahispano.jsignalwb.jsignalmonitor;
 
 import java.awt.Color;
 
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
+
 /**
  *
  * @author  Compaq_Propietario
@@ -176,7 +179,7 @@ public class MoveScrollPanel extends javax.swing.JPanel {
 
     private void defaultButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_defaultButtonActionPerformed
         milisec = jsm.getVisibleTime();
-        milisec =98*milisec/100;
+        milisec = 98 * milisec / 100;
         refreshFields();
     } //GEN-LAST:event_defaultButtonActionPerformed
 

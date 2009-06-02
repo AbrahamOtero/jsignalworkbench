@@ -5,12 +5,12 @@
 
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.io.File;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import es.usc.gsi.conversorDatosMIT.ficheros.*;
-import java.io.*;
 
 public class PanelPrincipal extends JPanel /* implements ComponentListener */ {
 
@@ -44,8 +44,8 @@ public class PanelPrincipal extends JPanel /* implements ComponentListener */ {
         this.validate(); // IMPRESCINDIBLE: SI NO, NO PINTA EL PANEL.
         //ESTO ES DEBIDO A QUE EN SWING EN --CASI-- TODOS LOS CASOS SE LLAMA A validate()
         // DE MANERA AUTOMATICA, PERO EN ESTE CASO NO. HAY QUE LLAMARLO SIEMPRE QUE
-        // SE AÑADA UN COMPONENTE A OTRO QUE YA HA SIDO PINTADO
-        // Y QUE NO LLAME AUTOMÁTICAMENTE A validate().
+        // SE ANHADA UN COMPONENTE A OTRO QUE YA HA SIDO PINTADO
+        // Y QUE NO LLAME AUTOMATICAMENTE A validate().
         this.repaint();
 
     }
@@ -112,7 +112,7 @@ public class PanelPrincipal extends JPanel /* implements ComponentListener */ {
       }
      */
 
-    /// MÉTODOS PARA ABRAHAM: VOLCADO DE DATOS Y OBTENCIÓN DE ARRAY DE PARÁMETROS.
+    /// METODOS PARA ABRAHAM: VOLCADO DE DATOS Y OBTENCION DE ARRAY DE PARAMETROS.
 
     // 1.- VOLCADO DE DATOS
 

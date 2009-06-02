@@ -11,23 +11,25 @@ import org.jdom.Element;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class XMLAnnotation extends Element{
-    
+public class XMLAnnotation extends Element {
+
     public XMLAnnotation(AnnotationPlugin ap) {
         super("Annotation");
         setAttribute("Name", ap.getName());
         setAttribute("BaseClass", ap.getClass().getCanonicalName());
         setAttribute("Version", ap.getPluginVersion());
-        setAttribute("MarkTime",String.valueOf(ap.getAnnotationTime()));
-        if(ap.isInterval()){
-            setAttribute("Interval",String.valueOf(true));
-            setAttribute("EndTime",String.valueOf(ap.getEndTime()));
-        }else
-            setAttribute("Interval",String.valueOf(false));
-        if(ap.hasDataToSave())
+        setAttribute("MarkTime", String.valueOf(ap.getAnnotationTime()));
+        if (ap.isInterval()) {
+            setAttribute("Interval", String.valueOf(true));
+            setAttribute("EndTime", String.valueOf(ap.getEndTime()));
+        } else {
+            setAttribute("Interval", String.valueOf(false));
+        }
+        if (ap.hasDataToSave()) {
             setText(ap.getDataToSave());
+        }
     }
-    
+
 }

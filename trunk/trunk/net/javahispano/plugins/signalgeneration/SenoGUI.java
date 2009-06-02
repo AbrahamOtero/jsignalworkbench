@@ -3,8 +3,6 @@ package net.javahispano.plugins.signalgeneration;
 import java.awt.*;
 
 import javax.swing.*;
-import java.util.*;
-import java.awt.Font;
 
 public class SenoGUI extends JPanel {
     FlowLayout flowLayout1 = new FlowLayout();
@@ -18,10 +16,10 @@ public class SenoGUI extends JPanel {
     JLabel jLabel4 = new JLabel();
 
 
-    public SenoGUI(double amplitud, double frecuencia,  double desfase) {
-        this.setAmplitud( amplitud);
-        this.setFrecuencia( frecuencia);
-        this.setDesfase( desfase);
+    public SenoGUI(double amplitud, double frecuencia, double desfase) {
+        this.setAmplitud(amplitud);
+        this.setFrecuencia(frecuencia);
+        this.setDesfase(desfase);
         try {
             jbInit();
         } catch (Exception exception) {
@@ -78,14 +76,14 @@ public class SenoGUI extends JPanel {
     }
 
     public void setFrecuencia(double frecuencia) {
-        this.frecuenciaEtiqueta.setText(""+ frecuencia);
+        this.frecuenciaEtiqueta.setText("" + frecuencia);
     }
 
     public void setDesfase(double desfase) {
-        this.desfaseEtiqueta.setText(""+ desfase);
+        this.desfaseEtiqueta.setText("" + desfase);
     }
 
     public void setAmplitud(double amplitud) {
-        this.amplitudEtiqueta.setText(""+ amplitud);
+        this.amplitudEtiqueta.setText("" + amplitud);
     }
 }

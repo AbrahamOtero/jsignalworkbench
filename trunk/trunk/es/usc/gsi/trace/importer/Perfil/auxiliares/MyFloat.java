@@ -1,7 +1,7 @@
 package es.usc.gsi.trace.importer.Perfil.auxiliares;
 
-import java.text.*;
-import java.util.*;
+import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class MyFloat {
     private static boolean hay_parser = false;

@@ -2,48 +2,30 @@ package net.javahispano.jsignalwb.io;
 
 import java.awt.Color;
 import java.beans.XMLDecoder;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.*;
+import java.util.*;
 import java.util.List;
-import java.util.StringTokenizer;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalManager;
-import net.javahispano.jsignalwb.plugins.AnnotationPlugin;
-import net.javahispano.jsignalwb.plugins.GridPlugin;
-import net.javahispano.jsignalwb.plugins.LoaderAdapter;
-import net.javahispano.jsignalwb.plugins.MarkPlugin;
-import net.javahispano.jsignalwb.plugins.Plugin;
-import net.javahispano.jsignalwb.plugins.framework.PluginManager;
+
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.framework.ExceptionsCollector;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
+import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
+import org.jdom.*;
 import org.jdom.input.SAXBuilder;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
-  * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patrón
-  * template method permitiendo que el usuario defina sólo un formato diferente
-  * para el archivo que contiene las señales muestreadas y conserve el formato
-  * XML de JSignalWorkbench donde se almacena la configuración del entorno,
-  * anotaciones, información de los plugin y demás; o viceversa.
-  *
-  * @author This software is under the Apache License Version 2.0
-  *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
-  *   Abraham Otero
-  */
+ * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patron
+ * template method permitiendo que el usuario defina solo un formato diferente
+ * para el archivo que contiene las senhales muestreadas y conserve el formato
+ * XML de JSignalWorkbench donde se almacena la configuracion del entorno,
+ * anotaciones, informacion de los plugin y demas; o viceversa.
+ *
+ * @author This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
+ *   Abraham Otero
+ */
 public class DefaultLoader extends LoaderAdapter {
-    private ArrayList<String> extensions;//Almacena las extensiones en que es capaz de almacenar senales el plugin
+    private ArrayList<String> extensions; //Almacena las extensiones en que es capaz de almacenar senales el plugin
     private float frecuency;
     private long scrollValue;
     private String leftPanelConfig;
@@ -53,35 +35,35 @@ public class DefaultLoader extends LoaderAdapter {
     public DefaultLoader() {
         extensions = new ArrayList<String>();
         extensions.add("jsw");
-        frecuency=-1;
-        scrollValue=-1;
+        frecuency = -1;
+        scrollValue = -1;
     }
 
     public String getName() {
         return "defaultLoader";
     }
 
-    public String getShortDescription(){
+    public String getShortDescription() {
         return "Proyectos JSignalWorkBench";
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return "Loader destinado a cargar todos aquellos proyectos que hayan sido " +
                 "guardados previamente mediante el plugin por defecto.\nCargara carpetas " +
                 "cuyo contenido ha de ser al menos un fichero con extension .jsw con las " +
-                "propiedades del proyecto y un .txt con los datos de las señales a cargar.\n" +
+                "propiedades del proyecto y un .txt con los datos de las senhales a cargar.\n" +
                 "Adicionalmente puede contener fichero generados por los plugins.";
     }
 
     /**
-     * Este método está implementado siguiendo el patron template. Los otros
-     * métodos involucrados en el patrón son {@link loadXML(File
+     * Este metodo esta implementado siguiendo el patron template. Los otros
+     * metodos involucrados en el patron son {@link loadXML(File
      * f,ArrayList<Signal> signals,SignalManager sm,PluginManager pm)} y {@link
      * loadValues(File f, ArrayList<Signal> signals)}. El primero se encarga de
-     * cargar la información relativa a la configuración del entorno, la
-     * información de los plugins y los nombres, frecuencias de muestreo,
-     * unidades, etc. de las señales. El segundo es el que se encarga de cargar
-     * los valores (arrays de datos) de las señales.
+     * cargar la informacion relativa a la configuracion del entorno, la
+     * informacion de los plugins y los nombres, frecuencias de muestreo,
+     * unidades, etc. de las senhales. El segundo es el que se encarga de cargar
+     * los valores (arrays de datos) de las senhales.
      *
      * @param file File
      * @param sm {@link SignalManager}.
@@ -92,49 +74,53 @@ public class DefaultLoader extends LoaderAdapter {
      */
     public boolean load(File file) throws Exception {
         //PluginManager pm=jswbManager.getPluginManager();
-        SignalManager sm=JSWBManager.getSignalManager();
-        if(file!=null &&file.getName().toLowerCase().endsWith(".jsw"))
-            file=file.getParentFile();
-        FileFilter ff=new FileFilter() {
-                public boolean accept(File f) {
+        SignalManager sm = JSWBManager.getSignalManager();
+        if (file != null && file.getName().toLowerCase().endsWith(".jsw")) {
+            file = file.getParentFile();
+        }
+        FileFilter ff = new FileFilter() {
+            public boolean accept(File f) {
 
-                    if (f.getName().toLowerCase().endsWith(".jsw")) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-            };
-        if(file!=null&&file.isDirectory()&&file.listFiles(ff)!=null&&file.listFiles(ff).length>0){
-                file=file.listFiles(ff)[0];
-                ArrayList<Signal> signals = new ArrayList<Signal>();
-                if (loadValues(loadXml(file, signals), signals)) {
-                    boolean flag = true;
-                    for (Signal s : signals) {
-                        if (!sm.addSignal(s)) {
-                            flag = false;
-                        }
-                    }
-                    if(leftPanelConfig!=null)
- /*
-                      @todo bug
-  ahora este código se ejecuta fuera del EDT
-
-  */
-
-                    JSWBManager.getJSWBManagerInstance().setJSMLeftPanelConfigurationString(leftPanelConfig);
-                   JSWBManager.getJSWBManagerInstance().setJSMFrecuency(frecuency);
-                    //genera eventos que pueden afectar a componentes Swing
-                    JSWBManager.getJSWBManagerInstance().setJSMScrollValue(scrollValue);
-                    //refresca JSignalMonitor
-                    JSWBManager.getJSWBManagerInstance().refreshJSM(false);
-
-                    //JSWBManager.getJSWBManagerInstance().getJSM().repaintAll();
-                    return flag;
+                if (f.getName().toLowerCase().endsWith(".jsw")) {
+                    return true;
                 } else {
                     return false;
                 }
-        }else return false;
+            }
+        };
+        if (file != null && file.isDirectory() && file.listFiles(ff) != null && file.listFiles(ff).length > 0) {
+            file = file.listFiles(ff)[0];
+            ArrayList<Signal> signals = new ArrayList<Signal>();
+            if (loadValues(loadXml(file, signals), signals)) {
+                boolean flag = true;
+                for (Signal s : signals) {
+                    if (!sm.addSignal(s)) {
+                        flag = false;
+                    }
+                }
+                if (leftPanelConfig != null) {
+                    /*
+                                         @todo bug
+                     ahora este codigo se ejecuta fuera del EDT
+
+                     */
+
+                    JSWBManager.getJSWBManagerInstance().setJSMLeftPanelConfigurationString(leftPanelConfig);
+                }
+                JSWBManager.getJSWBManagerInstance().setJSMFrecuency(frecuency);
+                //genera eventos que pueden afectar a componentes Swing
+                JSWBManager.getJSWBManagerInstance().setJSMScrollValue(scrollValue);
+                //refresca JSignalMonitor
+                JSWBManager.getJSWBManagerInstance().refreshJSM(false);
+
+                //JSWBManager.getJSWBManagerInstance().getJSM().repaintAll();
+                return flag;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
 
@@ -161,67 +147,70 @@ public class DefaultLoader extends LoaderAdapter {
      * @throws Exception
      * @return archivo que contiene los datos.
      */
-    protected File loadXml(File f,ArrayList<Signal> signals) throws Exception{
+    protected File loadXml(File f, ArrayList<Signal> signals) throws Exception {
         try {
-            ExceptionsCollector ec=new ExceptionsCollector(JSWBManager.getParentWindow());
-            PluginManager pm=JSWBManager.getPluginManager();
-            SAXBuilder builder=new SAXBuilder();
-            Document doc=builder.build(f);
-            Element root=doc.getRootElement();
+            ExceptionsCollector ec = new ExceptionsCollector(JSWBManager.getParentWindow());
+            PluginManager pm = JSWBManager.getPluginManager();
+            SAXBuilder builder = new SAXBuilder();
+            Document doc = builder.build(f);
+            Element root = doc.getRootElement();
 
-            File fileValues=new File(f.getParent()+"/"+root.getAttribute("path").getValue());
-            List signalsXML=root.getChildren("Signal");
+            File fileValues = new File(f.getParent() + "/" + root.getAttribute("path").getValue());
+            List signalsXML = root.getChildren("Signal");
 
-            Iterator i=signalsXML.iterator();
-            while(i.hasNext()) {
-                Element signal=(Element)i.next();
+            Iterator i = signalsXML.iterator();
+            while (i.hasNext()) {
+                Element signal = (Element) i.next();
                 Signal s;
                 if (Boolean.valueOf(signal.getAttribute("HasPosibility").getValue())) {
                     s = new Signal(signal.getAttribute("Name").getValue(),
-                            new float[Integer.parseInt(signal.getAttribute(
-                            "Size").getValue())],
-                            Float.parseFloat(signal.getAttribute("Frecuency").
+                                   new float[Integer.parseInt(signal.getAttribute(
+                                           "Size").getValue())],
+                                   Float.parseFloat(signal.getAttribute("Frecuency").
                             getValue()),
-                            Long.parseLong(signal.getAttribute("Start").
-                            getValue()),
-                            signal.getAttribute("Magnitude").getValue(),
-                            new short[Integer.parseInt(signal.getAttribute(
-                            "Size").getValue())]);
+                                   Long.parseLong(signal.getAttribute("Start").
+                                                  getValue()),
+                                   signal.getAttribute("Magnitude").getValue(),
+                                   new short[Integer.parseInt(signal.getAttribute(
+                                           "Size").getValue())]);
                     //s.setHasColors(true);
                 } else {
                     s = new Signal(signal.getAttribute("Name").getValue(),
-                            new float[Integer.parseInt(signal.getAttribute(
-                            "Size").getValue())],
-                            Float.parseFloat(signal.getAttribute("Frecuency").
+                                   new float[Integer.parseInt(signal.getAttribute(
+                                           "Size").getValue())],
+                                   Float.parseFloat(signal.getAttribute("Frecuency").
                             getValue()),
-                            Long.parseLong(signal.getAttribute("Start").
-                            getValue()),
-                            signal.getAttribute("Magnitude").getValue());
+                                   Long.parseLong(signal.getAttribute("Start").
+                                                  getValue()),
+                                   signal.getAttribute("Magnitude").getValue());
                     //s.setHasColors(false);
                 }
-               Element grid=signal.getChild("Grid");
-                //tengo archivos y los cuales no se guardaba la informacion del club y con la señal
+                Element grid = signal.getChild("Grid");
+                //tengo archivos y los cuales no se guardaba la informacion del club y con la senhal
                 //probablemente podamos cambiar esto en el futuro pero ahora necesita abrir los puntos suspensivos
-                if (grid!=null) {
-                    grid=grid.getChild("Plugin");
-                    String key=grid.getAttribute("Key").getValue();
-                    if(pm.isPluginRegistered(key)){
-                        GridPlugin gp=pm.createGridPlugin(key.substring(key.indexOf(":")+1));
+                if (grid != null) {
+                    grid = grid.getChild("Plugin");
+                    String key = grid.getAttribute("Key").getValue();
+                    if (pm.isPluginRegistered(key)) {
+                        GridPlugin gp = pm.createGridPlugin(key.substring(key.indexOf(":") + 1));
                         gp.setSignal(s);
-                            if(gp.getPluginVersion().equals(grid.getAttribute("Version").getValue())){
-                                if(gp.hasDataToSave())
-                                    gp.setSavedData(grid.getText());
-                                s.setGrid(gp);
+                        if (gp.getPluginVersion().equals(grid.getAttribute("Version").getValue())) {
+                            if (gp.hasDataToSave()) {
+                                gp.setSavedData(grid.getText());
+                            }
+                            s.setGrid(gp);
 
-                            }else
-                                ec.addException(new Exception("The version of the plugin "+gp.getName()+" is not the same"));
-                       }else
-                        ec.addException(new Exception("The grid plugin "+ key +" is not registered"));
+                        } else {
+                            ec.addException(new Exception("The version of the plugin " + gp.getName() +
+                                    " is not the same"));
+                        }
+                    } else {
+                        ec.addException(new Exception("The grid plugin " + key + " is not registered"));
+                    }
                 }
 
-
                 Iterator propertiesList = signal.getChildren("ChannelProperties").
-                        iterator();
+                                          iterator();
                 Element properties;
                 if (propertiesList.hasNext()) {
                     properties = (Element) propertiesList.next();
@@ -235,81 +224,91 @@ public class DefaultLoader extends LoaderAdapter {
                             getAttribute("Visible").getValue()));
 
                     //s.getProperties().setAbscissaValue(Float.valueOf(properties.
-                      //      getAttribute("AbscissaValue").getValue()));
+                    //      getAttribute("AbscissaValue").getValue()));
 //                    float abs=Float.valueOf(properties.
 //                            getAttribute("AbscissaValue").getValue());
-                    float min=Float.valueOf(properties.getAttribute("MinValue").getValue());
-                    float max=Float.valueOf(properties.getAttribute("MaxValue").getValue());
-                    s.getProperties().setVisibleRange(min,max);
+                    float min = Float.valueOf(properties.getAttribute("MinValue").getValue());
+                    float max = Float.valueOf(properties.getAttribute("MaxValue").getValue());
+                    s.getProperties().setVisibleRange(min, max);
                 }
                 Iterator marksList = signal.getChildren("Mark").
-                        iterator();
+                                     iterator();
                 Element mark;
-                while(marksList.hasNext()) {
+                while (marksList.hasNext()) {
                     mark = (Element) marksList.next();
-                    String pluginName=mark.getAttribute("Name").getValue();
-                if(pm.isPluginRegistered("mark",pluginName)){
-                    MarkPlugin mp=pm.createMarkPlugin(pluginName);
-                        if(mp.getPluginVersion().equals(mark.getAttribute("Version").getValue())){
+                    String pluginName = mark.getAttribute("Name").getValue();
+                    if (pm.isPluginRegistered("mark", pluginName)) {
+                        MarkPlugin mp = pm.createMarkPlugin(pluginName);
+                        if (mp.getPluginVersion().equals(mark.getAttribute("Version").getValue())) {
                             mp.setMarkTime(Long.parseLong(mark.getAttribute("MarkTime").getValue()));
-                            if(Boolean.parseBoolean(mark.getAttribute("Interval").getValue()))
+                            if (Boolean.parseBoolean(mark.getAttribute("Interval").getValue())) {
                                 mp.setEndTime(Long.parseLong(mark.getAttribute("EndTime").getValue()));
-                            if(mp.hasDataToSave())
+                            }
+                            if (mp.hasDataToSave()) {
                                 mp.setSavedData(mark.getText());
+                            }
                             s.addMark(mp);
                             /*else
                                 ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
-                        }else
-                            ec.addException(new Exception("The version of the plugin "+mp.getName()+" is not the same"));
-                }else
-                    ec.addException(new Exception("The mark plugin "+pluginName+" is not registered"));
+                        } else {
+                            ec.addException(new Exception("The version of the plugin " + mp.getName() +
+                                    " is not the same"));
+                        }
+                    } else {
+                        ec.addException(new Exception("The mark plugin " + pluginName + " is not registered"));
+                    }
                 }
                 Iterator propertyList = signal.getChildren("Property").
-                        iterator();
+                                        iterator();
                 Element property;
-                while(propertyList.hasNext()) {
+                while (propertyList.hasNext()) {
                     property = (Element) propertyList.next();
-                    String propertyName=property.getAttribute("Name").getValue();
-                    String beanString=property.getText();
-                    ByteArrayInputStream byteArrayIS=new ByteArrayInputStream(beanString.getBytes());
-                    XMLDecoder decoder=new XMLDecoder(byteArrayIS);
-                    Object obj=decoder.readObject();
+                    String propertyName = property.getAttribute("Name").getValue();
+                    String beanString = property.getText();
+                    ByteArrayInputStream byteArrayIS = new ByteArrayInputStream(beanString.getBytes());
+                    XMLDecoder decoder = new XMLDecoder(byteArrayIS);
+                    Object obj = decoder.readObject();
                     decoder.close();
-                    s.setProperty(propertyName,obj);
+                    s.setProperty(propertyName, obj);
                 }
                 signals.add(s);
             }
-            Element annotations=root.getChild("Annotations");
-            if(annotations!=null){
-               Iterator annotationsList = annotations.getChildren("Annotation").
-                        iterator();
+            Element annotations = root.getChild("Annotations");
+            if (annotations != null) {
+                Iterator annotationsList = annotations.getChildren("Annotation").
+                                           iterator();
                 Element annotation;
-                while(annotationsList.hasNext()) {
+                while (annotationsList.hasNext()) {
                     annotation = (Element) annotationsList.next();
-                    String pluginName=annotation.getAttribute("Name").getValue();
-                if(pm.isPluginRegistered("annotation",pluginName)){
-                    AnnotationPlugin mp=pm.createAnnotationPlugin(pluginName);
-                        if(mp.getPluginVersion().equals(annotation.getAttribute("Version").getValue())){
+                    String pluginName = annotation.getAttribute("Name").getValue();
+                    if (pm.isPluginRegistered("annotation", pluginName)) {
+                        AnnotationPlugin mp = pm.createAnnotationPlugin(pluginName);
+                        if (mp.getPluginVersion().equals(annotation.getAttribute("Version").getValue())) {
                             mp.setAnnotationTime(Long.parseLong(annotation.getAttribute("MarkTime").getValue()));
                             //mp.setJSWBManager(jswbManager);
-                            if(Boolean.parseBoolean(annotation.getAttribute("Interval").getValue()))
+                            if (Boolean.parseBoolean(annotation.getAttribute("Interval").getValue())) {
                                 mp.setEndTime(Long.parseLong(annotation.getAttribute("EndTime").getValue()));
-                            if(mp.hasDataToSave())
+                            }
+                            if (mp.hasDataToSave()) {
                                 mp.setSavedData(annotation.getText());
+                            }
                             JSWBManager.getSignalManager().addAnnotation(mp);
                             /*else
                                 ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
-                        }else
-                            ec.addException(new Exception("The version of the plugin "+mp.getName()+" is not the same"));
-                }else
-                    ec.addException(new Exception("The annotation plugin "+pluginName+" is not registered"));
+                        } else {
+                            ec.addException(new Exception("The version of the plugin " + mp.getName() +
+                                    " is not the same"));
+                        }
+                    } else {
+                        ec.addException(new Exception("The annotation plugin " + pluginName + " is not registered"));
+                    }
                 }
             }
-            Iterator jsmList=root.getChildren("JSignalMonitor").iterator();
-            if(jsmList.hasNext()){
-                Element jsm=(Element)jsmList.next();
-                frecuency=Float.valueOf(jsm.getAttribute("Frecuency").getValue());
-                scrollValue=Long.valueOf(jsm.getAttribute("ScrollPosition").getValue());
+            Iterator jsmList = root.getChildren("JSignalMonitor").iterator();
+            if (jsmList.hasNext()) {
+                Element jsm = (Element) jsmList.next();
+                frecuency = Float.valueOf(jsm.getAttribute("Frecuency").getValue());
+                scrollValue = Long.valueOf(jsm.getAttribute("ScrollPosition").getValue());
 //                leftPanelConfig=jsm.getAttribute("LeftPanelConfig").getValue();
 
 
@@ -317,34 +316,38 @@ public class DefaultLoader extends LoaderAdapter {
                 //JSWBManager.getJSWBManagerInstance().getJSM().repaintAll();
             }
 
-            Iterator plugins=root.getChildren("Plugin").iterator();
-            while(plugins.hasNext()){
-                Element plugin=(Element)plugins.next();
-                String pluginKey=plugin.getAttribute("Key").getValue();
-                if(pm.isPluginRegistered(pluginKey)){
-                    Plugin p=pm.getPlugin(pluginKey);
-                        if(p.getPluginVersion().equals(plugin.getAttribute("Version").getValue())){
-                            if(p.hasDataToSave())
-                                p.setSavedData(plugin.getText());
-                            if(p.createFile()){
-                                File pf= JSWBManager.getIOManager().createNameForPlugin(p);
-                                if(!pf.exists())
-                                    pf.createNewFile();
-                                p.setFile(pf);
+            Iterator plugins = root.getChildren("Plugin").iterator();
+            while (plugins.hasNext()) {
+                Element plugin = (Element) plugins.next();
+                String pluginKey = plugin.getAttribute("Key").getValue();
+                if (pm.isPluginRegistered(pluginKey)) {
+                    Plugin p = pm.getPlugin(pluginKey);
+                    if (p.getPluginVersion().equals(plugin.getAttribute("Version").getValue())) {
+                        if (p.hasDataToSave()) {
+                            p.setSavedData(plugin.getText());
+                        }
+                        if (p.createFile()) {
+                            File pf = JSWBManager.getIOManager().createNameForPlugin(p);
+                            if (!pf.exists()) {
+                                pf.createNewFile();
                             }
-                        }else
-                            ec.addException(new Exception("The version of the plugin "+p.getName()+" is not the same"));
-                }else
-                    ec.addException(new Exception("The plugin "+pluginKey+" is not registered"));
+                            p.setFile(pf);
+                        }
+                    } else {
+                        ec.addException(new Exception("The version of the plugin " + p.getName() + " is not the same"));
+                    }
+                } else {
+                    ec.addException(new Exception("The plugin " + pluginKey + " is not registered"));
+                }
             }
             ec.showExceptions("The next errors founded loading the plugins data");
             return fileValues;
         } catch (NumberFormatException ex) {
-            throw new Exception("Error loading xml(invalid number format): "+ex.getMessage(),ex);
+            throw new Exception("Error loading xml(invalid number format): " + ex.getMessage(), ex);
         } catch (JDOMException ex) {
-            throw new Exception("Error loading xml(xml malformed): "+ex.getMessage(),ex);
+            throw new Exception("Error loading xml(xml malformed): " + ex.getMessage(), ex);
         } catch (IOException ex) {
-            throw new Exception("Error loading xml: "+ex.getMessage(),ex);
+            throw new Exception("Error loading xml: " + ex.getMessage(), ex);
         }
     }
 
@@ -372,75 +375,74 @@ public class DefaultLoader extends LoaderAdapter {
     protected boolean loadValues(File f, ArrayList<Signal> signals) throws Exception {
         try {
 
+            //int numberOfSignals = signals.size();
+            //String file = new String();
+            FileReader fr = new FileReader(f);
+            BufferedReader input = new BufferedReader(fr);
+            try {
+                String line;
+                StringTokenizer st;
+                int index1 = 0;
+                //int signal = 0;
+                int pos = 0;
+                String temp = "";
+                while ((line = input.readLine()) != null) {
+                    index1 = 0;
+                    st = new StringTokenizer(line, "\t", true);
+                    boolean flag = false;
+                    while (st.hasMoreTokens()) {
+                        temp = st.nextToken();
+                        /*if(temp.equals("\t")){
+                            index1++;
+                                             }
+                                             else
+                         signals.get(index1).getValues()[pos]=Float.parseFloat(temp);*/
+                        if (!temp.equals("\t")) {
+                            /**
+                             * @todo
+                             * java.lang.IndexOutOfBoundsException: Index: 14, Size: 14
+                                     at java.util.ArrayList.RangeCheck(ArrayList.java:547)
+                                     at java.util.ArrayList.get(ArrayList.java:322)
+                                     at net.javahispano.jsignalwb.io.DefaultLoader.loadValues(DefaultLoader.java:413)
+                                     at net.javahispano.jsignalwb.io.DefaultLoader.load(DefaultLoader.java:111)
+                             at net.javahispano.jsignalwb.plugins.LoaderRunner.doInBackground(LoaderRunner.java:28)
+                             at net.javahispano.jsignalwb.plugins.LoaderRunner.doInBackground(LoaderRunner.java:18)
+                                     at javax.swing.SwingWorker$1.call(SwingWorker.java:279)primer exception
 
+                                     at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+                                     at java.util.concurrent.FutureTask.run(FutureTask.java:138)
+                                     at javax.swing.SwingWorker.run(SwingWorker.java:319)
+                             at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+                                     at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+                                     at java.lang.Thread.run(Thread.java:619)
 
-                //int numberOfSignals = signals.size();
-                //String file = new String();
-                FileReader fr = new FileReader(f);
-                BufferedReader input = new BufferedReader(fr);
-                try {
-                    String line;
-                    StringTokenizer st;
-                    int index1 = 0;
-                    //int signal = 0;
-                    int pos = 0;
-                    String temp = "";
-                    while ((line = input.readLine()) != null) {
-                        index1 = 0;
-                        st = new StringTokenizer(line, "\t", true);
-                        boolean flag = false;
-                        while (st.hasMoreTokens()) {
-                            temp = st.nextToken();
-                            /*if(temp.equals("\t")){
+                             */
+                            while (signals.get(index1).getValues().length <= pos) {
                                 index1++;
-                                                 }
-                                                 else
-                             signals.get(index1).getValues()[pos]=Float.parseFloat(temp);*/
-                            if (!temp.equals("\t")) {
-                                /**
-                                 * @todo
-                                 * java.lang.IndexOutOfBoundsException: Index: 14, Size: 14
-        at java.util.ArrayList.RangeCheck(ArrayList.java:547)
-        at java.util.ArrayList.get(ArrayList.java:322)
-        at net.javahispano.jsignalwb.io.DefaultLoader.loadValues(DefaultLoader.java:413)
-        at net.javahispano.jsignalwb.io.DefaultLoader.load(DefaultLoader.java:111)
-        at net.javahispano.jsignalwb.plugins.LoaderRunner.doInBackground(LoaderRunner.java:28)
-        at net.javahispano.jsignalwb.plugins.LoaderRunner.doInBackground(LoaderRunner.java:18)
-        at javax.swing.SwingWorker$1.call(SwingWorker.java:279)primer exception
-
-        at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
-        at java.util.concurrent.FutureTask.run(FutureTask.java:138)
-        at javax.swing.SwingWorker.run(SwingWorker.java:319)
-        at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
-        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
-        at java.lang.Thread.run(Thread.java:619)
-
-                                 */
-                                while (signals.get(index1).getValues().length <= pos) {
-                                    index1++;
-                                }
-                                if (!flag) {
-                                    signals.get(index1).getValues()[pos] = Float.
-                                            parseFloat(temp);
-                                    if (signals.get(index1).hasEmphasisLevel()) {
-                                        flag = true;
-                                    } else {
-                                        index1++;
-                                    }
+                            }
+                            if (!flag) {
+                                signals.get(index1).getValues()[pos] = Float.
+                                        parseFloat(temp);
+                                if (signals.get(index1).hasEmphasisLevel()) {
+                                    flag = true;
                                 } else {
-                                    signals.get(index1).getEmphasisLevel()[pos] = Short.
-                                            parseShort(temp);
-                                    flag = false;
                                     index1++;
                                 }
+                            } else {
+                                signals.get(index1).getEmphasisLevel()[pos] = Short.
+                                        parseShort(temp);
+                                flag = false;
+                                index1++;
                             }
                         }
-                        pos++;
                     }
-                } finally {
-                    input.close();
-                    fr.close();
-                }return true;
+                    pos++;
+                }
+            } finally {
+                input.close();
+                fr.close();
+            }
+            return true;
 
             /*for(int index3=0;index3<numberOfSignals;index3++) {
                 signals.get(index3).setValues(values.get(index3));
@@ -449,17 +451,14 @@ public class DefaultLoader extends LoaderAdapter {
 
         } catch (NumberFormatException ex) {
             throw new Exception("Error loading values(invalid number format): "
-                    +ex.getMessage(),ex);
+                                + ex.getMessage(), ex);
         } catch (FileNotFoundException ex) {
             throw new Exception("Error loading values(file not found): "
-                    +ex.getMessage(),ex);
+                                + ex.getMessage(), ex);
         } catch (IOException ex) {
-            throw new Exception("Error loading values: "+ex.getMessage(),ex);
+            throw new Exception("Error loading values: " + ex.getMessage(), ex);
         }
     }
-
-
-
 
 
 }

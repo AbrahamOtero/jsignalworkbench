@@ -1,6 +1,6 @@
 package es.usc.gsi.conversorDatosMIT.interfaz.filtros;
 
-import java.io.*;
+import java.io.File;
 
 import javax.swing.filechooser.FileFilter;
 

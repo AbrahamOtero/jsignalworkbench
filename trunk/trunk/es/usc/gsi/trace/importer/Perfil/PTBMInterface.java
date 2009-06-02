@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
+import java.io.Serializable;
 
 /**
  * @author Abraham Otero Quintana
@@ -22,7 +22,7 @@ public interface PTBMInterface extends Serializable {
      * @param ptb - Es el PTB que se va a anhadir, borrar o modificar. Si se va a
      * borrar o modificar no es necesario.
      * @param numeroPTB - Es el numero del PTB que se va a anhadir/borrar/modificar.
-     * @param seleccion - Puede tomar los valors PTBM.AÑADIR, PTBM.BORRAR,
+     * @param seleccion - Puede tomar los valors PTBM.ANHADIR, PTBM.BORRAR,
      * PTBM.Modificar
      * @roseuid 37875DDC03AB
      */
@@ -88,11 +88,11 @@ public interface PTBMInterface extends Serializable {
      * necesario.
      * @param numeroPtoSig - Numero del PtoSig . Solo es imprescindible cuando se va a
      * borrar.
-     * @param selecion - PTBM.AÑADIR/BORRAR/MODIFICAR
+     * @param selecion - PTBM.ANHADIR/BORRAR/MODIFICAR
      * @roseuid 37875DED034C
      */
     public void anhadePtoSig(PTB ptb, PtoSig ptosig, int numeroPtoSig,
-                            int selecion);
+                             int selecion);
 
     /**
      * @param ptb
@@ -104,9 +104,9 @@ public interface PTBMInterface extends Serializable {
      * @roseuid 37875DED0360
      */
     public void anhadeRestriccion(PTB ptb, PtoSig ptosig,
-                                 Restriccion restriccion,
-                                 Restriccion restriccion_vieja,
-                                 int numeroPtoSig, int selecion);
+                                  Restriccion restriccion,
+                                  Restriccion restriccion_vieja,
+                                  int numeroPtoSig, int selecion);
 
     /**
      * Debuelve true si el fichero de Sereializacion asociado a este PTBM esta

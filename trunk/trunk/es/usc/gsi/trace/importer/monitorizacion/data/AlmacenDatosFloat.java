@@ -2,9 +2,10 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.data;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.TreeSet;
 
-import es.usc.gsi.trace.importer.Perfil.*;
+import es.usc.gsi.trace.importer.Perfil.PTBMInterface;
 
 public class AlmacenDatosFloat extends AlmacenDatos {
     private float datos[][];
@@ -105,10 +106,10 @@ public class AlmacenDatosFloat extends AlmacenDatos {
     }
 
     public void anhadeSenhal(float[] nueva_senal, String nombre, String leyenda,
-                           String Leyenda_temporal, float fs,
-                           float[] rango, int numero_datos) {
+                             String Leyenda_temporal, float fs,
+                             float[] rango, int numero_datos) {
         super.anhadeSenhal(nombre, leyenda, Leyenda_temporal, fs, rango,
-                         numero_datos);
+                           numero_datos);
         float[][] datos_tmp = new float[datos.length + 1][];
         for (int i = 0; i < datos.length; i++) {
             datos_tmp[i] = datos[i];

@@ -5,10 +5,8 @@ import static java.lang.Math.*;
 import java.util.Arrays;
 import java.util.TreeSet;
 
-import research.apneas.gui.LimitacionFlujoMark;
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import research.beats.anotaciones.LimitacionAnotacion;
 
 public class ReduccionFlujo {
@@ -95,7 +93,7 @@ public class ReduccionFlujo {
 
     /**
      * Calcula la posibilidad. Requiere que se Hayan calculado antes las ventas y
-     * los valores basales. Rellena huecos de tamaño pequeño y eliminar aquellos
+     * los valores basales. Rellena huecos de tamanho pequenho y eliminar aquellos
      * episodios de posibilidad que no llegan a un cierto mnimo de duraci+n.
      *
      * @param delta float[]
@@ -122,7 +120,7 @@ public class ReduccionFlujo {
         }
         float[] posibilidadRellenada = Arrays.copyOf(posibilidad, posibilidad.length);
         logger.debugNivel2("Posibilidad sin rellenar", posibilidadRellenada);
-//@cambio duplicado el tamaño de las ventanas
+//@cambio duplicado el tamanho de las ventanas
         Utilidades.rellenarHuecos(posibilidadRellenada, (int) (0.75 * frecuencia * persistencia), 99);
         Utilidades.rellenarHuecos(posibilidadRellenada, (int) (0.5 * frecuencia * persistencia));
 
@@ -145,7 +143,7 @@ public class ReduccionFlujo {
         short[] emphasisLevel = new short[posibilidadRellenada.length];
         for (int i = 0; i < posibilidadRellenada.length; i++) {
             int principio, fin, pos = 0;
-            //búsqueda de muestras consecutivas con posibilidadRellenada mayor que cero
+            //busqueda de muestras consecutivas con posibilidadRellenada mayor que cero
             while (i < posibilidadRellenada.length && posibilidadRellenada[i] == 0) {
                 i++;
             }
@@ -167,11 +165,11 @@ public class ReduccionFlujo {
                 posibilidadRellenada[j] = min(posibilidadRellenada[j], pos);
             }
             //si la posibilidad global es mayor que cero creamos un intervalo
-            if (pos > 0 && pos*((fin - principio)/this.frecuencia)>500) {
+            if (pos > 0 && pos * ((fin - principio) / this.frecuencia) > 500) {
                 generarIntervalo(principio, fin, pos, posibilidad, emphasisLevel);
             }
         }
-      //  senalDeFlujoNasal.setEmphasisLevel(emphasisLevel);
+        //  senalDeFlujoNasal.setEmphasisLevel(emphasisLevel);
     }
 
     /**
@@ -195,7 +193,7 @@ public class ReduccionFlujo {
         posibilidadIntervalo /= (fin - principio);
         posibilidadIntervalo = Math.min(posibilidadIntervalo, pos);
         //si es demasiado mala
-        if (apnea&&posibilidadIntervalo*((fin - principio)/this.frecuencia)<500) {
+        if (apnea && posibilidadIntervalo * ((fin - principio) / this.frecuencia) < 500) {
             return;
         }
         for (int i = principio; i < fin; i++) {
@@ -214,43 +212,42 @@ public class ReduccionFlujo {
 
         if (!apnea) {
 //generarMarca(episodio, senalDeFlujoNasal.getName(), "Hipoapnea", Color.BLUE);
-        }
-        else{
+        } else {
 //generarMarca(episodio, senalDeFlujoNasal.getName(), "Apnea", Color.RED);
         }
     }
 
     static void generarMarca(Intervalo episodio, String nombreSenal, String titulo,
-                              Color color) throws SignalNotFoundException {
-      /*  if (titulo.equals("Apnea")) {
-            color= Color.red;
-        }
-        else{
-            color= Color.yellow;
-        }*/
-      LimitacionFlujo episodio2= (LimitacionFlujo) episodio;
-       // LimitacionFlujoMark marca = new LimitacionFlujoMark(episodio2, color);
-        LimitacionAnotacion marca =new  LimitacionAnotacion();
+                             Color color) throws SignalNotFoundException {
+        /*  if (titulo.equals("Apnea")) {
+              color= Color.red;
+          }
+          else{
+              color= Color.yellow;
+          }*/
+        LimitacionFlujo episodio2 = (LimitacionFlujo) episodio;
+        // LimitacionFlujoMark marca = new LimitacionFlujoMark(episodio2, color);
+        LimitacionAnotacion marca = new LimitacionAnotacion();
         long t = episodio.getPrincipioAbsoluto();
         marca.setMarkTime(t);
         long t2 = episodio.getFinAbsoluto();
         marca.setEndTime(t2);
         marca.setColor(Utilidades.getColor((short) episodio.getPosibilidad()));
-        String texto = "Duración: " + episodio.getDuracion() + "\n" + ", Posibilidad: " +
+        String texto = "Duracion: " + episodio.getDuracion() + "\n" + ", Posibilidad: " +
                        episodio.getPosibilidad();
         marca.setComentary(texto);
-            marca.setTitle(titulo);
-            marca.setColor(color);
-            if (Color.RED== color) {
-                marca.setTipo(LimitacionAnotacion.APNEA);
-                marca.setColor(Color.RED);
-            } else {
+        marca.setTitle(titulo);
+        marca.setColor(color);
+        if (Color.RED == color) {
+            marca.setTipo(LimitacionAnotacion.APNEA);
+            marca.setColor(Color.RED);
+        } else {
 
-                marca.setTipo(LimitacionAnotacion.HIPOAPNEA);
-                marca.setColor(Color.YELLOW);
-            }
-            marca.setAutomatica(true);
-       JSWBManager.getJSWBManagerInstance().getSignalManager().addSignalMark(nombreSenal, marca);
+            marca.setTipo(LimitacionAnotacion.HIPOAPNEA);
+            marca.setColor(Color.YELLOW);
+        }
+        marca.setAutomatica(true);
+        JSWBManager.getJSWBManagerInstance().getSignalManager().addSignalMark(nombreSenal, marca);
     }
 
     private float[] calcularValorBasal(float[] delta, float[] indicadorIndices) {
@@ -258,13 +255,13 @@ public class ReduccionFlujo {
         //@cambio 1000
         int ventanaTemporal = (int) (3000 * frecuencia);
         //las ventanas temporales tendrn un cierto solape
-        //de ahí que se reste el valor 200 en el paso del bucle
+        //de ahi que se reste el valor 200 en el paso del bucle
         for (int i = 0; i < datos.length - ventanaTemporal; i += ventanaTemporal) {
             float[] copiaDatos = Arrays.copyOfRange(copiaDelta, i, i + ventanaTemporal);
             Arrays.sort(copiaDatos);
             float valorLimite = 0;
             //cogemos el intervalo [X%, Y%] de los valores mayores de la derivada y calculamos su valor medio
-            //de este modo no consideramos valores excesivamente grandes ni claramente pequeños en la referencia
+            //de este modo no consideramos valores excesivamente grandes ni claramente pequenhos en la referencia
             int principio = copiaDatos.length * this.principioIntervaloSegundoFiltroEnergia / 100;
             int fin = copiaDatos.length * finIntervaloSegundoFiltroEnergia / 100;
             for (int j = principio; j < fin; j++) {
@@ -284,8 +281,8 @@ public class ReduccionFlujo {
     }
 
     /**
-     * Calcula la energía (realmente, la raíz cuadrada de la energía) y filtra los valores que sean claramente bajos
-     * poniéndolos a cero.
+     * Calcula la energia (realmente, la raiz cuadrada de la energia) y filtra los valores que sean claramente bajos
+     * poniendolos a cero.
      *
      * @param datos float[]
      * @return float[]
@@ -303,8 +300,8 @@ public class ReduccionFlujo {
             float[] copiaDatos = Arrays.copyOfRange(energia, i, i + ventanaTemporal);
             Arrays.sort(copiaDatos);
             float valorLimiteEnergia = 0;
-            //cogemos un intervalo de los valores mayores de la Energía y calculamos su valor medio
-            //de este modo no consideramos valores excesivamente grandes ni pequeños en la referencia
+            //cogemos un intervalo de los valores mayores de la Energia y calculamos su valor medio
+            //de este modo no consideramos valores excesivamente grandes ni pequenhos en la referencia
             int principio = copiaDatos.length * principioIntervaloFiltroEnerigia / 100;
             int fin = copiaDatos.length * finIntervaloFiltroEnerigia / 100;
             for (int j = principio; j < fin; j++) {
@@ -324,16 +321,16 @@ public class ReduccionFlujo {
 
     /**
      * Trata de estimar la cantidad de flujo inspirado/espirado en cada instante
-     * calculando la resta entre el valor mínimo y máximo de la señal de flujo
-     * oronasal en un intervalo cuya duración es aproximadamente igual a una
-     * inspiración/expiración.
+     * calculando la resta entre el valor minimo y maximo de la senhal de flujo
+     * oronasal en un intervalo cuya duracion es aproximadamente igual a una
+     * inspiracion/expiracion.
      *
      * @return float[]
      */
     private float[] calcularMaximosMenosMinimos(float[] datosNasal) {
         float[] delta = new float[datosNasal.length];
         //cogemos una ventana y calculamos
-        //el mínimo y el maximo. La diferencia entre ambos sera el valor
+        //el minimo y el maximo. La diferencia entre ambos sera el valor
         //asociado al flujo inspirado en ese intervalo
         int ventanaDelta = (int) (ventanaCalculoDeltas * frecuencia);
         ventanaDelta /= 2;
@@ -352,7 +349,7 @@ public class ReduccionFlujo {
     }
 
     /**
-     * sólo considera las partes Positivas o negativas de la onda.
+     * solo considera las partes Positivas o negativas de la onda.
      *
      * @return float[]
      */

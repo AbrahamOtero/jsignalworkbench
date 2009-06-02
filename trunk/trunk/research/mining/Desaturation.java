@@ -4,40 +4,40 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Desaturation extends TemporalEvent {
-    //Mínimo valor de la saturacion de oxigeno durante la desaturacion
+    //Minimo valor de la saturacion de oxigeno durante la desaturacion
     private float min;
     //Valores de la saturacion de oxigeno al principio y al final del evento
     private float beginValue, endValue;
-    //Tiempo desde el inicio de la desaturación hasta que se alcanza el valor mínimo.
+    //Tiempo desde el inicio de la desaturacion hasta que se alcanza el valor minimo.
     private long fallDuration;
-    //Tiempo desde el valor mínimo hasta el final de la desaturación.
+    //Tiempo desde el valor minimo hasta el final de la desaturacion.
     private long riseDuration;
-    //Valor medio de la saturación de oxigeno en la desaturación.
+    //Valor medio de la saturacion de oxigeno en la desaturacion.
     private float meanValue;
-    //Pendiente de la línea que pasa por el punto inicial de la desaturación
-    //y por el punto donde se alcanza el valor mínimo
+    //Pendiente de la linea que pasa por el punto inicial de la desaturacion
+    //y por el punto donde se alcanza el valor minimo
     private float fallSlope;
-    //Pendiente de la línea que pasa por el punto donde se alcanza el valor mínimo
-    //y por el punto final de la desaturación
+    //Pendiente de la linea que pasa por el punto donde se alcanza el valor minimo
+    //y por el punto final de la desaturacion
     private float riseSlope;
-    //Área del "hueco" de la desaturación de oxigeno
+    //Area del "hueco" de la desaturacion de oxigeno
     private float desaturatedArea;
-    //Número de veces que la saturación de oxigeno sube al menos dos unidades en
-    //el intervalo, y después vuelve a caer al menos dos unidades
+    //Numero de veces que la saturacion de oxigeno sube al menos dos unidades en
+    //el intervalo, y despues vuelve a caer al menos dos unidades
     private int numDesaturations;
     //lista de limitaciones de flujo
     private List<FluxLimitation> limitations = new LinkedList<FluxLimitation>();
-    //Energía de la señal en los intervalos de limitacion de flujo
-    //normalizada por la duración del episodio
+    //Energia de la senhal en los intervalos de limitacion de flujo
+    //normalizada por la duracion del episodio
     private float energyLimitations;
-    //Energía de la señal fuera de los intervalos de limitacion de flujo
-    //normalizada por la duración del episodio
+    //Energia de la senhal fuera de los intervalos de limitacion de flujo
+    //normalizada por la duracion del episodio
     private float energyOutOfLimitations;
-    //Buscar 10 segundos de señal de flujo respiratorio sin limitación justo antes
-    //de la señal y calcular su valor máximo.
+    //Buscar 10 segundos de senhal de flujo respiratorio sin limitacion justo antes
+    //de la senhal y calcular su valor maximo.
     private float basalEnergyBefore;
-    //Buscar 10 segundos de señal de flujo respiratorio sin limitación justo Despues
-    //de la señal y calcular su energía normalizada por su duración.
+    //Buscar 10 segundos de senhal de flujo respiratorio sin limitacion justo Despues
+    //de la senhal y calcular su energia normalizada por su duracion.
     private float basalEnergyAfter;
 
     public Desaturation() {
@@ -65,13 +65,13 @@ public class Desaturation extends TemporalEvent {
      * {fallDuration}  \t {riseDuration}  \t {fallSlope}  \t {riseSlope}  \t
      * {desaturatedArea}   \t {numDesaturations}  \t {energyLimitations} \t
      * {energyOutOfLimitations}  \t {basalEnergyBefore}  \t {basalEnergyAfter}
-     * +{Level EVERYTHING para cada limitación de flujo}\n
+     * +{Level EVERYTHING para cada limitacion de flujo}\n
      *
      * @param level DETAILLEVEL
      * @return String
      */
     public String genrateDescriptors(DETAILLEVEL level) {
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aqui todos los descriptores
         return "";
     }
 

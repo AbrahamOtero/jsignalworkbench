@@ -10,16 +10,15 @@
 package net.javahispano.jsignalwb.plugins.framework;
 
 import java.io.*;
-import java.net.*;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.*;
-import java.util.jar.*;
+import java.util.ArrayList;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
 
-import net.javahispano.jsignalwb.utilities.*;
-
-import net.javahispano.jsignalwb.plugins.*;
-import net.javahispano.jsignalwb.framework.*;
+import net.javahispano.jsignalwb.framework.ExceptionsCollector;
 
 /**
  *
@@ -31,7 +30,7 @@ public class PluginBrowser {
     public PluginBrowser() {
     }
 
-    static public File[] search(File f){
+    static public File[] search(File f) {
         if (f.isDirectory()) {
             File[] files = f.listFiles(
                     new FileFilter() {
@@ -42,52 +41,57 @@ public class PluginBrowser {
             }
             );
             return files;
-        }else return null;
+        } else {
+            return null;
+        }
 
     }
+
     /** Objetivo --> Buscar en el directorio f todos aquellos archivos con extension
      *               jar que deben corresponderse con plugins de la aplicacion.
-     *               El metodo añadira a pluginAsociation, para cada plugin encontrado,
+     *               El metodo anhadira a pluginAsociation, para cada plugin encontrado,
      *               el par nombre del plugin, path de la clase.
      *               A su vez el metodo devuelve el classLoader del sistema con el
-     *               classpath de los plugins añadidos*/
+     *               classpath de los plugins anhadidos*/
 
     static public ClassLoader install(PluginManager pm, ClassLoader classLoader,
-            File[] files, ExceptionsCollector ec) {
+                                      File[] files, ExceptionsCollector ec) {
 
-            if (files != null) {
+        if (files != null) {
 
-                ArrayList<URL> urls = new ArrayList<URL>();
-                for (int i = 0; i < files.length; i++) {
-                    try {
-                        JarFile jar = validateJar(files[i], pm);
-                        File file=new File(System.getProperty("user.home")+"/.JSignalWorkBench/"+files[i].getName());
-                        if(!file.exists())
-                            file.createNewFile();
-                        copy(files[i],file);
-                        jar.close();
-                        jar=new JarFile(file);
-                        loadPlugin(jar, pm);
-                        urls.add(file.toURI().toURL());
-                        jar.close();
-                    } catch (IOException ex) {
-                        ec.addException(ex);
-                    } /*catch (MalformedURLException ex) {
-                        ec.addException(new PluginLoadException(
-                                "URL malformed on: )" + files[i].getPath(),
-                                new RuntimeException()));
-                    }*/ catch (PluginLoadException ple) {
-                        ec.addException(ple);
+            ArrayList<URL> urls = new ArrayList<URL>();
+            for (int i = 0; i < files.length; i++) {
+                try {
+                    JarFile jar = validateJar(files[i], pm);
+                    File file = new File(System.getProperty("user.home") + "/.JSignalWorkBench/" + files[i].getName());
+                    if (!file.exists()) {
+                        file.createNewFile();
                     }
+                    copy(files[i], file);
+                    jar.close();
+                    jar = new JarFile(file);
+                    loadPlugin(jar, pm);
+                    urls.add(file.toURI().toURL());
+                    jar.close();
+                } catch (IOException ex) {
+                    ec.addException(ex);
                 }
-                classLoader = new URLClassLoader(urls.toArray(new URL[urls.size()]),
-                        classLoader);
+                /*catch (MalformedURLException ex) {
+                 ec.addException(new PluginLoadException(
+                         "URL malformed on: )" + files[i].getPath(),
+                         new RuntimeException()));
+                                    }*/ catch (PluginLoadException ple) {
+                   ec.addException(ple);
+               }
+            }
+            classLoader = new URLClassLoader(urls.toArray(new URL[urls.size()]),
+                                             classLoader);
 
-            } //else ec.addException(new RuntimeException("Plugins not found in the path: \""+f+"\""));
+        } //else ec.addException(new RuntimeException("Plugins not found in the path: \""+f+"\""));
         /*} else {
             ec.addException(new RuntimeException("\"" + f +
                     "\" isn't a existing directory"));
-        }*/
+                 }*/
         return classLoader;
     }
 
@@ -99,14 +103,14 @@ public class PluginBrowser {
             String pluginBaseClass = att.getValue("PluginBaseClass");
             if (pm.isPluginRegistered(pluginType, pluginName)) {
                 throw new PluginLoadException("Another plugin with the name \"" +
-                        pluginName +
-                        "\" is already registered",
-                        new RuntimeException());
+                                              pluginName +
+                                              "\" is already registered",
+                                              new RuntimeException());
             }
-            if (!pm.registerPlugin(pluginType, pluginName,pluginBaseClass)) {
+            if (!pm.registerPlugin(pluginType, pluginName, pluginBaseClass)) {
                 throw new PluginLoadException("Can't register plugin \"" +
-                        f.getName() + "\"",
-                        new RuntimeException());
+                                              f.getName() + "\"",
+                                              new RuntimeException());
             }
             if (att.getValue("Image") != null) {
                 pm.registerIcon(pluginType, pluginName, att.getValue("Image"));
@@ -114,7 +118,7 @@ public class PluginBrowser {
 
         } catch (IOException ex) {
             throw new PluginLoadException("Error loading manifest file at: " +
-                    f.getName(), ex);
+                                          f.getName(), ex);
         }
     }
 
@@ -134,20 +138,22 @@ public class PluginBrowser {
                     attributes.getValue("PluginBaseClass");
             if (pluginName == null || pluginBaseClass == null || pluginType == null) {
                 throw new PluginLoadException("The Manifest file of" +
-                        currentFile.getName() +
-                        " plugin is wrong",
-                        new RuntimeException());
-            }else{
-                if(pm.isPluginRegistered(pluginType,pluginName))
-                    throw new PluginLoadException("Another plugin with the name "+
-                            pluginName+" is already installed",new RuntimeException());
+                                              currentFile.getName() +
+                                              " plugin is wrong",
+                                              new RuntimeException());
+            } else {
+                if (pm.isPluginRegistered(pluginType, pluginName)) {
+                    throw new PluginLoadException("Another plugin with the name " +
+                                                  pluginName + " is already installed", new RuntimeException());
+                }
             }
         } catch (IOException ex) {
             throw new PluginLoadException("Can`t load file: \" " + f +
-                    "\". Wrong Jar file", ex);
+                                          "\". Wrong Jar file", ex);
         }
         return currentFile;
     }
+
     static public void copy(File source, File dest) throws IOException {
         FileChannel in = null, out = null;
         try {
@@ -163,10 +169,13 @@ public class PluginBrowser {
         } catch (IOException ex) {
             ex.printStackTrace();
 
-
         } finally {
-            if (in != null)          in.close();
-            if (out != null)     out.close();
+            if (in != null) {
+                in.close();
+            }
+            if (out != null) {
+                out.close();
+            }
         }
     }
 }

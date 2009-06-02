@@ -2,9 +2,9 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
+import java.io.Serializable;
 
-import es.usc.gsi.trace.importer.Perfil.auxiliares.*;
+import es.usc.gsi.trace.importer.Perfil.auxiliares.MyFloat;
 
 /**
  * @author Abraham Otero Quintana

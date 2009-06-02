@@ -7,16 +7,15 @@
 package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JToggleButton;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorModeEvent;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorModeListener;
+
+import net.javahispano.jsignalwb.jsignalmonitor.*;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class JToggleButtonAddMarks extends JToggleButton implements JSignalMonitorModeListener{
-    
+public class JToggleButtonAddMarks extends JToggleButton implements JSignalMonitorModeListener {
+
     public JToggleButtonAddMarks(JSignalMonitor jsm) {
         super(new SelectMarksAction(jsm));
         setFocusable(false);
@@ -24,16 +23,19 @@ public class JToggleButtonAddMarks extends JToggleButton implements JSignalMonit
         setSelected(jsm.isMarkSelectionMode());
         jsm.addModeListener(this);
     }
+
     public String getActionCommand() {
-        if(isSelected())
+        if (isSelected()) {
             return "true";
-        else
+        } else {
             return "false";
+        }
     }
-    
-     public void jSignalMonitorModeActionPerformed(JSignalMonitorModeEvent e) {
-        if(e.getMode() == JSignalMonitorModeEvent.MARK_CREATION)
+
+    public void jSignalMonitorModeActionPerformed(JSignalMonitorModeEvent e) {
+        if (e.getMode() == JSignalMonitorModeEvent.MARK_CREATION) {
             setSelected(e.getValue());
+        }
     }
-    
+
 }

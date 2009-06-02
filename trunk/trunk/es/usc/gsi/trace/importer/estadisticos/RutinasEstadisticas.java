@@ -1,6 +1,7 @@
 package es.usc.gsi.trace.importer.estadisticos;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>

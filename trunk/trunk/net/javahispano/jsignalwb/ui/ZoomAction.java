@@ -10,30 +10,31 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.utilities.*;
 
 /**
  *
  * @author Roman
  */
-public class ZoomAction extends AbstractAction{
+public class ZoomAction extends AbstractAction {
     private JSignalMonitor jsm;
     private String signalName;
     private int value;
     /** Creates a new instance of VisibleAction */
-    public ZoomAction(JSignalMonitor jsm,String signalName,int value) {
-        this.jsm=jsm;
-        this.signalName=signalName;
-        this.value=value;
-        this.putValue(NAME,String.valueOf(value));
-        this.putValue(SHORT_DESCRIPTION,"Set the zoom at "+ value + " %");
-        
+    public ZoomAction(JSignalMonitor jsm, String signalName, int value) {
+        this.jsm = jsm;
+        this.signalName = signalName;
+        this.value = value;
+        this.putValue(NAME, String.valueOf(value));
+        this.putValue(SHORT_DESCRIPTION, "Set the zoom at " + value + " %");
+
     }
 
     public void actionPerformed(ActionEvent e) {
-        jsm.setVerticalZoom(signalName,value);
+        jsm.setVerticalZoom(signalName, value);
         jsm.repaintAll();
     }
 

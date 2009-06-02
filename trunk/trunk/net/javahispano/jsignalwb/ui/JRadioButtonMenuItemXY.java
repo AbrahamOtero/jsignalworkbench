@@ -7,32 +7,35 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.KeyEvent;
+
 import javax.swing.JRadioButtonMenuItem;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorModeEvent;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorModeListener;
+
+import net.javahispano.jsignalwb.jsignalmonitor.*;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class JRadioButtonMenuItemXY extends JRadioButtonMenuItem implements JSignalMonitorModeListener{
-    
+public class JRadioButtonMenuItemXY extends JRadioButtonMenuItem implements JSignalMonitorModeListener {
+
     public JRadioButtonMenuItemXY(JSignalMonitor jsm) {
         super(new ShowXYPointsAction(jsm));
         setMnemonic(KeyEvent.VK_X);
         setSelected(jsm.isRepresentingXYValues());
         jsm.addModeListener(this);
     }
-    
+
     public String getActionCommand() {
-        if(isSelected())
+        if (isSelected()) {
             return "true";
-        else
+        } else {
             return "false";
+        }
     }
-     public void jSignalMonitorModeActionPerformed(JSignalMonitorModeEvent e) {
-        if(e.getMode() == JSignalMonitorModeEvent.REPRESENT_XY_VALUES)
+
+    public void jSignalMonitorModeActionPerformed(JSignalMonitorModeEvent e) {
+        if (e.getMode() == JSignalMonitorModeEvent.REPRESENT_XY_VALUES) {
             setSelected(e.getValue());
+        }
     }
 }

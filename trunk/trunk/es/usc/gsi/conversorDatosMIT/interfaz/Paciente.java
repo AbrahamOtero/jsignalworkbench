@@ -2,11 +2,11 @@
 // y su presentacion grafica.
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
 
 public class Paciente extends JPanel {
 
@@ -32,7 +32,7 @@ public class Paciente extends JPanel {
     // este componente a un contenedor: es la unica manera de que el tamanho
     // sea respecto al contenedor. MEJORAR ESTO.
     public void anhadeSubPanel() {
-        // LLAMAR A MÉTODOS DE SUBPANELES??
+        // LLAMAR A METODOS DE SUBPANELES??
         this.add(panelFecha, BorderLayout.NORTH);
         this.add(panelEtiquetado, BorderLayout.CENTER);
         this.validate();
@@ -70,7 +70,7 @@ public class Paciente extends JPanel {
         this.validate();
     }
 
-    /* ERA PARA SELECCIONAR UN FICHEROHEAD CUANDO HABÍA VARIOS, EN VEZ DE UN PACIENTE
+    /* ERA PARA SELECCIONAR UN FICHEROHEAD CUANDO HABIA VARIOS, EN VEZ DE UN PACIENTE
        public FicheroHead getFicheroHeadSeleccionado() {
       return panelEtiquetado.getFicheroHeadSeleccionado();
        } */

@@ -1,6 +1,5 @@
 package research.apneas;
 
-import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.*;
 
 /**
@@ -26,8 +25,8 @@ public class Loggeer {
     public Loggeer(Signal senalReferencia) {
         sm = JSWBManager.getJSWBManagerInstance().getSignalManager();
         this.senalReferencia = senalReferencia;
-        fechaBase=senalReferencia.getStart();
-        frecuencia=senalReferencia.getSRate();
+        fechaBase = senalReferencia.getStart();
+        frecuencia = senalReferencia.getSRate();
     }
 
     public void debugNivel1(String nombre, float[] posibilidad) {

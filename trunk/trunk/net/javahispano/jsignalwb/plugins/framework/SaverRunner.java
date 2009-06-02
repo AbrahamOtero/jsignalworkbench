@@ -7,16 +7,18 @@
 package net.javahispano.jsignalwb.plugins.framework;
 
 import java.io.File;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.Saver;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class SaverRunner extends SwingWorker<Boolean, Void>{
+public class SaverRunner extends SwingWorker<Boolean, Void> {
     private Saver saver;
     private File file;
     public SaverRunner(Saver saver, File file) {
@@ -24,19 +26,19 @@ public class SaverRunner extends SwingWorker<Boolean, Void>{
         this.file = file;
     }
 
-     protected Boolean doInBackground() throws Exception {
+    protected Boolean doInBackground() throws Exception {
         try {
             saver.save(file);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,
-                    "Error ejecutando el plugin "+
-                    saver.getName()+"\n"+ex.getMessage());
+                                          "Error ejecutando el plugin " +
+                                          saver.getName() + "\n" + ex.getMessage());
             ex.printStackTrace();
         }
         return Boolean.valueOf(true);
     }
 
-     protected void done() {
+    protected void done() {
         //super.done();
         Boolean end = Boolean.valueOf(false);
         try {
@@ -45,9 +47,9 @@ public class SaverRunner extends SwingWorker<Boolean, Void>{
             if (!isCancelled()) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
-                  "Ha sucedido un error al ejecutar el cargador "+
-                  saver.getName()+" versión "+
-                  saver.getPluginVersion(),
+                                              "Ha sucedido un error al ejecutar el cargador " +
+                                              saver.getName() + " version " +
+                                              saver.getPluginVersion(),
                                               "Error",
                                               JOptionPane.ERROR_MESSAGE);
             }

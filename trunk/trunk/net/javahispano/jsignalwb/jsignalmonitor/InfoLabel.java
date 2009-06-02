@@ -9,16 +9,13 @@
 
 package net.javahispano.jsignalwb.jsignalmonitor;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.*;
 
 /**
  *
  * @author roman
  */
- class InfoLabel {
+class InfoLabel {
     //private String name;
     //private String magnitude;
     private int infoHOffset;
@@ -40,7 +37,7 @@ import java.awt.Point;
         setInfoFieldsOffset(infoFieldsOffset);
     }
 
-    public void paintInfoLabel(Graphics2D g2d, Point p,String name,String magnitude) {
+    public void paintInfoLabel(Graphics2D g2d, Point p, String name, String magnitude) {
         g2d.setColor(Color.BLUE);
         g2d.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 10));
 
@@ -55,21 +52,21 @@ import java.awt.Point;
          g2d.drawString("Value:"+valY,(float)(p.getX()+getInfoHOffset()),(float)(p.getY()+getInfoVOffset()+4*getInfoFieldsOffset()));*/
     }
 
-   /* public String getName() {
-        return name;
-    }
+    /* public String getName() {
+         return name;
+     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+     public void setName(String name) {
+         this.name = name;
+     }
 
-    public String getMagnitude() {
-        return magnitude;
-    }
+     public String getMagnitude() {
+         return magnitude;
+     }
 
-    public void setMagnitude(String magnitude) {
-        this.magnitude = magnitude;
-    }*/
+     public void setMagnitude(String magnitude) {
+         this.magnitude = magnitude;
+     }*/
 
     public int getInfoHOffset() {
         return infoHOffset;

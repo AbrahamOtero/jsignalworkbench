@@ -6,21 +6,18 @@
 
 package net.javahispano.jsignalwb.plugins.defaults;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Window;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import net.javahispano.jsignalwb.JSWBManager;
 
-import net.javahispano.jsignalwb.plugins.*;
+import javax.swing.ImageIcon;
+
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
+public class DefaultInstantAnnotation extends AnnotationPluginAdapter {
     private long annotationTime;
     private String title;
     private String comentary;
@@ -32,17 +29,18 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
     private String imagePath;
     private JSWBManager jswbManager;
     public DefaultInstantAnnotation() {
-        annotationTime=0;
-        title="Write here the annotation title...";
-        comentary="Write here your comentary....";
-        color=Color.RED;
-        imagePath="default";
-        image=getDefaultImage();
-        jswbManager=null;
+        annotationTime = 0;
+        title = "Write here the annotation title...";
+        comentary = "Write here your comentary....";
+        color = Color.RED;
+        imagePath = "default";
+        image = getDefaultImage();
+        jswbManager = null;
         category = "Instant";
         setIsImage(false);
     }
-    public String getName(){
+
+    public String getName() {
         return "Default Instant Annotation";
     }
 
@@ -55,41 +53,43 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
     }
 
     public void setAnnotationTime(long annotationTime) {
-        this.annotationTime=annotationTime;
+        this.annotationTime = annotationTime;
     }
 
 
     public void setJSWBManager(JSWBManager jswbManager) {
-        this.jswbManager=jswbManager;
+        this.jswbManager = jswbManager;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category){
-        this.category=category;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void showMarkInfo(Window owner) {
         new DefaultInstantAnnotationPanel(this).showJWindow(owner);
     }
 
-    public JSWBManager getJSWBManager(){
+    public JSWBManager getJSWBManager() {
         return jswbManager;
     }
-    public void setTitle(String title){
-        this.title=title;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setComentary(String comentary){
-        this.comentary=comentary;
+    public void setComentary(String comentary) {
+        this.comentary = comentary;
     }
 
-    public String getComentary(){
+    public String getComentary() {
         return comentary;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return title;
     }
 
@@ -100,7 +100,7 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
     public String getDataToSave() {
         return "title:" + title + "|| comentary:" + comentary + " || icon:" +
                 imagePath + " || isImage:" + isImage + "|| color:" +
-                color.getRGB()+ "|| category: " + category;
+                color.getRGB() + "|| category: " + category;
     }
 
 
@@ -114,9 +114,9 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
         data = data.substring(data.indexOf("isImage:") + 8);
         isImage = Boolean.parseBoolean(data.substring(0, data.indexOf("||")));
         data = data.substring(data.indexOf("color:") + 6);
-        color = new Color(Integer.parseInt(data.substring(0,data.indexOf("||"))));
+        color = new Color(Integer.parseInt(data.substring(0, data.indexOf("||"))));
         data = data.substring(data.indexOf("category:") + 9);
-        category=data;
+        category = data;
         System.out.println(imagePath);
         if (!imagePath.trim().equals("default")) {
             image = new ImageIcon(imagePath).getImage();
@@ -130,10 +130,11 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
         return title;
     }
 
-    public Image getDefaultImage(){
+    public Image getDefaultImage() {
         return new ImageIcon(DefaultInstantAnnotation.class.getResource(
                 "images/defaultIconMark.png")).getImage();
     }
+
     public Color getColor() {
         return color;
     }
@@ -148,7 +149,7 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
         this.setIsImage(true);
     }
 
-    public Image getImageToShow(){
+    public Image getImageToShow() {
         return image;
     }
 
@@ -165,17 +166,17 @@ public class DefaultInstantAnnotation extends AnnotationPluginAdapter{
         this.imagePath = imagePath;
     }
 
-    private void refreshBufferedImage(){
+    private void refreshBufferedImage() {
         //System.out.println("refresco la imagen");
-        if(isImage){
-            bufferedImage=new BufferedImage(image.getHeight(null),image.getWidth(null),BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2d=bufferedImage.createGraphics();
-            g2d.drawImage(image,0,0,image.getHeight(null),image.getWidth(null),null);
-        }else{
-            bufferedImage=new BufferedImage(5,15,BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2d=bufferedImage.createGraphics();
+        if (isImage) {
+            bufferedImage = new BufferedImage(image.getHeight(null), image.getWidth(null), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.drawImage(image, 0, 0, image.getHeight(null), image.getWidth(null), null);
+        } else {
+            bufferedImage = new BufferedImage(5, 15, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
             g2d.setColor(color);
-            g2d.fillRect(0,0,5,15);
+            g2d.fillRect(0, 0, 5, 15);
         }
     }
 

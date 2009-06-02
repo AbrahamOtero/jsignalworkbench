@@ -38,62 +38,74 @@ public class JSMProperties {
     private LookAndFeelConfiguration lookAndFeelConfiguration;
     /** Creates a new instance of JSMProperties */
 
-    public JSMProperties(JSignalMonitorDataSource dataSource){
-        this(dataSource,-1,0,0,5);
-    }
-    public JSMProperties(JSignalMonitorDataSource dataSource,long scrollBaseTime,long maxTime,long scrollValue,float frec) {
-        this.dataSource=dataSource;
-        this.scrollBaseTime=scrollBaseTime;
-        this.maxTime=maxTime;
-        this.scrollValue=scrollValue;
-        this.frec=frec;
-        mouseTime=scrollBaseTime;
-        representingValues=false;
-        intervalSelection=false;
-        ignoreRepaint=false;
-        markCreation=false;
-        clicked=false;
-        showTimeLeyend=true;
-        showActionLeyend=true;
-        firstTimeClicked=-1;
-        leftPanelConfiguration=new LeftPanelConfiguration();
-        listeners=new ArrayList<JSignalMonitorScrollListener>();
-        mouseListeners=new ArrayList<MouseTimeChangeListener>();
-        modeListeners=new ArrayList<JSignalMonitorModeListener>();
+    public JSMProperties(JSignalMonitorDataSource dataSource) {
+        this(dataSource, -1, 0, 0, 5);
     }
 
-    public void addScrollValueChangeListener(JSignalMonitorScrollListener l){
+    public JSMProperties(JSignalMonitorDataSource dataSource, long scrollBaseTime, long maxTime, long scrollValue,
+                         float frec) {
+        this.dataSource = dataSource;
+        this.scrollBaseTime = scrollBaseTime;
+        this.maxTime = maxTime;
+        this.scrollValue = scrollValue;
+        this.frec = frec;
+        mouseTime = scrollBaseTime;
+        representingValues = false;
+        intervalSelection = false;
+        ignoreRepaint = false;
+        markCreation = false;
+        clicked = false;
+        showTimeLeyend = true;
+        showActionLeyend = true;
+        firstTimeClicked = -1;
+        leftPanelConfiguration = new LeftPanelConfiguration();
+        listeners = new ArrayList<JSignalMonitorScrollListener>();
+        mouseListeners = new ArrayList<MouseTimeChangeListener>();
+        modeListeners = new ArrayList<JSignalMonitorModeListener>();
+    }
+
+    public void addScrollValueChangeListener(JSignalMonitorScrollListener l) {
         listeners.add(l);
     }
-    public void addMouseTimeChangeListener(MouseTimeChangeListener l){
+
+    public void addMouseTimeChangeListener(MouseTimeChangeListener l) {
         mouseListeners.add(l);
     }
-    public void addModeListener(JSignalMonitorModeListener l){
+
+    public void addModeListener(JSignalMonitorModeListener l) {
         modeListeners.add(l);
     }
-    public void removeScrollValueChangeListener(JSignalMonitorScrollListener l){
-        if(listeners.contains(l)){
+
+    public void removeScrollValueChangeListener(JSignalMonitorScrollListener l) {
+        if (listeners.contains(l)) {
             listeners.remove(l);
         }
     }
-    public void removeMouseTimeChangeListener(MouseTimeChangeListener l){
-        if(mouseListeners.contains(l)){
+
+    public void removeMouseTimeChangeListener(MouseTimeChangeListener l) {
+        if (mouseListeners.contains(l)) {
             mouseListeners.remove(l);
         }
     }
-    public void removeModeListener(JSignalMonitorModeListener l){
-        if(modeListeners.contains(l)){
+
+    public void removeModeListener(JSignalMonitorModeListener l) {
+        if (modeListeners.contains(l)) {
             modeListeners.remove(l);
         }
     }
-    private void performAction(JSignalMonitorScrollEvent evt){
-        for(JSignalMonitorScrollListener l:listeners)
+
+    private void performAction(JSignalMonitorScrollEvent evt) {
+        for (JSignalMonitorScrollListener l : listeners) {
             l.scrollValueChanged(evt);
+        }
     }
-    private void fireJSignalMonitorModeAction(JSignalMonitorModeEvent evt){
-        for(JSignalMonitorModeListener l:modeListeners)
+
+    private void fireJSignalMonitorModeAction(JSignalMonitorModeEvent evt) {
+        for (JSignalMonitorModeListener l : modeListeners) {
             l.jSignalMonitorModeActionPerformed(evt);
+        }
     }
+
     public JSignalMonitorDataSource getDataSource() {
         return dataSource;
     }
@@ -123,14 +135,14 @@ public class JSMProperties {
     }
 
     public void setScrollValue(long scrollValue) {
-        if(scrollValue<scrollBaseTime)
-            scrollValue=scrollBaseTime;
-        else if(scrollValue>maxTime)
-            scrollValue=maxTime;
-        long temp=this.getScrollValue();
+        if (scrollValue < scrollBaseTime) {
+            scrollValue = scrollBaseTime;
+        } else if (scrollValue > maxTime) {
+            scrollValue = maxTime;
+        }
+        long temp = this.getScrollValue();
         this.scrollValue = scrollValue;
-        performAction(new JSignalMonitorScrollEvent(scrollValue,temp));
-
+        performAction(new JSignalMonitorScrollEvent(scrollValue, temp));
 
     }
 
@@ -147,20 +159,22 @@ public class JSMProperties {
      *  distancia(en pixeles) que se le pasa como parametro del pixel que representa
      *  el valor del scroll,
      */
-    public long getTimeAtLocation(int width){
-        return getScrollValue() +(long)(1000*((width/getFrec())));
+    public long getTimeAtLocation(int width) {
+        return getScrollValue() + (long) (1000 * ((width / getFrec())));
     }
 
-    public int getLocationAtTime(long time){
-        return (int)((getFrec()*(time - getScrollValue()))/1000f);
+    public int getLocationAtTime(long time) {
+        return (int) ((getFrec() * (time - getScrollValue())) / 1000f);
     }
+
     public boolean isRepresentingValues() {
         return representingValues;
     }
 
     public void setRepresentingValues(boolean representingValues) {
         this.representingValues = representingValues;
-        fireJSignalMonitorModeAction(new JSignalMonitorModeEvent(JSignalMonitorModeEvent.REPRESENT_XY_VALUES,representingValues));
+        fireJSignalMonitorModeAction(new JSignalMonitorModeEvent(JSignalMonitorModeEvent.REPRESENT_XY_VALUES,
+                representingValues));
     }
 
     public long getMouseTime() {
@@ -169,8 +183,9 @@ public class JSMProperties {
 
     public void setMouseTime(long mouseTime) {
         this.mouseTime = mouseTime;
-        for(MouseTimeChangeListener l:mouseListeners)
+        for (MouseTimeChangeListener l : mouseListeners) {
             l.MouseTimeChangeActionPerformed(mouseTime);
+        }
 
     }
 
@@ -180,7 +195,8 @@ public class JSMProperties {
 
     public void setIntervalSelection(boolean intervalSelection) {
         this.intervalSelection = intervalSelection;
-        fireJSignalMonitorModeAction(new JSignalMonitorModeEvent(JSignalMonitorModeEvent.INTERVAL_SELECTION,intervalSelection));
+        fireJSignalMonitorModeAction(new JSignalMonitorModeEvent(JSignalMonitorModeEvent.INTERVAL_SELECTION,
+                intervalSelection));
     }
 
     public boolean isClicked() {
@@ -206,7 +222,7 @@ public class JSMProperties {
     public void setMarkCreation(boolean markCreation) {
         this.markCreation = markCreation;
         this.setIntervalSelection(false);
-        fireJSignalMonitorModeAction(new JSignalMonitorModeEvent(JSignalMonitorModeEvent.MARK_CREATION,markCreation));
+        fireJSignalMonitorModeAction(new JSignalMonitorModeEvent(JSignalMonitorModeEvent.MARK_CREATION, markCreation));
     }
 
     public LeftPanelConfiguration getLeftPanelConfiguration() {
@@ -228,6 +244,7 @@ public class JSMProperties {
     public void setShowTimeLeyend(boolean showTimeLeyend) {
         this.showTimeLeyend = showTimeLeyend;
     }
+
     public boolean isShowActionLeyend() {
         return showActionLeyend;
     }
@@ -244,11 +261,11 @@ public class JSMProperties {
         this.lookAndFeelConfiguration = lookAndFeelConfiguration;
     }
 
-    public float getFrecForFullView(int width){
-        return ((float)width)/((maxTime - scrollBaseTime)/1000);
+    public float getFrecForFullView(int width) {
+        return ((float) width) / ((maxTime - scrollBaseTime) / 1000);
     }
 
-    public float getFrecForTimeInterval(long startTime, long endTime,int width){
-        return ((float)width)/((endTime - startTime)/1000);
+    public float getFrecForTimeInterval(long startTime, long endTime, int width) {
+        return ((float) width) / ((endTime - startTime) / 1000);
     }
 }

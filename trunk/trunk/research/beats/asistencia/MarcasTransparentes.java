@@ -1,19 +1,14 @@
 package research.beats.asistencia;
 
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.plugins.Plugin;
-import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.JSWBManager;
 import java.util.Collection;
-import javax.swing.Icon;
-import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.plugins.MarkPluginAdapter;
-import net.javahispano.jsignalwb.plugins.MarkPlugin;
+
+import javax.swing.Icon;
+
+import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 /**
  * <p>Title: </p>
@@ -28,22 +23,22 @@ import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
  * @version 0.5
  */
 public class MarcasTransparentes extends AlgorithmAdapter {
-private boolean transparente = false;
+    private boolean transparente = false;
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
         Collection<MarkPlugin> listaMarcas = sm.getAllSignalMarks("ECG");
         for (MarkPlugin s : listaMarcas) {
-            DefaultIntervalMark marca = (DefaultIntervalMark)s;
+            DefaultIntervalMark marca = (DefaultIntervalMark) s;
             if (!transparente) {
                 marca.setInnerTransparencyLevel(0);
-            marca.setBorderTransparencyLevel(0);
+                marca.setBorderTransparencyLevel(0);
             } else {
                 marca.setInnerTransparencyLevel(50);
-            marca.setBorderTransparencyLevel(150);
+                marca.setBorderTransparencyLevel(150);
             }
         }
-        transparente=!transparente;
-            JSWBManager.getJSignalMonitor().repaintChannels();
+        transparente = !transparente;
+        JSWBManager.getJSignalMonitor().repaintChannels();
     }
 
     public boolean hasOwnExecutionGUI() {

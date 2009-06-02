@@ -8,15 +8,16 @@ package net.javahispano.jsignalwb.jsignalmonitor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorAnnotation;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorMark;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public abstract class JSignalMonitorDataSourceAdapter implements JSignalMonitorDataSource{
-    private ArrayList mokList=new ArrayList<String>();
+public abstract class JSignalMonitorDataSourceAdapter implements JSignalMonitorDataSource {
+    private ArrayList mokList = new ArrayList<String>();
 
     public List<JSignalMonitorAnnotation> getAnnotations(long fistValue, long endValue) {
         return mokList;
@@ -48,8 +49,8 @@ public abstract class JSignalMonitorDataSourceAdapter implements JSignalMonitorD
 
     public short[] getSignalEmphasisLevels(String signalName, long firstValue, long lastValue) {
         throw new UnsupportedOperationException(
-            "Override getSignalEmphasisLevels on " +
-            "JSignalMonitorDataSourceAdapter if you want to use emphasis levels");
+                "Override getSignalEmphasisLevels on " +
+                "JSignalMonitorDataSourceAdapter if you want to use emphasis levels");
     }
 
     public void notifyAnnotationAdded(String kindOfAnnotation, long startTime, long endTime) {

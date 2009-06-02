@@ -18,8 +18,8 @@ import java.awt.Font;
 public class LookAndFeelConfiguration {
 
     private Font smallFont = new java.awt.Font("Tahoma", Font.BOLD, 11),
-                 mediumFont = new java.awt.Font("Tahoma", Font.BOLD, 11),
-                 largeFont = new java.awt.Font("Tahoma", Font.BOLD, 11);
+    mediumFont = new java.awt.Font("Tahoma", Font.BOLD, 11),
+    largeFont = new java.awt.Font("Tahoma", Font.BOLD, 11);
     private Color colorFont = Color.BLUE;
 
     public Color getColorFont() {

@@ -9,11 +9,9 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
-import javax.swing.JRadioButtonMenuItem;
+
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.utilities.*;
 
 /**
  *
@@ -22,7 +20,7 @@ import net.javahispano.jsignalwb.utilities.*;
 public class JMenuAbscissaOffset extends JMenu {
 
     /** Creates a new instance of JMenuAbscissaOffset */
-    public JMenuAbscissaOffset(JSignalMonitor jsm,String signalName) {
+    public JMenuAbscissaOffset(JSignalMonitor jsm, String signalName) {
         super("Abscissa offset");
 //        if(jsm.hasChannel(signalName)){
 //            setEnabled(true);

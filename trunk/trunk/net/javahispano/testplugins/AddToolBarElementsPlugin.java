@@ -8,16 +8,17 @@ package net.javahispano.testplugins;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
-import javax.swing.JComponent;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.GenericPluginAdapter;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class AddToolBarElementsPlugin extends GenericPluginAdapter implements ActionListener{
+public class AddToolBarElementsPlugin extends GenericPluginAdapter implements ActionListener {
 
     JButton button;
     public AddToolBarElementsPlugin() {
@@ -29,7 +30,7 @@ public class AddToolBarElementsPlugin extends GenericPluginAdapter implements Ac
     }
 
     public void launch(JSWBManager jswbManager) {
-        button=new JButton("Borrame");
+        button = new JButton("Borrame");
         button.addActionListener(this);
         jswbManager.addJToolBarComponent(button);
     }

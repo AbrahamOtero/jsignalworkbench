@@ -1,18 +1,15 @@
 package research.beats.anotaciones;
 
-import java.awt.BorderLayout;
-import java.awt.Frame;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.*;
 
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
-import java.awt.Font;
-import java.awt.Color;
-import java.util.TimerTask;
-import java.util.Timer;
 
 /**
  * <p>Title: </p>
@@ -49,7 +46,7 @@ public class LimitacionesDialog extends JDialog {
             if (limitacionesAnotaciones.getTipo() == LimitacionAnotacion.APNEA ||
                 limitacionesAnotaciones.getTipo() == LimitacionAnotacion.HIPOAPNEA) {
 
-                jLabel1.setText("Tipo de limitación: ");
+                jLabel1.setText("Tipo de limitacion: ");
                 jComboBox1.addItem("Apnea");
                 jComboBox1.addItem("Hipoapnea");
 
@@ -73,7 +70,7 @@ public class LimitacionesDialog extends JDialog {
                     latido = true;
                 } else {
                     jPanel2.remove(this.jComboBox1);
-                    JLabel l = new JLabel("Desaturación                       ");
+                    JLabel l = new JLabel("Desaturacion                       ");
                     l.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
                     l.setForeground(Color.blue);
                     this.jPanel2.add(l);
@@ -146,7 +143,7 @@ public class LimitacionesDialog extends JDialog {
         jLabel1.setForeground(Color.blue);
         jLabel2.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
         jLabel2.setForeground(Color.blue);
-        jLabel2.setText("Creado automáticamente:");
+        jLabel2.setText("Creado automaticamente:");
         abelAutomatico.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14));
         abelAutomatico.setForeground(Color.blue);
         abelAutomatico.setText("jLabel3");

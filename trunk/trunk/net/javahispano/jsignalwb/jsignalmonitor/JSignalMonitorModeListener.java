@@ -14,7 +14,7 @@ package net.javahispano.jsignalwb.jsignalmonitor;
  * @author Compaq_Propietario
  */
 public interface JSignalMonitorModeListener {
-    
+
     public void jSignalMonitorModeActionPerformed(JSignalMonitorModeEvent e);
-    
+
 }
