@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
         this.setSize(ANCHOVENTANA, ALTOVENTANA);
 //    this.setResizable(false);
 
-        // Hay que inicializarlo despues de haberle dado un tamaño a la ventana
+        // Hay que inicializarlo despues de haberle dado un tamanho a la ventana
         // o al contenedor, ya que el panelPrincipal ocupa todo
         // el espacio de su contenedor.
         panelPrincipal = controlInterfaz.getPanelPrincipal();

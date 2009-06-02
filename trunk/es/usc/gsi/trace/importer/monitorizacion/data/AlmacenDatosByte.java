@@ -72,10 +72,10 @@ public class AlmacenDatosByte extends AlmacenDatos {
     }
 
     /**
-     * Añade la señal indicada al almacend e datos byte.
+     * Anhade la senhal indicada al almacend e datos byte.
      * @param nueva_senal
      */
-    public void añadeSeñal(byte[] nueva_senal) {
+    public void anhadeSenhal(byte[] nueva_senal) {
         byte[][] datos_tmp = new byte[datos.length + 1][];
         for (int i = 0; i < datos.length; i++) {
             datos_tmp[i] = datos[i];
@@ -85,10 +85,10 @@ public class AlmacenDatosByte extends AlmacenDatos {
     }
 
     /**
-     * LLamar cuando se cree una nueva señal sin inicializarla a nada. Toma el mismo
-     *  tamaño que la señal situada en la posicion 0 del arayy datos[].
+     * LLamar cuando se cree una nueva senhal sin inicializarla a nada. Toma el mismo
+     *  tamanho que la senhal situada en la posicion 0 del arayy datos[].
      */
-    public void añadeSeñal() {
+    public void anhadeSenhal() {
         byte[][] datos_tmp = new byte[datos.length + 1][];
         for (int i = 0; i < datos.length; i++) {
             datos_tmp[i] = datos[i];
@@ -98,7 +98,7 @@ public class AlmacenDatosByte extends AlmacenDatos {
     }
 
     /**
-     * Devuelve la longitud maxima de la señal mas grande.
+     * Devuelve la longitud maxima de la senhal mas grande.
      * @return
      */
     public int getMaximoNumeroDeDatos() {

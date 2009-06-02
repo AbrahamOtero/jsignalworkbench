@@ -93,10 +93,10 @@ public class ResultadoCorrelacion implements Serializable {
      * @return
      */
     public String getTextoDescriptivo() {
-        String texto = "La correlacion fue calculada sobre la señal " +
+        String texto = "La correlacion fue calculada sobre la senhal " +
                        this.getSenal1() +
                        " desde " + this.getFechaInicio1() + " hasta " +
-                       this.getFechaFin1() + " y sobre la señal " +
+                       this.getFechaFin1() + " y sobre la senhal " +
                        this.getSenal2() +
                        " desde " + this.getFechaInicio2() + " hasta " +
                        this.getFechaFin2() + ".";
@@ -105,7 +105,7 @@ public class ResultadoCorrelacion implements Serializable {
 
     /**
      * crea la key con la que se lmacena esta correlacion.
-     * Ser indentica siempre que coincidan las señales y los intervalos.
+     * Ser indentica siempre que coincidan las senhales y los intervalos.
      * @return
      */
     public String getKey() {

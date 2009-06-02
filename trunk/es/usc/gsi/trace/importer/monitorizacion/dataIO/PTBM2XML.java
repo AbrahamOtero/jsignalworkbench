@@ -26,7 +26,7 @@ class MyFloat {
             //Ponemos como localidad la inglesa, pa que pille . en vez de ,
             Locale.setDefault(new Locale("en", "GB"));
             decimal_format = new DecimalFormat("###.#");
-            //Ahora que ya tengo un parseador "A la inglesa" volvemos pa espanaña:
+            //Ahora que ya tengo un parseador "A la inglesa" volvemos pa espananha:
             Locale.setDefault(default_locale);
             hay_parser = true;
         }
@@ -196,7 +196,7 @@ public class PTBM2XML {
         root.setAttribute("NumeroPTB", ptbm.getPTB().length + "");
         root.setAttribute("ComentarioPTBM", ptbm.getComentario());
         root.setAttribute("NombrePTBM", ptbm.getTitulo());
-        //Bucle que ira añadiendo los nodos PTB
+        //Bucle que ira anhadiendo los nodos PTB
         PTBInterface[] ptb_array = ptbm.getPTB();
         for (int i = 0; i < ptb_array.length; i++) {
             //Creo el nodo PTB con sus atributos
@@ -211,9 +211,9 @@ public class PTBM2XML {
                              ptb_array[i].getUnidadesTemporales());
             ptb.setAttribute("BuscarEnValorAbsoluto",
                              ptb_array[i].isBuscarEnValorAbsoluto() + "");
-            //Añado el nodo creado a la raiz del documebnto
+            //Anhado el nodo creado a la raiz del documebnto
             root.addContent(ptb);
-            //Continuo Añadiendo los hijos al nodo PTB
+            //Continuo Anhadiendo los hijos al nodo PTB
             PtoSigInterface[] pto_sig_array = ptb_array[i].getPtoSig();
             for (int j = 0; j < pto_sig_array.length; j++) {
                 //Creo el nodo PtoSig con sus atributos
@@ -223,9 +223,9 @@ public class PTBM2XML {
                 pto_sig.setAttribute("NumeroDePtoSig", j + "");
                 pto_sig.setAttribute("NumeroDeRestricciones",
                                      restricciones_array.length + "");
-                //Añado el nodo creado al nodo del cual culega
+                //Anhado el nodo creado al nodo del cual culega
                 ptb.addContent(pto_sig);
-                //Continuo añadiendo los nodos hijos
+                //Continuo anhadiendo los nodos hijos
                 for (int k = 0; k < restricciones_array.length; k++) {
                     //Creo el nodo restriicon con sus atributos
                     Element restriccion = new Element("Restriccion");
@@ -241,9 +241,9 @@ public class PTBM2XML {
                     restriccion.setAttribute("RelativaAlBasal",
                                              restricciones_array[k].
                                              isRelativaAlNivelBasal() + "");
-                    //Añado el nod ala padre
+                    //Anhado el nod ala padre
                     pto_sig.addContent(restriccion);
-                    //Continuo añadiendole los hijos al nodo
+                    //Continuo anhadiendole los hijos al nodo
                     String[] D = restricciones_array[k].getD();
                     String[] L = restricciones_array[k].getL();
                     String[] M = restricciones_array[k].getM();
@@ -265,7 +265,7 @@ public class PTBM2XML {
                     restriccon_magnitud.setAttribute("InicioCore", D[1]);
                     restriccon_magnitud.setAttribute("FinCore", D[2]);
                     restriccon_magnitud.setAttribute("FinSoporte", D[3]);
-                    //Añadimos este elemnto al padre:
+                    //Anhadimos este elemnto al padre:
                     restriccion.addContent(restriccon_magnitud);
 
                     //Elemento restricion Temporal:
@@ -274,7 +274,7 @@ public class PTBM2XML {
                     restriccon_temporal.setAttribute("InicioCore", L[1]);
                     restriccon_temporal.setAttribute("FinCore", L[2]);
                     restriccon_temporal.setAttribute("FinSoporte", L[3]);
-                    //Añadimos este elemnto al padre:
+                    //Anhadimos este elemnto al padre:
                     restriccion.addContent(restriccon_temporal);
 
                     //Elemento unidades temporales:
@@ -289,7 +289,7 @@ public class PTBM2XML {
                     restriccon_pendiente.setAttribute("InicioCore", M[1]);
                     restriccon_pendiente.setAttribute("FinCore", M[2]);
                     restriccon_pendiente.setAttribute("FinSoporte", M[3]);
-                    //Añadimos este elemnto al padre:
+                    //Anhadimos este elemnto al padre:
                     restriccion.addContent(restriccon_pendiente);
 
                     //Semantica
@@ -395,7 +395,7 @@ public class PTBM2XML {
         List lista_ptb = root.getContent(filtro);
         Iterator it = lista_ptb.iterator();
         //Empleamos un floag para marcar el primer PTB, que se le pasara en el constructor
-        //Al PTBM, de los demas que se le añadiran
+        //Al PTBM, de los demas que se le anhadiran
         PTBM ptbm = null;
         boolean primer_ptb = true;
         int num_PTB = -1;
@@ -438,7 +438,7 @@ public class PTBM2XML {
                 ptbm = new PTBM(nombrePTBM, comentarioPTBM, ptb);
                 primer_ptb = false;
             } else {
-                ptbm.añadePTB(ptb, num_PTB, PTBM.AÑADIR);
+                ptbm.anhadePTB(ptb, num_PTB, PTBM.AÑADIR);
             }
 
             //Comenzamos a RECOPILAR PUNTOS SIGNIFICATIVOS:
@@ -448,8 +448,8 @@ public class PTBM2XML {
             while (it2.hasNext()) {
                 num_PtoSig++;
                 Element PtoSig_xml = (Element) it2.next();
-                //Los puntos significativos = y ! se añaden automaticamente al PTB, solo tendremos
-                //que añadir las restricciones que tengan
+                //Los puntos significativos = y ! se anhaden automaticamente al PTB, solo tendremos
+                //que anhadir las restricciones que tengan
                 if (num_PtoSig < 2) {
                     if (PtoSig_xml.getChildren().size() == 0) {
                         continue;
@@ -459,21 +459,21 @@ public class PTBM2XML {
                 Restriccion[] restriciones_de_un_PToSig = generaRestricciones(
                         PtoSig_xml);
                 for (int i = 0; i < restriciones_de_un_PToSig.length; i++) {
-                    //Si es el primer o segundo Pto Sig ya esta añadido al PTB
+                    //Si es el primer o segundo Pto Sig ya esta anhadido al PTB
                     if (num_PtoSig < 2) {
-                        ptb.añadeRestriccion(0, num_PtoSig,
+                        ptb.anhadeRestriccion(0, num_PtoSig,
                                              restriciones_de_un_PToSig[i], null,
                                              PTBM.AÑADIR);
                     }
-                    //Si no lo era y si es la primera restriccion => preimero añadir el PtoSig al PTB:
+                    //Si no lo era y si es la primera restriccion => preimero anhadir el PtoSig al PTB:
                     else if (i == 0) {
                         PtoSig pto_sig = new PtoSig(restriciones_de_un_PToSig[0],
                                 num_PTB, num_PtoSig);
-                        ptb.añadePtoSig(pto_sig);
+                        ptb.anhadePtoSig(pto_sig);
                     }
-                    //Si no es que ya esta añadido el PtoSig => añadimos solo la restricion
+                    //Si no es que ya esta anhadido el PtoSig => anhadimos solo la restricion
                     else {
-                        ptb.añadeRestriccion(num_PTB, num_PtoSig,
+                        ptb.anhadeRestriccion(num_PTB, num_PtoSig,
                                              restriciones_de_un_PToSig[i], null,
                                              PTBM.AÑADIR);
                     }

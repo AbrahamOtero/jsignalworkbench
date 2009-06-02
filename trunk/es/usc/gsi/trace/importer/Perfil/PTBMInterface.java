@@ -18,15 +18,15 @@ public interface PTBMInterface extends Serializable {
     static final long serialVersionUID = 1234L;
 
     /**
-     * Este metodo se emplea para añadir, eliminar o modificar un PTB de este PTBM.
-     * @param ptb - Es el PTB que se va a añadir, borrar o modificar. Si se va a
+     * Este metodo se emplea para anhadir, eliminar o modificar un PTB de este PTBM.
+     * @param ptb - Es el PTB que se va a anhadir, borrar o modificar. Si se va a
      * borrar o modificar no es necesario.
-     * @param numeroPTB - Es el numero del PTB que se va a añadir/borrar/modificar.
+     * @param numeroPTB - Es el numero del PTB que se va a anhadir/borrar/modificar.
      * @param seleccion - Puede tomar los valors PTBM.AÑADIR, PTBM.BORRAR,
      * PTBM.Modificar
      * @roseuid 37875DDC03AB
      */
-    public void añadePTB(PTB ptb, int numeroPTB, int seleccion);
+    public void anhadePTB(PTB ptb, int numeroPTB, int seleccion);
 
     /**
      * Indica si el objeto PTBM tiene un fichero asignado o no.
@@ -81,17 +81,17 @@ public interface PTBMInterface extends Serializable {
     public int[] getNumeroPtoSig();
 
     /**
-     * Añade, modifica o borra un PtoSig de un PTB.
-     * @param ptb - PTB al cual se le va a añadir el PtoSig. OJO: deberia modificarse
+     * Anhade, modifica o borra un PtoSig de un PTB.
+     * @param ptb - PTB al cual se le va a anhadir el PtoSig. OJO: deberia modificarse
      * esto para en vez de pasarle el PTB, pasaele el numero del PTB.
-     * @param ptosig - PtoSig a añadir/modificar/borrar. Si se va a borrar no es
+     * @param ptosig - PtoSig a anhadir/modificar/borrar. Si se va a borrar no es
      * necesario.
      * @param numeroPtoSig - Numero del PtoSig . Solo es imprescindible cuando se va a
      * borrar.
      * @param selecion - PTBM.AÑADIR/BORRAR/MODIFICAR
      * @roseuid 37875DED034C
      */
-    public void añadePtoSig(PTB ptb, PtoSig ptosig, int numeroPtoSig,
+    public void anhadePtoSig(PTB ptb, PtoSig ptosig, int numeroPtoSig,
                             int selecion);
 
     /**
@@ -103,7 +103,7 @@ public interface PTBMInterface extends Serializable {
      * @param selecion
      * @roseuid 37875DED0360
      */
-    public void añadeRestriccion(PTB ptb, PtoSig ptosig,
+    public void anhadeRestriccion(PTB ptb, PtoSig ptosig,
                                  Restriccion restriccion,
                                  Restriccion restriccion_vieja,
                                  int numeroPtoSig, int selecion);

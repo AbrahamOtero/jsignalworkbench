@@ -8,8 +8,8 @@ public class BufferedRandomAccessFile {
 
     private RandomAccessFile entrada;
 
-    private int bufferSize; // Tamaño del buffer normal
-    private int bufferSizeReducido; // Tamaño del buffer reducido: el ultimo buffer que llenamos es menor o igual en tamaño que el buffer normal.
+    private int bufferSize; // Tamanho del buffer normal
+    private int bufferSizeReducido; // Tamanho del buffer reducido: el ultimo buffer que llenamos es menor o igual en tamanho que el buffer normal.
 
     private byte[] buffer = null; // Buffer de almacenamiento de datos
 
@@ -20,7 +20,7 @@ public class BufferedRandomAccessFile {
 
     private int numPeticion = 0;
 
-    // Contructor con tamaño de buffer por defecto.
+    // Contructor con tamanho de buffer por defecto.
     public BufferedRandomAccessFile(RandomAccessFile entrada) {
         this(entrada, DEFAULTBUFFERSIZE);
     }
@@ -31,8 +31,8 @@ public class BufferedRandomAccessFile {
         this.bufferSize = bufferSize;
 
         try {
-            this.numMaxLecturasNormales = (int) (entrada.length() / bufferSize); // Numero de lecturas que podremos hacer con buffers de tamaño bufferSize.
-            this.bufferSizeReducido = (int) (entrada.length() % bufferSize); // Tamaño del ultimo buffer: el resto de los bytes que quedan por leer en el final del fichero.
+            this.numMaxLecturasNormales = (int) (entrada.length() / bufferSize); // Numero de lecturas que podremos hacer con buffers de tamanho bufferSize.
+            this.bufferSizeReducido = (int) (entrada.length() % bufferSize); // Tamanho del ultimo buffer: el resto de los bytes que quedan por leer en el final del fichero.
         } catch (IOException e) {
             this.numMaxLecturasNormales = 0;
             this.bufferSizeReducido = 0;

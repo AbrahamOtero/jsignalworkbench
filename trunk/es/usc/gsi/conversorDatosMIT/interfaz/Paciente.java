@@ -28,8 +28,8 @@ public class Paciente extends JPanel {
         this(ficherosHead, Paciente.LISTA);
     }
 
-    // Necesario llamar a este metodo despues de haber añadido
-    // este componente a un contenedor: es la unica manera de que el tamaño
+    // Necesario llamar a este metodo despues de haber anhadido
+    // este componente a un contenedor: es la unica manera de que el tamanho
     // sea respecto al contenedor. MEJORAR ESTO.
     public void anhadeSubPanel() {
         // LLAMAR A MÉTODOS DE SUBPANELES??
@@ -60,7 +60,7 @@ public class Paciente extends JPanel {
 
         this.cerrarPaciente(); // Cerramos los paneles abiertos anteriormente
         this.creaVista(ficherosHead, modoVista); // Creamos una nueva vista.
-        this.anhadeSubPanel(); // Se puede llamar desde aqui, ya que se supone que este componente ya ha sido añadido.
+        this.anhadeSubPanel(); // Se puede llamar desde aqui, ya que se supone que este componente ya ha sido anhadido.
     }
 
     public void cerrarPaciente() {

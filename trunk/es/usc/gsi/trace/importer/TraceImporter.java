@@ -39,7 +39,7 @@ public class TraceImporter extends LoaderAdapter {
      * @return descripcion textual larga
      */
     public String getDescription() {
-        return "permite importar las señales, junto con sus nombres, frecuencias de muestreo, etc. y las anotaciones contenidas en archivos de TRACE";
+        return "permite importar las senhales, junto con sus nombres, frecuencias de muestreo, etc. y las anotaciones contenidas en archivos de TRACE";
     }
 
     public Icon getIcon() {

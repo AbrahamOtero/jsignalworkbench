@@ -1,7 +1,7 @@
-// Clase PanelPrincipal: sirve para poder añadir toda la funcionalidad de
+// Clase PanelPrincipal: sirve para poder anhadir toda la funcionalidad de
 // la aplicacion a otra aplicacion como modulo independiente.
 // Lo unico que hay que hacer es crear un nuevo objeto PanelPrincipal
-// y añadirlo a otro contenedor.
+// y anhadirlo a otro contenedor.
 
 package es.usc.gsi.conversorDatosMIT.interfaz;
 

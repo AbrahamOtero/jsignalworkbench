@@ -39,7 +39,7 @@ public class FicheroHead extends File {
             // A PARTIR DE ELLOS, POR SI HUBIESE ALGUNO DEFECTUOSO.
             this.leeParametros();
 
-            // Estimacion del numero de muestras en funcion del tamaño del fichero, si es necesario
+            // Estimacion del numero de muestras en funcion del tamanho del fichero, si es necesario
 
             if (this.numMuestras == 0) {
 
@@ -163,7 +163,7 @@ public class FicheroHead extends File {
 
             }
 
-            // TODO Si numMuestras = 0, estimar el numero de muestras a partir del tamaño del fichero.
+            // TODO Si numMuestras = 0, estimar el numero de muestras a partir del tamanho del fichero.
 
             long segundosMuestreo = (long) (this.numMuestras /
                                             this.frecuenciaMuestreoFrame);

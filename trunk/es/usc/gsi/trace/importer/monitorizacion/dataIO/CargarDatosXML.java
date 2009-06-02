@@ -87,7 +87,7 @@ public class CargarDatosXML extends CargarDatos {
         boolean[] tien_pos_asociada = new boolean[num_senales];
         String nombre_archivo_senal;
 
-        //Primero cargaremos la configuracion de las señales
+        //Primero cargaremos la configuracion de las senhales
         int cont_senal = -1;
         while (it.hasNext()) {
             cont_senal++;
@@ -115,7 +115,7 @@ public class CargarDatosXML extends CargarDatos {
             } else {
                 tien_pos_asociada[cont_senal] = false;
             }
-            //Ahora leemos las marcas de esta señal
+            //Ahora leemos las marcas de esta senhal
             List lista_marcas = senal_xml.getChildren("Marca");
             Iterator it2 = lista_marcas.iterator();
             while (it2.hasNext()) {
@@ -185,7 +185,7 @@ public class CargarDatosXML extends CargarDatos {
 
         //Y  los estadisticos
         LinkedList estadisticos_list = this.cargaEstadisticos(root);
-        //Añadimos al alamcen todos los estadisticos
+        //Anhadimos al alamcen todos los estadisticos
         Iterator it2 = estadisticos_list.iterator();
         while (it2.hasNext()) {
             ResultadosEstadisticos estadsitico = (ResultadosEstadisticos) it2.
@@ -195,7 +195,7 @@ public class CargarDatosXML extends CargarDatos {
 
         //Las correlaciones
         LinkedList correlaciones_list = this.cargaCorrelaciones(root);
-        //Añadimos al alamcen todos los estadisticos
+        //Anhadimos al alamcen todos los estadisticos
         Iterator it3 = correlaciones_list.iterator();
         while (it3.hasNext()) {
             ResultadoCorrelacion correlacion = (ResultadoCorrelacion) it3.next();
@@ -471,7 +471,7 @@ public class CargarDatosXML extends CargarDatos {
                     columna = 0;
                     while (tk2.hasMoreTokens() && !(columna == num_senales)) {
                         String dato_fichero = tk2.nextToken();
-                        //Si columna es mayor que numero de señales => estamos leyendo la posibilidad global
+                        //Si columna es mayor que numero de senhales => estamos leyendo la posibilidad global
                         if (columna == num_senales) {
                             pos_gloabal[linea] = Byte.parseByte(dato_fichero);
                         }
@@ -511,7 +511,7 @@ public class CargarDatosXML extends CargarDatos {
                         }
                     }
 
-                    //Si columna es mayor que numero de señales => estamos leyendo la posibilidad global
+                    //Si columna es mayor que numero de senhales => estamos leyendo la posibilidad global
                     if (columna == num_senales && tk2.hasMoreTokens()) {
                         String dato_fichero = tk2.nextToken();
                         pos_gloabal[linea] = Byte.parseByte(dato_fichero);
@@ -644,10 +644,10 @@ public class CargarDatosXML extends CargarDatos {
                         "Significacion").getIntValue();
                 String nombre_correlacion = correlacion_xml.getAttribute(
                         "NombreCorrelacion").getValue();
-                String nombre_señal1 = correlacion_xml.getAttribute(
-                        "NombreSeñal1").getValue();
-                String nombre_señal2 = correlacion_xml.getAttribute(
-                        "NombreSeñal2").getValue();
+                String nombre_senhal1 = correlacion_xml.getAttribute(
+                        "NombreSenhal1").getValue();
+                String nombre_senhal2 = correlacion_xml.getAttribute(
+                        "NombreSenhal2").getValue();
                 String fecha_inicio1 = correlacion_xml.getAttribute(
                         "FechaInicio1").getValue();
                 String fecha_inicio2 = correlacion_xml.getAttribute(
@@ -665,8 +665,8 @@ public class CargarDatosXML extends CargarDatos {
                 correlacion.setFechaFin2(fecha_fin2);
                 correlacion.setFechaInicio1(fecha_inicio1);
                 correlacion.setFechaInicio2(fecha_inicio2);
-                correlacion.setSenal1(nombre_señal1);
-                correlacion.setSenal2(nombre_señal2);
+                correlacion.setSenal1(nombre_senhal1);
+                correlacion.setSenal2(nombre_senhal2);
                 correlacion.setComentario(comentario);
                 correlacion.setNivelDeSignificacion(coef_correlacion);
                 correlacion.setNivelDeSignificacionDiscreto(significacion);

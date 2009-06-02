@@ -2,7 +2,7 @@ package es.usc.gsi.trace.importer.estadisticos;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>
- * <p>Description: Clase que permite remuestrar una señal</p>
+ * <p>Description: Clase que permite remuestrar una senhal</p>
  * <p>Copyright: Copyright (c) 1999</p>
  * <p>Company: GSI</p>
  * @author Abraham Otero
@@ -109,7 +109,7 @@ public class Remuestrea {
     }
 
     /**
-     * Elimina los 0 finales de las señales
+     * Elimina los 0 finales de las senhales
      * @param datos
      * @return
      */

@@ -8,7 +8,7 @@ import javax.swing.*;
 
 /**
  * Esta clase es util a la hora de averiguar la fecha a la cual corresponde una
- * determinada muestra. Esta clase se ha diseñado mediante el patron Singleton,
+ * determinada muestra. Esta clase se ha disenhado mediante el patron Singleton,
  * se configura pasandole una fecha de nase y probee metodos para saber dada una
  * frecuencia de muestreo a que fecha corresponde una muestra, o a que muestra corresponde una fecha.
  *
@@ -66,7 +66,7 @@ public class SamplesToDate {
      * hasta la fecha ctual
      * @param fecha_hasta fecha hasta lac ual deseamos sober cuantras muestras han
      * sucedido desde la fecha base
-     * @param fs frecuencia a la cual esta muestreada la señal
+     * @param fs frecuencia a la cual esta muestreada la senhal
      * @return nuero de muestras transcurridas. Si hubo algun fallo en la oporacion
      * devuelve Long.MIN_VALUE
      */
@@ -141,7 +141,7 @@ public class SamplesToDate {
 
     /**
      * Este metodo devuelve un String con la fecha que correponde a una muestra
-     * muestras de una señal con una frecuencia de muestreo fs. La calcula sobre
+     * muestras de una senhal con una frecuencia de muestreo fs. La calcula sobre
      * la fecha base con la que se configuro este SamplesToDate.
      * Segun el valor del ultimo boolean se devolvera la fecha con o sin milisegundos.
      * @param muestras
@@ -163,7 +163,7 @@ public class SamplesToDate {
 
     /**
      * Este metodo devuelve un String con la fecha que correponde a una muestra
-     * muestras de una señal con una frecuencia de muestreo fs. La calcula sobre
+     * muestras de una senhal con una frecuencia de muestreo fs. La calcula sobre
      * la fecha base con la que se configuro este SamplesToDate.
      * @param muestras
      * @param fs
@@ -225,7 +225,7 @@ public class SamplesToDate {
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\"> 1) Formato Corto:&nbsp; </font><font color=\"#009933\">hora:minutos:segundos" +
             "</font><font color=\"#0000FF\"> Ej: 22:30:00 serian las ocho</font></font></p>" +
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\">&nbsp;&nbsp;&nbsp;&nbsp; y media de la " +
-            "tarde. Al no indicar ni año, ni dia ni mes se supone que</font></font></p>" +
+            "tarde. Al no indicar ni anho, ni dia ni mes se supone que</font></font></p>" +
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\">&nbsp;&nbsp;&nbsp;&nbsp; son los del " +
             "inicio de la monitorizacion.</font></font></p>" +
 
@@ -238,7 +238,7 @@ public class SamplesToDate {
             "son los del inicio de la monitorizacion.</font></font></p>" +
 
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\"> 3)Formato Largo </font><font color=\"#009933\">" +
-            "hora:minutos:segundos año/mes/dia</font></font></p>" +
+            "hora:minutos:segundos anho/mes/dia</font></font></p>" +
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
             "Ej: 12:15:45 2002/06/25</font></font></p>" +
             "<p><font size=\"4\">&nbsp;</font></p>" +

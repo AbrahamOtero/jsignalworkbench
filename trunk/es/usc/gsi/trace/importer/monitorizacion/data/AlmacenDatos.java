@@ -20,7 +20,7 @@ public abstract class AlmacenDatos implements Serializable {
     static final long serialVersionUID = 3211L;
 
     /**
-     * Numero de señales contenidas en este almacen.
+     * Numero de senhales contenidas en este almacen.
      */
     int i;
     protected int numero_senales;
@@ -136,7 +136,7 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     /**
-     * @param senal - Datos del array i, es decir la señal i.
+     * @param senal - Datos del array i, es decir la senhal i.
      * @return Object
      */
     public Object getPos(int senal) {
@@ -149,7 +149,7 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     /**
-     * @param senal - Datos del array i, es decir la señal i.
+     * @param senal - Datos del array i, es decir la senhal i.
      * @return Object
      * @todo cerciorarse de que funciona
      */
@@ -159,7 +159,7 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     /**
-     * @param senal - Datos del array i, es decir la señal i.
+     * @param senal - Datos del array i, es decir la senhal i.
      * @return Object
      */
     public abstract Object getArray(int senal);
@@ -473,14 +473,14 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     /**
-     * Devuelve la longitud maxima de la señal mas grande.
+     * Devuelve la longitud maxima de la senhal mas grande.
      * Han de implementarlo las clases que la extiendan.
      * @return
      */
     public abstract int getMaximoNumeroDeDatos();
 
 
-    void añadeSeñal(String nombre, String leyenda, String Leyenda_temporal,
+    void anhadeSenhal(String nombre, String leyenda, String Leyenda_temporal,
                     float fs,
                     float[] rango, int numero_datos) {
         int nueva_num_senales = numero_senales + 1; //this.marcas.length+1;
@@ -559,12 +559,12 @@ public abstract class AlmacenDatos implements Serializable {
         this.leyenda_temporal = leyenda_temporal_tmp;
         this.leyendas = leyendas_tmp;
         numero_senales++;
-        this.almacen_pos.añadeSeñal(new byte[numero_datos]);
+        this.almacen_pos.anhadeSenhal(new byte[numero_datos]);
 
     }
 
 
-    void eliminaSeñal(int numero_señal) {
+    void eliminaSenhal(int numero_senhal) {
 
         float[][] rangos_tmp = new float[rangos_senales.length - 1][];
         float[] fs_tmp = new float[fs.length - 1];
@@ -582,7 +582,7 @@ public abstract class AlmacenDatos implements Serializable {
 
         //Si hay posibilidad => esa no cuenta
         for (int i = 0; i < num_senales; i++) {
-            if (i != numero_señal) {
+            if (i != numero_senhal) {
                 rangos_tmp[cout] = rangos_senales[i];
                 fs_tmp[cout] = fs[i];
                 nombres_tmp[cout] = nombre_senales[i];
@@ -633,7 +633,7 @@ public abstract class AlmacenDatos implements Serializable {
      * @param resultados
      */
     void anadeEstadistico(ResultadosEstadisticos resultados) {
-        estadisticos.put(resultados.getNombreSeñal() +
+        estadisticos.put(resultados.getNombreSenhal() +
                          resultados.getFechaInicio() +
                          resultados.getFechaFin(), resultados);
     }
@@ -736,7 +736,7 @@ public abstract class AlmacenDatos implements Serializable {
     }
 
 
-    /**Cuando se carga un archivo serializado este no posee ciertos campos que se añadienron
+    /**Cuando se carga un archivo serializado este no posee ciertos campos que se anhadienron
      * al almacen a posteriori. Los inicializamos aqui
      */
 

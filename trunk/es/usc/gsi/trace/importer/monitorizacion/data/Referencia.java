@@ -43,7 +43,7 @@ abstract class Referencia
 
     /**
      * @param posicion -
-     * Posicion en la que se ha de añadir la referencia. Las que estuviesen en
+     * Posicion en la que se ha de anhadir la referencia. Las que estuviesen en
      * posiciones superiores o iguales a esta se desplazan hacia arriba.@param canal
      */
     void anadeReferencia(int canal, int posicion) {
