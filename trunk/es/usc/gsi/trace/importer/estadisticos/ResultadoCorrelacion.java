@@ -93,7 +93,7 @@ public class ResultadoCorrelacion implements Serializable {
      * @return
      */
     public String getTextoDescriptivo() {
-        String texto = "La correlación fue calculada sobre la señal " +
+        String texto = "La correlacion fue calculada sobre la señal " +
                        this.getSenal1() +
                        " desde " + this.getFechaInicio1() + " hasta " +
                        this.getFechaFin1() + " y sobre la señal " +

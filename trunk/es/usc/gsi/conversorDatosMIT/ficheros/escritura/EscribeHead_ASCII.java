@@ -1,4 +1,4 @@
-/* Esta clase está bastante mal planteada: REFORMAR.
+/* Esta clase esta bastante mal planteada: REFORMAR.
  Tiene una estructura "rara": todo se hace desde el constructor
  */
 package es.usc.gsi.conversorDatosMIT.ficheros.escritura;
@@ -29,7 +29,7 @@ public class EscribeHead_ASCII extends Thread implements Cancelar {
      public EscribeHead_ASCII(Vector vectorFicherosHead, File ficheroDestino) {
          this.vectorFicherosHead = vectorFicherosHead;
 
-         // Corrección del nombre de fichero
+         // Correccion del nombre de fichero
          if (ficheroDestino.getName().indexOf(".txt") != -1) {
              this.ficheroDestino = ficheroDestino;
          } else {
@@ -67,7 +67,7 @@ public class EscribeHead_ASCII extends Thread implements Cancelar {
              Parametro[] parG = fhTemp.getParametros();
 
              for (int j = 0; j < parG.length; j++) {
-                 if (parG[j].getActivado()) { // Solo se crean lectores para ficheros con algún parámetro activado para volcar.
+                 if (parG[j].getActivado()) { // Solo se crean lectores para ficheros con algun parametro activado para volcar.
                      LeeFicheroDat lfd = new LeeFicheroDat(fhTemp, parG[j]);
                      //      LeeFicheroDat lfd = new LeeFicheroDat( fhTemp, parG[j], 250.0F );
                      vectorLectores.add(lfd);
@@ -75,7 +75,7 @@ public class EscribeHead_ASCII extends Thread implements Cancelar {
              }
          }
 
-         // Creación del array, una vez seleccionados todos los ficheros y parámetros para volcar.
+         // Creacion del array, una vez seleccionados todos los ficheros y parametros para volcar.
          arrayLectores = new LeeFicheroDat[vectorLectores.size()];
 
          for (int i = 0; i < arrayLectores.length; i++) {
@@ -151,7 +151,7 @@ public class EscribeHead_ASCII extends Thread implements Cancelar {
 
                      //  System.out.println(lineaVolcado);
                  } catch (Exception e) {
-                     System.out.println("Error al volcar línea");
+                     System.out.println("Error al volcar linea");
                      e.printStackTrace();
                  }
 

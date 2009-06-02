@@ -1,7 +1,7 @@
 // Clase FicheroHead: al crearlo, se abre el fichero de cabecera y
 // se lee para asignarle valores a los atributos.
-// Además, se crean tantos objetos Parametro como
-// parámetros haya en el fichero.
+// Ademas, se crean tantos objetos Parametro como
+// parametros haya en el fichero.
 
 package es.usc.gsi.conversorDatosMIT.ficheros;
 
@@ -33,13 +33,13 @@ public class FicheroHead extends File {
             fr = new FileReader(this);
             br = new BufferedReader(fr);
 
-            this.leeFichero(); // Inicialización de atributos.
+            this.leeFichero(); // Inicializacion de atributos.
             parametros = new Parametro[numSenhales]; // MEJOR: LEER PRIMERO EL FICHERO ALMACENANDO EN UN VECTOR
             // LOS PARÁMETROS QUE SON VÁLIDOS Y LUEGO CREAR EL ARRAY
             // A PARTIR DE ELLOS, POR SI HUBIESE ALGUNO DEFECTUOSO.
             this.leeParametros();
 
-            // Estimación del número de muestras en función del tamaño del fichero, si es necesario
+            // Estimacion del numero de muestras en funcion del tamaño del fichero, si es necesario
 
             if (this.numMuestras == 0) {
 
@@ -59,7 +59,7 @@ public class FicheroHead extends File {
                     break;
                 }
 
-                // Cálculo del número de marcos en el fichero
+                // Calculo del numero de marcos en el fichero
                 int frameSize = 0;
                 float frameSizeBytes = 0.0f;
                 File dataFile = new File(this.parametros[0].getNombreFichero());
@@ -89,7 +89,7 @@ public class FicheroHead extends File {
         this(fich.getAbsolutePath());
     }
 
-    // Métodos get
+    // Metodos get
 
     public String getNombreFrame() {
         return this.nombreFrame;
@@ -131,11 +131,11 @@ public class FicheroHead extends File {
 
         try {
 
-            // Lectura de la primera línea del fichero de cabecera:
+            // Lectura de la primera linea del fichero de cabecera:
             // obtenemos los atributos de este objeto a partir de ella.
 
-            // Poner código que posicione el puntero de lectura
-            // en la primera línea del fichero.
+            // Poner codigo que posicione el puntero de lectura
+            // en la primera linea del fichero.
 
             String datosHead = br.readLine();
 
@@ -163,7 +163,7 @@ public class FicheroHead extends File {
 
             }
 
-            // TODO Si numMuestras = 0, estimar el número de muestras a partir del tamaño del fichero.
+            // TODO Si numMuestras = 0, estimar el numero de muestras a partir del tamaño del fichero.
 
             long segundosMuestreo = (long) (this.numMuestras /
                                             this.frecuenciaMuestreoFrame);
@@ -179,8 +179,8 @@ public class FicheroHead extends File {
 
 
     private void leeParametros() throws FicheroNoValidoException {
-        // Poner código que posicione el puntero de lectura
-        // en la segunda línea del fichero.
+        // Poner codigo que posicione el puntero de lectura
+        // en la segunda linea del fichero.
         Parametro par;
         String lineaPar;
         String[] camposPar;
@@ -205,7 +205,7 @@ public class FicheroHead extends File {
             for (int i = 0; i < numSenhales; i++) {
 
                 lineaPar = br.readLine();
-                /*  if (lineaPar.indexOf("#")!=-1) { // Si el fichero contiene comentarios, no creamos un parámetro y retrocedemos una posición para no saltar un elemento del array.
+                /*  if (lineaPar.indexOf("#")!=-1) { // Si el fichero contiene comentarios, no creamos un parametro y retrocedemos una posicion para no saltar un elemento del array.
                     i--;
                     continue;
                     } */
@@ -218,8 +218,8 @@ public class FicheroHead extends File {
 
                 formatoAlmacenamiento = Integer.parseInt(subCamposPar[0]);
 
-                // Si sólo existe un elemento en el array,
-                //quiere decir que no hay "x número" => factor de frecuencia =1
+                // Si solo existe un elemento en el array,
+                //quiere decir que no hay "x numero" => factor de frecuencia =1
                 if (subCamposPar.length < 2) {
                     factorFrecuencia = 1;
                 } else {
@@ -235,7 +235,7 @@ public class FicheroHead extends File {
                     ganancia = Float.parseFloat(subCamposPar[0]);
                 }
 
-                // Igual que arriba: si sólo hay un elemento en el array, no hay unidades.
+                // Igual que arriba: si solo hay un elemento en el array, no hay unidades.
                 if (subCamposPar.length < 2) {
                     unidades = "";
                 } else {
@@ -274,9 +274,9 @@ public class FicheroHead extends File {
             throw new FicheroNoValidoException();
         }
 
-        // Si al acabar de leer los parámetros no hay ninguno leido,
-        // entenderemos que el fichero no es válido, bien porque
-        // ningún parámetro es válido o bien porque no existen parámetros en
+        // Si al acabar de leer los parametros no hay ninguno leido,
+        // entenderemos que el fichero no es valido, bien porque
+        // ningun parametro es valido o bien porque no existen parametros en
         // el fichero.
 
         if (parametros.length == 0) {

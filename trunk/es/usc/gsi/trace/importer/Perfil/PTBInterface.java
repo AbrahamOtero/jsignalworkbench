@@ -41,7 +41,7 @@ public interface PTBInterface extends Serializable {
     public void DecrementaNumeroDePtoSig();
 
     /**
-     * Devuelve el numero asociado a este PTB. Empieza a contar en 0. Es la posición
+     * Devuelve el numero asociado a este PTB. Empieza a contar en 0. Es la posicion
      * que ocupa este PTB dentro del objeto Vector contenido en el PTBM al cual
      * pertence este PTB.
      * @return int
@@ -82,7 +82,7 @@ public interface PTBInterface extends Serializable {
 
     /**
      * Modifica los campos nombre, señal, unidades, comentario y unidades temporales
-     * de éste PTB. Los inicializa a los valores que les pasamos.
+     * de este PTB. Los inicializa a los valores que les pasamos.
      * @param nombre
      * @param parametro
      * @param unidades
@@ -111,12 +111,12 @@ public interface PTBInterface extends Serializable {
     public Restriccion[] getRestricciones(int ptosig);
 
     /**
-     * Añade, borra o modifica un PtoSig según el selector que se le pase. Este método
-     * debería de llevar toda la funcionalidad del  metodo añadePtoSig, y este debería
+     * Añade, borra o modifica un PtoSig segun el selector que se le pase. Este metodo
+     * deberia de llevar toda la funcionalidad del  metodo añadePtoSig, y este deberia
      * "deprecarse".
      * @param ptosig - PtoSIg que se va a añadir, o modificar. Si se va  a borrar no
      * es necesario.
-     * @param numeroPtoSig - Posición que ocupa el PtoSIg que se va a modificar o
+     * @param numeroPtoSig - Posicion que ocupa el PtoSIg que se va a modificar o
      * borrar. Si se va a crear no es necesario.
      * @param seleccion - PTBM.BORRAR/MODIFICAR/AÑADIR.
      * @roseuid 3788BB0A01DB
@@ -129,7 +129,7 @@ public interface PTBInterface extends Serializable {
      * @param ptb - PTB con el cual se tienen la restriccion.
      * @param ptosig - PtoSig que al que se le va a añadir/borrar/modificar la
      * restriccion.
-     * @param restriccion - Restricción nueva en caso de que se vaya a añadir o
+     * @param restriccion - Restriccion nueva en caso de que se vaya a añadir o
      * modificar. null si se va a borrar.
      * @param restriccion_vieja - restriccion antigua en caso de que se vaya a borrar
      * o modificar. null si se va a ñadir.
@@ -175,11 +175,11 @@ public interface PTBInterface extends Serializable {
     public String getUnidadesTemporales();
 
     /**
-     * Este metodo no se implementará actualmente. su misión es permitir
+     * Este metodo no se implementara actualmente. su mision es permitir
      * compatibilidad entre los formatos serializados de distitas versiones de PTB. En
      * caso de que en el futuro haya que introducir un nuevo campo en el PTB (ej:
      * nombre del autor del PTB), se almacenarta como una dato Object dentro de una
-     * lista. Este metodo accederá a la posición i de esa lista para recuperar ese
+     * lista. Este metodo accedera a la posicion i de esa lista para recuperar ese
      * dato.
      * @param parametro
      * @return Object
@@ -188,19 +188,19 @@ public interface PTBInterface extends Serializable {
     public Object getParametro(int parametro);
 
     /**
-     * Este metodo no se implementará actualmente. su misión es permitir
+     * Este metodo no se implementara actualmente. su mision es permitir
      * compatibilidad entre los formatos serializados de distitas versiones de PTB. En
      * caso de que en el futuro haya que introducir un nuevo campo en el PTB (ej:
      * nombre del autor del PTB), se almacenarta como una dato Object dentro de una
-     * lista. Este metodo accederá a la posición i de esa lista para almacenar ese dat
-     * @param parametro - Es la posición del vector a la cual se accederá para
+     * lista. Este metodo accedera a la posicion i de esa lista para almacenar ese dat
+     * @param parametro - Es la posicion del vector a la cual se accedera para
      * recuperear un determinado parametro.
      * @roseuid 3788CEC202D5
      */
     public void setParametro(int parametro);
 
     /**
-     * Métodos para acceder a la distancia entre PTB
+     * Metodos para acceder a la distancia entre PTB
      * @return int
      */
     public float getIntInicioSoporteSeparacion();
@@ -224,7 +224,7 @@ public interface PTBInterface extends Serializable {
 
 
     /**
-     * Médtodos para acceder a la longitud de la ventana de búsqueda
+     * Medtodos para acceder a la longitud de la ventana de busqueda
      * @return int
      */
     public float getLongitudVentana();

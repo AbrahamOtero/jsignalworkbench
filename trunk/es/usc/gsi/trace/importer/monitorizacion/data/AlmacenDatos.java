@@ -336,7 +336,7 @@ public abstract class AlmacenDatos implements Serializable {
     }
 
 
-    //////////////Conjunto de métodos para la gestion del almacenaje a archivo
+    //////////////Conjunto de metodos para la gestion del almacenaje a archivo
     public boolean getEstaGuardado() {
         return esta_guardado;
     }
@@ -473,7 +473,7 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     /**
-     * Devuelve la longitud máxima de la señal más grande.
+     * Devuelve la longitud maxima de la señal mas grande.
      * Han de implementarlo las clases que la extiendan.
      * @return
      */
@@ -532,7 +532,7 @@ public abstract class AlmacenDatos implements Serializable {
         tienePosAsociada_tmp[nueva_num_senales - 1] = true;
         leyendas_tmp[nueva_num_senales] = leyenda;
         leyenda_temporal_tmp[nueva_num_senales] = Leyenda_temporal;
-        //La posibilidad siempre debe ser la última en almacenar su rango
+        //La posibilidad siempre debe ser la ultima en almacenar su rango
         if (pos_total != null) {
             nueva_num_senales++;
             nombre_senales_tmp[nueva_num_senales] = this.nombre_senales[
@@ -737,7 +737,7 @@ public abstract class AlmacenDatos implements Serializable {
 
 
     /**Cuando se carga un archivo serializado este no posee ciertos campos que se añadienron
-     * al almacen a posteriori. Los inicializamos aquí
+     * al almacen a posteriori. Los inicializamos aqui
      */
 
     public void inicializaPartesNoSerializadas() {

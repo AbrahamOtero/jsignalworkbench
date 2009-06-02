@@ -4,10 +4,10 @@ import javax.swing.*;
 
 public abstract class PanelEtiquetadoGeneral extends JTabbedPane {
 
-    // Actualizará las frecuencias a las presentes en el interfaz gráfico.
+    // Actualizara las frecuencias a las presentes en el interfaz grafico.
     public abstract void actualizaFrecuencias();
 
-    // Actualizará las fechas a las presentes en el interfaz gráfico.
+    // Actualizara las fechas a las presentes en el interfaz grafico.
     public abstract void actualizaFechas(String fechaInicio, String fechaFin);
 
     // Cerrar todos los ficheros

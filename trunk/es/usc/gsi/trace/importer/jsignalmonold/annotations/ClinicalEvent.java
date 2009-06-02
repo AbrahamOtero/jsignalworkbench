@@ -102,7 +102,7 @@ public class ClinicalEvent implements Comparable, Serializable {
     }
 
     /**
-     * Debuelve el tipo de enento (Marca, Diagnostico, Terapia o manifestación)
+     * Debuelve el tipo de enento (Marca, Diagnostico, Terapia o manifestacion)
      * al cual pertene este evento
      */
     public int getTipo() {
@@ -134,8 +134,8 @@ public class ClinicalEvent implements Comparable, Serializable {
     }
 
     /**
-     * Devuelve el ófset con el cual será dibujado este evento en pantalla. Es un
-     * método cuya única finalidad es gestionar el dibujo en pantalla.
+     * Devuelve el ofset con el cual sera dibujado este evento en pantalla. Es un
+     * metodo cuya unica finalidad es gestionar el dibujo en pantalla.
      */
 
     public int getOffset() {

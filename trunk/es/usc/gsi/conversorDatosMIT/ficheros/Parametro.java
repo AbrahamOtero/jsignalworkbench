@@ -29,7 +29,7 @@ public class Parametro {
     private String nombreParametro;
 
     // Frecuencia REAL a la cual
-    // se muestrea nuestro parámetro=frecuencia muestreo marco * factorFrecuencia
+    // se muestrea nuestro parametro=frecuencia muestreo marco * factorFrecuencia
 
     private float frecuenciaMuestreo;
     private float backupFrecuenciaMuestreo;
@@ -42,7 +42,7 @@ public class Parametro {
     private String backupFechaFin;
 
 
-    // Flag que indica si su checkbox está activado
+    // Flag que indica si su checkbox esta activado
     private boolean activado = false;
     public static int numSeleccionados = 0;
     // Atributo que almacena los valores seleccionados
@@ -61,7 +61,7 @@ public class Parametro {
                      String fechaInicio, String fechaFin
             ) {
 
-        // Inicialización de atributos
+        // Inicializacion de atributos
 
         this.nombreFichero = nombreFichero;
         this.ficheroDat = new FicheroDat(nombreFichero); //Fichero donde se almacena la info.
@@ -257,7 +257,7 @@ public class Parametro {
         return activado;
     }
 
-    // Corrector de nombre del parámetro
+    // Corrector de nombre del parametro
     // SÓLO CORRIGE LA ÚLTIMA CIFRA. SI HUBIESE 2 CIFRAS AL FINAL
     // DEL NOMBRE DEL PARÁMETRO, ERROR!!!
     private void corrigeNombre() {
@@ -271,7 +271,7 @@ public class Parametro {
             //  System.out.println( nombreParametro.substring( nombreParametro.length() - 1 ) );
 
             if (nombreParametro.equalsIgnoreCase("SaO2")) {
-                return; // Excepción a la regla general: en este caso, no se debe corregir el número de final del nombre.
+                return; // Excepcion a la regla general: en este caso, no se debe corregir el numero de final del nombre.
             }
 
             indice = Integer.parseInt(nombreParametro.substring(nombreParametro.

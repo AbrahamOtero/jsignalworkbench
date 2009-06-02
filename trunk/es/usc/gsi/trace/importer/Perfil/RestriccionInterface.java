@@ -35,7 +35,7 @@ public interface RestriccionInterface extends Serializable {
 
     /**
      * Devuelve la restriccion en magnitud. Lo hace en forma de un vector de 4
-     * Strings.En cada posición estan las restriiciones con el Ptosig 0, 1, 2...
+     * Strings.En cada posicion estan las restriiciones con el Ptosig 0, 1, 2...
      * @return String[][]
      * @roseuid 3788D069033E
      */
@@ -43,7 +43,7 @@ public interface RestriccionInterface extends Serializable {
 
     /**
      * Devuelve la restriccion temporal. Lo hace en forma de un vector de 4 Strings.En
-     * cada posición estan las restriiciones con el Ptosig 0, 1, 2...
+     * cada posicion estan las restriiciones con el Ptosig 0, 1, 2...
      * @return String[][]
      * @roseuid 3788D0690352
      */
@@ -51,17 +51,17 @@ public interface RestriccionInterface extends Serializable {
 
     /**
      * Devuelve la restriccion en pendiente. Lo hace en forma de un vector de 4
-     * Strings.En cada posición estan las restriiciones con el Ptosig 0, 1, 2...
+     * Strings.En cada posicion estan las restriiciones con el Ptosig 0, 1, 2...
      * @return String[][]
      * @roseuid 3788D0690366
      */
     public String[][] getMs();
 
     /**
-     * Inicializa la restricicon en magnitud.En cada posición estan las restriiciones
+     * Inicializa la restricicon en magnitud.En cada posicion estan las restriiciones
      * con el Ptosig 0, 1, 2...
      * @param D - Arrayde arrays, cada unao de ellos  con 4 Strings representando la
-     * distribución de posibilidad en forma de trapecio.
+     * distribucion de posibilidad en forma de trapecio.
      * @roseuid 3788D069037A
      */
     public void setDs(String[][] D);
@@ -69,7 +69,7 @@ public interface RestriccionInterface extends Serializable {
     /**
      * Inicializa la restricicon temporal.
      * @param L - Array de arrays, cada unao de ellos  con 4 Strings representando la
-     * distribución de posibilidad en forma de trapecio.
+     * distribucion de posibilidad en forma de trapecio.
      * @roseuid 3788D069038E
      */
     public void setLs(String[][] L);
@@ -77,15 +77,15 @@ public interface RestriccionInterface extends Serializable {
     /**
      * Inicializa la restricicon en pendiente.
      * @param M - Array de arrays, cada unao de ellos con 4 Strings representando la
-     * distribución de posibilidad en forma de trapecio.
+     * distribucion de posibilidad en forma de trapecio.
      * @roseuid 3788D06903A2
      */
     public void setMs(String[][] M);
 
     /**
-     * Devuelve todos los PTB envueltos en esta restricción. El orden en el que son
-     * devulestops es el mismo en el que se nos devolverán los Ptosig de cada PTB que
-     * envuelven a esta restricción.
+     * Devuelve todos los PTB envueltos en esta restriccion. El orden en el que son
+     * devulestops es el mismo en el que se nos devolveran los Ptosig de cada PTB que
+     * envuelven a esta restriccion.
      * @return int[]
      * @roseuid 3789AF8D021A
      */
@@ -107,7 +107,7 @@ public interface RestriccionInterface extends Serializable {
     public int[] getNumerosDePtoSig();
 
     /**
-     * Inicializa los PtosSig de cada PTB envueltos en esta restricción.
+     * Inicializa los PtosSig de cada PTB envueltos en esta restriccion.
      * @param v_PtoSig
      * @return Void
      * @roseuid 3789B2E80184
@@ -115,9 +115,9 @@ public interface RestriccionInterface extends Serializable {
     public Void setNumerosDePtoSig(int[] v_PtoSig);
 
     /**
-     * Este el el método que permite resolver est restriccion. Para su reralización
-     * será necesario que la restriccion tenga un acceso a la señal real de algúm
-     * modo. Probablemente se cree un Objeto que se encapsule dentro de la restricción
+     * Este el el metodo que permite resolver est restriccion. Para su reralizacion
+     * sera necesario que la restriccion tenga un acceso a la señal real de algum
+     * modo. Probablemente se cree un Objeto que se encapsule dentro de la restriccion
      * y que tenga acceso a los cauces de entrada.
      * @return float
      * @roseuid 3789B7F80283
@@ -134,7 +134,7 @@ public interface RestriccionInterface extends Serializable {
 
 
     /**
-     * indica si la restriccióne s relativa al nevel basal
+     * indica si la restriccione s relativa al nevel basal
      * @return boolean
      */
     public boolean isRelativaAlNivelBasal();

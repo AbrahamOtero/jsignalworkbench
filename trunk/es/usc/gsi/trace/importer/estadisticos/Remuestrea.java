@@ -69,7 +69,7 @@ public class Remuestrea {
                                       float periodoFinal,
                                       boolean suaviza) {
         int numDatos = datos.length;
-        //El numero de datos finales será el entyero superior a numDatos*periodoInicial/periodoFinal
+        //El numero de datos finales sera el entyero superior a numDatos*periodoInicial/periodoFinal
         int nuevoNumDatos = (int) (numDatos * periodoInicial / periodoFinal);
         float[] nuevoDatos = new float[nuevoNumDatos];
         for (int i = 0; i < numDatos; i++) {
@@ -85,13 +85,13 @@ public class Remuestrea {
 
                 //Si el dato nuevo se corresponde a varios antiguos y se quiere suavizado
                 if (periodoFinal > periodoInicial && suaviza) {
-                    //El último dato que no ue empleado para rellenar
+                    //El ultimo dato que no ue empleado para rellenar
                     int anteriorDato = i - (int) (periodoFinal / periodoInicial);
                     anteriorDato = Math.max(0, anteriorDato);
-                    //Este es el número de dtaos qeu saltamos
+                    //Este es el numero de dtaos qeu saltamos
                     int nunDatosSaltados = i - anteriorDato;
                     float sum = 0;
-                    //Hacemos la media aritmética desde el último dato que no empleamos hasta
+                    //Hacemos la media aritmetica desde el ultimo dato que no empleamos hasta
                     //el presente, y ese es el valor que empleamos para el nuevo dato
                     for (int k = anteriorDato; k < i; k++) {
                         sum += datos[k];

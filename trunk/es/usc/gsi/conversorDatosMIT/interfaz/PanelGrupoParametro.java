@@ -86,9 +86,9 @@ public class PanelGrupoParametro extends JPanel implements ActionListener,
 
 //***************************************************************************
 
-     // Métodos para gestionar eventos
+     // Metodos para gestionar eventos
 
-     // Eventos de botón
+     // Eventos de boton
      public void actionPerformed(ActionEvent e) {
          this.reset();
      }

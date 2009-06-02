@@ -28,29 +28,29 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
 
 
     /**
-     * Proporciona datos de configuración del algoritmo que deben de ser
+     * Proporciona datos de configuracion del algoritmo que deben de ser
      * guardados por el entorno.
      *
      * @return cadena de caracteres con los datos que debe guardar el
-     *   entorno. Si el entorno no debe de guardar ninguna información sobre
-     *   el plugin el valor de retorno será null.
+     *   entorno. Si el entorno no debe de guardar ninguna informacion sobre
+     *   el plugin el valor de retorno sera null.
      */
     public String getDataToSave() {
         return ultimoDirectorioAbierto;
     }
 
     /**
-     * Devuelve una decisión textual más amplia de la funcionalidad del
+     * Devuelve una decision textual mas amplia de la funcionalidad del
      * plugin.
      *
-     * @return descripción textual larga
+     * @return descripcion textual larga
      */
     public String getDescription() {
         return "Permite importar señales de registros MIT-BIH. Importa nombre de señales, frecuencias de muestreo, fecha de comienzo del registro, etc.";
     }
 
     /**
-     * Devuelve un icono que será empleado en varios sitios de la interfaz de
+     * Devuelve un icono que sera empleado en varios sitios de la interfaz de
      * usuario para representar al plugin.
      *
      * @return icono que representa al plugin
@@ -70,19 +70,19 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
     }
 
     /**
-     * Devuelve la versión del plugin.
+     * Devuelve la version del plugin.
      *
-     * @return Versión del plugin
+     * @return Version del plugin
      */
     public String getPluginVersion() {
         return "0.5";
     }
 
     /**
-     * Devuelve una de extinción textual corta sobre la funcionalidad del
+     * Devuelve una de extincion textual corta sobre la funcionalidad del
      * plugin.
      *
-     * @return descripción textual corta
+     * @return descripcion textual corta
      */
     public String getShortDescription() {
         return "Importa registros MIT-BIH";
@@ -90,7 +90,7 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
 
     /**
      * Devuelve ciertos y el plugin tiene datos se desea que el entorno
-     * guarde y le devuelva la próxima vez que se ejecute la herramienta.
+     * guarde y le devuelva la proxima vez que se ejecute la herramienta.
      *
      * @return ciertos y el entorno debe guardar de datos, falso en caso
      *   contrario.
@@ -100,7 +100,7 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
     }
 
     /**
-     * Indica si el plugin tiene una interfaz gráfica propia para
+     * Indica si el plugin tiene una interfaz grafica propia para
      * configurarse.
      *
      * @return devuelve cierto si tiene interfaz y falso en caso contrario
@@ -112,12 +112,12 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
 
 
     /**
-     * Este método es invocado por el entorno al cargar el plugin para
-     * pasarle una cadena de caracteres con los datos que el plugin le pidió
-     * que almacenarse en la última ejecución.
+     * Este metodo es invocado por el entorno al cargar el plugin para
+     * pasarle una cadena de caracteres con los datos que el plugin le pidio
+     * que almacenarse en la ultima ejecucion.
      *
-     * @param data datos que el plugin pidió al entorno que almacenarse en
-     *   la última ejecución
+     * @param data datos que el plugin pidio al entorno que almacenarse en
+     *   la ultima ejecucion
      */
     public void setSavedData(String data) {
         ultimoDirectorioAbierto = data;

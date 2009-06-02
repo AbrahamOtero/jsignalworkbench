@@ -33,7 +33,7 @@ public class CargarDatosXML extends CargarDatos {
     }
 
     private void cargaDatos() throws JDOMException {
-        //Generamos el path de este archivo, lo necesitaremos para más tarde:
+        //Generamos el path de este archivo, lo necesitaremos para mas tarde:
         String arcivo_monitorizacion_path = (new File(archivo)).getParent() +
                                             File.separator;
         //Cargamos el documento validando
@@ -87,7 +87,7 @@ public class CargarDatosXML extends CargarDatos {
         boolean[] tien_pos_asociada = new boolean[num_senales];
         String nombre_archivo_senal;
 
-        //Primero cargaremos la configuración de las señales
+        //Primero cargaremos la configuracion de las señales
         int cont_senal = -1;
         while (it.hasNext()) {
             cont_senal++;
@@ -223,7 +223,7 @@ public class CargarDatosXML extends CargarDatos {
 
     /**
      * Las leyendas por cmodidad las habiamos guardado todas en un solo String
-     * sepradas por espacios en blanco. Aquí las recuperamos.
+     * sepradas por espacios en blanco. Aqui las recuperamos.
      * @param todas_las_leyendas
      * @return
      */
@@ -481,7 +481,7 @@ public class CargarDatosXML extends CargarDatos {
                         } else {
                             datos[columna][linea] = Float.parseFloat(
                                     dato_fichero);
-                            //Si no estamos en la última columna
+                            //Si no estamos en la ultima columna
                             if (tk2.hasMoreElements()) {
                                 //consuminos el \t adicional
                                 if (!(tk2.nextElement().equals("\t"))) {

@@ -13,11 +13,11 @@ public interface InterfazConversion {
 
     public int convierteBytes(byte[] b, int numMuestra);
 
-// Este método proporciona el "step": cuántos bytes debemos avanzar para
+// Este metodo proporciona el "step": cuantos bytes debemos avanzar para
 // obtener la siguiente muestra.
     public float getStep();
 
-// Este método proporciona el número de bytes que debemos leer de un fichero para
+// Este metodo proporciona el numero de bytes que debemos leer de un fichero para
 // poder obtener una muestra a partir de ellos.
     public int getArraySize();
 

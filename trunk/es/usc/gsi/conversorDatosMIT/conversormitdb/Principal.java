@@ -8,8 +8,8 @@ public class Principal {
     // Constructor
     public Principal() {
 
-        // Carga de controladores: al cargar la clase también se crea un objeto
-        // de cada uno de los controladores: siguen el patrón Singleton
+        // Carga de controladores: al cargar la clase tambien se crea un objeto
+        // de cada uno de los controladores: siguen el patron Singleton
 
 
         VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();

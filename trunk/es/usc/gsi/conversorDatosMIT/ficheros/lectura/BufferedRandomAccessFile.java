@@ -9,12 +9,12 @@ public class BufferedRandomAccessFile {
     private RandomAccessFile entrada;
 
     private int bufferSize; // Tamaño del buffer normal
-    private int bufferSizeReducido; // Tamaño del buffer reducido: el último buffer que llenamos es menor o igual en tamaño que el buffer normal.
+    private int bufferSizeReducido; // Tamaño del buffer reducido: el ultimo buffer que llenamos es menor o igual en tamaño que el buffer normal.
 
     private byte[] buffer = null; // Buffer de almacenamiento de datos
 
-    private int numLecturasBuffer; // Número de veces que se ha rellenado el buffer = número de lecturas en disco que se han hecho.
-    private int numMaxLecturasNormales; // Número máximo de lecturas de bufferNormal que se pueden hacer. Después, hay que leer un buffer reducido.
+    private int numLecturasBuffer; // Numero de veces que se ha rellenado el buffer = numero de lecturas en disco que se han hecho.
+    private int numMaxLecturasNormales; // Numero maximo de lecturas de bufferNormal que se pueden hacer. Despues, hay que leer un buffer reducido.
 
     private int posicionEnBuffer;
 
@@ -31,21 +31,21 @@ public class BufferedRandomAccessFile {
         this.bufferSize = bufferSize;
 
         try {
-            this.numMaxLecturasNormales = (int) (entrada.length() / bufferSize); // Número de lecturas que podremos hacer con buffers de tamaño bufferSize.
-            this.bufferSizeReducido = (int) (entrada.length() % bufferSize); // Tamaño del último buffer: el resto de los bytes que quedan por leer en el final del fichero.
+            this.numMaxLecturasNormales = (int) (entrada.length() / bufferSize); // Numero de lecturas que podremos hacer con buffers de tamaño bufferSize.
+            this.bufferSizeReducido = (int) (entrada.length() % bufferSize); // Tamaño del ultimo buffer: el resto de los bytes que quedan por leer en el final del fichero.
         } catch (IOException e) {
             this.numMaxLecturasNormales = 0;
             this.bufferSizeReducido = 0;
         }
 
         this.numLecturasBuffer = 0; // No se ha hecho ninguna lectura
-        this.posicionEnBuffer = 0; // La posición inicial es la primera
+        this.posicionEnBuffer = 0; // La posicion inicial es la primera
 
         this.llenaBuffer(); // LLenamos el buffer por primera vez.
 
     }
 
-    // Métodos que se superponen a los de RandomAccessFile
+    // Metodos que se superponen a los de RandomAccessFile
 
     public void seek(long posicion) {
 
@@ -102,7 +102,7 @@ public class BufferedRandomAccessFile {
         int res;
 
         if (numLecturasBuffer > numMaxLecturasNormales) {
-            return -1; // No podemos leer más: estamos al final del fichero.
+            return -1; // No podemos leer mas: estamos al final del fichero.
         }
 
         if (numLecturasBuffer == numMaxLecturasNormales) {

@@ -47,12 +47,12 @@ public class PideDatosAlConversor extends Thread {
     }
 
     /**
-     * método que coge los datos del conversor y los carga en la interface.
+     * metodo que coge los datos del conversor y los carga en la interface.
      */
     public boolean cargarDatos() {
         max_numero_datos = Integer.MIN_VALUE;
 
-//LLAMADA A Código de CONVERSOTMIT
+//LLAMADA A Codigo de CONVERSOTMIT
         Parametro[] parametros = null;
         try {
             parametros = conversor.getParametros();
@@ -62,7 +62,7 @@ public class PideDatosAlConversor extends Thread {
                                           JOptionPane.ERROR_MESSAGE);
         }
 
-//Si no canceló la operación
+//Si no cancelo la operacion
         if (parametros != null) {
             float[][] datos = new float[parametros.length][];
             String[] nombresSenales = new String[parametros.length];
@@ -74,7 +74,7 @@ public class PideDatosAlConversor extends Thread {
             paso = 100 / parametros.length * parametros[0].getValores().length;
             paso = paso / 400;
             datos_por_aaray = parametros[0].getValores().length;
-            //Recojo los datos del array de parámetros
+            //Recojo los datos del array de parametros
             for (int i = 0; i < parametros.length; i++) {
                 datos[i] = arrayIntToFloat(parametros[i].getValores(),
                                            parametros[i].getGanancia(), i);

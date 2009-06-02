@@ -11,36 +11,36 @@ import es.usc.gsi.conversorDatosMIT.utilidades.*;
 public class LeeFicheroDat {
 
     private FicheroHead ficheroHead; // Fichero de cabecera
-    private Parametro parametro; // Parámetro que muestrearemos
-    private int indiceParametro; // Índice del parámetro dentro de su array
+    private Parametro parametro; // Parametro que muestrearemos
+    private int indiceParametro; // Índice del parametro dentro de su array
 
     private int factorFrecuencia; // Factor que multiplica la frecuencia del frame.
 
-    private int muestrasTotalesPorMarco; // Número de muestras de todos los parámetros por cada marco.
-    private int muestrasParametroPorMarco; // Número de muestras del parámetro en un marco.
-    private int muestrasParametrosAnteriores; // Número de muestras de los parámetros anteriores a este en el marco
-    // en el cual leeremos. Hará las veces de un offset para desplazarse dentro del marco.
+    private int muestrasTotalesPorMarco; // Numero de muestras de todos los parametros por cada marco.
+    private int muestrasParametroPorMarco; // Numero de muestras del parametro en un marco.
+    private int muestrasParametrosAnteriores; // Numero de muestras de los parametros anteriores a este en el marco
+    // en el cual leeremos. Hara las veces de un offset para desplazarse dentro del marco.
 
-    private float frecuenciaOriginal; // Frecuencia original a la cual se muestreó la señal
+    private float frecuenciaOriginal; // Frecuencia original a la cual se muestreo la señal
     private float frecuenciaRemuestreo; // Frecuencia a la que queremos remuestrear
-    private float factorConversion; // Factor de conversión de num muestras remuestreadas a num muestras originales
+    private float factorConversion; // Factor de conversion de num muestras remuestreadas a num muestras originales
 
     private BufferedRandomAccessFile entrada; // Entrada de datos desde fichero
     // private CacheMITDB entrada;
     // private RandomAccessFile entrada;
 
-    private long numMuestra; // Número ordinal de muestra que leeremos en la siguiente invocación de getSiguiente()
+    private long numMuestra; // Numero ordinal de muestra que leeremos en la siguiente invocacion de getSiguiente()
     private long numMuestraFinal; // Ordinal hasta el cual leeremos: es la muestra en la qu acaba la lectura.
-    private long numMuestrasTotal; // Número que indica qué cantidad de muestras existen.
+    private long numMuestrasTotal; // Numero que indica que cantidad de muestras existen.
 
-    private int valorMuestra; // Valor numérico de la muestra en formato entero.
+    private int valorMuestra; // Valor numerico de la muestra en formato entero.
 
     private int formato;
 
-    private float stepBytes; // Número de bytes por muestra <=> Número de bytes que hay que avanzar para leer la siguiente muestra.
+    private float stepBytes; // Numero de bytes por muestra <=> Numero de bytes que hay que avanzar para leer la siguiente muestra.
     private int sizeArrayBytes; // Tamaño del array de bytes.
 
-    private InterfazConversion algoritmoConversion; // Algoritmo de conversión propio para este formato.
+    private InterfazConversion algoritmoConversion; // Algoritmo de conversion propio para este formato.
 
     public LeeFicheroDat(FicheroHead ficheroHead, Parametro parametro) {
 
@@ -51,7 +51,7 @@ public class LeeFicheroDat {
         this.frecuenciaOriginal = parametro.getBackupFrecuenciaMuestreo();
 
         // Equivalente a numMuestrasOriginales/numMuestrasRemuestreo:
-        // es un factor de conversión para pasar un número de muestras
+        // es un factor de conversion para pasar un numero de muestras
         // de remuestreo a uno de muestras originales, que son las muestras
         // sobre las que trabajamos.
         this.factorConversion = frecuenciaOriginal / frecuenciaRemuestreo;
@@ -66,7 +66,7 @@ public class LeeFicheroDat {
         this.muestrasParametrosAnteriores = this.
                                             calculaMuestrasParametrosAnteriores();
 
-        // Inicializamos los parámetros de conteo.
+        // Inicializamos los parametros de conteo.
         long intervaloNumMuestra = ParseadorFecha.calculaDiferencia(
                 parametro.getBackupFechaInicio(), parametro.getFechaInicio()
                                    );
@@ -98,9 +98,9 @@ public class LeeFicheroDat {
         }
 
         this.numMuestrasTotal = (ficheroHead.getNumMuestras()) *
-                                this.factorFrecuencia - 1; // Hay que corregir: la 10ª muestra tendrá el índice 9, p.ej.
+                                this.factorFrecuencia - 1; // Hay que corregir: la 10ª muestra tendra el indice 9, p.ej.
 
-        // "Step" de avance dentro del fichero y conversión de formato
+        // "Step" de avance dentro del fichero y conversion de formato
 
         switch (this.parametro.getFormatoAlmacenamiento()) {
 
@@ -186,12 +186,12 @@ public class LeeFicheroDat {
 
     }
 
-////// Búsqueda de muestra original correspondiente a la muestra de remuestreo
+////// Busqueda de muestra original correspondiente a la muestra de remuestreo
     private int buscaMuestraOriginal() {
 
         int res;
 
-        // Buscamos el marco donde está la muestra
+        // Buscamos el marco donde esta la muestra
         int numMuestraOriginal = (int) (numMuestra * factorConversion);
         int numMarco = numMuestraOriginal / muestrasParametroPorMarco;
         int desplazamiento = numMuestraOriginal % muestrasParametroPorMarco;
@@ -218,7 +218,7 @@ public class LeeFicheroDat {
         if (entrada.read(bytesMuestra) == -1) {
             throw new EOFException();
         }
-        // Conversión de los bytes a un int
+        // Conversion de los bytes a un int
         //   System.out.println("(" + bytesMuestra[0] + "," + bytesMuestra[1] + ")");
         // OBTENER RESULTADO DE CONVERSIÓN
         res = algoritmoConversion.convierteBytes(bytesMuestra, posMuestra);
@@ -275,7 +275,7 @@ public class LeeFicheroDat {
 
     } // Fin lectura del siguiente valor.
 
-    // Devuelve todos los valores de un parámetro en forma de array de enteros.
+    // Devuelve todos los valores de un parametro en forma de array de enteros.
 
     public int[] getTodosValores() {
 
@@ -313,12 +313,12 @@ public class LeeFicheroDat {
              if (parametro.getGanancia()!=200) {
                 res[i]=(int) (res[i]/parametro.getGanancia());
                          }
-             Por algún motivo, el algoritmo cuando la ganancia es 200 le perfectamente
-             pero cuando es distinto de 200 no. Quizás el algoritmo está preparado para
-             que la ganancia sea 200 (no se ve que normalice y ningún sitio). También
+             Por algun motivo, el algoritmo cuando la ganancia es 200 le perfectamente
+             pero cuando es distinto de 200 no. Quizas el algoritmo esta preparado para
+             que la ganancia sea 200 (no se ve que normalice y ningun sitio). Tambien
              he observado que no restan el ofset.
 
-             No obstante, habría que verificar y que testearcuidadosamente estos cambios.
+             No obstante, habria que verificar y que testearcuidadosamente estos cambios.
              */
 
         }

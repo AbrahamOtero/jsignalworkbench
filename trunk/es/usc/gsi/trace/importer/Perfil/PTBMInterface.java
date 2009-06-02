@@ -18,10 +18,10 @@ public interface PTBMInterface extends Serializable {
     static final long serialVersionUID = 1234L;
 
     /**
-     * Este método se emplea para añadir, eliminar o modificar un PTB de éste PTBM.
+     * Este metodo se emplea para añadir, eliminar o modificar un PTB de este PTBM.
      * @param ptb - Es el PTB que se va a añadir, borrar o modificar. Si se va a
      * borrar o modificar no es necesario.
-     * @param numeroPTB - Es el número del PTB que se va a añadir/borrar/modificar.
+     * @param numeroPTB - Es el numero del PTB que se va a añadir/borrar/modificar.
      * @param seleccion - Puede tomar los valors PTBM.AÑADIR, PTBM.BORRAR,
      * PTBM.Modificar
      * @roseuid 37875DDC03AB
@@ -43,7 +43,7 @@ public interface PTBMInterface extends Serializable {
     public void setTieneFicheroAsociado(boolean b);
 
     /**
-     * Debuelve un String con el fichero que tiene asignado éste PTBM, en caso de que
+     * Debuelve un String con el fichero que tiene asignado este PTBM, en caso de que
      * tenga fichero asignado.
      * @return String
      * @roseuid 37875DED0266
@@ -51,14 +51,14 @@ public interface PTBMInterface extends Serializable {
     public String getFicheroAsociado();
 
     /**
-     * Asocia un Fichero a éste PTBM
+     * Asocia un Fichero a este PTBM
      * @param fichero - String del PATH completo del fichero
      * @roseuid 37875DED0270
      */
     public void setFicheroAsociado(String fichero);
 
     /**
-     * Devuelve un array con todos lo PTB que componen éste PTBM.
+     * Devuelve un array con todos lo PTB que componen este PTBM.
      * @return PTB[]
      * @roseuid 37875DED02FC
      */
@@ -67,7 +67,7 @@ public interface PTBMInterface extends Serializable {
     /**
      * Hace que los PTB que contenga este PTBM sean los que se le pasan en el array.
      * @param vptb - Array con los PTB que queremos se hallen en este PTBM
-     * @param nptb - Número de PTB que contiene el array.
+     * @param nptb - Numero de PTB que contiene el array.
      * @roseuid 37875DED0306
      */
     public void setPTB(PTB[] vptb, int nptb);
@@ -82,8 +82,8 @@ public interface PTBMInterface extends Serializable {
 
     /**
      * Añade, modifica o borra un PtoSig de un PTB.
-     * @param ptb - PTB al cual se le va a añadir el PtoSig. OJO: debería modificarse
-     * esto para en vez de pasarle el PTB, pasáele el numero del PTB.
+     * @param ptb - PTB al cual se le va a añadir el PtoSig. OJO: deberia modificarse
+     * esto para en vez de pasarle el PTB, pasaele el numero del PTB.
      * @param ptosig - PtoSig a añadir/modificar/borrar. Si se va a borrar no es
      * necesario.
      * @param numeroPtoSig - Numero del PtoSig . Solo es imprescindible cuando se va a
@@ -163,11 +163,11 @@ public interface PTBMInterface extends Serializable {
     public int getnumeroPTBnoEstatico();
 
     /**
-     * Este metodo no se implementará actualmente. su misión es permitir
+     * Este metodo no se implementara actualmente. su mision es permitir
      * compatibilidad entre los formatos serializados de distitas versiones de PTBM.
      * En caso de que en el futuro haya que introducir un nuevo campo en el PTBM (ej:
      * nombre del autor del PTBM), se almacenarta como una dato Object dentro de una
-     * lista. Este metodo accederá a la posición i de esa lista para recuperar ese
+     * lista. Este metodo accedera a la posicion i de esa lista para recuperar ese
      * dato.
      * @param parametro
      * @return Object
@@ -176,31 +176,31 @@ public interface PTBMInterface extends Serializable {
     public Object getParametro(int parametro);
 
     /**
-     * Este metodo no se implementará actualmente. su misión es permitir
+     * Este metodo no se implementara actualmente. su mision es permitir
      * compatibilidad entre los formatos serializados de distitas versiones de PTBM.
      * En caso de que en el futuro haya que introducir un nuevo campo en el PTBM (ej:
      * nombre del autor del PTBM), se almacenarta como una dato Object dentro de una
-     * lista. Este metodo accederá a la posición i de esa lista para almacenar ese dat
-     * @param parametro - Es la posición del vector a la cual se accederá para
+     * lista. Este metodo accedera a la posicion i de esa lista para almacenar ese dat
+     * @param parametro - Es la posicion del vector a la cual se accedera para
      * recuperear un determinado parametro.
      * @roseuid 3788BA0903A7
      */
     public void setParametro(int parametro);
 
     /**
-     * Este método devuelve el titulo del PTBM
+     * Este metodo devuelve el titulo del PTBM
      * @roseuid 3788BA0903A7
      */
     public String getTitulo();
 
     /**
-     * Este método devuelve el comentario del PTBM
+     * Este metodo devuelve el comentario del PTBM
      * @roseuid 3788BA0903A7
      */
     public String getComentario();
 
     /**
-     * Este método modifica el titulo y el comentario del PTBM
+     * Este metodo modifica el titulo y el comentario del PTBM
      * @roseuid 3788BA0903A7
      * @param titulo
      * @param comentario

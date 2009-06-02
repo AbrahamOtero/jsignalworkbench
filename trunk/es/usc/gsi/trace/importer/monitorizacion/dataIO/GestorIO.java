@@ -89,7 +89,7 @@ public class GestorIO {
                 float[][] datos = (float[][]) almacen.getDatos();
                 String[] nombres_Vila = {"VLF", "LF", "HF", "HF/LF", "FC"};
                 GestorDatos gestor_fdatos = GestorDatos.getInstancia();
-                //Si carhgó el archivo de Vila
+                //Si carhgo el archivo de Vila
                 if (archivo.endsWith(".picos")) {
                     for (int i = 0; i < datos.length && i < nombres_Vila.length;
                                  i++) {

@@ -70,7 +70,7 @@ public class MyFloat {
     }
 
     /**
-     * Devuelve null si No se pudo completar la operación
+     * Devuelve null si No se pudo completar la operacion
      * @param numero
      * @return
      */
@@ -107,7 +107,7 @@ public class MyFloat {
     }
 
     /**
-     * Emplear para cambiar el numero de dígitos decimales del patrón
+     * Emplear para cambiar el numero de digitos decimales del patron
      * @param numero_decimaales
      */
     public static void setNumeroDecimales(int numero_decimales) {

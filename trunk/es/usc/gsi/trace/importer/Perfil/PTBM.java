@@ -301,7 +301,7 @@ public class PTBM implements PTBMInterface, Serializable {
     }
 
     /**
-     * Este método devuelve el comentario del PTBM
+     * Este metodo devuelve el comentario del PTBM
      * @roseuid 3788BA0903A7
      */
     public String getComentario() {
@@ -309,7 +309,7 @@ public class PTBM implements PTBMInterface, Serializable {
     }
 
     /**
-     * Este método modifica el titulo y el comentario del PTBM
+     * Este metodo modifica el titulo y el comentario del PTBM
      * @roseuid 3788BA0903A7
      * @param titulo
      * @param comentario

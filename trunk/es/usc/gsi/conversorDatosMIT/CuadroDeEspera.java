@@ -89,7 +89,7 @@ public class CuadroDeEspera extends JDialog {
             }
         });
         cancelar.setBorder(normal);
-        cancelar.setToolTipText("Canclar el proceso de adquisición de datos");
+        cancelar.setToolTipText("Canclar el proceso de adquisicion de datos");
         cancelar.setText("Cancelar");
         cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(MouseEvent e) {

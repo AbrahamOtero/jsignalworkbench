@@ -17,7 +17,7 @@ public class RutinasEstadisticas {
     MAYOR_QUE_995 = 5, MENOR_QUE_90 = 0;
 
     /**
-     * Simple cálculo de una media artimética.
+     * Simple calculo de una media artimetica.
      * @param datos
      * @return
      */
@@ -30,7 +30,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Cálculo de una mediana y de los percentiles. Se devueleven en un mimo arrya de
+     * Calculo de una mediana y de los percentiles. Se devueleven en un mimo arrya de
      * floats, el primero es la mediana, y el resto los percentiles que se solicitarion.
      * @param datos
      * @return
@@ -50,7 +50,7 @@ public class RutinasEstadisticas {
                 if (dato_actual == 0) {
                     dato_actual = Float.MIN_VALUE;
                 }
-                //Mas chapuzas. Supongo que nunca pasará. si lo de abajo no actualiza el número =>
+                //Mas chapuzas. Supongo que nunca pasara. si lo de abajo no actualiza el numero =>
                 if (Math.abs(dato_actual) < Float.MIN_VALUE * 10000000) {
                     dato_actual = dato_actual + Float.MIN_VALUE;
                     dato_Float = new Float(dato_actual);
@@ -66,7 +66,7 @@ public class RutinasEstadisticas {
         Iterator it = num_ordenados.iterator();
         boolean numero_datos_par;
         int mitad_de_los_datos;
-        //Miro si el número de datos es par
+        //Miro si el numero de datos es par
         if (num_datos % 2 == 0) {
             numero_datos_par = true;
             mitad_de_los_datos = num_datos / 2;
@@ -75,13 +75,13 @@ public class RutinasEstadisticas {
             //Nos interesa el redondeo por defecto
             mitad_de_los_datos = num_datos / 2;
         }
-        //Divido entre dos todos los datos de los percentiles, ya que la distribución es supuestamente simétrica,
+        //Divido entre dos todos los datos de los percentiles, ya que la distribucion es supuestamente simetrica,
         //Y los multiplico por el numero de datos totales, por el percentil en cuestion y divido por 100
         for (int i = 0; i < percentiles.length; i++) {
             percentiles[i] = percentiles[i] * num_datos / (100);
         }
 
-        //Esta varibale me permitirá ir almacenando correctamente los percentiles
+        //Esta varibale me permitira ir almacenando correctamente los percentiles
         int cuantos_percentiles_van = 0;
         float[] valor_de_los_percentiles = new float[percentiles.length];
         //Este flg nos indica cuando hemosm hallado la media
@@ -168,7 +168,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Se le pasa la varianza y calcula la desviación típica.
+     * Se le pasa la varianza y calcula la desviacion tipica.
      * @param varianza
      * @return
      */
@@ -177,7 +177,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Se le pasa la varianza y el número de datos calcula el error estandar.
+     * Se le pasa la varianza y el numero de datos calcula el error estandar.
      * @param varianza
      * @param num_datos
      * @return
@@ -201,8 +201,8 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Se le pasa la varianza, numero de datios, la media, y el parámetro z sub alfa
-     * y calcual el intervalo de confinaza del parámetro z sub alfa correspondiente.
+     * Se le pasa la varianza, numero de datios, la media, y el parametro z sub alfa
+     * y calcual el intervalo de confinaza del parametro z sub alfa correspondiente.
      * @param media
      * @param varianza
      * @param num_datos
@@ -223,7 +223,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Se le pasa la varianza y el la media y calcula el cociente de variación.
+     * Se le pasa la varianza y el la media y calcula el cociente de variacion.
      * @param varianza
      * @param media
      * @return
@@ -234,8 +234,8 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Calcula la correlación entre los dos vectores que se le pasan. Si el boolean es true
-     * se fuerza a calcualr la correlación aun cuando los vectores sean de distintas
+     * Calcula la correlacion entre los dos vectores que se le pasan. Si el boolean es true
+     * se fuerza a calcualr la correlacion aun cuando los vectores sean de distintas
      * longitudes.
      * @param datos1
      * @param datos2
@@ -246,7 +246,7 @@ public class RutinasEstadisticas {
     public static final float calculaCorrelacion(float[] datos1, float[] datos2,
                                                  boolean fuerza) throws
             CorrelacionException {
-        //Punteros que emplearé para denominar a datos 1 y dos una vez que, en caso de ser necesrio,
+        //Punteros que empleare para denominar a datos 1 y dos una vez que, en caso de ser necesrio,
         //Los halla ajustado para tener el mismo tamaño
         float datos_t_1[], datos_t_2[];
         int longitud1 = datos1.length;
@@ -264,16 +264,16 @@ public class RutinasEstadisticas {
             if (longitud1 > longitud2) {
                 //datos_t_2 se queda tal cual
                 datos_t_2 = datos2;
-                //datos_t_1 serán los primeros elementos de datos1
+                //datos_t_1 seran los primeros elementos de datos1
                 datos_t_1 = new float[datos2.length];
                 for (int i = 0; i < datos2.length; i++) {
                     datos_t_1[i] = datos1[i];
                 }
-                //si no => al revés
+                //si no => al reves
             } else {
                 //datos_t_1 se queda tal cual
                 datos_t_1 = datos1;
-                //datos_t_1 serán los primeros elementos de datos1
+                //datos_t_1 seran los primeros elementos de datos1
                 datos_t_2 = new float[datos1.length];
                 for (int i = 0; i < datos1.length; i++) {
                     datos_t_2[i] = datos2[i];
@@ -289,7 +289,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Calcula la correlación entre los dos vectores que se le pasan. Han de ser del mimo tamaño.
+     * Calcula la correlacion entre los dos vectores que se le pasan. Han de ser del mimo tamaño.
      * longitudes.
      * @param datos1
      * @param datos2
@@ -342,7 +342,7 @@ public class RutinasEstadisticas {
     }
 
     /**
-     * Devuelve un entero que indica el nivel de significacion de la correlación.
+     * Devuelve un entero que indica el nivel de significacion de la correlacion.
      * @param correlacion
      * @param NUM_DATOS EL MINIMO NUMERO DE DATOS DE LOS DOS NUMEROS DE DATOS CON LOS QUE SE CALCULO LA CORRELACION
      * @return
@@ -369,7 +369,7 @@ public class RutinasEstadisticas {
 
     }
 
-    public static String getTextoDeSignificación(int significacion) {
+    public static String getTextoDeSignificacion(int significacion) {
         switch (significacion) {
         case MENOR_QUE_90:
             return "no es significativo";

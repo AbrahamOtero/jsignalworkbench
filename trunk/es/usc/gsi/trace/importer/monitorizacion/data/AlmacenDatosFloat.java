@@ -43,7 +43,7 @@ public class AlmacenDatosFloat extends AlmacenDatos {
         this.marcas = new TreeSet[datos.length];
         this.anotaciones = new TreeSet();
         for (int i = 0; i < datos.length; i++) {
-            this.nombre_senales[i] = "parámetro " + (i + 1);
+            this.nombre_senales[i] = "parametro " + (i + 1);
             this.leyenda_temporal[i] = "leyenda temporal";
             String tmp = "";
             this.leyendas[i] = tmp;
@@ -131,7 +131,7 @@ public class AlmacenDatosFloat extends AlmacenDatos {
     }
 
     /**
-     * Devuelve la longitud máxima de la señal más grande.
+     * Devuelve la longitud maxima de la señal mas grande.
      * @return
      */
     public int getMaximoNumeroDeDatos() {
