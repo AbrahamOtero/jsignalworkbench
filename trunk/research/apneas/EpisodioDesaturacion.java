@@ -89,8 +89,8 @@ public class EpisodioDesaturacion extends Intervalo {
     /**
      * caracterizaEpisodio
      *
-     * @todo quizﬂs seria interesante calcular alguno de estos parametros sobre
-     *   la senhal real y no sobre la filtrada. En especial el m›nimo.
+     * @todo quizas seria interesante calcular alguno de estos parametros sobre
+     *   la senhal real y no sobre la filtrada. En especial el minimo.
      */
     private void caracterizaEpisodio() {
         tiempoBajada = intervaloPrincipio.getFin() - intervaloPrincipio.getPrincipio() + 1;

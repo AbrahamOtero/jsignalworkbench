@@ -151,7 +151,7 @@ public class DesatDetector {
             siguienteAscenso = ascensos.ceiling(ascenso.desplazaEnTiempo(1));
         }
         //despues de pedir un nuevo ascenso o descenso siempre se vuelve al bucle
-        //es aqui donde se comprueba si no hay mﬂs elementos.
+        //es aqui donde se comprueba si no hay mas elementos.
         while (descenso != null && ascenso != null && siguienteDescenso != null && siguienteAscenso != null) {
             //Si el ascenso comienza antes del descenso podemos despreciarlo por no estar emparejado
             //**********************/***\***/***************
@@ -358,7 +358,7 @@ public class DesatDetector {
 
 
     /**
-     * genera las marcas que representan los episodios de desaturaciæn y el
+     * genera las marcas que representan los episodios de desaturacion y el
      * colorido de la senhal.
      *
      * @todo este no es el mejor sitio para este mUtodo.

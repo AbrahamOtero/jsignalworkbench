@@ -289,7 +289,7 @@ public class DetectorDesaturaciones {
      */
     private Desaturacion comprobarTransicionANoDeteccionDesdeBusquedaDeFin() {
         buscandoFinDesat = true;
-        //@cambio  val•an 2 y 4
+        //@cambio  valian 2 y 4
         if (desatFinContador >= 6 || desatFinContador2 >= 8) {
             return transicionASinDeteccion();
         }

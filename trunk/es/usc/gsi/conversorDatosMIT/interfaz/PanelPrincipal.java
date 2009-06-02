@@ -65,7 +65,7 @@ public class PanelPrincipal extends JPanel /* implements ComponentListener */ {
     }
 
     ////////
-    /* ERA PARA OBTENER EL FICHEROHEAD SELECCIONADO EN UNA LENGÜETA
+    /* ERA PARA OBTENER EL FICHEROHEAD SELECCIONADO EN UNA LENGUETA
       public FicheroHead getFicheroHeadSeleccionado() {
 
         return paciente.getFicheroHeadSeleccionado();

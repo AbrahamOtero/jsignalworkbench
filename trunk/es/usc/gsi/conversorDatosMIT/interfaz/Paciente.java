@@ -46,7 +46,7 @@ public class Paciente extends JPanel {
             panelEtiquetado = new PanelEtiquetadoSimple(ficherosHead); // PRESENTACION EN FORMA DE LISTA
             break;
         case Paciente.ETIQUETAS:
-            panelEtiquetado = new PanelEtiquetado(ficherosHead); // PRESENTACION EN VARIAS LENGÜETAS
+            panelEtiquetado = new PanelEtiquetado(ficherosHead); // PRESENTACION EN VARIAS LENGUETAS
             break;
         default:
             panelEtiquetado = new PanelEtiquetadoSimple(ficherosHead);

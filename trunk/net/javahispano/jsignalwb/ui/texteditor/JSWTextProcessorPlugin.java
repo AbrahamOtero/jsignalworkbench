@@ -128,7 +128,7 @@ public class JSWTextProcessorPlugin extends WindowAdapter implements GenericPlug
         inMemoryDucyment = this.jSWTextProcessor.getInMemoryDucyment();
         jSWTextProcessorBounds = jSWTextProcessor.getBounds();
         JSWBManager.getJSWBManagerInstance().getSessionInfo().setSessionSaved(false);
-        System.out.println("Intentar\u2663 cerrﬂndose");
+        System.out.println("Intentar cerrandose");
     }
 
     public void actionPerformed(ActionEvent e) {

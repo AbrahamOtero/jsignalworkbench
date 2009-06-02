@@ -119,7 +119,7 @@ public class DebugPluginsManager {
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Limitacion de flujo",
                                         new LimitacionAnotacion()));
 
-        plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Desaturación",
+        plugins.add(new DebugPluginInfo(PluginTypes.MARK, "DesaturaciÃ³n",
                                         new DesaturacionAnotacion()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Latido normal",

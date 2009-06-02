@@ -38,7 +38,7 @@ public class DesaturacionAnotacion extends LimitacionAnotacion {
     }
 
     public String getName() {
-        return "Desaturación";
+        return "DesaturaciÃ³n";
     }
 
     public void showMarkInfo(Window owner) {
