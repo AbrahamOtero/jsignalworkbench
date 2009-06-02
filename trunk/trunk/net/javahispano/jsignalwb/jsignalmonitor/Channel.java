@@ -44,7 +44,7 @@ class Channel implements ImageObserver {
         setGrid(grid);
         setChannelProperties(channelProperties);
         //gridConfig=null;
-        //a veces daba una excepci¾n. Nunca es buena idea dejar un objeto a medias cuando se construye...
+        //a veces daba una excepcion. Nunca es buena idea dejar un objeto a medias cuando se construye...
         this.refreshGridConfig(4);
     }
 

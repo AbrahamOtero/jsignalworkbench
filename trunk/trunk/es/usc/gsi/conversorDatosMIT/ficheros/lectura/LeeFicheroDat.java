@@ -99,7 +99,7 @@ public class LeeFicheroDat {
         }
 
         this.numMuestrasTotal = (ficheroHead.getNumMuestras()) *
-                                this.factorFrecuencia - 1; // Hay que corregir: la 10ª muestra tendra el indice 9, p.ej.
+                                this.factorFrecuencia - 1; // Hay que corregir: la 10 muestra tendra el indice 9, p.ej.
 
         // "Step" de avance dentro del fichero y conversion de formato
 
@@ -297,7 +297,7 @@ public class LeeFicheroDat {
         } catch (IOException e) {}
 
         this.cierraFichero();
-//@todo y aqu• es donde reserva el espacio para los datos de verdad
+//@todo y aqui es donde reserva el espacio para los datos de verdad
         res = new int[valoresTemp.size()];
         System.out.println(res.length);
 
