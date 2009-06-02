@@ -1,11 +1,11 @@
 package es.usc.gsi.conversorDatosMIT;
 
-import javax.swing.*;
+import java.io.File;
 
-import net.javahispano.jsignalwb.*;
+import javax.swing.Icon;
+
+import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.*;
-import java.util.ArrayList;
-import java.io.*;
 
 /**
  * <p>Title: </p>
@@ -24,7 +24,6 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
 
     public ConversorDatosMITPlugin() {
     }
-
 
 
     /**
@@ -110,7 +109,6 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
     }
 
 
-
     /**
      * Este metodo es invocado por el entorno al cargar el plugin para
      * pasarle una cadena de caracteres con los datos que el plugin le pidio
@@ -125,7 +123,7 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
 
 
     public void launch(JSWBManager jswbManager) {
-        FrameConversorMIT f = new FrameConversorMIT(jswbManager.getParentWindow(),jswbManager);
+        FrameConversorMIT f = new FrameConversorMIT(jswbManager.getParentWindow(), jswbManager);
         if (this.ultimoDirectorioAbierto != null) {
 
             File directorioViejo = new File(this.ultimoDirectorioAbierto);
@@ -135,19 +133,20 @@ public class ConversorDatosMITPlugin extends PluginAdapter implements GenericPlu
         }
         f.setVisible(true);
         //obtenemos el ltimo directorio
-        File directorio =f.getArchivoAbierto();
+        File directorio = f.getArchivoAbierto();
         if (directorio != null) {
             this.ultimoDirectorioAbierto = directorio.getAbsolutePath();
         }
 
     }
+
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-    if (gUIPositions == GUIPositions.MENU) {
-        return true;
-    } else if (gUIPositions == GUIPositions.TOOLBAR) {
-        return true;
+        if (gUIPositions == GUIPositions.MENU) {
+            return true;
+        } else if (gUIPositions == GUIPositions.TOOLBAR) {
+            return true;
+        }
+        return false;
     }
-    return false;
-}
 
 }

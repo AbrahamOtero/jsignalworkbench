@@ -9,24 +9,23 @@
 
 package net.javahispano.jsignalwb.plugins;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.swing.*;
 
-import net.javahispano.jsignalwb.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
- * Clase que implementa prácticamente todos los métodos de {@link  Plugin}
+ * Clase que implementa practicamente todos los metodos de {@link  Plugin}
  * proporcionando un comportamiento por efecto. Se recomienda extender esta
  * clase en vez de incrementar {@link Plugin}, especialmente para la
- * construcción de prototipos que no estén muy integrados con JSignalWorkbench.
+ * construccion de prototipos que no esten muy integrados con JSignalWorkbench.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public abstract class PluginAdapter implements Plugin {
@@ -96,7 +95,7 @@ public abstract class PluginAdapter implements Plugin {
         throw new UnsupportedOperationException();
     }
 
-     public void setSavedData(String data) {
+    public void setSavedData(String data) {
         throw new UnsupportedOperationException();
     }
 
@@ -109,28 +108,28 @@ public abstract class PluginAdapter implements Plugin {
     }
 
     /**
-     * Genera un icono con la primera y última letra de la cadena de texto que
+     * Genera un icono con la primera y ultima letra de la cadena de texto que
      * se le pasa.
      *
      * @param name String
      * @return Icon
      */
-    protected Icon generateImage(String name){
+    protected Icon generateImage(String name) {
         if (name.equals("")) {
-            name= "No icon";
+            name = "No icon";
         }
-        name=name.toUpperCase();
-        BufferedImage bufferedImage=new BufferedImage(20,20,BufferedImage.TYPE_INT_RGB);
-        char first=name.charAt(0);
-        char last=name.charAt(name.length()-1);
-        Graphics2D g2d=bufferedImage.createGraphics();
-        Font font=new Font(Font.SANS_SERIF, Font.BOLD, 13);
+        name = name.toUpperCase();
+        BufferedImage bufferedImage = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
+        char first = name.charAt(0);
+        char last = name.charAt(name.length() - 1);
+        Graphics2D g2d = bufferedImage.createGraphics();
+        Font font = new Font(Font.SANS_SERIF, Font.BOLD, 13);
         g2d.setBackground(Color.LIGHT_GRAY);
-        g2d.clearRect(0,0,20,20);
+        g2d.clearRect(0, 0, 20, 20);
         g2d.setColor(Color.RED);
         g2d.setFont(font);
-        g2d.drawString(String.valueOf(first),1,10);
-        g2d.drawString(String.valueOf(last),10,20);
+        g2d.drawString(String.valueOf(first), 1, 10);
+        g2d.drawString(String.valueOf(last), 10, 20);
         return new ImageIcon(bufferedImage);
     }
 

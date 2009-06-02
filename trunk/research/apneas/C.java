@@ -50,7 +50,7 @@ public class C {
     private void detectar() {
         filtrarApneas();
         asociarApneasADesaturaciones();
-        if(false){
+        if (false) {
             return;
         }
         buscaHipoapneasQueContenganUnaApnea();
@@ -58,17 +58,17 @@ public class C {
 
         eliminaDesaturacionesLigadas();
         ligarDesaturacionesResultantesSiendoOptimista();
-       // fundirEpisodiosDesaturacionPartidos();
+        // fundirEpisodiosDesaturacionPartidos();
         eliminarDesaturacionesDudosas();
         buscarApneasContenidasEnHipoapneas();
         fundirHipoapneasCercanasAOtrosEventos();
 
-      //  andirMarcas(this.desaturacionesSinLigar, false);
-    //    andirMarcas(hipoapneasSinLigar, true);
-      //  andirMarcas(apneasSinLigar, true);
+        //  andirMarcas(this.desaturacionesSinLigar, false);
+        //    andirMarcas(hipoapneasSinLigar, true);
+        //  andirMarcas(apneasSinLigar, true);
     }
 
-    private void fundirHipoapneasCercanasAOtrosEventos(){
+    private void fundirHipoapneasCercanasAOtrosEventos() {
         TreeSet<Intervalo> apneasSinLigarCopia = new TreeSet<Intervalo>(apneasSinLigar);
         TreeSet<Intervalo> apneasEHipoapneas = new TreeSet<Intervalo>(apneasYDesaturaciones);
         apneasEHipoapneas.addAll(hipoapneasYDesaturaciones);
@@ -77,7 +77,7 @@ public class C {
                     apneaOHipoapnea.desplazaEnTiempo( -95), apneaOHipoapnea.desplazaEnTiempo(90));
             for (Intervalo limitacionCandidata : candidatosAFundir) {
                 if (limitacionCandidata.distanciaCon(apneaOHipoapnea) < 4) {
-                    ReduccionFlujo.generarMarca(limitacionCandidata, "Nasal", "título", Color.ORANGE);
+                    ReduccionFlujo.generarMarca(limitacionCandidata, "Nasal", "titulo", Color.ORANGE);
                     apneasSinLigarCopia.remove(limitacionCandidata);
                 }
             }
@@ -89,13 +89,13 @@ public class C {
      * Mira si las Hipoapneas que han sido identificadas hasta este momento son contenidas por alguna Apnea. En caso
      * afirmativo, podemos identificar la hipoapnea de modo sencillo.
      *
-     * También comprueba si después de una hipoapnea ahí alguna apnea y esa apnea termina antes de que termine la
-     * desaturación correspondiente con la infamia. En ese caso también las funde.
+     * Tambien comprueba si despues de una hipoapnea ahi alguna apnea y esa apnea termina antes de que termine la
+     * desaturacion correspondiente con la infamia. En ese caso tambien las funde.
      */
     private void buscarApneasContenidasEnHipoapneas() {
         TreeSet<Intervalo> apneasSinLigarCopia = new TreeSet<Intervalo>(apneasSinLigar);
         for (Intervalo apneaSinLigar : apneasSinLigarCopia) {
-            //obtenemos la apnea detectada Que comience justo después de la hipoapnea que estamos analizando
+            //obtenemos la apnea detectada Que comience justo despues de la hipoapnea que estamos analizando
             HipoapneaDesaturacion hipoapneaDesaturacion = (HipoapneaDesaturacion) hipoapneasYDesaturaciones.floor(
                     apneaSinLigar);
             //si la apnea esta contenida
@@ -107,8 +107,8 @@ public class C {
                             hipoapneaDesaturacion.desplazaEnTiempo(1));
                 }
                 //si despu\u2665s de la hipoapnea ah% una apnea
-                else if (apneaSinLigar.distanciaEntreFines(hipoapneaDesaturacion.getEpisodioDesaturacion()) > 5&&
-                           apneaSinLigar.distanciaEntreFines(hipoapneaDesaturacion.getEpisodioDesaturacion()) < 40) {
+                else if (apneaSinLigar.distanciaEntreFines(hipoapneaDesaturacion.getEpisodioDesaturacion()) > 5 &&
+                         apneaSinLigar.distanciaEntreFines(hipoapneaDesaturacion.getEpisodioDesaturacion()) < 40) {
                     hipoapneaDesaturacion.addApneaYDesaturacion(this.asociarApneaConDesat(apneaSinLigar,
                             hipoapneaDesaturacion.getEpisodioDesaturacion(), 100, Color.red));
                     hipoapneaDesaturacion = (HipoapneaDesaturacion) hipoapneasYDesaturaciones.floor(
@@ -121,12 +121,12 @@ public class C {
     }
 
     /**
-     * Funde episodios de desaturación que inicialmente fueron identificados como dos episodios distintos pero que están
-     * ligados con una única apnea o hipoapnea y que no tiene una clara recuperación entre ellos.
+     * Funde episodios de desaturacion que inicialmente fueron identificados como dos episodios distintos pero que estan
+     * ligados con una unica apnea o hipoapnea y que no tiene una clara recuperacion entre ellos.
      *
-     * @todoSi se consigue extraer una interfaz común para las clases  HipoapneaDesaturacion y ApneaYDesaturacion
+     * @todoSi se consigue extraer una interfaz comun para las clases  HipoapneaDesaturacion y ApneaYDesaturacion
      * hacer refactoring para evitar
-     * el código duplicado.
+     * el codigo duplicado.
      */
     private void fundirEpisodiosDesaturacionPartidos() {
         TreeSet<Intervalo> desaturacionesSinLigarCopia = new TreeSet<Intervalo>(desaturacionesSinLigar);
@@ -155,21 +155,21 @@ public class C {
         desaturacionesSinLigar = desaturacionesSinLigarCopia;
         desaturacionesSinLigarCopia = new TreeSet<Intervalo>(desaturacionesSinLigar);
         boolean ligado = false;
-        for (Intervalo d : desaturacionesSinLigar ) {
+        for (Intervalo d : desaturacionesSinLigar) {
             //si agrupamos dos hay que saltarse el segundo de la lista porque ya est\u2193 procesado
             if (ligado) {
                 ligado = false;
                 continue;
             }
-            EpisodioDesaturacion desaturacionDeApnea = (EpisodioDesaturacion)d;
+            EpisodioDesaturacion desaturacionDeApnea = (EpisodioDesaturacion) d;
             EpisodioDesaturacion desaturacionSinLigar =
                     (EpisodioDesaturacion) desaturacionesSinLigarCopia.ceiling(
                             desaturacionDeApnea.desplazaEnTiempo(1));
-            if (desaturacionSinLigar== null) {
+            if (desaturacionSinLigar == null) {
                 break;
             }
             if (desaturacionDeApnea.distanciaCon(desaturacionSinLigar) < 15) {
-                if (!esRecuperacionExcesiva((EpisodioDesaturacion)desaturacionDeApnea, desaturacionSinLigar)) {
+                if (!esRecuperacionExcesiva((EpisodioDesaturacion) desaturacionDeApnea, desaturacionSinLigar)) {
                     desaturacionesSinLigarCopia.remove(desaturacionDeApnea);
                     desaturacionesSinLigarCopia.remove(desaturacionSinLigar);
                     EpisodioDesaturacion nuevaDesaturacion = new EpisodioDesaturacion(
@@ -184,15 +184,13 @@ public class C {
     }
 
     private boolean esRecuperacionExcesiva(EpisodioDesaturacion d, Intervalo d2) {
-        float limite =0;
-        if (d.getCaidaSatO2()<10) {
-            limite=d.getDatos()[d.getIntervaloPrincipio().getFin()]+ d.getCaidaSatO2()/2;
-        }
-        else if (d.getCaidaSatO2()<20) {
-            limite=d.getDatos()[d.getIntervaloPrincipio().getFin()]+ d.getCaidaSatO2()/3;
-        }
-        else {
-            limite=d.getDatos()[d.getIntervaloPrincipio().getFin()]+ d.getCaidaSatO2()/4;
+        float limite = 0;
+        if (d.getCaidaSatO2() < 10) {
+            limite = d.getDatos()[d.getIntervaloPrincipio().getFin()] + d.getCaidaSatO2() / 2;
+        } else if (d.getCaidaSatO2() < 20) {
+            limite = d.getDatos()[d.getIntervaloPrincipio().getFin()] + d.getCaidaSatO2() / 3;
+        } else {
+            limite = d.getDatos()[d.getIntervaloPrincipio().getFin()] + d.getCaidaSatO2() / 4;
         }
         limite = Math.max(85, limite);
         for (int i = d.getFin(); i < d2.getPrincipio(); i++) {
@@ -204,8 +202,8 @@ public class C {
     }
 
     /**
-     * Elimina aquellas desaturaciones que son dudosas. Ya no vamos a asociar desaturaciones con nada. El propósito de
-     * este método es filtrar aquellas desaturaciones que no merece la pena.
+     * Elimina aquellas desaturaciones que son dudosas. Ya no vamos a asociar desaturaciones con nada. El proposito de
+     * este metodo es filtrar aquellas desaturaciones que no merece la pena.
      */
     private void eliminarDesaturacionesDudosas() {
         TreeSet<Intervalo> desaturacionesSinLigarCopia = new TreeSet<Intervalo>(desaturacionesSinLigar);
@@ -219,13 +217,13 @@ public class C {
     }
 
     /**
-     * Este método recorre la lista de desaturaciones que quedan sin llegar y busca alguna apnea o hipoapnea que "quede
-     * cerca" de la desaturación y las asocia. Aunque se comprueban ciertas relaciones temporales, se es muy laxo en
+     * Este metodo recorre la lista de desaturaciones que quedan sin llegar y busca alguna apnea o hipoapnea que "quede
+     * cerca" de la desaturacion y las asocia. Aunque se comprueban ciertas relaciones temporales, se es muy laxo en
      * ellas. La idea es que una vez que se han identificado todas las apneas e hipoapneas claras (junto con sus
-     * desaturaciones) será menos probable equivocarse aunque seamos bastante laxos con las relaciones temporales.
+     * desaturaciones) sera menos probable equivocarse aunque seamos bastante laxos con las relaciones temporales.
      *
-     * El motivo de tolerar en este método relaciones temporales que serían fisiológicamente imposibles (o al menos
-     * improbables) entre los eventos es que el algoritmo puede equivocarse al determinar con precisión el principio y el
+     * El motivo de tolerar en este metodo relaciones temporales que serian fisiologicamente imposibles (o al menos
+     * improbables) entre los eventos es que el algoritmo puede equivocarse al determinar con precision el principio y el
      * fin de los eventos.
      */
     private void ligarDesaturacionesResultantesSiendoOptimista() {
@@ -248,7 +246,7 @@ public class C {
                 int distanciaEntreFines = hipoapnea.distanciaEntreFines(desaturacion);
                 int distanciaEntrePrincipios = hipoapnea.distanciaEntrePrincipios(desaturacion);
                 if (distanciaEntreFines < 45 && distanciaEntreFines > 5 && distanciaEntrePrincipios < 50) {
-                    //dado que esto Es un tanto heuristico sólo asignamos un grado  de cumplimiento a
+                    //dado que esto Es un tanto heuristico solo asignamos un grado  de cumplimiento a
                     //la relacion temporal de 50
                     this.asociarHipoapneaConDesat(hipoapnea, desaturacion, 50, Color.red);
                     desaturacionesSinLigarCopia.remove(desaturacion);
@@ -263,9 +261,9 @@ public class C {
 
     /**
      * Al identificar hipoapneas hemos ido eliminando desaturaciones de la lista de desaturaciones. Al identificar
-     * apneas no lo hicimos por si acaso alguna hipoapnea se asocia con la misma desaturación que alguna apnea. Ahora,
-     * una vez identificadas las hipoapneas, eliminemos aquellas desaturaciones que están asociadas con alguna apnea y
-     * que no fueron eliminadas durante la detección de hipoapneas.
+     * apneas no lo hicimos por si acaso alguna hipoapnea se asocia con la misma desaturacion que alguna apnea. Ahora,
+     * una vez identificadas las hipoapneas, eliminemos aquellas desaturaciones que estan asociadas con alguna apnea y
+     * que no fueron eliminadas durante la deteccion de hipoapneas.
      */
     private void eliminaDesaturacionesLigadas() {
         for (Intervalo elem : this.apneasYDesaturaciones) {
@@ -283,7 +281,7 @@ public class C {
         TreeSet<Intervalo> copiaHipoapneas = new TreeSet<Intervalo>(hipoapneas);
         for (Intervalo hipoapnea : hipoapneas) {
             Intervalo apnea;
-            //obtenemos la apnea detectada Que comience justo después de la hipoapnea que estamos analizando
+            //obtenemos la apnea detectada Que comience justo despues de la hipoapnea que estamos analizando
             apnea = apneasYDesaturaciones.ceiling(hipoapnea);
             //si la apnea esta contenida
             SortedSet<Intervalo> apneasContenidas =
@@ -291,7 +289,7 @@ public class C {
             if (apneasContenidas.size() != 0) {
                 ApneaYDesaturacion apneaYDesaturacion = (ApneaYDesaturacion) apneasContenidas.first();
                 EpisodioDesaturacion desaturacion = apneaYDesaturacion.getEpisodioDesaturacion();
-                //la desaturacion, que no se borró en su día por si se asociaba a una hipoapnea, Ya no hará falta más
+                //la desaturacion, que no se borro en su dia por si se asociaba a una hipoapnea, Ya no hara falta mas
                 this.desaturaciones.remove(desaturacion);
                 copiaHipoapneas.remove(hipoapnea);
                 //suponemos que la relacion temporal se cumple totalmente (de ahi el 100)
@@ -345,7 +343,7 @@ public class C {
                 }
                 //************----***---***U******* (ambas compatibles)
                  else if (caculaCompatibilidad(siguienteApnea, desaturacion) > 0) {
-                     //si Actual tiene más compatibilidad que la siguiente
+                     //si Actual tiene mas compatibilidad que la siguiente
                      if (caculaCompatibilidad(apnea, desaturacion) > caculaCompatibilidad(siguienteApnea, desaturacion)
                          || //O si la siguiente apnea tiene compatibilidad con la siguiente desaturacion
                          caculaCompatibilidad(siguienteApnea, siguienteDesaturacion) > 0) {
@@ -376,13 +374,13 @@ public class C {
                  //************----*U**U******* (ambas compatibles)
                   else if (caculaCompatibilidad(apnea, desaturacion) > 0 &&
                            caculaCompatibilidad(apnea, siguienteDesaturacion) > 0) {
-                      //si la compatibilidad de la presente apnea con la siguiente desaturación es mayor que la compatibilidad
+                      //si la compatibilidad de la presente apnea con la siguiente desaturacion es mayor que la compatibilidad
                       //de la actual apnea con la actual desaturacion y la compatibilidad De la actual apnea y la Siguiente
                       //desaturacion Es mayor que la compatibilidad de la siguiente apnea con la siguiente desaturacion
                       if (caculaCompatibilidad(apnea, desaturacion) < caculaCompatibilidad(apnea, siguienteDesaturacion)
                           && caculaCompatibilidad(apnea, siguienteDesaturacion) >
                           caculaCompatibilidad(siguienteApnea, siguienteDesaturacion)) {
-                          //unimos la actual apnea con la siguiente desaturación y pasamos de la actual desaturación
+                          //unimos la actual apnea con la siguiente desaturacion y pasamos de la actual desaturacion
                           asociarApneaConDesat(apnea, siguienteDesaturacion, relacionTemporal.evaluatepossibilityAt(
                                   apnea.distanciaEntrePrincipios(siguienteDesaturacion)), Color.red);
                           copiaDesaturaciones.remove(desaturacion); // esta la ignoramos
@@ -395,7 +393,7 @@ public class C {
                               siguienteDesaturacion = copiaDesaturaciones.ceiling(desaturacion.desplazaEnTiempo(1));
                           }
                           continue;
-                      } //no es necesario gestionar el "else" ya que es la opción por defecto: liga actual apnea y desaturacion
+                      } //no es necesario gestionar el "else" ya que es la opcion por defecto: liga actual apnea y desaturacion
                   }
             asociarApneaConDesat(apnea, desaturacion, relacionTemporal.evaluatepossibilityAt(
                     apnea.distanciaEntrePrincipios(desaturacion)), Color.RED);
@@ -412,10 +410,10 @@ public class C {
     }
 
     /**
-     * Su función es muy similar a la del método de las asambleas. Trabaja sobre colecciones de datos diferentes y
-     * realiza acciones ligeramente diferentes (una desaturación que aquí no se ha ligado a nada pasa a ser un problema,
-     * mientras que en el método anterior todavía teníamos la esperanza de que aquí se lígase).
-     * Nota: evalué fundir este método y el anterior, pero incrementaría la ya complicada lógica de cada método por
+     * Su funcion es muy similar a la del metodo de las asambleas. Trabaja sobre colecciones de datos diferentes y
+     * realiza acciones ligeramente diferentes (una desaturacion que aqui no se ha ligado a nada pasa a ser un problema,
+     * mientras que en el metodo anterior todavia teniamos la esperanza de que aqui se ligase).
+     * Nota: evalue fundir este metodo y el anterior, pero incrementaria la ya complicada logica de cada metodo por
      * tener que considerar las acciones diferentes a realizar cuando se trabaja sobre apneas e hipoapneas.
      */
     private void asociarHipoapneasADesaturaciones() {
@@ -453,7 +451,7 @@ public class C {
                 }
                 //************----***---***U******* (ambas compatibles)
                  else if (caculaCompatibilidad(sigHipoapnea, desaturacion) > 0) {
-                     //si Actual tiene más compatibilidad que la siguiente
+                     //si Actual tiene mas compatibilidad que la siguiente
                      if (caculaCompatibilidad(hipoapnea, desaturacion) >
                          caculaCompatibilidad(sigHipoapnea, desaturacion)
                          || //O si la siguiente apnea tiene compatibilidad con la siguiente desaturacion
@@ -485,13 +483,13 @@ public class C {
                  //************----*U**U******* (ambas compatibles)
                   else if (caculaCompatibilidad(hipoapnea, desaturacion) > 0 &&
                            caculaCompatibilidad(hipoapnea, siguienteDesaturacion) > 0) {
-                      //si la compatibilidad de la presente apnea con la siguiente desaturación es mayor que la compatibilidad
+                      //si la compatibilidad de la presente apnea con la siguiente desaturacion es mayor que la compatibilidad
                       //de la actual apnea con la actual desaturacion y la compatibilidad De la actual apnea y la Siguiente
                       //desaturacion Es mayor que la compatibilidad de la siguiente apnea con la siguiente desaturacion
                       if (caculaCompatibilidad(hipoapnea, desaturacion) < caculaCompatibilidad(hipoapnea,
                               siguienteDesaturacion) && caculaCompatibilidad(hipoapnea, siguienteDesaturacion) >
                           caculaCompatibilidad(sigHipoapnea, siguienteDesaturacion)) {
-                          //unimos la actual apnea con la siguiente desaturación y pasamos de la actual desaturación
+                          //unimos la actual apnea con la siguiente desaturacion y pasamos de la actual desaturacion
                           asociarHipoapneaConDesat(hipoapnea, siguienteDesaturacion,
                                   relacionTemporal.evaluatepossibilityAt(
                                           hipoapnea.distanciaEntrePrincipios(siguienteDesaturacion)), Color.RED);
@@ -506,7 +504,7 @@ public class C {
                               siguienteDesaturacion = desaturaciones.ceiling(desaturacion.desplazaEnTiempo(1));
                           }
                           continue;
-                      } //no es necesario gestionar el "else" ya que es la opción por defecto: liga actual apnea y desaturacion
+                      } //no es necesario gestionar el "else" ya que es la opcion por defecto: liga actual apnea y desaturacion
                   }
 
             asociarHipoapneaConDesat(hipoapnea, desaturacion, relacionTemporal.evaluatepossibilityAt(
@@ -525,8 +523,8 @@ public class C {
 
 
     /**
-     * Calcula la compatibilidad global resultante de ligar una limitación de flujo, una desaturación y tener en cuenta
-     * la relación temporal entre ambas.
+     * Calcula la compatibilidad global resultante de ligar una limitacion de flujo, una desaturacion y tener en cuenta
+     * la relacion temporal entre ambas.
      *
      * @param limitacionFlujo Intervalo
      * @param desaturacion Intervalo
@@ -558,7 +556,7 @@ public class C {
         HipoapneaDesaturacion episodio = new HipoapneaDesaturacion(limitacionFlujo, episodioDesaturacion,
                 posibilidadRelacionTemporal);
         ReduccionFlujo.generarMarca(limitacionFlujo, nasal.getName(), "Hypoapnea", color);
-       DesatDetector.generarEpisodioDesaturacion((EpisodioDesaturacion) episodioDesaturacion, color, satO2);
+        DesatDetector.generarEpisodioDesaturacion((EpisodioDesaturacion) episodioDesaturacion, color, satO2);
         hipoapneasYDesaturaciones.add(episodio);
         generarAnnotation(episodio, "Hypoapnea");
         return episodio;
@@ -572,7 +570,7 @@ public class C {
         long fin = hipoapnea.getFinAbsoluto();
         annotation.setEndTime(fin);
         annotation.setColor(Utilidades.getColor((short) hipoapnea.getPosibilidad()));
-        String texto = "Duración: " + hipoapnea.getDuracion() + "\n" +
+        String texto = "Duracion: " + hipoapnea.getDuracion() + "\n" +
                        ", Posibilidad: " + hipoapnea.getPosibilidad() + "\n";
         annotation.setComentary(texto);
         annotation.setTitle(titulo);
@@ -581,8 +579,8 @@ public class C {
     }
 
     /**
-     * Elimina aquellas hipoapneas que contengan en su interior una única apnea y que esta apnea abarca casi toda la
-     * hipoapnea. Se considera que en este caso el señalar la hipoapnea no aporta nada.
+     * Elimina aquellas hipoapneas que contengan en su interior una unica apnea y que esta apnea abarca casi toda la
+     * hipoapnea. Se considera que en este caso el senhalar la hipoapnea no aporta nada.
      */
     private void filtrarApneas() {
         Intervalo hipoapnea = null;

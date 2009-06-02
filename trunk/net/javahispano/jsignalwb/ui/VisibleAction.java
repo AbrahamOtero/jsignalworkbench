@@ -11,14 +11,16 @@ package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+
 import javax.swing.AbstractAction;
+
 import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
  * @author Roman
  */
-public class VisibleAction extends AbstractAction{
+public class VisibleAction extends AbstractAction {
     private JSWBManager jswbManager;
     private String signalName;
     /** Creates a new instance of VisibleAction */
@@ -26,8 +28,8 @@ public class VisibleAction extends AbstractAction{
         this.signalName = signalName;
         this.jswbManager = jswbManager;
         this.putValue(this.NAME, "Visible");
-        this.putValue(SHORT_DESCRIPTION,"Make visible(or not) the signal");
-        this.putValue(MNEMONIC_KEY,KeyEvent.VK_V);        
+        this.putValue(SHORT_DESCRIPTION, "Make visible(or not) the signal");
+        this.putValue(MNEMONIC_KEY, KeyEvent.VK_V);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -37,7 +39,7 @@ public class VisibleAction extends AbstractAction{
         } else if (e.getActionCommand().toLowerCase().equals("false")) {
             jswbManager.setChannelVisible(signalName, false);
             jswbManager.refreshJSM(false);
-        }        
+        }
     }
 
 

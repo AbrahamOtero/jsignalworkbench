@@ -8,32 +8,31 @@ package net.javahispano.jsignalwb.ui;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyVetoException;
+import java.beans.*;
+import java.text.DecimalFormat;
 import java.util.Date;
-import javax.swing.JWindow;
+
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
-import java.text.DecimalFormat;
-import net.javahispano.jsignalwb.utilities.ui.*;
 
 /**
  *
  * @author  Roman
  */
-public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeListener,DocumentListener{
+public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeListener, DocumentListener {
     private JSWBManager jswbManager;
     private boolean zoomH;
     private boolean scroll;
     /** Creates new form ConfigureJSM */
     public ConfigureJSM(JSWBManager jswbManager) {
-        this.jswbManager=jswbManager;
+        this.jswbManager = jswbManager;
         initComponents();
-        scroll=zoomH=false;
+        scroll = zoomH = false;
         jTextFieldDate1.setText(TimeRepresentation.timeToString(
                 jswbManager.getJSMScrollValue()));
         datePicker1.showButtonOnly(true);
@@ -42,54 +41,60 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
         } catch (PropertyVetoException ex) {
             ex.printStackTrace();
         }
-        datePicker1.addPropertyChangeListener(datePicker1.PROPERTY_NAME_DATE,this);
+        datePicker1.addPropertyChangeListener(datePicker1.PROPERTY_NAME_DATE, this);
         applyButton.setEnabled(false);
         initPropertiesListeners();
         cancelButton.grabFocus();
     }
 
-    public void propertyChange(PropertyChangeEvent evt){
-        if("date".equals(evt.getPropertyName())){
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("date".equals(evt.getPropertyName())) {
             jTextFieldDate1.setText(TimeRepresentation.timeToString(
                     swapDateNoChangeTime(jswbManager.getJSMScrollValue(),
-                    datePicker1.getDate().getTime())));
+                                         datePicker1.getDate().getTime())));
         }
     }
 
-    public void changedUpdate(DocumentEvent evt){
-        documentEvent(evt);
-    }
-    public void removeUpdate(DocumentEvent evt){
-        documentEvent(evt);
-    }
-    public void insertUpdate(DocumentEvent evt){
+    public void changedUpdate(DocumentEvent evt) {
         documentEvent(evt);
     }
 
-    private void initPropertiesListeners(){
-        scroll=zoomH=false;
+    public void removeUpdate(DocumentEvent evt) {
+        documentEvent(evt);
+    }
+
+    public void insertUpdate(DocumentEvent evt) {
+        documentEvent(evt);
+    }
+
+    private void initPropertiesListeners() {
+        scroll = zoomH = false;
         jTextField1.getDocument().addDocumentListener(this);
         jTextFieldDate1.getDocument().addDocumentListener(this);
-        jTextField1.getDocument().putProperty("textField","zoomH");
-        jTextFieldDate1.getDocument().putProperty("textField","scroll");
+        jTextField1.getDocument().putProperty("textField", "zoomH");
+        jTextFieldDate1.getDocument().putProperty("textField", "scroll");
     }
 
-    private void documentEvent(DocumentEvent evt){
-        String property=evt.getDocument().getProperty("textField").toString();
+    private void documentEvent(DocumentEvent evt) {
+        String property = evt.getDocument().getProperty("textField").toString();
 
-        if(property.equals("scroll"))
-            scroll=true;
-        else if(property.equals("zoomH"))
-            zoomH=true;
+        if (property.equals("scroll")) {
+            scroll = true;
+        } else if (property.equals("zoomH")) {
+            zoomH = true;
+        }
         evt.getDocument().removeDocumentListener(this);
         checkApplyButton();
     }
-     private void checkApplyButton(){
-        if(scroll||zoomH)
+
+    private void checkApplyButton() {
+        if (scroll || zoomH) {
             applyButton.setEnabled(true);
-        else
+        } else {
             applyButton.setEnabled(false);
+        }
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -115,7 +120,7 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
         jSlider1.setMinorTickSpacing(1);
         jSlider1.setPaintTicks(true);
         jSlider1.setSnapToTicks(true);
-        jSlider1.setValue((int)(jswbManager.getJSMFrecuency()*10));
+        jSlider1.setValue((int) (jswbManager.getJSMFrecuency() * 10));
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider1StateChanged(evt);
@@ -150,94 +155,109 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(applyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(80, 80, 80))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jSlider1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
-        );
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addGap(67, 67, 67)
+                          .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(applyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 76,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addGap(80, 80, 80))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                          .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 23,
+                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSlider1, javax.swing.GroupLayout.Alignment.TRAILING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 82,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                              .addContainerGap())))
+                );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(okButton)
-                    .addComponent(applyButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addGap(39, 39, 39)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                              .addComponent(jLabel2)
+                                              .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(okButton)
+                                    .addComponent(applyButton)
+                                    .addComponent(cancelButton))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+    } // </editor-fold>//GEN-END:initComponents
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        if(apply()){
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_okButtonActionPerformed
+        if (apply()) {
             hideJWindow();
             jswbManager.refreshJSM(false);
         }
-    }//GEN-LAST:event_okButtonActionPerformed
+    } //GEN-LAST:event_okButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_cancelButtonActionPerformed
         hideJWindow();
         jswbManager.refreshJSM(false);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    } //GEN-LAST:event_cancelButtonActionPerformed
 
-    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_applyButtonActionPerformed
         apply();
-    }//GEN-LAST:event_applyButtonActionPerformed
+    } //GEN-LAST:event_applyButtonActionPerformed
 
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        if(jSlider1.getValue()>=0)
-        {
-            double fs = 0.00999*jSlider1.getValue()+0.001;
-             DecimalFormat df = new DecimalFormat("#.####");
-             String texto = df.format(fs);
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) { //GEN-FIRST:event_jSlider1StateChanged
+        if (jSlider1.getValue() >= 0) {
+            double fs = 0.00999 * jSlider1.getValue() + 0.001;
+            DecimalFormat df = new DecimalFormat("#.####");
+            String texto = df.format(fs);
 
-            System.out.println(""+jSlider1.getValue() +" fs " +fs);
-            texto  = texto.replace(',','.');
+            System.out.println("" + jSlider1.getValue() + " fs " + fs);
+            texto = texto.replace(',', '.');
             jTextField1.setText(texto);
         }
-           // jTextField1.setText(Float.toString(jSlider1.getValue()/10f));
-        else
+        // jTextField1.setText(Float.toString(jSlider1.getValue()/10f));
+        else {
             jTextField1.setText("0.1");
-    }//GEN-LAST:event_jSlider1StateChanged
+        }
+    } //GEN-LAST:event_jSlider1StateChanged
 
-    private boolean apply(){
-        boolean flag=true;
-        if(zoomH){
+    private boolean apply() {
+        boolean flag = true;
+        if (zoomH) {
             try {
-                float value=Float.valueOf(jTextField1.getText());
+                float value = Float.valueOf(jTextField1.getText());
                 jswbManager.setJSMFrecuency(value);
                 jswbManager.refreshJSM(true);
                 jTextField1.setBackground(Color.WHITE);
@@ -245,42 +265,43 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
             } catch (NumberFormatException ex) {
                 jTextField1.setBackground(Color.RED);
             }
-        }else if(scroll){
-            String dateValue=jTextFieldDate1.getFormattedText();
-            if(!dateValue.equals("")){
+        } else if (scroll) {
+            String dateValue = jTextFieldDate1.getFormattedText();
+            if (!dateValue.equals("")) {
                 try {
-                    long newScroll=TimeRepresentation.stringToMillis(dateValue,true,true,true);
-                    if(newScroll>=jswbManager.getJSMScrollBaseTime() && newScroll<=jswbManager.getJSMMaxTime()){
+                    long newScroll = TimeRepresentation.stringToMillis(dateValue, true, true, true);
+                    if (newScroll >= jswbManager.getJSMScrollBaseTime() && newScroll <= jswbManager.getJSMMaxTime()) {
                         jswbManager.setJSMScrollValue(newScroll);
                         jTextFieldDate1.setBackground(Color.WHITE);
-                    }else
+                    } else {
                         jTextFieldDate1.setBackground(Color.RED);
-                } catch(Exception ex){
+                    }
+                } catch (Exception ex) {
                     jTextFieldDate1.setBackground(Color.RED);
-                    flag=false;
+                    flag = false;
                 }
-            }
-            else{
+            } else {
                 jTextFieldDate1.setBackground(Color.RED);
-                flag=false;
+                flag = false;
             }
         }
         return flag;
     }
-    public void showJWindow(Window owner){
-        jw=new JWindow(owner);
+
+    public void showJWindow(Window owner) {
+        jw = new JWindow(owner);
         jw.add(this);
         jw.setSize(this.getPreferredSize());
         jw.setLocationRelativeTo(owner);
         jw.setVisible(true);
     }
 
-    private void hideJWindow(){
+    private void hideJWindow() {
         jw.dispose();
     }
 
     /**
-    * @param old long
+     * @param old long
      * @param newTime long
      * @return long
      */

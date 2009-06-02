@@ -7,29 +7,26 @@
 package net.javahispano.jsignalwb.jsignalmonitor;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
+
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorMark;
-import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
- class SynchronizedElements {
+class SynchronizedElements {
     private Map<String, Channel> channels; //Almacena los canales identificandolos mediante su nombre
-    private Map<JSignalMonitorMark,Rectangle> marks;
+    private Map<JSignalMonitorMark, Rectangle> marks;
     private List<String> positions; //Almacena el nombre de los canales en el orden que se mostraran
     public SynchronizedElements() {
-        channels=new HashMap<String, Channel>();
-        positions=new ArrayList<String>();
-        marks=new HashMap<JSignalMonitorMark,Rectangle>();
+        channels = new HashMap<String, Channel>();
+        positions = new ArrayList<String>();
+        marks = new HashMap<JSignalMonitorMark, Rectangle>();
     }
 
-     public Map<String, Channel> getChannels() {
+    public Map<String, Channel> getChannels() {
         return channels;
     }
 
@@ -40,5 +37,5 @@ import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
     public List<String> getPositions() {
         return positions;
     }
-    
+
 }

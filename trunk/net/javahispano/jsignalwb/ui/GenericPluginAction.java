@@ -1,10 +1,11 @@
 package net.javahispano.jsignalwb.ui;
 
-import net.javahispano.jsignalwb.JSWBManager;
-import javax.swing.Icon;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import net.javahispano.jsignalwb.plugins.framework.*;
+
+import javax.swing.AbstractAction;
+import javax.swing.Icon;
+
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  * <p>Title: </p>
@@ -27,10 +28,10 @@ public class GenericPluginAction extends AbstractAction {
 
     public GenericPluginAction(JSWBManager jswbManager,
                                String genericPluginName, int action) {
-        this(jswbManager,genericPluginName,action, 20,20);
+        this(jswbManager, genericPluginName, action, 20, 20);
     }
 
-        public GenericPluginAction(JSWBManager jswbManager,
+    public GenericPluginAction(JSWBManager jswbManager,
                                String genericPluginName, int action, int iconWidth, int iconHeight) {
         this.action = action;
         this.genericPluginName = genericPluginName;
@@ -41,7 +42,7 @@ public class GenericPluginAction extends AbstractAction {
         } else if (action == LAUNCH_ACTION) {
             this.putValue(NAME, "Launch");
             Icon smallIcon = jswbManager.getPluginManager().getIconDefaultSize("generic", genericPluginName,
-                             iconWidth,iconHeight);
+                    iconWidth, iconHeight);
             this.putValue(SMALL_ICON, smallIcon);
         }
     }

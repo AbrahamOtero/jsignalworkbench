@@ -9,13 +9,11 @@
 
 package net.javahispano.jsignalwb.jsignalmonitor;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Stroke;
+import java.awt.*;
 
 
 /**
- * no forma parte del API pública.
+ * no forma parte del API publica.
  *
  * @author Roman
  */
@@ -46,18 +44,18 @@ public class ChannelProperties {
     public ChannelProperties(String name, long startTime, float dataRate, int dataSize,
                              boolean hasColors) {
         setDataStroke(new BasicStroke(1));
-        this.name=name;
-        this.startTime=startTime;
-        this.dataRate=dataRate;
-        this.dataSize=dataSize;
+        this.name = name;
+        this.startTime = startTime;
+        this.dataRate = dataRate;
+        this.dataSize = dataSize;
         refreshEndTime();
         setZoom(1);
         setDataColor(Color.BLACK);
 //        abscissaOffset=1;
-        abscissaValue=maxValue=channelHeight=1;
+        abscissaValue = maxValue = channelHeight = 1;
         visible = true;
-        invadeNearChannels=true;
-        magnitude="unknown";
+        invadeNearChannels = true;
+        magnitude = "unknown";
         this.hasColors = hasColors;
 
     }
@@ -74,7 +72,7 @@ public class ChannelProperties {
      * getDataRate
      *
      * @return float
-     * @duda ¿dataRate?
+     * @duda ?dataRate?
      */
     public float getDataRate() {
         return dataRate;
@@ -90,12 +88,13 @@ public class ChannelProperties {
     }
 
     public void setZoom(float zoom) {
-        if(zoom<=0)
+        if (zoom <= 0) {
             throw new RuntimeException("Try to set a non valid value at zoom" +
-                    " propertie. Must be a positive value");
-        float middleValue=(maxValue +abscissaValue)/2f;
-        maxValue=(channelHeight*(1/zoom))*0.5f + middleValue;
-        abscissaValue=maxValue-(channelHeight*(1/zoom));
+                                       " propertie. Must be a positive value");
+        }
+        float middleValue = (maxValue + abscissaValue) / 2f;
+        maxValue = (channelHeight * (1 / zoom)) * 0.5f + middleValue;
+        abscissaValue = maxValue - (channelHeight * (1 / zoom));
         this.zoom = zoom;
     }
 
@@ -160,10 +159,10 @@ public class ChannelProperties {
         return endTime;
     }
 
-    private void refreshEndTime(){
+    private void refreshEndTime() {
         //+1 para curarnos en salud en problemas de redondeo;
-        //más vale que se muestre un poco de señal de más que de menos
-        endTime =startTime + (long)(((dataSize+1) / dataRate)*1000);
+        //mas vale que se muestre un poco de senhal de mas que de menos
+        endTime = startTime + (long) (((dataSize + 1) / dataRate) * 1000);
     }
 
     public void setDataSize(int dataSize) {
@@ -186,26 +185,28 @@ public class ChannelProperties {
 //            }else{
 //               abscissaOffset=((maxValue-abscissaValue)/(maxValue-minValue));
 //            }
-        maxValue=abscissaValue + (channelHeight/zoom);
+        maxValue = abscissaValue + (channelHeight / zoom);
         this.abscissaValue = abscissaValue;
     }
 
 
-    public boolean setVisibleRange(float abscissaValue,float maxValue,float range){
-        float newMax=maxValue*range;
-        float newMin=abscissaValue*range;
-        return setVisibleRange(newMin,newMax);
+    public boolean setVisibleRange(float abscissaValue, float maxValue, float range) {
+        float newMax = maxValue * range;
+        float newMin = abscissaValue * range;
+        return setVisibleRange(newMin, newMax);
     }
-    public boolean setVisibleRange(float abscissaValue,float maxValue){
-        this.abscissaValue=abscissaValue;
-        this.maxValue=maxValue;
-        zoom=channelHeight /(maxValue - abscissaValue);
+
+    public boolean setVisibleRange(float abscissaValue, float maxValue) {
+        this.abscissaValue = abscissaValue;
+        this.maxValue = maxValue;
+        zoom = channelHeight / (maxValue - abscissaValue);
         return true;
     }
-    public void refreshChannelHeight(float newChannelHeight){
-        if(newChannelHeight>0){
-            zoom*=(newChannelHeight/channelHeight);
-            channelHeight=newChannelHeight;
+
+    public void refreshChannelHeight(float newChannelHeight) {
+        if (newChannelHeight > 0) {
+            zoom *= (newChannelHeight / channelHeight);
+            channelHeight = newChannelHeight;
         }
     }
 

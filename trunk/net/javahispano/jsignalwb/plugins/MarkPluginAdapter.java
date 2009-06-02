@@ -9,21 +9,20 @@
 
 package net.javahispano.jsignalwb.plugins;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Window;
+import java.awt.*;
+
 import javax.swing.JOptionPane;
-import net.javahispano.jsignalwb.JSWBManager;
+
+import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
-import net.javahispano.jsignalwb.Signal;
 
 /**
  *
  * @author Roman
  */
 public abstract class MarkPluginAdapter extends PluginAdapter implements MarkPlugin {
-    protected Signal signal=null;
+    protected Signal signal = null;
     public boolean isInterval() {
         return false;
     }
@@ -44,11 +43,11 @@ public abstract class MarkPluginAdapter extends PluginAdapter implements MarkPlu
         return getName();
     }
 
-    public void setSignal(Signal signal){
-        this.signal=signal;
+    public void setSignal(Signal signal) {
+        this.signal = signal;
     }
 
-    public Signal getSignal(){
+    public Signal getSignal() {
         return signal;
     }
 
@@ -63,11 +62,11 @@ public abstract class MarkPluginAdapter extends PluginAdapter implements MarkPlu
 
     public Image getImage() {
         throw new UnsupportedOperationException("Try to get the image of a mark that is ownPaintd. " +
-                "Set isOwnPainted true or override the getImage method.");
+                                                "Set isOwnPainted true or override the getImage method.");
     }
 
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-         return false;
+        return false;
     }
 
 }

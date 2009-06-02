@@ -1,18 +1,19 @@
 package net.javahispano.jsignalwb.plugins.framework;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
+
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.SignalIntervalProperties;
-import javax.swing.JOptionPane;
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.Algorithm;
 
 /**
- * <p>Pequeña clase de utilidad que permite informar al usuario de las
- * actividades que está realizando un plugin tipo {@link Algorithm}.</p>
+ * <p>Pequenha clase de utilidad que permite informar al usuario de las
+ * actividades que esta realizando un plugin tipo {@link Algorithm}.</p>
  *
- * @author Román Segador y Abraham Otero
+ * @author Roman Segador y Abraham Otero
  *    Copyright 2006-2007. This software is under the Apache License Version 2.0
  *   (http://www.apache.org/licenses/).
  */
@@ -55,9 +56,9 @@ public class AlgorithmRunner extends SwingWorker<Boolean, Void> {
             if (!isCancelled()) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
-                  "Ha sucedido un error al ejecutar el algoritmo "+
-                  algorithm.getName()+" versión "+
-                  algorithm.getPluginVersion(),
+                                              "Ha sucedido un error al ejecutar el algoritmo " +
+                                              algorithm.getName() + " version " +
+                                              algorithm.getPluginVersion(),
                                               "Error",
                                               JOptionPane.ERROR_MESSAGE);
             }
@@ -72,7 +73,7 @@ public class AlgorithmRunner extends SwingWorker<Boolean, Void> {
     }
 
     /**
-     * Mostrará al usuario el porcentaje completado de una de las tareas que el
+     * Mostrara al usuario el porcentaje completado de una de las tareas que el
      * algoritmo realiza o del procesador global.
      *
      * @param progress porcentaje completado.
@@ -82,7 +83,7 @@ public class AlgorithmRunner extends SwingWorker<Boolean, Void> {
     }
 
     /**
-     * Informa al usuario sobre que tarea está realizando en cada momento el
+     * Informa al usuario sobre que tarea esta realizando en cada momento el
      * algoritmo.
      *
      * @param task cadena de texto describiendo la tarea.
@@ -94,9 +95,9 @@ public class AlgorithmRunner extends SwingWorker<Boolean, Void> {
 
 
     /**
-     * Informa al usuario sobre qué señal se está procesando en cada momento.
+     * Informa al usuario sobre que senhal se esta procesando en cada momento.
      *
-     * @param signal nombre de la señal.
+     * @param signal nombre de la senhal.
      */
     public void setSignalRunning(String signal) {
         firePropertyChange("signal", this.signalName, signal);

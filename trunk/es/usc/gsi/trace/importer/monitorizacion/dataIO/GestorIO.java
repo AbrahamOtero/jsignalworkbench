@@ -2,12 +2,12 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.dataIO;
 
-import java.util.*;
+import java.util.TreeSet;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import es.usc.gsi.trace.importer.monitorizacion.data.*;
-import org.jdom.*;
+import org.jdom.JDOMException;
 
 public class GestorIO {
 
@@ -94,9 +94,9 @@ public class GestorIO {
                     for (int i = 0; i < datos.length && i < nombres_Vila.length;
                                  i++) {
                         gestor_fdatos.anhadeSenhal(datos[i], nombres_Vila[i], "",
-                                                 "",
-                                                 almacen.getFs(i),
-                                                 almacen.getRango(i));
+                                "",
+                                almacen.getFs(i),
+                                almacen.getRango(i));
                     }
 
                 }
@@ -104,11 +104,11 @@ public class GestorIO {
                 else {
                     for (int i = 0; i < datos.length; i++) {
                         gestor_fdatos.anhadeSenhal(datos[i],
-                                                 almacen.getNombreSenal(i),
-                                                 almacen.getLeyenda(i),
-                                                 "",
-                                                 almacen.getFs(i),
-                                                 almacen.getRango(i));
+                                almacen.getNombreSenal(i),
+                                almacen.getLeyenda(i),
+                                "",
+                                almacen.getFs(i),
+                                almacen.getRango(i));
                     }
                 }
 

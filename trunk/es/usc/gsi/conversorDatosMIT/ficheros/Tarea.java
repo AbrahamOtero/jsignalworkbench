@@ -1,9 +1,9 @@
 package es.usc.gsi.conversorDatosMIT.ficheros;
 
-import java.util.*;
+import java.util.Vector;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.lectura.*;
-import es.usc.gsi.conversorDatosMIT.interfaz.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.lectura.LeeFicheroDat;
+import es.usc.gsi.conversorDatosMIT.interfaz.ControladorInterfaz;
 
 public class Tarea extends Thread implements Cancelar {
     private ControladorInterfaz controlInterfaz = ControladorInterfaz.

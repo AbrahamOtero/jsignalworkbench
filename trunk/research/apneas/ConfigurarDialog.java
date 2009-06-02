@@ -222,7 +222,7 @@ public class ConfigurarDialog extends JDialog {
         jLabel5.setForeground(Color.blue);
         jLabel5.setRequestFocusEnabled(false);
         jLabel5.setText(
-                "Valores antes del actual a considerar en el cálculo del basal (segundos):");
+                "Valores antes del actual a considerar en el calculo del basal (segundos):");
         jTextFieldprincipioVentanaBasalSatO2.setText("jTextField1");
         jTextFieldprincipioVentanaBasalSatO2.setColumns(6);
         jTextFieldprincipioVentanaBasalSatO2.addFocusListener(new
@@ -253,7 +253,7 @@ public class ConfigurarDialog extends JDialog {
         jLabel6.setForeground(Color.blue);
         jLabel6.setRequestFocusEnabled(false);
         jLabel6.setText(
-                "Valores después del actual a considerar en el cálculo del basal (segundos):");
+                "Valores despues del actual a considerar en el calculo del basal (segundos):");
         jPanel6.setPreferredSize(new Dimension(899, 200));
         jPanel2.setPreferredSize(new Dimension(452, 90));
         jPanel4.setPreferredSize(new Dimension(452, 90));
@@ -264,7 +264,7 @@ public class ConfigurarDialog extends JDialog {
         jLabel7.setForeground(Color.blue);
         jLabel7.setRequestFocusEnabled(false);
         jLabel7.setText(
-                "Valores antes del actual a considerar en el cálculo del basal (segundos):");
+                "Valores antes del actual a considerar en el calculo del basal (segundos):");
         jSliderprincipioVentanaBasalFlujoApnea.setMajorTickSpacing(100);
         jSliderprincipioVentanaBasalFlujoApnea.setMaximum(600);
         jSliderprincipioVentanaBasalFlujoApnea.setPaintLabels(true);
@@ -282,7 +282,7 @@ public class ConfigurarDialog extends JDialog {
         jLabel8.setForeground(Color.blue);
         jLabel8.setRequestFocusEnabled(false);
         jLabel8.setText(
-                "Valores después del actual a considerar en el cálculo del basal (segundos):");
+                "Valores despues del actual a considerar en el calculo del basal (segundos):");
         jSliderfinVentanaBasalFlujoApnea.setMajorTickSpacing(50);
         jSliderfinVentanaBasalFlujoApnea.setMaximum(200);
         jSliderfinVentanaBasalFlujoApnea.setPaintLabels(true);
@@ -299,7 +299,7 @@ public class ConfigurarDialog extends JDialog {
         jLabel9.setForeground(Color.blue);
         jLabel9.setRequestFocusEnabled(false);
         jLabel9.setText(
-                "Ancho de la ventana para el cálculo de apneas (segundos): ");
+                "Ancho de la ventana para el calculo de apneas (segundos): ");
         jSlideranchoVentanaValorMedioApnea.setMajorTickSpacing(10);
         jSlideranchoVentanaValorMedioApnea.setMaximum(30);
         jSlideranchoVentanaValorMedioApnea.setPaintLabels(true);
@@ -320,7 +320,7 @@ public class ConfigurarDialog extends JDialog {
         jLabel12.setForeground(Color.blue);
         jLabel12.setRequestFocusEnabled(false);
         jLabel12.setText(
-                "Ancho de la ventana para el cálculo de apneas (segundos): ");
+                "Ancho de la ventana para el calculo de apneas (segundos): ");
         jSlideranchoVentanaValorMedioHipoapnea.setMajorTickSpacing(10);
         jSlideranchoVentanaValorMedioHipoapnea.setMaximum(60);
         jSlideranchoVentanaValorMedioHipoapnea.setPaintLabels(true);
@@ -347,24 +347,24 @@ public class ConfigurarDialog extends JDialog {
         distanciaRellenoArrayPosibilidades.setMaximum(50);
         distanciaRellenoArrayPosibilidades.setValor(10);
         distanciaRellenoArrayPosibilidades.setTexto(
-                "Los ascensos y descensos se funden si están a menos de (segundos):");
+                "Los ascensos y descensos se funden si estan a menos de (segundos):");
         duracionMaximaDesaturacion.setMajorTickSpacing(25);
         duracionMaximaDesaturacion.setMaximum(200);
         duracionMaximaDesaturacion.setValor(100);
         duracionMaximaDesaturacion.setTexto(
-                "Máxima duración de un episodio de desaturacián (segundos):");
+                "Maxima duracion de un episodio de desaturacian (segundos):");
         tabbedPaneApnea.setTabPlacement(JTabbedPane.LEFT);
         panelTemporalApnea.setLayout(borderLayout9);
         panelTemporalHipoapnea.setLayout(borderLayout10);
         sliderprincipioIntervaloFiltroEnergia.setTexto(
                 "Principio del intervalo para el primer filtro");
         sliderrelacionPrimerFiltroDerivada.setTexto(
-                "Relación (porcentaje) de corte para el primer filtro de la derivada");
+                "Relacion (porcentaje) de corte para el primer filtro de la derivada");
         sliderprincipioIntervaloSegundoFiltroDerivada.setTexto(
                 "Fin del intervalo para el segundo filtro");
         sliderlimiteEnergia.setValor(0);
         sliderlimiteEnergia.setTexto(
-                "Relación (porcentaje) de corte para el segundo filtro de la derivada");
+                "Relacion (porcentaje) de corte para el segundo filtro de la derivada");
         slideFinIntervaloFiltroEnergia.setTexto(
                 "Fin del intervalo para el primer filtro");
         checkBoxConsiderarSoloOndasNegativas.setFont(new java.awt.Font("Tahoma",
@@ -372,11 +372,11 @@ public class ConfigurarDialog extends JDialog {
         checkBoxConsiderarSoloOndasNegativas.setForeground(Color.blue);
         checkBoxConsiderarSoloOndasNegativas.setSelected(true);
         checkBoxConsiderarSoloOndasNegativas.setText(
-                "Considerar sólo las ondas negativas ");
+                "Considerar solo las ondas negativas ");
         jLabel13.setFont(new java.awt.Font("Tahoma", Font.BOLD, 12));
         jLabel13.setForeground(Color.blue);
         jLabel13.setText(
-                "Ventana temporal a emplear en el cálculo de la delta (flujo respiratorio, " +
+                "Ventana temporal a emplear en el calculo de la delta (flujo respiratorio, " +
                 "se da en segundos):");
         textventanaCalculoDeltas.setColumns(8);
         textventanaCalculoDeltas.addFocusListener(new
@@ -386,7 +386,7 @@ public class ConfigurarDialog extends JDialog {
         sliderPersistenciaFlujo.setMajorTickSpacing(1);
         sliderPersistenciaFlujo.setMaximum(10);
         sliderPersistenciaFlujo.setTexto(
-                "Persistencia, las limitaciones de flujo se unen si están a menos " +
+                "Persistencia, las limitaciones de flujo se unen si estan a menos " +
                 "de (segundos):");
         this.getContentPane().add(jPanel1, java.awt.BorderLayout.SOUTH);
         jPanel1.add(jButton1);
@@ -394,9 +394,9 @@ public class ConfigurarDialog extends JDialog {
         panelPendiente.setLayout(borderLayout2);
         this.getContentPane().add(this.jTabbedPane1,
                                   java.awt.BorderLayout.CENTER);
-        this.jTabbedPane1.addTab("Desaturación", tabbedPaneSatO2);
+        this.jTabbedPane1.addTab("Desaturacion", tabbedPaneSatO2);
         this.jTabbedPane1.addTab("Apnea e hipoapnea", tabbedPaneApnea);
-        this.jTabbedPane1.addTab("Relación temporal",panelTiempo);
+        this.jTabbedPane1.addTab("Relacion temporal", panelTiempo);
         jPanel4.add(jLabel4);
         jPanel4.add(jSliderVentanaDescenso);
         jPanel4.add(jTextDuracionVentanaDescenso);
@@ -434,12 +434,12 @@ public class ConfigurarDialog extends JDialog {
         panelOtrosSatO2.add(distanciaRellenoArrayPosibilidades);
         panelOtrosSatO2.add(duracionMaximaDesaturacion);
         panelMagnitudApnea.add(jPanel9, java.awt.BorderLayout.SOUTH);
-        tabbedPaneApnea.add(panelMagnitudApnea, "Restricción magnitud apnea");
+        tabbedPaneApnea.add(panelMagnitudApnea, "Restriccion magnitud apnea");
         tabbedPaneApnea.add(panelMagnitudHipoapnea,
-                            "Restricción magnitud hipoapnea");
-        tabbedPaneApnea.add(panelTemporalApnea, "Restricción temporal apnea");
+                            "Restriccion magnitud hipoapnea");
+        tabbedPaneApnea.add(panelTemporalApnea, "Restriccion temporal apnea");
         tabbedPaneApnea.add(panelTemporalHipoapnea,
-                            "Restricción temporal hipoapnea");
+                            "Restriccion temporal hipoapnea");
         tabbedPaneApnea.add(panelValorBasalApnea, "Valor basal");
         panelValorBasalApnea.add(jLabel7);
         panelValorBasalApnea.add(jSliderprincipioVentanaBasalFlujoApnea);
@@ -447,7 +447,7 @@ public class ConfigurarDialog extends JDialog {
         panelValorBasalApnea.add(jLabel8);
         panelValorBasalApnea.add(jSliderfinVentanaBasalFlujoApnea);
         panelValorBasalApnea.add(jTextFieldfinVentanaBasalFlujoApnea);
-        tabbedPaneApnea.add(panelDerivadas, "Parámetros de las derivadas");
+        tabbedPaneApnea.add(panelDerivadas, "Parametros de las derivadas");
         panelDerivadas.add(sliderprincipioIntervaloFiltroEnergia);
         panelDerivadas.add(slideFinIntervaloFiltroEnergia);
         panelDerivadas.add(sliderrelacionPrimerFiltroDerivada);
@@ -923,12 +923,12 @@ public class ConfigurarDialog extends JDialog {
     }
 
     public void setDescensoAdmisibleRespectoBasal(TrapezoidalDistribution
-            descensoAdmisibleRespectoBasal) {
+                                                  descensoAdmisibleRespectoBasal) {
         panelDescensoAdmisibleRespectoBasal = new FuzzyAcquisitionPanel(
                 descensoAdmisibleRespectoBasal);
         panelDescensoAdmisibleRespectoBasal.setNumeroDecimales(3);
         tabbedPaneSatO2.add(panelDescensoAdmisibleRespectoBasal,
-                            "Desviación admisible respecto al basal");
+                            "Desviacion admisible respecto al basal");
 
     }
 
@@ -992,11 +992,11 @@ public class ConfigurarDialog extends JDialog {
     }
 
     public void setPersistenciaFlujo(int persistenciaFlujo) {
-       sliderPersistenciaFlujo.setValor(persistenciaFlujo);
+        sliderPersistenciaFlujo.setValor(persistenciaFlujo);
     }
 
     public void setRelacionTemporal(TrapezoidalDistribution relacionTemporal) {
-        panelRelacionTemporalFlujoDesaturacion.setTrapezoidalDistribution( relacionTemporal);
+        panelRelacionTemporalFlujoDesaturacion.setTrapezoidalDistribution(relacionTemporal);
         panelRelacionTemporalFlujoDesaturacion.validaActualizar();
     }
 
@@ -1011,7 +1011,7 @@ public class ConfigurarDialog extends JDialog {
     }
 
     public void setFinIntervaloFiltroEnergia(int
-            finIntervaloFiltroEnergia) {
+                                             finIntervaloFiltroEnergia) {
         this.slideFinIntervaloFiltroEnergia.setValor(
                 finIntervaloFiltroEnergia);
     }
@@ -1072,7 +1072,7 @@ public class ConfigurarDialog extends JDialog {
         this.duracionMaximaDesaturacion.setValor(
                 duracionMaximaEpisodiosDesaturacion);
         tabbedPaneSatO2.add(this.panelOtrosSatO2,
-                            "Otros parámetros");
+                            "Otros parametros");
     }
 
     public void setFinVentanaBasalFlujoHipoApnea(int
@@ -1160,427 +1160,427 @@ public class ConfigurarDialog extends JDialog {
     }
 
 
-class ConfigurarDialog_textventanaCalculoDeltas_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_textventanaCalculoDeltas_focusAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.textventanaCalculoDeltas_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextFieldanchoVentanaValorMedioHipoapnea_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jSlideranchoVentanaValorMedioHipoapnea_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSlideranchoVentanaValorMedioHipoapnea_changeAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSlideranchoVentanaValorMedioHipoapnea_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_focusAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextFieldanchoVentanaValorMedioHipoapnea_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_focusAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextFieldanchoVentanaValorMedioApnea_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_focusAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextFieldfinVentanaBasalFlujoApnea_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextFieldfinVentanaBasalFlujoApnea_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jSlideranchoVentanaValorMedioApnea_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSlideranchoVentanaValorMedioApnea_changeAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSlideranchoVentanaValorMedioApnea_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextFieldanchoVentanaValorMedioApnea_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_focusAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextFieldprincipioVentanaBasalFlujoApnea_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextFieldprincipioVentanaBasalFlujoApnea_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jSliderfinVentanaBasalFlujoApnea_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSliderfinVentanaBasalFlujoApnea_changeAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSliderfinVentanaBasalFlujoApnea_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jSliderprincipioVentanaBasalFlujoApnea_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSliderprincipioVentanaBasalFlujoApnea_changeAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSliderprincipioVentanaBasalFlujoApnea_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_focusAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextFieldfinVentanaBasalSatO2_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jSliderfinVentanaBasalSatO2_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSliderfinVentanaBasalSatO2_changeAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSliderfinVentanaBasalSatO2_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextFieldfinVentanaBasalSatO2_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextDuracionVentanaDescenso_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextDuracionVentanaDescenso_focusAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextDuracionVentanaDescenso_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_focusAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextFieldprincipioVentanaBasalSatO2_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextFieldprincipioVentanaBasalSatO2_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jSliderprincipioVentanaBasalSatO2_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSliderprincipioVentanaBasalSatO2_changeAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSliderprincipioVentanaBasalSatO2_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextDuracionVentanaDescenso_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextDuracionVentanaDescenso_actionAdapter(
-            ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextDuracionVentanaDescenso_actionPerformed(e);
-    }
-}
-
-
-class ConfigurarDialog_jSliderVentanaDescenso_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSliderVentanaDescenso_changeAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSliderVentanaDescenso_stateChanged(e);
-    }
-}
-
-
-class ConfigurarDialog_jTextDuracionVentanaAscenso_focusAdapter extends
-        FocusAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextDuracionVentanaAscenso_focusAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent e) {
-        adaptee.jTextDuracionVentanaAscenso_focusLost(e);
-    }
-}
-
-
-class ConfigurarDialog_jButton1_actionAdapter implements ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jButton1_actionAdapter(ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent actionEvent) {
-        adaptee.jButton1_actionPerformed(actionEvent);
-    }
-}
-
-
-class ConfigurarDialog_jButton1_hierarchyBoundsAdapter extends
-        HierarchyBoundsAdapter {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jButton1_hierarchyBoundsAdapter(ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void ancestorMoved(HierarchyEvent hierarchyEvent) {
-        adaptee.jButton1_ancestorMoved(hierarchyEvent);
-    }
-}
-
-
-class Configura_tv_actionAdapter implements ActionListener {
-    private ConfigurarDialog adaptee;
-    Configura_tv_actionAdapter(ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.tv_actionPerformed(e);
-    }
-}
-
-
-class Configura_jSlider1_changeAdapter implements ChangeListener {
-    private ConfigurarDialog adaptee;
-    Configura_jSlider1_changeAdapter(ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent changeEvent) {
-        adaptee.jSlider1_stateChanged(changeEvent);
-    }
-}
-
-
-class ConfigurarDialog_jSliderVentanaAscenso_changeAdapter implements
-        ChangeListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jSliderVentanaAscenso_changeAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void stateChanged(ChangeEvent e) {
-        adaptee.jSliderVentanaAscenso_stateChanged(e);
-    }
-}
-
-
-class Configura_tv_focusAdapter extends FocusAdapter {
-    private ConfigurarDialog adaptee;
-    Configura_tv_focusAdapter(ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void focusLost(FocusEvent focusEvent) {
-        adaptee.tv_focusLost(focusEvent);
-    }
-}
-
-
-class ConfigurarDialog_jTextDuracionVentanaAscenso_actionAdapter implements
-        ActionListener {
-    private ConfigurarDialog adaptee;
-    ConfigurarDialog_jTextDuracionVentanaAscenso_actionAdapter(ConfigurarDialog
-            adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jTextDuracionVentanaAscenso_actionPerformed(e);
-    }
-}
-
-
-class Configura_jButton2_actionAdapter implements ActionListener {
-    private ConfigurarDialog adaptee;
-    Configura_jButton2_actionAdapter(ConfigurarDialog adaptee) {
-        this.adaptee = adaptee;
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        adaptee.jButton2_actionPerformed(e);
+    class ConfigurarDialog_textventanaCalculoDeltas_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_textventanaCalculoDeltas_focusAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.textventanaCalculoDeltas_focusLost(e);
+        }
     }
 
 
-}
+    class ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextFieldanchoVentanaValorMedioHipoapnea_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSlideranchoVentanaValorMedioHipoapnea_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSlideranchoVentanaValorMedioHipoapnea_changeAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSlideranchoVentanaValorMedioHipoapnea_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldanchoVentanaValorMedioHipoapnea_focusAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextFieldanchoVentanaValorMedioHipoapnea_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_focusAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextFieldanchoVentanaValorMedioApnea_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_focusAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextFieldfinVentanaBasalFlujoApnea_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldfinVentanaBasalFlujoApnea_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextFieldfinVentanaBasalFlujoApnea_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSlideranchoVentanaValorMedioApnea_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSlideranchoVentanaValorMedioApnea_changeAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSlideranchoVentanaValorMedioApnea_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldanchoVentanaValorMedioApnea_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextFieldanchoVentanaValorMedioApnea_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_focusAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextFieldprincipioVentanaBasalFlujoApnea_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldprincipioVentanaBasalFlujoApnea_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextFieldprincipioVentanaBasalFlujoApnea_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSliderfinVentanaBasalFlujoApnea_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSliderfinVentanaBasalFlujoApnea_changeAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSliderfinVentanaBasalFlujoApnea_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSliderprincipioVentanaBasalFlujoApnea_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSliderprincipioVentanaBasalFlujoApnea_changeAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSliderprincipioVentanaBasalFlujoApnea_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_focusAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextFieldfinVentanaBasalSatO2_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSliderfinVentanaBasalSatO2_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSliderfinVentanaBasalSatO2_changeAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSliderfinVentanaBasalSatO2_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldfinVentanaBasalSatO2_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextFieldfinVentanaBasalSatO2_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextDuracionVentanaDescenso_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextDuracionVentanaDescenso_focusAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextDuracionVentanaDescenso_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_focusAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextFieldprincipioVentanaBasalSatO2_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextFieldprincipioVentanaBasalSatO2_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextFieldprincipioVentanaBasalSatO2_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSliderprincipioVentanaBasalSatO2_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSliderprincipioVentanaBasalSatO2_changeAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSliderprincipioVentanaBasalSatO2_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextDuracionVentanaDescenso_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextDuracionVentanaDescenso_actionAdapter(
+                ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextDuracionVentanaDescenso_actionPerformed(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jSliderVentanaDescenso_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSliderVentanaDescenso_changeAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSliderVentanaDescenso_stateChanged(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextDuracionVentanaAscenso_focusAdapter extends
+            FocusAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextDuracionVentanaAscenso_focusAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent e) {
+            adaptee.jTextDuracionVentanaAscenso_focusLost(e);
+        }
+    }
+
+
+    class ConfigurarDialog_jButton1_actionAdapter implements ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jButton1_actionAdapter(ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent actionEvent) {
+            adaptee.jButton1_actionPerformed(actionEvent);
+        }
+    }
+
+
+    class ConfigurarDialog_jButton1_hierarchyBoundsAdapter extends
+            HierarchyBoundsAdapter {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jButton1_hierarchyBoundsAdapter(ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void ancestorMoved(HierarchyEvent hierarchyEvent) {
+            adaptee.jButton1_ancestorMoved(hierarchyEvent);
+        }
+    }
+
+
+    class Configura_tv_actionAdapter implements ActionListener {
+        private ConfigurarDialog adaptee;
+        Configura_tv_actionAdapter(ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.tv_actionPerformed(e);
+        }
+    }
+
+
+    class Configura_jSlider1_changeAdapter implements ChangeListener {
+        private ConfigurarDialog adaptee;
+        Configura_jSlider1_changeAdapter(ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent changeEvent) {
+            adaptee.jSlider1_stateChanged(changeEvent);
+        }
+    }
+
+
+    class ConfigurarDialog_jSliderVentanaAscenso_changeAdapter implements
+            ChangeListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jSliderVentanaAscenso_changeAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void stateChanged(ChangeEvent e) {
+            adaptee.jSliderVentanaAscenso_stateChanged(e);
+        }
+    }
+
+
+    class Configura_tv_focusAdapter extends FocusAdapter {
+        private ConfigurarDialog adaptee;
+        Configura_tv_focusAdapter(ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void focusLost(FocusEvent focusEvent) {
+            adaptee.tv_focusLost(focusEvent);
+        }
+    }
+
+
+    class ConfigurarDialog_jTextDuracionVentanaAscenso_actionAdapter implements
+            ActionListener {
+        private ConfigurarDialog adaptee;
+        ConfigurarDialog_jTextDuracionVentanaAscenso_actionAdapter(ConfigurarDialog
+                adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jTextDuracionVentanaAscenso_actionPerformed(e);
+        }
+    }
+
+
+    class Configura_jButton2_actionAdapter implements ActionListener {
+        private ConfigurarDialog adaptee;
+        Configura_jButton2_actionAdapter(ConfigurarDialog adaptee) {
+            this.adaptee = adaptee;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            adaptee.jButton2_actionPerformed(e);
+        }
+
+
+    }
 }

@@ -10,46 +10,44 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import javax.swing.AbstractAction;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
+
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.*;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class PluginUninstallAction extends AbstractAction{
+public class PluginUninstallAction extends AbstractAction {
     private File file;
     private String pluginKey;
     private PluginManagerPanel pmPanel;
-    public PluginUninstallAction(File file,String pluginKey,PluginManagerPanel pmPanel) {
+    public PluginUninstallAction(File file, String pluginKey, PluginManagerPanel pmPanel) {
         this.file = file;
         this.pluginKey = pluginKey;
         this.pmPanel = pmPanel;
-        Image image=Toolkit.getDefaultToolkit().createImage(
+        Image image = Toolkit.getDefaultToolkit().createImage(
                 PluginUninstallAction.class.getResource("images/trash.png"));
-        Icon smallIcon=new ImageIcon(
-                image.getScaledInstance(15,15,Image.SCALE_SMOOTH));
-        this.putValue(SMALL_ICON,smallIcon);
+        Icon smallIcon = new ImageIcon(
+                image.getScaledInstance(15, 15, Image.SCALE_SMOOTH));
+        this.putValue(SMALL_ICON, smallIcon);
         this.putValue(NAME, "");
-        this.putValue(SHORT_DESCRIPTION,"Uninstall plugin");
+        this.putValue(SHORT_DESCRIPTION, "Uninstall plugin");
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(JOptionPane.showConfirmDialog(
+        if (JOptionPane.showConfirmDialog(
                 JSWBManager.getJSWBManagerInstance().getParentWindow(),
                 "Are you sure?",
                 "Uninstall plugin",
-                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-            if(JSWBManager.getJSWBManagerInstance().getPluginManager().unregisterPlugin(
-                    pluginKey)){
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (JSWBManager.getJSWBManagerInstance().getPluginManager().unregisterPlugin(
+                    pluginKey)) {
                 JSWBManager.getJSWBManagerInstance().deletePluginFile(file);
                 pmPanel.refreshJTable();
 
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(
                         JSWBManager.getJSWBManagerInstance().getParentWindow(),
                         "Unable to delete plugin");

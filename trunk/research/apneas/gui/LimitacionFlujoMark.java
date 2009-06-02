@@ -1,15 +1,11 @@
 package research.apneas.gui;
 
-import net.javahispano.jsignalwb.plugins.defaults.DefaultInstantMark;
-import net.javahispano.jsignalwb.*;
 import java.awt.*;
-import java.awt.image.*;
-import javax.swing.*;
 import java.awt.geom.RoundRectangle2D;
+
 import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import research.apneas.LimitacionFlujo;
-import net.javahispano.jsignalwb.plugins.*;
-import net.javahispano.jsignalwb.plugins.defaults.*;
 
 /**
  * <p>Title: </p>
@@ -31,19 +27,19 @@ public class LimitacionFlujoMark extends DefaultIntervalMark {
 
 
     /**
-     * La limitacionFlujo se le pasa por referencia; si es modificada se modificará en el entorno.
+     * La limitacionFlujo se le pasa por referencia; si es modificada se modificara en el entorno.
      *
      * @param limitacionFlujo LimitacionFlujo
      */
     public LimitacionFlujoMark(LimitacionFlujo limitacionFlujo, Color color) {
         super.setTitle("Respiratory airflow limitation");
         super.setColor(color);
-        this.color=color;
-        this.limitacionFlujo=limitacionFlujo;
+        this.color = color;
+        this.limitacionFlujo = limitacionFlujo;
     }
 
     public String getName() {
-        return "Respiratory airflow limitation "+ limitacionFlujo.getDuracion() +" seg.";
+        return "Respiratory airflow limitation " + limitacionFlujo.getDuracion() + " seg.";
     }
 
     public void showMarkInfo(Window owner) {
@@ -72,31 +68,31 @@ public class LimitacionFlujoMark extends DefaultIntervalMark {
     }
 
     public void paint(Graphics2D g2d, MarkPaintInfo markPaintInfo) {
-            Stroke oldStroke = g2d.getStroke();
-            Color color2 = new Color(color.getRed(), color.getGreen(),
-                                     color.getBlue(), 50);
-            Color color3 = new Color(color.getRed(), color.getGreen(),
-                                     color.getBlue(), 150);
-            int maxY = (int) Math.max(markPaintInfo.getPoint().getY(),
-                                      markPaintInfo.getMaxValueY());
-            int minY = (int) Math.min(markPaintInfo.getPoint().getY() +
-                                      markPaintInfo.getHeight(),
-                                      markPaintInfo.getMinValueY());
-            g2d.setColor(color3);
+        Stroke oldStroke = g2d.getStroke();
+        Color color2 = new Color(color.getRed(), color.getGreen(),
+                                 color.getBlue(), 50);
+        Color color3 = new Color(color.getRed(), color.getGreen(),
+                                 color.getBlue(), 150);
+        int maxY = (int) Math.max(markPaintInfo.getPoint().getY(),
+                                  markPaintInfo.getMaxValueY());
+        int minY = (int) Math.min(markPaintInfo.getPoint().getY() +
+                                  markPaintInfo.getHeight(),
+                                  markPaintInfo.getMinValueY());
+        g2d.setColor(color3);
 
-            g2d.setStroke(new BasicStroke(3));
+        g2d.setStroke(new BasicStroke(3));
 
-            int x = markPaintInfo.getPoint().x;
-            int y = maxY - extraheightPixels - 2;
-            int width = markPaintInfo.getWidth();
-            int height = minY - maxY + 2 * extraheightPixels + 3;
-            g2d.draw(new java.awt.geom.RoundRectangle2D.Float(x - 2, y, width + 3,
-                    height, 15, 15));
-            g2d.setColor(color2);
-            g2d.fillRect(x, y, width, height);
-            //dejamos las cosas tal y como estaban
-            g2d.setStroke(oldStroke);
-       // }
+        int x = markPaintInfo.getPoint().x;
+        int y = maxY - extraheightPixels - 2;
+        int width = markPaintInfo.getWidth();
+        int height = minY - maxY + 2 * extraheightPixels + 3;
+        g2d.draw(new java.awt.geom.RoundRectangle2D.Float(x - 2, y, width + 3,
+                height, 15, 15));
+        g2d.setColor(color2);
+        g2d.fillRect(x, y, width, height);
+        //dejamos las cosas tal y como estaban
+        g2d.setStroke(oldStroke);
+        // }
     }
 
 }

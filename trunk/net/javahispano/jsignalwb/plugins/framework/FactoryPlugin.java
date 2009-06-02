@@ -9,8 +9,7 @@
 
 package net.javahispano.jsignalwb.plugins.framework;
 
-import java.util.*;
-import net.javahispano.jsignalwb.plugins.*;
+import java.util.HashMap;
 
 /**
  *
@@ -29,7 +28,7 @@ public class FactoryPlugin {
             plugin = pluginAssociation.get(name);
             if (plugin == null) {
                 throw new PluginLoadException("El plugin '" + name +
-                        "' que intenta cargar no esta registrado",
+                                              "' que intenta cargar no esta registrado",
                                               new RuntimeException(name));
             } else {
                 if (plugin instanceof String) {

@@ -2,8 +2,8 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.Vector;
 
 /**
  * @author Abraham Otero Quintana
@@ -40,7 +40,7 @@ public class PTBM implements PTBMInterface, Serializable {
     private transient boolean guardado = false;
     public static final int MODIFICAR = 0;
     public static final int BORRAR = -1;
-    public static final int AÑADIR = 1;
+    public static final int ANHADIR = 1;
     public static final int CREAR = 2;
     private Vector parametros;
     private Vector vectorPTB = new Vector();
@@ -203,7 +203,7 @@ public class PTBM implements PTBMInterface, Serializable {
      * @roseuid 3787081900B5
      */
     public void anhadePtoSig(PTB ptb, PtoSig ptosig, int numeroPtoSig,
-                            int selecion) {
+                             int selecion) {
         ((PTB) vectorPTB.elementAt(vectorPTB.indexOf(ptb))).anhadePtoSig(ptosig,
                 numeroPtoSig, selecion);
     }
@@ -218,9 +218,9 @@ public class PTBM implements PTBMInterface, Serializable {
      * @roseuid 3787081900BA
      */
     public void anhadeRestriccion(PTB ptb, PtoSig ptosig,
-                                 Restriccion restriccion,
-                                 Restriccion restriccion_vieja,
-                                 int numeroPtoSig, int selecion) {
+                                  Restriccion restriccion,
+                                  Restriccion restriccion_vieja,
+                                  int numeroPtoSig, int selecion) {
         ((PTB) (vectorPTB.elementAt(vectorPTB.indexOf(ptb)))).anhadeRestriccion(
                 ptb.getNumeroDePTB(),
                 ptosig.getNumeroDePtoSig(), restriccion,

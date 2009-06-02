@@ -2,17 +2,18 @@ package es.usc.gsi.conversorDatosMIT.ficheros.lectura;
 
 
 import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
 import es.usc.gsi.conversorDatosMIT.algoritmos.*;
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
-import es.usc.gsi.conversorDatosMIT.utilidades.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
+import es.usc.gsi.conversorDatosMIT.ficheros.Parametro;
+import es.usc.gsi.conversorDatosMIT.utilidades.ParseadorFecha;
 
 public class LeeFicheroDat {
 
     private FicheroHead ficheroHead; // Fichero de cabecera
     private Parametro parametro; // Parametro que muestrearemos
-    private int indiceParametro; // Índice del parametro dentro de su array
+    private int indiceParametro; // Indice del parametro dentro de su array
 
     private int factorFrecuencia; // Factor que multiplica la frecuencia del frame.
 
@@ -117,7 +118,7 @@ public class LeeFicheroDat {
             this.algoritmoConversion = new AlgoritmoF212();
             break;
 
-        default: // POR DEFECTO SE COGE EL ALGORITMO F61 PARA QUE EL FICHERO SE INTERPRETE MAL, PERO POR LO MENOS NO HAYA ERRORES DE EJECUCIÓN.
+        default: // POR DEFECTO SE COGE EL ALGORITMO F61 PARA QUE EL FICHERO SE INTERPRETE MAL, PERO POR LO MENOS NO HAYA ERRORES DE EJECUCION.
             this.algoritmoConversion = new AlgoritmoF61();
 
         } // Fin switch
@@ -220,7 +221,7 @@ public class LeeFicheroDat {
         }
         // Conversion de los bytes a un int
         //   System.out.println("(" + bytesMuestra[0] + "," + bytesMuestra[1] + ")");
-        // OBTENER RESULTADO DE CONVERSIÓN
+        // OBTENER RESULTADO DE CONVERSION
         res = algoritmoConversion.convierteBytes(bytesMuestra, posMuestra);
 
         return res;

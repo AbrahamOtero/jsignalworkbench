@@ -8,7 +8,7 @@ package net.javahispano.jsignalwb.jsignalmonitor;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class JSignalMonitorModeEvent {
     public static final int REPRESENT_XY_VALUES = 1;
@@ -16,20 +16,22 @@ public class JSignalMonitorModeEvent {
     public static final int INTERVAL_SELECTION = 3;
     private int mode;
     private boolean value;
-    public JSignalMonitorModeEvent(int mode,boolean value) {
-        if(mode!= REPRESENT_XY_VALUES &&
-           mode!= MARK_CREATION &&
-           mode!= INTERVAL_SELECTION)
+    public JSignalMonitorModeEvent(int mode, boolean value) {
+        if (mode != REPRESENT_XY_VALUES &&
+            mode != MARK_CREATION &&
+            mode != INTERVAL_SELECTION) {
             throw new RuntimeException("Invalid property on JSignalMonitorModeEvent");
-        this.mode=mode;
-        this.value=value;
+        }
+        this.mode = mode;
+        this.value = value;
     }
-    
-    public int getMode(){
+
+    public int getMode() {
         return mode;
     }
-    public boolean getValue(){
+
+    public boolean getValue() {
         return value;
     }
-    
+
 }

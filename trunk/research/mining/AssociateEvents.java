@@ -35,12 +35,12 @@ public class AssociateEvents extends AlgorithmAdapter {
     public void asociate(SignalManager sm) {
         Signal sato2 = sm.getSignal("Sat02");
         Signal flux = sm.getSignal("Flujo");
-        Signal tórax = sm.getSignal("Movimiento toracico");
+        Signal torax = sm.getSignal("Movimiento toracico");
         Signal abdomen = sm.getSignal("Movimiento abdominal");
 
         TreeSet<LimitacionAnotacion> limTree = getMarksAsTree(flux);
         TreeSet<LimitacionAnotacion> limAbdomen = getMarksAsTree(abdomen);
-        TreeSet<LimitacionAnotacion> limTorax = getMarksAsTree(tórax);
+        TreeSet<LimitacionAnotacion> limTorax = getMarksAsTree(torax);
         java.util.List < net.javahispano.jsignalwb.plugins.MarkPlugin > listMarkPlugins = sato2.getAllMarks();
         TreeSet<DesaturacionAnotacion> desatTree = new TreeSet<DesaturacionAnotacion>();
         for (MarkPlugin elem : listMarkPlugins) {

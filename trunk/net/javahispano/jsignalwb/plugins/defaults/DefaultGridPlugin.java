@@ -6,22 +6,19 @@
 
 package net.javahispano.jsignalwb.plugins.defaults;
 
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Window;
-import net.javahispano.jsignalwb.jsignalmonitor.DefaultGrid;
-import net.javahispano.jsignalwb.jsignalmonitor.GridConfiguration;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitorGrid;
-import net.javahispano.jsignalwb.plugins.*;
+import java.awt.*;
+
+import net.javahispano.jsignalwb.jsignalmonitor.*;
+import net.javahispano.jsignalwb.plugins.GridPluginAdapter;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class DefaultGridPlugin extends GridPluginAdapter{
+public class DefaultGridPlugin extends GridPluginAdapter {
     private JSignalMonitorGrid jsmGrid;
     public DefaultGridPlugin() {
-        jsmGrid=new DefaultGrid();
+        jsmGrid = new DefaultGrid();
     }
 
     public String getName() {
@@ -34,8 +31,8 @@ public class DefaultGridPlugin extends GridPluginAdapter{
 
 
     public void paintGrid(Graphics2D g2d, Point p, int height, int width,
-                             GridConfiguration gridConfig) {
-        jsmGrid.paintGrid(g2d,p,height,width,gridConfig);
+                          GridConfiguration gridConfig) {
+        jsmGrid.paintGrid(g2d, p, height, width, gridConfig);
     }
 
     public int getLeyendHeight() {

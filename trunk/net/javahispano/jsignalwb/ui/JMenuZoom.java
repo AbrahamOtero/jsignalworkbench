@@ -10,9 +10,9 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.KeyEvent;
-import javax.swing.ButtonGroup;
-import javax.swing.JMenu;
-import javax.swing.JRadioButtonMenuItem;
+
+import javax.swing.*;
+
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
 
 /**
@@ -22,19 +22,21 @@ import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
 public class JMenuZoom extends JMenu {
 
     /** Creates a new instance of JMenuZoom */
-    public JMenuZoom(JSignalMonitor jsm,String signalName) {
-         super("Zoom");
-         setMnemonic(KeyEvent.VK_Z);
-         if(jsm.hasChannel(signalName)){
-                setEnabled(true);
-                int actualZoom=(int)(jsm.getChannelProperties(signalName).getZoom()*100);
-                ButtonGroup itemGroup = new ButtonGroup();
-                for(int index=25;index<251;index+=25){
-                    JRadioButtonMenuItem jrbmi=new JRadioButtonMenuItem(new ZoomAction(jsm,signalName,index));
-                    itemGroup.add(jrbmi);
-                    add(jrbmi);
-                    if(index==actualZoom) jrbmi.setSelected(true);
+    public JMenuZoom(JSignalMonitor jsm, String signalName) {
+        super("Zoom");
+        setMnemonic(KeyEvent.VK_Z);
+        if (jsm.hasChannel(signalName)) {
+            setEnabled(true);
+            int actualZoom = (int) (jsm.getChannelProperties(signalName).getZoom() * 100);
+            ButtonGroup itemGroup = new ButtonGroup();
+            for (int index = 25; index < 251; index += 25) {
+                JRadioButtonMenuItem jrbmi = new JRadioButtonMenuItem(new ZoomAction(jsm, signalName, index));
+                itemGroup.add(jrbmi);
+                add(jrbmi);
+                if (index == actualZoom) {
+                    jrbmi.setSelected(true);
                 }
+            }
         } else {
             setEnabled(false);
         }

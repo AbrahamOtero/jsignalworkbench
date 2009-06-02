@@ -7,7 +7,7 @@ package research.beats;
 
 /**
  *
- * @author Santiago Fernández Dapena
+ * @author Santiago Fernandez Dapena
  */
 public class Bdac {
 
@@ -50,7 +50,7 @@ public class Bdac {
     }
 
     /**
-     * Calcula el número de muestra donde aparece un latido
+     * Calcula el numero de muestra donde aparece un latido
      *
      * @param ecgSample int
      * @param t int

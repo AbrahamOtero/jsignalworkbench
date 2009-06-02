@@ -1,16 +1,15 @@
 package research.beats.asistencia;
 
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.plugins.Plugin;
-import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.JSWBManager;
 import java.util.Collection;
-import javax.swing.Icon;
-import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
+
+import javax.swing.Icon;
+
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
+import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 /**
  * <p>Title: </p>
@@ -39,8 +38,8 @@ public class Paso2 extends AlgorithmAdapter {
         sat.getProperties().setInvadeNearChannels(false);
         float[] d = sat.getValues();
         for (int i = 1; i < d.length; i++) {
-            if (d[i]>=103) {
-                d[i]=d[i-1];
+            if (d[i] >= 103) {
+                d[i] = d[i - 1];
                 System.out.println("ssssssssss");
             }
         }

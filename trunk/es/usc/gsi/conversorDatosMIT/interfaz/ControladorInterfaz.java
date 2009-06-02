@@ -1,10 +1,10 @@
-// PATRÓN DE DISEÑO SINGLETON
+// PATRON DE DISENHO SINGLETON
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 
 import es.usc.gsi.conversorDatosMIT.excepciones.*;
@@ -13,7 +13,7 @@ import es.usc.gsi.conversorDatosMIT.interfaz.filtros.*;
 
 public class ControladorInterfaz {
 
-    private ControladorInterfaz(){
+    private ControladorInterfaz() {
         dialogoAbrir = new DialogoAbrir();
         dialogoAbrirGrabar = new JFileChooser();
     }
@@ -26,7 +26,7 @@ public class ControladorInterfaz {
             controlador = new ControladorInterfaz();
             ini = true;
         }
-         return controlador;
+        return controlador;
     }
 
     public static final int LISTA = 0;
@@ -42,7 +42,7 @@ public class ControladorInterfaz {
 
 
     private PanelPrincipal panelPrincipal = null;
-    private JFileChooser dialogoAbrirGrabar; // QUITAR: HACER UN DIÁLOGO SÓLO PARA ABRIR Y OTRO SÓLO PARA GRABAR.
+    private JFileChooser dialogoAbrirGrabar; // QUITAR: HACER UN DIALOGO SOLO PARA ABRIR Y OTRO SOLO PARA GRABAR.
     private DialogoAbrir dialogoAbrir;
 
     private IndicadorProgreso progreso = null;
@@ -64,9 +64,9 @@ public class ControladorInterfaz {
         dialogoAbrirGrabar.setFileSelectionMode(JFileChooser.
                                                 FILES_AND_DIRECTORIES);
         dialogoAbrirGrabar.setSelectedFile(null);
-         if (archivoAbierto != null) {
-             this.dialogoAbrirGrabar.setCurrentDirectory(archivoAbierto);
-         }
+        if (archivoAbierto != null) {
+            this.dialogoAbrirGrabar.setCurrentDirectory(archivoAbierto);
+        }
 
         int opc = dialogoAbrirGrabar.showOpenDialog(panelPrincipal);
 
@@ -101,11 +101,9 @@ public class ControladorInterfaz {
         dialogoAbrir.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         dialogoAbrir.setSelectedFile(null);
         if (archivoAbierto != null) {
-    this.dialogoAbrir.setCurrentDirectory(archivoAbierto);
-}
+            this.dialogoAbrir.setCurrentDirectory(archivoAbierto);
+        }
         int opc = dialogoAbrir.showOpenDialog(panelPrincipal);
-
-
 
         if (opc == JFileChooser.APPROVE_OPTION) {
 
@@ -152,7 +150,7 @@ public class ControladorInterfaz {
 
         this.cerrarPaciente(); // LO CIERRA TODO
 
-        //IMPLEMENTAR COMPROBACIÓN DE CAMBIO EN FICHERO
+        //IMPLEMENTAR COMPROBACION DE CAMBIO EN FICHERO
         //PARA SACAR UN CUADRO INFORMATIVO ACERCA DE SI SE DEBE GRABAR O NO.
         // ANTES: SE USABA PARA CERRAR LOS FICHEROS DE UNO EN UNO.
         /*  controlFicheros.eliminaHead( this.getFicheroHeadSeleccionado() );
@@ -164,7 +162,7 @@ public class ControladorInterfaz {
 
         try {
             controlFicheros.esExportable(); // Comprobacion de condiciones de exportacion: este metodo
-            // solo devuelve excepciones. ¿Poco ortodoxo?
+            // solo devuelve excepciones. Poco ortodoxo?
             this.actualizaParametros();
         } catch (NoPacienteAbiertoException e) {
             this.muestraDialogoError("Debe abrir la carpeta de un paciente o un fichero antes de poder importar datos.");
@@ -193,7 +191,7 @@ public class ControladorInterfaz {
 
         try {
             controlFicheros.esExportable(); // Comprobacion de condiciones de exportacion: este metodo
-            // solo devuelve excepciones. ¿Poco ortodoxo?
+            // solo devuelve excepciones. Poco ortodoxo?
             this.actualizaParametros();
         } catch (NoPacienteAbiertoException e) {
             this.muestraDialogoError(
@@ -229,7 +227,7 @@ public class ControladorInterfaz {
 
             if (f.exists()) { // Si el fichero ya existe, preguntamos para sobreescribir.
                 opcionSobreescribir = this.muestraDialogoConfirmacion(
-                        "El archivo ya existe.\n¿Desea sobreescribirlo?",
+                        "El archivo ya existe.\nDesea sobreescribirlo?",
                         "Sobreescribir archivo", JOptionPane.YES_NO_OPTION);
             }
 

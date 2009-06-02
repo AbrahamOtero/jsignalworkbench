@@ -24,7 +24,7 @@ public class DialogMobileMeanPlugin extends JDialog {
     private int oldWindow;
     private boolean mediana = false;
     private boolean rellenar = false;
-    private float valorRelleno=50;
+    private float valorRelleno = 50;
 
     private JPanel panel1 = new JPanel();
     private BorderLayout borderLayout1 = new BorderLayout();
@@ -88,7 +88,7 @@ public class DialogMobileMeanPlugin extends JDialog {
         jPanel1.setLayout(flowLayout2);
         flowLayout2.setHgap(25);
         jCheckBox2.setText(
-                "Rellenar huecos con el último valor si su valor es menor que:");
+                "Rellenar huecos con el ultimo valor si su valor es menor que:");
         jCheckBox2.addItemListener(new
                                    DialogMobileMeanPlugin_jCheckBox2_itemAdapter(this));
         jTextField1.setEnabled(false);
@@ -157,7 +157,7 @@ public class DialogMobileMeanPlugin extends JDialog {
         this.window = jSlider1.getValue();
         this.mediana = jCheckBox1.isSelected();
         if (this.jCheckBox2.isSelected()) {
-            this.rellenar=true;
+            this.rellenar = true;
             try {
                 this.valorRelleno = Float.parseFloat(this.jTextField1.getText());
             } catch (NumberFormatException ex) {
@@ -165,9 +165,8 @@ public class DialogMobileMeanPlugin extends JDialog {
                 this.jTextField1.selectAll();
                 return;
             }
-        }
-        else{
-            this.rellenar=false;
+        } else {
+            this.rellenar = false;
         }
         this.dispose();
 
@@ -193,7 +192,7 @@ public class DialogMobileMeanPlugin extends JDialog {
 
     public void setValorRelleno(float valorRelleno) {
         this.valorRelleno = valorRelleno;
-        this.jTextField1.setText(""+valorRelleno);
+        this.jTextField1.setText("" + valorRelleno);
     }
 }
 

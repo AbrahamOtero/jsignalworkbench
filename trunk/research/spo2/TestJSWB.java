@@ -20,38 +20,40 @@ import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 public class TestJSWB extends AlgorithmAdapter {
 
     private static void test(float[] test) {
-            DetectorDesaturaciones b = new DetectorDesaturaciones();
-            b.setTiempoInicial( inicio);
+        DetectorDesaturaciones b = new DetectorDesaturaciones();
+        b.setTiempoInicial(inicio);
         for (int i = 0; i < test.length; i++) {
             Desaturacion d = b.anadeDato(test[i]);
-           // System.out.println("*****************************Valor basal "+b.getValorBasal());
+            // System.out.println("*****************************Valor basal "+b.getValorBasal());
 
             if (d != null) {
                 System.out.println(d.toString());
-                if (!d.isInicioSolo()&&true) {
+                if (!d.isInicioSolo() && true) {
                     DefaultIntervalMark m = new DefaultIntervalMark();
-                    m.setMarkTime(inicio + d.getComienzo()*1000);
-                    m.setEndTime(inicio + d.getFin()*1000);
-                    m.setComentary(""+d.getPos()+" "+d.getValorMinimo());
+                    m.setMarkTime(inicio + d.getComienzo() * 1000);
+                    m.setEndTime(inicio + d.getFin() * 1000);
+                    m.setComentary("" + d.getPos() + " " + d.getValorMinimo());
                     //m.setMarkTime(inicio + 10*1000);
-                  //  m.setEndTime(inicio + 100*1000);
+                    //  m.setEndTime(inicio + 100*1000);
 
 
 
-                    JSWBManager.getSignalManager().addSignalMark("SaO2",m);
+                    JSWBManager.getSignalManager().addSignalMark("SaO2", m);
                 }
             }
         }
     }
 
-public void runAlgorithm(SignalManager sm, float[] signal) {
+    public void runAlgorithm(SignalManager sm, float[] signal) {
 
-     inicio =  JSWBManager.getSignalManager().getSignal("SaO2").getStart();
-    test(signal);
+        inicio = JSWBManager.getSignalManager().getSignal("SaO2").getStart();
+        test(signal);
     }
+
     public String getName() {
         return "Test";
     }
-    private static long inicio=0;
+
+    private static long inicio = 0;
 
 }

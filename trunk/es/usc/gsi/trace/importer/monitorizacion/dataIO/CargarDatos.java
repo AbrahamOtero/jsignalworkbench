@@ -2,9 +2,9 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.dataIO;
 
-import java.util.*;
+import java.util.TreeSet;
 
-import es.usc.gsi.trace.importer.monitorizacion.data.*;
+import es.usc.gsi.trace.importer.monitorizacion.data.AlmacenDatos;
 
 /**
  * Esta clase se encargara de cargar los datos de un archivo, que se le pasara en

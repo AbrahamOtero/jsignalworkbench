@@ -7,33 +7,35 @@
 package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JRadioButtonMenuItem;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.jsignalmonitor.ChannelProperties;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class JRadioButtonMenuItemInvadeNearChannels extends JRadioButtonMenuItem {
-    
-    public JRadioButtonMenuItemInvadeNearChannels(JSWBManager jswbManager,ChannelProperties channelProperties) {
+
+    public JRadioButtonMenuItemInvadeNearChannels(JSWBManager jswbManager, ChannelProperties channelProperties) {
         super(new InvadeNearChannelsAction(jswbManager, channelProperties));
-        
+
         if (channelProperties.isInvadeNearChannels()) {
             setSelected(true);
         } else {
             setSelected(false);
         }
-        if(!jswbManager.getSignalManager().isSignalVisible(channelProperties.getName())){
+        if (!jswbManager.getSignalManager().isSignalVisible(channelProperties.getName())) {
             setEnabled(false);
         }
     }
-    
-    public String getActionCommand(){
-        if(isSelected())
+
+    public String getActionCommand() {
+        if (isSelected()) {
             return "true";
-        else 
+        } else {
             return "false";
+        }
     }
-    
+
 }

@@ -7,14 +7,14 @@ import java.util.List;
 import javax.swing.Icon;
 
 import net.javahispano.jsignalwb.*;
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
+import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import research.beats.anotaciones.LatidoAnotacion;
-import net.javahispano.jsignalwb.plugins.defaults.*;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  *
- * @author Santiago Fernández Dapena
+ * @author Santiago Fernandez Dapena
  */
 public class TestDeteccion extends AlgorithmAdapter {
 
@@ -30,7 +30,7 @@ public class TestDeteccion extends AlgorithmAdapter {
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
 
-        //Asignar a SampleRate la frecuencia de la señal actual
+        //Asignar a SampleRate la frecuencia de la senhal actual
         SampleRate.setSampleRate((int) signals.get(0).getSignal().getSRate());
 
         // Initialize beat detection

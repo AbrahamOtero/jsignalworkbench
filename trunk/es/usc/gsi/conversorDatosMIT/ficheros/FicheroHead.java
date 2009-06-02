@@ -8,8 +8,9 @@ package es.usc.gsi.conversorDatosMIT.ficheros;
 import java.io.*;
 
 import es.usc.gsi.conversorDatosMIT.algoritmos.*;
-import es.usc.gsi.conversorDatosMIT.excepciones.*;
-import es.usc.gsi.conversorDatosMIT.utilidades.*;
+import es.usc.gsi.conversorDatosMIT.excepciones.FicheroNoValidoException;
+import es.usc.gsi.conversorDatosMIT.utilidades.ParseadorCadena;
+import es.usc.gsi.conversorDatosMIT.utilidades.ParseadorFecha;
 
 public class FicheroHead extends File {
 
@@ -35,7 +36,7 @@ public class FicheroHead extends File {
 
             this.leeFichero(); // Inicializacion de atributos.
             parametros = new Parametro[numSenhales]; // MEJOR: LEER PRIMERO EL FICHERO ALMACENANDO EN UN VECTOR
-            // LOS PARÁMETROS QUE SON VÁLIDOS Y LUEGO CREAR EL ARRAY
+            // LOS PARAMETROS QUE SON VALIDOS Y LUEGO CREAR EL ARRAY
             // A PARTIR DE ELLOS, POR SI HUBIESE ALGUNO DEFECTUOSO.
             this.leeParametros();
 

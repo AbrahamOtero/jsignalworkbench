@@ -18,7 +18,7 @@ public class MediaMovilException extends Exception {
     }
 
     /**
-     * Devuelve el valor del cual se pidió un percentil como un String.
+     * Devuelve el valor del cual se pidio un percentil como un String.
      * @return
      */
     public int getVentanaTemporal() {

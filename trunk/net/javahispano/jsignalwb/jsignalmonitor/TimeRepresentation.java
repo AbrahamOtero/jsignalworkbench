@@ -22,12 +22,12 @@ import org.joda.time.format.DateTimeFormatter;
  * es <code>HH:mm:ss[.SSS] [dd/MM/yyyy]</code>, siendo optativo el contenido
  * entre corchetes. </p>
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public class TimeRepresentation {
     //no tiene sentido instanciar esta clase.
-    private TimeRepresentation(){}
+    private TimeRepresentation() {}
 
     /**
      * Recibe un instante de tiempo medido en milisegundos desde la fecha base y
@@ -112,8 +112,8 @@ public class TimeRepresentation {
      * hasta ese instante en milisegundos.
      *
      * @param time fecha como cadena de caracteres.
-     * @param date true si la cadena de caracteres contiene día a mes y
-     *   año, false en caso contrario.
+     * @param date true si la cadena de caracteres contiene dia a mes y
+     *   anho, false en caso contrario.
      * @param hour true si la cadena de caracteres contiene horas, minutos
      *   y segundos, false en caso contrario.
      * @param milisec true si la cadena de caracteres contienen
@@ -160,6 +160,5 @@ public class TimeRepresentation {
 
     }
 
-    
 
 }

@@ -1,7 +1,7 @@
 package net.javahispano.jsignalwb.io;
 
-import net.javahispano.jsignalwb.jsignalmonitor.*;
-import org.jdom.*;
+import net.javahispano.jsignalwb.jsignalmonitor.ChannelProperties;
+import org.jdom.Element;
 
 /**
  *

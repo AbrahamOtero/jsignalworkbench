@@ -66,7 +66,6 @@ public class DesaturacionAnotacion extends LimitacionAnotacion {
     }
 
 
-
     public void resetColors() {
         for (LimitacionAnotacion limitation : limitationsList) {
             limitation.setColor(oldColorLimitations.get(limitation));

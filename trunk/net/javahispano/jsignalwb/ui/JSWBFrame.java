@@ -11,15 +11,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.JSWBWindowListener;
 import net.javahispano.jsignalwb.jsignalmonitor.MoveScrollPanel;
-import net.javahispano.jsignalwb.plugins.*;
-import net.javahispano.jsignalwb.plugins.Plugin.*;
-import net.javahispano.jsignalwb.plugins.framework.*;
+import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.Plugin.GUIPositions;
+import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 
 /**
- * ventana principal de la aplicación.No diseñado como parte del API.
+ * ventana principal de la aplicacion.No disenhado como parte del API.
  *
  * @author Roman
  */
@@ -78,7 +79,7 @@ public class JSWBFrame extends javax.swing.JFrame {
 
     /**
      *
-     * que se ejecute adecuadamente aunque no haya parámetros de la consola
+     * que se ejecute adecuadamente aunque no haya parametros de la consola
      * @todo obtener los plugin de desarrollo de un modo adecuado
      *
      * @param args the command line arguments
@@ -95,7 +96,7 @@ public class JSWBFrame extends javax.swing.JFrame {
                 } catch (InstantiationException ex1) {
                 } catch (ClassNotFoundException ex1) {
                 }
-                boolean develop = true; //cierto sólo si se está usando el framework para el desarrollo de plugings
+                boolean develop = true; //cierto solo si se esta usando el framework para el desarrollo de plugings
                 try {
                     develop = Boolean.parseBoolean(args[0]);
                     //path = args[1];
@@ -111,17 +112,17 @@ public class JSWBFrame extends javax.swing.JFrame {
 
 
     /**
-     * @todo ahora este método fuerza que se cae de los plugin. Buscar una solución para esto más adelante.
+     * @todo ahora este metodo fuerza que se cae de los plugin. Buscar una solucion para esto mas adelante.
      *
      * @param jswbManager JSWBManager
      */
     private void initJToolBar(JSWBManager jswbManager) {
         PluginManager pluginManager = jswbManager.getPluginManager();
         jswbManager.addJToolBarButton(new NewAction());
-       // jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
+        // jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
         jswbManager.addJToolBarButton(new OpenFileAction(jswbManager));
         jswbManager.addJToolBarButton(new SaveAction(jswbManager));
-       // jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
+        // jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
         jswbManager.addJToolBarButton(new GenericPluginAction(jswbManager,
                 "JSWTextProcessorPlugin",
                 GenericPluginAction.LAUNCH_ACTION));

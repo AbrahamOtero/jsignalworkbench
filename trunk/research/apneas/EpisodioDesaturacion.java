@@ -17,7 +17,7 @@ public class EpisodioDesaturacion extends Intervalo {
 
     private float valorBasal;
 
-//@todo parámetro
+//@todo parametro
     private TrapezoidalDistribution caidaEnSaturacion = new
             TrapezoidalDistribution(3F, 5F, 70, 110F);
     private TrapezoidalDistribution pendienteAscenso;
@@ -40,39 +40,38 @@ public class EpisodioDesaturacion extends Intervalo {
         identificaArtefactos();
 
     }
+
     public EpisodioDesaturacion(Intervalo principio, Intervalo fin, EpisodioDesaturacion desaturacion) {
         this(principio, fin, desaturacion.valorBasal);
     }
 
     /**
-     * Devolverá a cierto cuando este episodio de desaturación tiene una calidad elevada; es decir, existe bastante
-     * evidencia de que es un episodio de desaturación y es relevante.
+     * Devolvera a cierto cuando este episodio de desaturacion tiene una calidad elevada; es decir, existe bastante
+     * evidencia de que es un episodio de desaturacion y es relevante.
      *
      * @return boolean
      */
-    public boolean esBuenaCalidad (){
-        if (this.posibilidad<60) {
+    public boolean esBuenaCalidad() {
+        if (this.posibilidad < 60) {
+            return false;
+        } else if (this.getDuracion() < 6) {
+            return false;
+        } else if (this.getCaidaSatO2() < 5) {
             return false;
         }
-        else if (this.getDuracion()<6) {
-        return false;
-        }
-        else if (this.getCaidaSatO2()<5){
-        return false;
-        }
         //si no cumple una calidad mnima combinando la caida y la duracion
-        else if (this.getCaidaSatO2()*this.getDuracion()<50){
-        return false;
+        else if (this.getCaidaSatO2() * this.getDuracion() < 50) {
+            return false;
         }
         return true;
     }
 
     private void identificaArtefactos() {
         for (int i = principio; i < fin; i++) {
-            //Una caída de 60 o más entre un par de muestras era considerada como artefacto
+            //Una caida de 60 o mas entre un par de muestras era considerada como artefacto
             if (datos[i] - datos[i + 1] > 60) {
                 int p = i;
-                //comprobamos si hay una recuperación
+                //comprobamos si hay una recuperacion
                 for (int j = i + 1; j < fin; j++, i++) {
                     if (datos[j] - datos[j + 1] < -60) {
                         //hemos encontrado el principio y el fin de un artefacto
@@ -90,8 +89,8 @@ public class EpisodioDesaturacion extends Intervalo {
     /**
      * caracterizaEpisodio
      *
-     * @todo quizßs sería interesante calcular alguno de estos parámetros sobre
-     *   la señal real y no sobre la filtrada. En especial el mÝnimo.
+     * @todo quizßs seria interesante calcular alguno de estos parametros sobre
+     *   la senhal real y no sobre la filtrada. En especial el mÝnimo.
      */
     private void caracterizaEpisodio() {
         tiempoBajada = intervaloPrincipio.getFin() - intervaloPrincipio.getPrincipio() + 1;
@@ -102,14 +101,14 @@ public class EpisodioDesaturacion extends Intervalo {
         duracion /= frecuencia;
         caidaSatO2 = maximo - minimo;
         if (this.fin - this.principio < 4 * frecuencia) {
-    posibilidad = 0;
-}
+            posibilidad = 0;
+        }
 
     }
 
     private void refinarFin(float[] posibilidadFin) {
         int i = fin;
-        //si "esta plano" pasamos de el. Ahora sólo consideramos una ventana de un segundo
+        //si "esta plano" pasamos de el. Ahora solo consideramos una ventana de un segundo
         //y una pendiente ocho veces superior. Este valor es completamente arbitrario.
         while (i > intervaloFin.principio + 1 &&
                this.pendienteAscenso.multiply(8 / frecuencia).evaluatepossibilityAt(
@@ -124,7 +123,7 @@ public class EpisodioDesaturacion extends Intervalo {
 
     private void refinarPrincipio(float[] posibilidadPrincipio) {
         int i = principio;
-        //si "esta plano" pasamos de el. Ahora sólo consideramos una ventana de un segundo
+        //si "esta plano" pasamos de el. Ahora solo consideramos una ventana de un segundo
         //y una pendiente ocho veces superior. Este valor es completamente arbitrario.
         while (i < intervaloFin.fin - 1 && this.pendienteDescenso.multiply(8 / frecuencia).evaluatepossibilityAt(
                 Utilidades.pendienteEnTornoA((int) (1 * frecuencia), i, datos)) == 0) {
@@ -133,11 +132,11 @@ public class EpisodioDesaturacion extends Intervalo {
         }
         principio = i;
         intervaloPrincipio.setPrincipio(principio);
-        //Miramos si el episodio empieza con una caída brusca
-        if (artefactos.size()>0) {
+        //Miramos si el episodio empieza con una caida brusca
+        if (artefactos.size() > 0) {
             Intervalo n = artefactos.first();
             //si el intervalo comienza menos de dos segundos de un artefacto
-            if (n.getPrincipio() - principio< 2 * frecuencia) {
+            if (n.getPrincipio() - principio < 2 * frecuencia) {
                 this.intervaloPrincipio.setPrincipio(n.getFin());
                 this.principio = n.getFin();
             }
@@ -215,12 +214,12 @@ public class EpisodioDesaturacion extends Intervalo {
     }
 
     public void setPrincipio(int principio) {
-        this.intervaloPrincipio.setPrincipio( principio);
-        super.setPrincipio( principio);
+        this.intervaloPrincipio.setPrincipio(principio);
+        super.setPrincipio(principio);
     }
 
     public void setFin(int fin) {
-        this.intervaloFin.setFin( fin);
+        this.intervaloFin.setFin(fin);
         super.setFin(fin);
     }
 

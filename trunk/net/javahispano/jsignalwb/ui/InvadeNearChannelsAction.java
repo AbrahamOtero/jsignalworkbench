@@ -8,23 +8,25 @@ package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+
 import javax.swing.AbstractAction;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.jsignalmonitor.ChannelProperties;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class InvadeNearChannelsAction extends AbstractAction{
+public class InvadeNearChannelsAction extends AbstractAction {
     private JSWBManager jswbManager;
     private ChannelProperties channelProperties;
-    
-    public InvadeNearChannelsAction(JSWBManager jswbManager,ChannelProperties channelProperties) {
-        this.channelProperties=channelProperties;
+
+    public InvadeNearChannelsAction(JSWBManager jswbManager, ChannelProperties channelProperties) {
+        this.channelProperties = channelProperties;
         this.jswbManager = jswbManager;
         this.putValue(this.NAME, "InvadeNearChannels");
-        this.putValue(this.MNEMONIC_KEY,KeyEvent.VK_I);
+        this.putValue(this.MNEMONIC_KEY, KeyEvent.VK_I);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -34,7 +36,7 @@ public class InvadeNearChannelsAction extends AbstractAction{
         } else if (e.getActionCommand().toLowerCase().equals("false")) {
             channelProperties.setInvadeNearChannels(false);
             jswbManager.refreshJSM(false);
-        }       
+        }
     }
 
 }

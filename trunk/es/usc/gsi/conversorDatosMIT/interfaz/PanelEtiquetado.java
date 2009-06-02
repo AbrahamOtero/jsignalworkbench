@@ -1,7 +1,7 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
 
 public class PanelEtiquetado extends PanelEtiquetadoGeneral {
 

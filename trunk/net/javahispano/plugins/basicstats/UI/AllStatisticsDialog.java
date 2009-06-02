@@ -1,13 +1,14 @@
 package net.javahispano.plugins.basicstats.UI;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import javax.swing.border.*;
+import java.awt.event.ActionEvent;
+import java.util.Collection;
+import java.util.Iterator;
 
-import java.util.*;
-import net.javahispano.plugins.basicstats.ResultadosEstadisticos;
+import javax.swing.*;
+
 import net.javahispano.plugins.basicstats.BasicStatisticsPlugin;
+import net.javahispano.plugins.basicstats.ResultadosEstadisticos;
 
 
 /**
@@ -38,7 +39,7 @@ public class AllStatisticsDialog extends JDialog {
 
     public AllStatisticsDialog(BasicStatisticsPlugin statisticsPlugin,
                                Window parent, boolean modal) {
-        super(parent,"Todos los estadsticos almacenados en el entorno", Dialog.ModalityType.APPLICATION_MODAL);
+        super(parent, "Todos los estadsticos almacenados en el entorno", Dialog.ModalityType.APPLICATION_MODAL);
         this.statisticsPlugin = statisticsPlugin;
         try {
             jbInit();
@@ -53,13 +54,13 @@ public class AllStatisticsDialog extends JDialog {
             PanelMostrarEstadisticos panel_estaditico = new
                     PanelMostrarEstadisticos(
                             resultado_estdaitico, false);
-            jTabbedPane1.add(resultado_estdaitico.getNombreSeñal(),
+            jTabbedPane1.add(resultado_estdaitico.getNombreSenhal(),
                              panel_estaditico);
         }
-           Point d = parent.getLocation();
-           Dimension t = parent.getSize();
-           setLocation ((int)(d.x+t.getWidth()/2-350),(int)((d.y)+ 5));
-           this.setSize(500,600);
+        Point d = parent.getLocation();
+        Dimension t = parent.getSize();
+        setLocation((int) (d.x + t.getWidth() / 2 - 350), (int) ((d.y) + 5));
+        this.setSize(500, 600);
 
     }
 
@@ -67,7 +68,7 @@ public class AllStatisticsDialog extends JDialog {
         jPanel1.setLayout(borderLayout1);
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14));
         jLabel1.setForeground(Color.red);
-        jLabel1.setText("Estadísticos calculados:");
+        jLabel1.setText("Estadisticos calculados:");
         aceptar.setText("Aceptar");
 
         aceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,12 +107,12 @@ public class AllStatisticsDialog extends JDialog {
                                              jTabbedPane1.getComponentAt(i);
             ResultadosEstadisticos resultados_estadisticos = panel.
                     getResultadosEstadisticos();
-            String nuevo_nombre_senal = panel.getNombreSeñal();
-            String key = resultados_estadisticos.getNombreSeñal() +
+            String nuevo_nombre_senal = panel.getNombreSenhal();
+            String key = resultados_estadisticos.getNombreSenhal() +
                          resultados_estadisticos.getFechaInicio() +
                          resultados_estadisticos.getFechaFin();
             statisticsPlugin.eraseStatistics(key);
-            resultados_estadisticos.setNombreSeñal(nuevo_nombre_senal);
+            resultados_estadisticos.setNombreSenhal(nuevo_nombre_senal);
             resultados_estadisticos.setComentario(panel.getComentario());
             statisticsPlugin.addStatistics(resultados_estadisticos);
         }
@@ -129,7 +130,7 @@ public class AllStatisticsDialog extends JDialog {
             ResultadosEstadisticos resultados_estadisticos = panel.
                     getResultadosEstadisticos();
             statisticsPlugin.eraseStatistics(resultados_estadisticos.
-                                             getNombreSeñal() +
+                                             getNombreSenhal() +
                                              resultados_estadisticos.
                                              getFechaInicio() +
                                              resultados_estadisticos.

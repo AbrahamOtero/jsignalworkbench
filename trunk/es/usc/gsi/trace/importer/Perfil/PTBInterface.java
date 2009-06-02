@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
+import java.io.Serializable;
 
 public interface PTBInterface extends Serializable {
     /**
@@ -118,7 +118,7 @@ public interface PTBInterface extends Serializable {
      * es necesario.
      * @param numeroPtoSig - Posicion que ocupa el PtoSIg que se va a modificar o
      * borrar. Si se va a crear no es necesario.
-     * @param seleccion - PTBM.BORRAR/MODIFICAR/AÑADIR.
+     * @param seleccion - PTBM.BORRAR/MODIFICAR/ANHADIR.
      * @roseuid 3788BB0A01DB
      */
     public void anhadePtoSig(PtoSig ptosig, int numeroPtoSig, int seleccion);
@@ -133,11 +133,11 @@ public interface PTBInterface extends Serializable {
      * modificar. null si se va a borrar.
      * @param restriccion_vieja - restriccion antigua en caso de que se vaya a borrar
      * o modificar. null si se va a nhadir.
-     * @param seleccion - PTBM:BORRAR/MODIFICAR/AÑADIR
+     * @param seleccion - PTBM:BORRAR/MODIFICAR/ANHADIR
      * @roseuid 3788BB0A01EF
      */
     public void anhadeRestriccion(int ptb, int ptosig, Restriccion restriccion,
-                                 Restriccion restriccion_vieja, int seleccion);
+                                  Restriccion restriccion_vieja, int seleccion);
 
     /**
      * Devuelve le nombre de este PTB.

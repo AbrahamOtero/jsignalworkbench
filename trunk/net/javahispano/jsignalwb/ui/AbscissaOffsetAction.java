@@ -10,24 +10,25 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
+
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import net.javahispano.jsignalwb.utilities.*;
 
 /**
  *
  * @author Roman
  */
-public class AbscissaOffsetAction extends AbstractAction{
+public class AbscissaOffsetAction extends AbstractAction {
     private JSignalMonitor jsm;
     private String signalName;
     private int value;
     /** Creates a new instance of AbscissaOffsetAction */
-    public AbscissaOffsetAction(JSignalMonitor jsm,String signalName,int value) {
-        this.jsm=jsm;
-        this.signalName=signalName;
-        this.value=value;
-        this.putValue(NAME,String.valueOf(value)+"%");
+    public AbscissaOffsetAction(JSignalMonitor jsm, String signalName, int value) {
+        this.jsm = jsm;
+        this.signalName = signalName;
+        this.value = value;
+        this.putValue(NAME, String.valueOf(value) + "%");
     }
 
     public void actionPerformed(ActionEvent e) {

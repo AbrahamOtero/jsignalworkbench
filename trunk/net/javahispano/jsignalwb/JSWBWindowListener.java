@@ -8,19 +8,20 @@ package net.javahispano.jsignalwb;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class JSWBWindowListener extends WindowAdapter{
+public class JSWBWindowListener extends WindowAdapter {
     private JSWBManager jswbManager;
-    public JSWBWindowListener(JSWBManager jswbManager){
-        this.jswbManager=jswbManager;
+    public JSWBWindowListener(JSWBManager jswbManager) {
+        this.jswbManager = jswbManager;
     }
-    public void windowClosing(WindowEvent e){
-        if(jswbManager.prepareClose(false))
+
+    public void windowClosing(WindowEvent e) {
+        if (jswbManager.prepareClose(false)) {
             System.exit(0);
+        }
     }
 }

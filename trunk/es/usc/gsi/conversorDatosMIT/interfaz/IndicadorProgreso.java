@@ -1,17 +1,17 @@
 // *************
 // Todavia por implementar correctamente: centrar componentes, decicir tamanhos,
 // establecer modelo de communicaciones, usar multithreading para actualizarlo, etc.
-// ¿Es necesario hacer multithreading?
+// Es necesario hacer multithreading?
 // *************
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.Cancelar;
 
 public class IndicadorProgreso extends JDialog implements ActionListener {
 
@@ -62,7 +62,6 @@ public class IndicadorProgreso extends JDialog implements ActionListener {
          this.setResizable(false);
 //    this.setLocationRelativeTo(propietario);
      }
-
 
 
 //***********************************************************************************

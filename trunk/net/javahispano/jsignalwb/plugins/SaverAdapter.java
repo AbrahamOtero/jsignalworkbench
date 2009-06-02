@@ -1,6 +1,6 @@
 package net.javahispano.jsignalwb.plugins;
 
-import java.io.*;
+import java.io.File;
 
 import net.javahispano.jsignalwb.*;
 
@@ -8,20 +8,20 @@ import net.javahispano.jsignalwb.*;
  * <p>Clase Adapter para la interfaz {@link Saver}.</p>
  *
  * <p> Para realizar la carga de datos el usuario puede extender cualquiera de
- * los tres métodos save definidos en esta clase. </p>
+ * los tres metodos save definidos en esta clase. </p>
  *
  *
  * <p> La forma preferida de crear un nuevo Saver es extendiendo  a {@link DefaultSaver}.</p>
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero.
  */
 public abstract class SaverAdapter extends PluginAdapter implements Saver {
     private boolean executionCanceled = false;
     /**
-     * Invoca a <code>save(File f, SignalManager sm)</code> pasándole como
-     * argumento los dos primeros argumentos que recibe este método.
+     * Invoca a <code>save(File f, SignalManager sm)</code> pasandole como
+     * argumento los dos primeros argumentos que recibe este metodo.
      *
      * @param f File
      * @param sm SignalManager
@@ -35,9 +35,9 @@ public abstract class SaverAdapter extends PluginAdapter implements Saver {
     }
 
     /**
-     * Invoca al método <code>save(File f, float[][] data) </code> pasándole el
-     * primer argumento que recibe este método y un array con todos los arrays
-     * de datos de las señales cargadas en el entorno.
+     * Invoca al metodo <code>save(File f, float[][] data) </code> pasandole el
+     * primer argumento que recibe este metodo y un array con todos los arrays
+     * de datos de las senhales cargadas en el entorno.
      *
      * @param f File
      * @param sm SignalManager
@@ -55,8 +55,8 @@ public abstract class SaverAdapter extends PluginAdapter implements Saver {
     }
 
     /**
-     * Este método debe almacenar en el fichero que se le pasa como primer
-     * argumento las señales que se le pasan, en forma de array, como segundo
+     * Este metodo debe almacenar en el fichero que se le pasa como primer
+     * argumento las senhales que se le pasan, en forma de array, como segundo
      * argumento.
      *
      * @param f File
@@ -77,7 +77,7 @@ public abstract class SaverAdapter extends PluginAdapter implements Saver {
     }
 
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
-         return false;
+        return false;
     }
 
 

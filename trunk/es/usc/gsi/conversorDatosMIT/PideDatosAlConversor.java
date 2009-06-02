@@ -2,13 +2,13 @@ package es.usc.gsi.conversorDatosMIT;
 
 import java.util.*;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
-import es.usc.gsi.conversorDatosMIT.interfaz.*;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.Parametro;
+import es.usc.gsi.conversorDatosMIT.interfaz.PanelPrincipal;
 import es.usc.gsi.trace.importer.jsignalmonold.SamplesToDate;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.SignalManager;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>
@@ -89,7 +89,7 @@ public class PideDatosAlConversor extends Thread {
             //Asumo que todos tiene la misma fecha de incio y cojo la del priemr parametro
             String fechaBaseConversor = parametros[0].getFechaInicio();
             long fecha = obtenerFecha(fechaBaseConversor);
-            long duracionMaxima=0;
+            long duracionMaxima = 0;
 
             SignalManager s = j.getSignalManager();
             s.removeAllSignals();
@@ -97,7 +97,7 @@ public class PideDatosAlConversor extends Thread {
 
                 s.addSignal(nombresSenales[i], datos[i], fs[i], fecha,
                             unidadesSenales[i]);
-                long duracion = (long) ((datos[i].length+1)/fs[i]);
+                long duracion = (long) ((datos[i].length + 1) / fs[i]);
                 if (duracionMaxima < duracion) {
                     duracionMaxima = duracion;
                 }
@@ -112,6 +112,7 @@ public class PideDatosAlConversor extends Thread {
             return false;
         }
     }
+
     /**
      * @todo ojo, no tengo claro si en el formato MIT los dis y meses se empiezan
      * a contar en 0 o en 1. He supuesto que se empiezan a contar en 1.
@@ -162,7 +163,7 @@ public class PideDatosAlConversor extends Thread {
         for (int i = 0; i < datos_int.length; i++) {
             datos[i] = datos_int[i];
             //@todo modificado hace poco datos[i] /= ganancia;
-           if (datos[i] > max) {
+            if (datos[i] > max) {
                 max = datos[i];
             }
             if (datos[i] < min) {

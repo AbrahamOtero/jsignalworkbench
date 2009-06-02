@@ -9,14 +9,15 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import net.javahispano.jsignalwb.EnvironmentConfiguration;
-import net.javahispano.jsignalwb.JSWBManager;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import net.javahispano.jsignalwb.plugins.framework.*;
+
+import javax.swing.*;
+
+import net.javahispano.jsignalwb.EnvironmentConfiguration;
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  * @author Roman
@@ -45,7 +46,6 @@ public class OpenFileAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
 
-
         int result = chooser.showOpenDialog(JSWBManager.getParentWindow());
         File file = chooser.getSelectedFile();
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -55,11 +55,10 @@ public class OpenFileAction extends AbstractAction {
                         chooser.getCurrentDirectory().getAbsolutePath());
             } else {
                 JOptionPane.showMessageDialog(JSWBManager.getParentWindow(),
-                        "The selected file is not a valid JSW project");
+                                              "The selected file is not a valid JSW project");
             }
 
             EnvironmentConfiguration.getInstancia().setDefaultLoader(chooser.getLoaderSelected().getName());
-
 
         }
     }

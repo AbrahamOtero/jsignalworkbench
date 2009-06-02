@@ -1,8 +1,8 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.awt.*;
+import java.awt.Frame;
 
-import javax.swing.*;
+import javax.swing.JDialog;
 
 public class DialogoInformativo extends JDialog {
 

@@ -6,7 +6,7 @@ import net.javahispano.jsignalwb.Signal;
 
 public abstract class GridPluginAdapter extends PluginAdapter implements GridPlugin {
     /**
-     * Contiene la señal sobre la cual se está mostrando este grid.
+     * Contiene la senhal sobre la cual se esta mostrando este grid.
      */
     protected Signal signal;
     public GridPluginAdapter() {
@@ -15,8 +15,10 @@ public abstract class GridPluginAdapter extends PluginAdapter implements GridPlu
     public void setSignal(Signal s) {
         signal = s;
     }
+
     public void launchConfigureGridGUI(Window owner) {
     }
+
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
         return false;
     }
@@ -27,8 +29,8 @@ public abstract class GridPluginAdapter extends PluginAdapter implements GridPlu
      * @return 0
      */
     public int getLeyendHeight() {
-         return 0;
-     }
+        return 0;
+    }
 
     /**
      * getLeyendWidth
@@ -36,7 +38,7 @@ public abstract class GridPluginAdapter extends PluginAdapter implements GridPlu
      * @return 0
      */
     public int getLeyendWidth() {
-         return 0;
+        return 0;
     }
 
 }

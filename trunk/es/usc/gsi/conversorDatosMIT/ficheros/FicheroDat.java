@@ -1,7 +1,7 @@
 package es.usc.gsi.conversorDatosMIT.ficheros;
 
 
-import java.io.*;
+import java.io.File;
 
 public class FicheroDat extends File {
 

@@ -6,18 +6,14 @@
 
 package net.javahispano.jsignalwb.plugins.defaults;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-
-import net.javahispano.jsignalwb.plugins.*;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class DefaultIntervalMarkYellow extends DefaultIntervalMark{
+public class DefaultIntervalMarkYellow extends DefaultIntervalMark {
 
     public DefaultIntervalMarkYellow() {
         super();
@@ -26,12 +22,13 @@ public class DefaultIntervalMarkYellow extends DefaultIntervalMark{
     public String getName() {
         return "Default Interval Mark Yellow";
     }
-     public Image getImage() {
-        BufferedImage im=new BufferedImage(5,15,BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2d=im.createGraphics();
+
+    public Image getImage() {
+        BufferedImage im = new BufferedImage(5, 15, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d = im.createGraphics();
 
         g2d.setColor(Color.YELLOW);
-        g2d.fillRect(0,0,5,15);
+        g2d.fillRect(0, 0, 5, 15);
         return im;
     }
 

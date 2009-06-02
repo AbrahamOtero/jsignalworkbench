@@ -1,9 +1,9 @@
 package net.javahispano.jsignalwb;
 
 /*
- * Representa un intervalo de señal.
+ * Representa un intervalo de senhal.
  *
- * @author Román Segador y Abraham Otero
+ * @author Roman Segador y Abraham Otero
  *    Copyright 2006-2007. This software is under the Apache License Version 2.0
  *   (http://www.apache.org/licenses/).
  */
@@ -15,53 +15,54 @@ public class SignalIntervalProperties {
     private int lastArrayPosition;
     private boolean fullSignal;
     /**
-     * Construye un intervalo que empieza al principio de la señal que se le
+     * Construye un intervalo que empieza al principio de la senhal que se le
      * pasa como argumento y termina en su fin.
      *
-     * @param signal señal para la cose quiere construir el intervalo.
+     * @param signal senhal para la cose quiere construir el intervalo.
      */
-    public SignalIntervalProperties(Signal signal){
-        this.signal=signal;
-        this.fullSignal=true;
-        this.startTime=signal.getStart();
-        this.endTime=signal.getProperties().getEndTime();
-        this.firstArrayPosition=0;
-        this.lastArrayPosition=signal.getValues().length - 1;
+    public SignalIntervalProperties(Signal signal) {
+        this.signal = signal;
+        this.fullSignal = true;
+        this.startTime = signal.getStart();
+        this.endTime = signal.getProperties().getEndTime();
+        this.firstArrayPosition = 0;
+        this.lastArrayPosition = signal.getValues().length - 1;
     }
 
     /**
-     * construye un intervalo de señal con las propiedades especificadas.
+     * construye un intervalo de senhal con las propiedades especificadas.
      *
-     * @param signal señala a la cual afecta el intervalo.
+     * @param signal senhala a la cual afecta el intervalo.
      * @param startTime principio del intervalo medido en milisegundos desde
      *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
      * @param endTime fin del intervalo medido en milisegundos desde 00:00:00
      *   01/01/1970. Ver {@link TimePositionConverter}.
-     * @param firstArrayPosition Índice de la raíz de datos asociado con esta
-     *   señal que se corresponde con el instante de inicio del intervalo.
-     * @param lastArrayPosition Índice del array de datos asociado con esta
-     *   señal que se corresponde con el instante de fin del intervalo.
+     * @param firstArrayPosition Indice de la raiz de datos asociado con esta
+     *   senhal que se corresponde con el instante de inicio del intervalo.
+     * @param lastArrayPosition Indice del array de datos asociado con esta
+     *   senhal que se corresponde con el instante de fin del intervalo.
      */
     public SignalIntervalProperties(Signal signal,
-            long startTime,long endTime,
-            int firstArrayPosition,int lastArrayPosition) {
-        this.signal=signal;
-        this.startTime=startTime;
-        this.endTime=endTime;
-        this.firstArrayPosition=firstArrayPosition;
-        this.lastArrayPosition=lastArrayPosition;
-        if(firstArrayPosition == 0 && lastArrayPosition == signal.getValues().length - 1)
-            this.fullSignal=true;
-        else
-            this.fullSignal=false;
+                                    long startTime, long endTime,
+                                    int firstArrayPosition, int lastArrayPosition) {
+        this.signal = signal;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.firstArrayPosition = firstArrayPosition;
+        this.lastArrayPosition = lastArrayPosition;
+        if (firstArrayPosition == 0 && lastArrayPosition == signal.getValues().length - 1) {
+            this.fullSignal = true;
+        } else {
+            this.fullSignal = false;
+        }
     }
 
     /**
      * getSignal
      *
      * @return {@link Signal} asociada con este intervalo. El objeto es
-     * la señal del entorno, no una copia; esto es, si el objeto
-     * se modifica la señal del entorno será modificada.
+     * la senhal del entorno, no una copia; esto es, si el objeto
+     * se modifica la senhal del entorno sera modificada.
      */
     public Signal getSignal() {
         return signal;
@@ -92,7 +93,7 @@ public class SignalIntervalProperties {
     /**
      * getFirstArrayPosition
      *
-     * @return Índice del array de datos asociado con esta señal que se
+     * @return Indice del array de datos asociado con esta senhal que se
      *   corresponde con el instante de inicio del intervalo.
      */
     public int getFirstArrayPosition() {
@@ -102,7 +103,7 @@ public class SignalIntervalProperties {
     /**
      * getLastArrayPosition
      *
-     * @return Índice del array de datos asociado con esta señal que se
+     * @return Indice del array de datos asociado con esta senhal que se
      *   corresponde con el instante de fin del intervalo.
      */
     public int getLastArrayPosition() {
@@ -112,7 +113,7 @@ public class SignalIntervalProperties {
     /**
      * isFullSignal
      *
-     * @return true si el intervalo se corresponde con una señal completa,
+     * @return true si el intervalo se corresponde con una senhal completa,
      *   false en caso contrario.
      */
     public boolean isFullSignal() {

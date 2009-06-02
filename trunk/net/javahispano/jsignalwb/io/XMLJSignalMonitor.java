@@ -1,6 +1,6 @@
 package net.javahispano.jsignalwb.io;
 
-import org.jdom.*;
+import org.jdom.Element;
 
 /**
  *
@@ -9,13 +9,13 @@ import org.jdom.*;
 class XMLJSignalMonitor extends Element {
 
     /** Creates a new instance of XMLJSignalMonitor */
-    public XMLJSignalMonitor(float frecuency, long scrollPosition, 
-            String leftPanelConfig) {
+    public XMLJSignalMonitor(float frecuency, long scrollPosition,
+                             String leftPanelConfig) {
         super("JSignalMonitor");
         setAttribute("Frecuency", String.valueOf(frecuency));
         setAttribute("ScrollPosition", String.valueOf(scrollPosition));
         setAttribute("LeftPanelConfig", leftPanelConfig);
-        
+
     }
 
 }

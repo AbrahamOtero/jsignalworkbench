@@ -1,12 +1,12 @@
-// SIGUE EL PATRÓN SINGLETON: UN SOLO OBJETO
+// SIGUE EL PATRON SINGLETON: UN SOLO OBJETO
 package es.usc.gsi.conversorDatosMIT.ficheros;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.util.Vector;
 
 import es.usc.gsi.conversorDatosMIT.excepciones.*;
-import es.usc.gsi.conversorDatosMIT.ficheros.escritura.*;
-import es.usc.gsi.conversorDatosMIT.interfaz.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.escritura.EscribeHead_ASCII;
+import es.usc.gsi.conversorDatosMIT.interfaz.ControladorInterfaz;
 
 public class ControladorFicheros {
 
@@ -71,8 +71,8 @@ public class ControladorFicheros {
 
     }
 
-    // DEVUELVE UN ARRAY CON LOS PARÁMETROS SELECCIONADOS
-    // Y DENTRO DE CADA UNO DE LOS PARÁMETROS EXISTE UN ARRAY
+    // DEVUELVE UN ARRAY CON LOS PARAMETROS SELECCIONADOS
+    // Y DENTRO DE CADA UNO DE LOS PARAMETROS EXISTE UN ARRAY
     // QUE CONTIENE TODOS LOS VALORES.
 
     public Parametro[] getParametrosSeleccionados() throws OutOfMemoryError {
@@ -99,7 +99,7 @@ public class ControladorFicheros {
     public void volcarFicherosHead_ASCII(File ficheroDestino) throws
             ErrorExportandoException {
 
-        // INCLUIR CÓDIGO DE PREPROCESAMIENTO DEL PATH PARA
+        // INCLUIR CODIGO DE PREPROCESAMIENTO DEL PATH PARA
         // QUE EL FICHERO TENGA UN NOMBRE ADECUADO.
         int maxBarraProgreso = calcularMaxBarraProgreso();
         EscribeHead_ASCII hilo = new EscribeHead_ASCII(ficherosHead,
@@ -145,8 +145,8 @@ public class ControladorFicheros {
 
         FicheroHead[] res;
         File[] listaFicheros;
-        Vector temp1 = new Vector(); // Almacena todos los ficheros .hea menos senal.hea --AHORA SÍ LOS ALMACENA
-        Vector temp2 = new Vector(); // Almacena todos los ficheros .hea VÁLIDOS.
+        Vector temp1 = new Vector(); // Almacena todos los ficheros .hea menos senal.hea --AHORA SI LOS ALMACENA
+        Vector temp2 = new Vector(); // Almacena todos los ficheros .hea VALIDOS.
 
         listaFicheros = f.listFiles();
 

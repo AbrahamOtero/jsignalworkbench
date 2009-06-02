@@ -4,7 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import net.javahispano.plugins.basicstats.*;
+import net.javahispano.plugins.basicstats.ResultadoCorrelacion;
+import net.javahispano.plugins.basicstats.RutinasEstadisticas;
 
 public class PanelMostrarCorrelacion extends JPanel {
     private ResultadoCorrelacion correlacion;
@@ -68,7 +69,7 @@ public class PanelMostrarCorrelacion extends JPanel {
         gridLayout1.setRows(2);
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14));
         jLabel3.setForeground(Color.blue);
-        jLabel3.setText("Coeficiente de correlación:");
+        jLabel3.setText("Coeficiente de correlacion:");
         coef_correlacion.setFont(new java.awt.Font("Dialog", 1, 14));
         coef_correlacion.setForeground(Color.blue);
         coef_correlacion.setText("jLabel4");
@@ -80,7 +81,7 @@ public class PanelMostrarCorrelacion extends JPanel {
         nivel_de_significacion.setText("jLabel6");
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14));
         jLabel1.setForeground(Color.blue);
-        jLabel1.setText("Nombre de identificación:");
+        jLabel1.setText("Nombre de identificacion:");
         nombre_correlacion.setColumns(15);
         jPanel2.setLayout(flowLayout1);
         flowLayout1.setHgap(15);
@@ -141,7 +142,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Inica cual es la correlación a mostrar.
+     * Inica cual es la correlacion a mostrar.
      * @param s
      */
     void setCorrelacion(String s) {
@@ -149,7 +150,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Inica cual es la correlación a mostrar.
+     * Inica cual es la correlacion a mostrar.
      * @param s
      */
     public String getCorrelacionCoeficiente() {
@@ -157,7 +158,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Indica cual es el nivel de significación a mostrar.
+     * Indica cual es el nivel de significacion a mostrar.
      * @param s
      */
     void setNivelDeCorrelacion(String s) {
@@ -165,7 +166,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Indica cual es el nivel de significación a mostrar.
+     * Indica cual es el nivel de significacion a mostrar.
      * @param s
      */
     public String getNivelDeCorrelacion() {
@@ -173,7 +174,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Pone el nombre de la correlación que muestra este panel.
+     * Pone el nombre de la correlacion que muestra este panel.
      * @param s
      */
     void setNombreCorrelacion(String s) {
@@ -181,7 +182,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Indica que  nombre de correlación muestra este panel.
+     * Indica que  nombre de correlacion muestra este panel.
      * @param s
      */
     public String getNombreCorrelacion() {
@@ -189,20 +190,20 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Pone la correlación indicada en este panel
+     * Pone la correlacion indicada en este panel
      */
     public void setCorrelacion(ResultadoCorrelacion correlacion) {
         this.correlacion = correlacion;
         this.setComentario(correlacion.getComentario());
         this.setNombreCorrelacion(correlacion.getNombre());
         this.setCorrelacion(Float.toString(correlacion.getNivelDeSignificacion()));
-        this.setNivelDeCorrelacion(RutinasEstadisticas.getTextoDeSignificación(
+        this.setNivelDeCorrelacion(RutinasEstadisticas.getTextoDeSignificacion(
                 correlacion.getNivelDeSignificacionDiscreto()));
         this.setTextoDescriptivo(correlacion.getTextoDescriptivo());
     }
 
     /**
-     * Devuelve la correlación que muestr este panel.
+     * Devuelve la correlacion que muestr este panel.
      * @return
      */
     public ResultadoCorrelacion getCorrelacion() {
@@ -210,7 +211,7 @@ public class PanelMostrarCorrelacion extends JPanel {
     }
 
     /**
-     * Devuelve la correlación que muestra este panel actualizada con su nuevo cometario
+     * Devuelve la correlacion que muestra este panel actualizada con su nuevo cometario
      * y nombre.
      * @return
      */

@@ -1,14 +1,14 @@
 package net.javahispano.jsignalwb.ui;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+
+import javax.swing.*;
+
 import net.javahispano.jsignalwb.JSWBManager;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.Icon;
-import java.awt.Toolkit;
-import javax.swing.AbstractAction;
-import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.SignalManager;
 
 /**
  * <p>Title: </p>
@@ -22,7 +22,7 @@ import net.javahispano.jsignalwb.*;
  * @author Abraham Otero
  * @version 0.5
  */
-public class EraseAllAction extends AbstractAction{
+public class EraseAllAction extends AbstractAction {
     public EraseAllAction() {
         this.putValue(SHORT_DESCRIPTION, "Remove all the signals emphasis levels, marks and annotations. Be careful...");
         this.putValue(NAME, "Remove all");

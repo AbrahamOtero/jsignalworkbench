@@ -1,7 +1,7 @@
 package net.javahispano.plugins.basicstats;
 
-import java.text.*;
-import java.util.*;
+import java.text.DecimalFormat;
+import java.util.Locale;
 
 public class MyFloat {
     private static boolean hay_parser = false;
@@ -17,7 +17,7 @@ public class MyFloat {
             //Ponemos como localidad la inglesa, pa que pille . en vez de ,
             Locale.setDefault(new Locale("en", "GB"));
             decimal_format = new DecimalFormat("###.###");
-            //Ahora que ya tengo un parseador "A la inglesa" volvemos pa espanaña:
+            //Ahora que ya tengo un parseador "A la inglesa" volvemos pa espananha:
             Locale.setDefault(default_locale);
             hay_parser = true;
         }
@@ -70,7 +70,7 @@ public class MyFloat {
     }
 
     /**
-     * Devuelve null si No se pudo completar la operación
+     * Devuelve null si No se pudo completar la operacion
      * @param numero
      * @return
      */
@@ -107,7 +107,7 @@ public class MyFloat {
     }
 
     /**
-     * Emplear para cambiar el numero de dígitos decimales del patrón
+     * Emplear para cambiar el numero de digitos decimales del patron
      * @param numero_decimaales
      */
     public static void setNumeroDecimales(int numero_decimales) {
@@ -134,4 +134,3 @@ public class MyFloat {
         return numero_decimales_actuales;
     }
 }
-

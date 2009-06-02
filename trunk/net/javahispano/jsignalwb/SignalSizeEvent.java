@@ -23,10 +23,11 @@ public class SignalSizeEvent {
     }
 
     public boolean isSignalAdded() {
-    	if(s!=null)
+        if (s != null) {
             return add;
-    	else 
+        } else {
             return false;
+        }
     }
 
     public boolean isSignalRemoved() {

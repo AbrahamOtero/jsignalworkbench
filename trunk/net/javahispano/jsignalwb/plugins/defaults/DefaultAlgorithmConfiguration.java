@@ -9,17 +9,13 @@ package net.javahispano.jsignalwb.plugins.defaults;
 import java.awt.Window;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.*;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
-import net.javahispano.jsignalwb.IntervalSelectedEvent;
-import net.javahispano.jsignalwb.IntervalSelectedListener;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.*;
 
+import javax.swing.*;
+
+import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.Algorithm;
 
 
 /**
@@ -27,7 +23,7 @@ import net.javahispano.jsignalwb.plugins.*;
  * @author  Roman
  */
 public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
-        PropertyChangeListener,IntervalSelectedListener {
+        PropertyChangeListener, IntervalSelectedListener {
     private JSWBManager jswbManager;
     private final Algorithm alg;
     private Window owner;
@@ -37,10 +33,10 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
     private int intervalsNeeded;
     private ArrayList<IntervalSelectedEvent> intervals;
     /** Creates new form DefaultAlgorithmConfiguration */
-    public DefaultAlgorithmConfiguration(Algorithm al, JSWBManager jswbManager,Window owner) {
+    public DefaultAlgorithmConfiguration(Algorithm al, JSWBManager jswbManager, Window owner) {
         this.jswbManager = jswbManager;
-        this.owner=owner;
-        intervals=new ArrayList<IntervalSelectedEvent>();
+        this.owner = owner;
+        intervals = new ArrayList<IntervalSelectedEvent>();
         List<String>
                 signalNames = jswbManager.getSignalManager().getSignalsNames();
         initComponents();
@@ -82,26 +78,27 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
     public void intervalSelectedActionPerformed(IntervalSelectedEvent evt) {
 
         intervalsNeeded--;
-        if(intervalsNeeded>0){
-            System.out.println("quedan "+intervalsNeeded+" intervalos por seleccionar");
+        if (intervalsNeeded > 0) {
+            System.out.println("quedan " + intervalsNeeded + " intervalos por seleccionar");
             intervals.add(evt);
             jswbManager.selectInterval(this);
-        }
-        else{
+        } else {
             intervals.add(evt);
-            jswbManager.runAlgorithm(alg,intervals);
+            jswbManager.runAlgorithm(alg, intervals);
             intervals.clear();
         }
     }
 
 
-    private void selectIntervals(int number){
-        intervalsNeeded=number;
-        if(intervalsNeeded>0)
+    private void selectIntervals(int number) {
+        intervalsNeeded = number;
+        if (intervalsNeeded > 0) {
             jswbManager.selectInterval(this);
-        else
-            jswbManager.runAlgorithm(alg,intervals);
+        } else {
+            jswbManager.runAlgorithm(alg, intervals);
+        }
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -137,7 +134,8 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Signals"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(),
+                "Signals"));
         selectSignals.setForeground(java.awt.Color.blue);
         selectSignals.setText("Select complete signals");
         selectSignals.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -188,46 +186,59 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(selectSignals, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(selectSignals, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                              jPanel2Layout.createSequentialGroup()
+                                              .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137,
+                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.
+                Alignment.LEADING, false)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              Short.MAX_VALUE)
+                .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                              Short.MAX_VALUE))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152,
+                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, jScrollPane2});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1,
+                               jScrollPane2});
 
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(selectSignals)
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(selectSignals)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING, false)
+                                              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addComponent(jButton4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                 javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2))
+                                              .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING,
+                javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel3.setForeground(java.awt.Color.blue);
@@ -239,29 +250,35 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
+                          .addContainerGap(18, Short.MAX_VALUE))
+                );
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Intervals"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(),
+                "Intervals"));
         jLabel5.setForeground(java.awt.Color.blue);
         jLabel5.setText("Intervals");
 
-        jSpinner1.setModel(new SpinnerNumberModel(0,0,100,1));
+        jSpinner1.setModel(new SpinnerNumberModel(0, 0, 100, 1));
 
         selectInterval.setForeground(java.awt.Color.blue);
         selectInterval.setText("Select signals intervals ");
@@ -277,26 +294,29 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(selectInterval)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(selectInterval)
+                          .addGap(25, 25, 25)
+                          .addComponent(jLabel5)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addContainerGap(125, Short.MAX_VALUE))
+                );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(selectInterval)
-                    .addComponent(jLabel5)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(selectInterval)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
 
         jButton6.setForeground(java.awt.Color.blue);
         jButton6.setText("Cancel");
@@ -309,55 +329,62 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                .addGap(80, 80, 80))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(177, 177, 177))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addContainerGap())
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addContainerGap())
+                .addGroup(layout.createSequentialGroup()
+                          .addGap(80, 80, 80)
+                          .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                          .addGap(80, 80, 80))
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addContainerGap())
+                .addGroup(layout.createSequentialGroup()
+                          .addGap(175, 175, 175)
+                          .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addGap(177, 177, 177))
+                );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addGap(14, 14, 14)
+                          .addComponent(jButton3)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jButton6)
+                          .addContainerGap(48, Short.MAX_VALUE))
+                );
+    } // </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton6ActionPerformed
         owner.setVisible(false);
         owner.dispose();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    } //GEN-LAST:event_jButton6ActionPerformed
 
-    private void selectionModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectionModeActionPerformed
-        if(evt.getSource().equals(selectInterval)){
+    private void selectionModeActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_selectionModeActionPerformed
+        if (evt.getSource().equals(selectInterval)) {
             this.jSpinner1.setEnabled(selectInterval.isSelected());
             //this.jLabel5.setVisible(selectInterval.isSelected());
-        }else if(evt.getSource().equals(selectSignals)){
+        } else if (evt.getSource().equals(selectSignals)) {
             jList1.setEnabled(selectSignals.isSelected());
             jList2.setEnabled(selectSignals.isSelected());
             jButton1.setEnabled(selectSignals.isSelected());
@@ -365,12 +392,12 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
             jButton4.setEnabled(selectSignals.isSelected());
             jButton5.setEnabled(selectSignals.isSelected());
         }
-    }//GEN-LAST:event_selectionModeActionPerformed
+    } //GEN-LAST:event_selectionModeActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton5ActionPerformed
         if (!jList2.isSelectionEmpty()) {
-            Object[] selected=jList2.getSelectedValues();
-            for(int index=0;index<selected.length;index++){
+            Object[] selected = jList2.getSelectedValues();
+            for (int index = 0; index < selected.length; index++) {
                 dlmNo.addElement(selected[index]);
                 dlmYes.removeElement(selected[index]);
             }
@@ -386,15 +413,15 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         if (numberSignals < 0 && dlmYes.size() < (numberSignals * ( -1))) {
             jButton3.setEnabled(false);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    } //GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         if (!jList1.isSelectionEmpty()) {
-            Object[] selected=jList1.getSelectedValues();
-            if(numberSignals>0 && dlmYes.size()+selected.length>numberSignals)
-                JOptionPane.showMessageDialog(owner,"Maximum "+numberSignals+" signals selected");
-            else{
-                for(int index=0;index<selected.length;index++){
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton4ActionPerformed
+        if (!jList1.isSelectionEmpty()) {
+            Object[] selected = jList1.getSelectedValues();
+            if (numberSignals > 0 && dlmYes.size() + selected.length > numberSignals) {
+                JOptionPane.showMessageDialog(owner, "Maximum " + numberSignals + " signals selected");
+            } else {
+                for (int index = 0; index < selected.length; index++) {
                     dlmYes.addElement(selected[index]);
                     dlmNo.removeElement(selected[index]);
                 }
@@ -410,88 +437,94 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
                     jButton5.setEnabled(true);
                     jButton2.setEnabled(true);
                 }
-                if(dlmNo.size()<=0){
+                if (dlmNo.size() <= 0) {
                     jButton4.setEnabled(false);
                     jButton1.setEnabled(false);
                 }
             }
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    } //GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int intervalsNumber=0;
-        int signalsNumber=0;
-        if(selectInterval.isSelected())
-            intervalsNumber=Integer.parseInt(jSpinner1.getValue().toString());
-        if(selectSignals.isSelected())
-            signalsNumber=dlmYes.size();
-        int totalSelected=intervalsNumber + signalsNumber;
-        if(numberSignals==0||
-                (numberSignals>0 && totalSelected<=numberSignals)||
-                (numberSignals<0 && totalSelected>=(numberSignals*(-1)))){
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton3ActionPerformed
+        int intervalsNumber = 0;
+        int signalsNumber = 0;
+        if (selectInterval.isSelected()) {
+            intervalsNumber = Integer.parseInt(jSpinner1.getValue().toString());
+        }
+        if (selectSignals.isSelected()) {
+            signalsNumber = dlmYes.size();
+        }
+        int totalSelected = intervalsNumber + signalsNumber;
+        if (numberSignals == 0 ||
+            (numberSignals > 0 && totalSelected <= numberSignals) ||
+            (numberSignals < 0 && totalSelected >= (numberSignals * ( -1)))) {
             Enumeration elemen = dlmYes.elements();
             owner.setVisible(false);
             try {
-                if(selectInterval.isSelected()){
-                    while(elemen.hasMoreElements())
+                if (selectInterval.isSelected()) {
+                    while (elemen.hasMoreElements()) {
                         intervals.add(new IntervalSelectedEvent(elemen.nextElement().toString()));
+                    }
 
                     selectIntervals(intervalsNumber);
+                } else {
+                    jswbManager.runAlgorithm(alg, elemen);
                 }
-                else
-                    jswbManager.runAlgorithm(alg,elemen);
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this,"The number of intervals selected is not a valid number");
+                JOptionPane.showMessageDialog(this, "The number of intervals selected is not a valid number");
             }
             owner.dispose();
-        }
-        else{
-            if(numberSignals<0)
+        } else {
+            if (numberSignals < 0) {
                 JOptionPane.showMessageDialog(owner,
-                        "Selected "+totalSelected+" signals(or Intervals).Needed a minimum of " + numberSignals);
-            else
+                                              "Selected " + totalSelected +
+                                              " signals(or Intervals).Needed a minimum of " + numberSignals);
+            } else {
                 JOptionPane.showMessageDialog(owner,
-                        "Selected "+totalSelected+" signals(or Intervals).Needed a maximum of " + numberSignals);
+                                              "Selected " + totalSelected +
+                                              " signals(or Intervals).Needed a maximum of " + numberSignals);
+            }
         }
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    } //GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton2ActionPerformed
 
-        Object[] elements=dlmYes.toArray();
-        for(int index=0;index<elements.length;index++){
+        Object[] elements = dlmYes.toArray();
+        for (int index = 0; index < elements.length; index++) {
             dlmNo.addElement(elements[index]);
             dlmYes.removeElement(elements[index]);
         }
 
-        if(dlmNo.size()>0){
+        if (dlmNo.size() > 0) {
             jButton1.setEnabled(true);
             jButton4.setEnabled(true);
         }
-        if(dlmYes.size()<=0){
+        if (dlmYes.size() <= 0) {
             jButton2.setEnabled(false);
             jButton5.setEnabled(false);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    } //GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if((numberSignals>0 && dlmYes.size()+dlmNo.size()<=numberSignals)||numberSignals<=0){
-            Object[] elements=dlmNo.toArray();
-            for(int index=0;index<elements.length;index++){
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton1ActionPerformed
+        if ((numberSignals > 0 && dlmYes.size() + dlmNo.size() <= numberSignals) || numberSignals <= 0) {
+            Object[] elements = dlmNo.toArray();
+            for (int index = 0; index < elements.length; index++) {
                 dlmYes.addElement(elements[index]);
                 dlmNo.removeElement(elements[index]);
             }
-        }else
-            JOptionPane.showMessageDialog(owner,"Maximum "+numberSignals+" signals selected");
-        if(dlmNo.size()<=0 || (numberSignals>0 && dlmYes.size()>=numberSignals)){
+        } else {
+            JOptionPane.showMessageDialog(owner, "Maximum " + numberSignals + " signals selected");
+        }
+        if (dlmNo.size() <= 0 || (numberSignals > 0 && dlmYes.size() >= numberSignals)) {
             jButton1.setEnabled(false);
             jButton4.setEnabled(false);
         }
-        if(dlmYes.size()>0){
+        if (dlmYes.size() > 0) {
             jButton2.setEnabled(true);
             jButton5.setEnabled(true);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    } //GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

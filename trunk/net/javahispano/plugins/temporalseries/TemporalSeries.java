@@ -7,10 +7,9 @@ import javax.swing.JOptionPane;
 
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.defaults.AxesGridPlugin;
-import net.javahispano.jsignalwb.jsignalmonitor.*;
 
 /**
- * Clase que extiende a {@link Signal} proporcionando ciertos métodos de
+ * Clase que extiende a {@link Signal} proporcionando ciertos metodos de
  * utilidad para el procesado de series temporales.
  */
 public class TemporalSeries extends Signal {
@@ -20,12 +19,12 @@ public class TemporalSeries extends Signal {
 
     /**
      * Crea una nueva instancia de Signal. sName indica el nombre de la senal mientras que sValues almacena los valores
-     * de la senal ordenados para cada instante de tiempo. Todos los demás parámetros de la serie (frecuencia de
-     * muestreo, origen de tiempo, unidades,énfasis
+     * de la senal ordenados para cada instante de tiempo. Todos los demas parametros de la serie (frecuencia de
+     * muestreo, origen de tiempo, unidades,enfasis
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
-     * @param t serie temporal de la cual se copiará la frecuencia de muestreo, instante de origen y unidades.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
+     * @param t serie temporal de la cual se copiara la frecuencia de muestreo, instante de origen y unidades.
      */
     public TemporalSeries(String sName, float[] sValues, TemporalSeries t) {
         this(sName, sValues, t.getSRate(), 0, t.getMagnitude(),
@@ -35,11 +34,11 @@ public class TemporalSeries extends Signal {
     /**
      * Crea una nueva instancia de Signal. sName indica el nombre de la senal mientras que sValues almacena los valores de la senal ordenados para cada
      * instante de tiempo.
-     * Todos los demás parámetros de la serie (frecuencia de muestreo, origen de tiempo,
-     * unidades,énfasis
+     * Todos los demas parametros de la serie (frecuencia de muestreo, origen de tiempo,
+     * unidades,enfasis
      *
-     * @param sName nombre de la señal.
-     * @param t serie temporal de la cual se copiará la frecuencia de muestreo, instante de origen y unidades.
+     * @param sName nombre de la senhal.
+     * @param t serie temporal de la cual se copiara la frecuencia de muestreo, instante de origen y unidades.
      */
 
     public TemporalSeries(String sName, TemporalSeries t) {
@@ -51,13 +50,13 @@ public class TemporalSeries extends Signal {
     /**
      * Crea una nueva instancia de Signal.
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
-     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     * @param sStart long instante de inicio de la senhal medido en milisegundos desde
      *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
-     * @param sMagnitude magnitud de la señal.
+     * @param sMagnitude magnitud de la senhal.
      */
     public TemporalSeries(String sName, float[] sValues, float frec,
                           int sStart, String sMagnitude) {
@@ -67,12 +66,12 @@ public class TemporalSeries extends Signal {
     /**
      * Crea una nueva instancia de Signal.
      *
-     * @param sName nombre de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sName nombre de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
-     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     * @param sStart long instante de inicio de la senhal medido en milisegundos desde
      *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
-     * @param sMagnitude magnitud de la señal.
+     * @param sMagnitude magnitud de la senhal.
      */
     public TemporalSeries(String sName, float frec,
                           int sStart, String sMagnitude) {
@@ -82,14 +81,14 @@ public class TemporalSeries extends Signal {
     /**
      * Crea una nueva instancia de Signal.
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
-     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     * @param sStart long instante de inicio de la senhal medido en milisegundos desde
      *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
-     * @param sMagnitude magnitud de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sMagnitude magnitud de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
      */
     public TemporalSeries(String sName, float[] sValues, float frec,
@@ -117,8 +116,8 @@ public class TemporalSeries extends Signal {
     }
 
     /**
-     * Permite modificar el valor de la serie temporal en x[n]. Puede ocasionar que el tamaño del array crezca. Si se
-     * invoca a este método, el menor y el mayor valor de n para el cual la serie está definida pueden cambiar.
+     * Permite modificar el valor de la serie temporal en x[n]. Puede ocasionar que el tamanho del array crezca. Si se
+     * invoca a este metodo, el menor y el mayor valor de n para el cual la serie esta definida pueden cambiar.
      *
      * @param pos int
      * @param value float
@@ -151,8 +150,8 @@ public class TemporalSeries extends Signal {
     }
 
     /**
-     * Devuelve el mínimo valor de n para el cual la serie temporal está definida. Para valores menores que este el
-     * valor de la serie será 0.
+     * Devuelve el minimo valor de n para el cual la serie temporal esta definida. Para valores menores que este el
+     * valor de la serie sera 0.
      *
      * @return int
      */
@@ -161,8 +160,8 @@ public class TemporalSeries extends Signal {
     }
 
     /**
-     * Devuelve el máximo valor de n para el cual la serie temporal está definida. Para valores mayores que éste el
-     * valor de la serie será 0.
+     * Devuelve el maximo valor de n para el cual la serie temporal esta definida. Para valores mayores que este el
+     * valor de la serie sera 0.
      *
      * @return int
      */
@@ -185,7 +184,7 @@ public class TemporalSeries extends Signal {
                 JOptionPane.showMessageDialog(JSWBManager.
                                               getJSWBManagerInstance().
                                               getParentWindow(),
-                                              "Alguna de las señales del entorno no es una serie temporal",
+                                              "Alguna de las senhales del entorno no es una serie temporal",
                                               "Error",
                                               JOptionPane.ERROR_MESSAGE);
                 return;
@@ -211,9 +210,9 @@ public class TemporalSeries extends Signal {
     }
 
     /**
-     * Permite modificar el instante de comienzo de la serie temporal. Desde un punto de vista matemático, desplaza toda
-     * la serie temporal de tal modo que el anterior valor mínimo para el cual la serie estaba definida pase a ser el
-     * "n" que se le pasa como argumento a este método.
+     * Permite modificar el instante de comienzo de la serie temporal. Desde un punto de vista matematico, desplaza toda
+     * la serie temporal de tal modo que el anterior valor minimo para el cual la serie estaba definida pase a ser el
+     * "n" que se le pasa como argumento a este metodo.
      *
      * @param offset int
      */
@@ -227,7 +226,7 @@ public class TemporalSeries extends Signal {
     /**
      * setFrecuency
      *
-     * @param frecuency frecuencia de la señal medida en hercios.
+     * @param frecuency frecuencia de la senhal medida en hercios.
      */
     public void setFrecuency(float frecuency) {
         super.setFrecuency(frecuency);

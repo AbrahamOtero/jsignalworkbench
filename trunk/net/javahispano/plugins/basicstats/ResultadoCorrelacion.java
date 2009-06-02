@@ -1,10 +1,10 @@
 package net.javahispano.plugins.basicstats;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class ResultadoCorrelacion implements Serializable {
     private String senal1, senal2, fechaInicio1, fechaInicio2, fechaFin1,
-            fechaFin2, comentario, nombre;
+    fechaFin2, comentario, nombre;
     private float nivelDeSignificacion;
     private int nivelDeSignificacionDiscreto;
     public String getSenal1() {
@@ -93,10 +93,10 @@ public class ResultadoCorrelacion implements Serializable {
      * @return
      */
     public String getTextoDescriptivo() {
-        String texto = "La correlación fue calculada sobre la señal " +
+        String texto = "La correlacion fue calculada sobre la senhal " +
                        this.getSenal1() +
                        " desde " + this.getFechaInicio1() + " hasta " +
-                       this.getFechaFin1() + " y sobre la señal " +
+                       this.getFechaFin1() + " y sobre la senhal " +
                        this.getSenal2() +
                        " desde " + this.getFechaInicio2() + " hasta " +
                        this.getFechaFin2() + ".";
@@ -105,7 +105,7 @@ public class ResultadoCorrelacion implements Serializable {
 
     /**
      * crea la key con la que se lmacena esta correlacion.
-     * Ser indentica siempre que coincidan las señales y los intervalos.
+     * Ser indentica siempre que coincidan las senhales y los intervalos.
      * @return
      */
     public String getKey() {

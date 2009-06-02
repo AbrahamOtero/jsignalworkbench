@@ -1,13 +1,15 @@
 package net.javahispano.plugins.signalgeneration;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.GenericPluginAdapter;
-import javax.swing.Icon;
-import java.awt.Toolkit;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import net.javahispano.plugins.temporalseries.TemporalSeries;
 import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.plugins.temporalseries.TemporalSeries;
 
 public class SignalGenerationPlugin extends GenericPluginAdapter {
     public SignalGenerationPlugin() {
@@ -21,7 +23,7 @@ public class SignalGenerationPlugin extends GenericPluginAdapter {
 
     public void launch(JSWBManager jswbManager) {
         //antes de lanzar la interfaz gr\u2663fica debemos asegurarnos que
-        //todas las señales son series temporales
+        //todas las senhales son series temporales
         TemporalSeries.convertSignalsToTemporalSeries(jswbManager.getSignalManager());
         SignalGeneration d = new SignalGeneration();
         d.setSize(680, 420);
@@ -30,12 +32,12 @@ public class SignalGenerationPlugin extends GenericPluginAdapter {
     }
 
     public String getShortDescription() {
-        return "Permite generar señales artificiales para testeo";
+        return "Permite generar senhales artificiales para testeo";
     }
 
 
     public String getDescription() {
-        return "Plugin que permite generar una señal artificial a partir de la suma de un conjunto de senos de amplitud, frecuencia y desfase configurable. También permite añadir ruido blanco de amplitud configurable a la señal final.";
+        return "Plugin que permite generar una senhal artificial a partir de la suma de un conjunto de senos de amplitud, frecuencia y desfase configurable. Tambien permite anhadir ruido blanco de amplitud configurable a la senhal final.";
     }
 
     public Icon getIcon() {

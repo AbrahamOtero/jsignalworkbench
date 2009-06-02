@@ -1,6 +1,6 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import javax.swing.*;
+import javax.swing.JTabbedPane;
 
 public abstract class PanelEtiquetadoGeneral extends JTabbedPane {
 

@@ -2,10 +2,10 @@ package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.GenericPlugin;
 import net.javahispano.jsignalwb.plugins.framework.PluginManager;
-import net.javahispano.jsignalwb.plugins.framework.*;
 
 /**
  * <p>Title: </p>
@@ -20,18 +20,19 @@ import net.javahispano.jsignalwb.plugins.framework.*;
  * @version 1.0
  */
 public class JMenuGenericPlugin extends JMenu {
-    public JMenuGenericPlugin(String genericPluginName,JSWBManager jswbManager){
+    public JMenuGenericPlugin(String genericPluginName, JSWBManager jswbManager) {
         super(genericPluginName);
-        PluginManager pm=jswbManager.getPluginManager();
-        JMenuItem configure=new JMenuItem(new GenericPluginAction(jswbManager,
-                     genericPluginName,GenericPluginAction.CONFIGURE_ACTION));
-        if(pm.isPluginLoaded("generic",genericPluginName)){
-            GenericPlugin gp=pm.getGeneric(genericPluginName);
-            if(!gp.hasOwnConfigureGUI())
+        PluginManager pm = jswbManager.getPluginManager();
+        JMenuItem configure = new JMenuItem(new GenericPluginAction(jswbManager,
+                genericPluginName, GenericPluginAction.CONFIGURE_ACTION));
+        if (pm.isPluginLoaded("generic", genericPluginName)) {
+            GenericPlugin gp = pm.getGeneric(genericPluginName);
+            if (!gp.hasOwnConfigureGUI()) {
                 configure.setEnabled(false);
+            }
         }
         add(configure);
         add(new JMenuItem(new GenericPluginAction(jswbManager,
-                        genericPluginName,GenericPluginAction.LAUNCH_ACTION)));
+                                                  genericPluginName, GenericPluginAction.LAUNCH_ACTION)));
     }
 }

@@ -2,7 +2,7 @@ package research.beats;
 
 /**
  *
- * @author Santiago Fernández Dapena
+ * @author Santiago Fernandez Dapena
  */
 public class SampleRate {
 

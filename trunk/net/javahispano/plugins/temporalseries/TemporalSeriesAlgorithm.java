@@ -1,17 +1,14 @@
 package net.javahispano.plugins.temporalseries;
 
 
-import java.util.ArrayList;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.SignalManager;
-import java.util.*;
-import net.javahispano.jsignalwb.plugins.*;
-import javax.swing.*;
-import net.javahispano.jsignalwb.*;
 import java.awt.HeadlessException;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 
 /**
  *
@@ -26,7 +23,7 @@ public abstract class TemporalSeriesAlgorithm extends AlgorithmAdapter {
                              List<SignalIntervalProperties> signals) {
         TemporalSeries.convertSignalsToTemporalSeries(sm);
         if (this.hasOwnConfigureGUI()) {
-this.launchConfigureGUI(JSWBManager.getJSWBManagerInstance());
+            this.launchConfigureGUI(JSWBManager.getJSWBManagerInstance());
         }
 
         List<TemporalSeries>
@@ -57,14 +54,14 @@ this.launchConfigureGUI(JSWBManager.getJSWBManagerInstance());
             if (!(signal instanceof TemporalSeries)) {
                 //intentamos transformarla
                 if (signal.getProperty("offset") != null) {
-                    listaTemporalSeries.add(TemporalSeries.convertSignalsToTemporalSeries(sm,signal));
+                    listaTemporalSeries.add(TemporalSeries.convertSignalsToTemporalSeries(sm, signal));
                     //se acaba el trabajo
                     continue;
                 }
                 JOptionPane.showMessageDialog(JSWBManager.
                                               getJSWBManagerInstance().
                                               getParentWindow(),
-                                              "Alguna de las señales seleccionadas no es una serie temporal",
+                                              "Alguna de las senhales seleccionadas no es una serie temporal",
                                               "Error",
                                               JOptionPane.ERROR_MESSAGE);
                 return null;

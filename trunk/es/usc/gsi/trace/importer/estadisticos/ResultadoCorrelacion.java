@@ -1,6 +1,6 @@
 package es.usc.gsi.trace.importer.estadisticos;
 
-import java.io.*;
+import java.io.Serializable;
 
 public class ResultadoCorrelacion implements Serializable {
     private String senal1, senal2, fechaInicio1, fechaInicio2, fechaFin1,

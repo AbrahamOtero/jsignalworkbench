@@ -1,13 +1,13 @@
 package net.javahispano.jsignalwb.ui;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.Image;
+
+import javax.swing.*;
+
 import net.javahispano.jsignalwb.JSWBManager;
-import javax.swing.ImageIcon;
-import javax.swing.Icon;
-import java.awt.Toolkit;
-import javax.swing.AbstractAction;
 
 /**
  * <p>Title: </p>
@@ -21,7 +21,7 @@ import javax.swing.AbstractAction;
  * @author Abraham Otero
  * @version 0.5
  */
-public class EraseAllEmphasisLevelsAction extends AbstractAction{
+public class EraseAllEmphasisLevelsAction extends AbstractAction {
     public EraseAllEmphasisLevelsAction() {
         this.putValue(SHORT_DESCRIPTION, "Remove all the signals emphasis levels. Be careful...");
         this.putValue(NAME, "Remove emphasis levels");

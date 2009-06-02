@@ -37,9 +37,9 @@ public class OpenFileAndAddSignalsAction extends OpenFileAction {
     }
 
     protected void loadData(File file) {
-    this.jswbManager.setDeleteSignalsInNextLoad(false);
-    jswbManager.loadChannels(chooser.getLoaderSelected().getName(), file);
-}
+        this.jswbManager.setDeleteSignalsInNextLoad(false);
+        jswbManager.loadChannels(chooser.getLoaderSelected().getName(), file);
+    }
 
 
 }

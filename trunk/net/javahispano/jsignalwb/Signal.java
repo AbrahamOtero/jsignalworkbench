@@ -5,15 +5,16 @@ import java.util.*;
 import java.util.List;
 
 import net.javahispano.jsignalwb.jsignalmonitor.ChannelProperties;
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.GridPlugin;
+import net.javahispano.jsignalwb.plugins.MarkPlugin;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultGridPlugin;
 import org.joda.time.DateTime;
-import net.javahispano.jsignalwb.plugins.defaults.*;
 
 /**
- * Representa una señal dentro de JSignalWorkbench. Contiene información tanto
- * sobre las señales si misma como sobre su representación en pantalla.
+ * Representa una senhal dentro de JSignalWorkbench. Contiene informacion tanto
+ * sobre las senhales si misma como sobre su representacion en pantalla.
  *
- * @author Román Segador y Abraham Otero
+ * @author Roman Segador y Abraham Otero
  *    Copyright 2006-2007. This software is under the Apache License Version 2.0
  *   (http://www.apache.org/licenses/).
  */
@@ -35,7 +36,7 @@ public class Signal {
     private String magnitude;
     private ChannelProperties properties;
     private GridPlugin grid;
-    private Map<String,Object> externalProperties;
+    private Map<String, Object> externalProperties;
     //private boolean ownGrid;
 
     /**
@@ -45,8 +46,8 @@ public class Signal {
      * valores y el instance actual al tiempo de inicio de la senal. Se indica
      * que la magnitud es desconocida
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
      */
     public Signal(String sName, float[] sValues) {
         this(sName, sValues, null);
@@ -55,9 +56,9 @@ public class Signal {
     /**
      * Crea una nueva instancia de Signal.
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
      */
     public Signal(String sName, float[] sValues, short[] emphasis) {
@@ -67,13 +68,13 @@ public class Signal {
     /**
      * Crea una nueva instancia de Signal.
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
-     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     * @param sStart long instante de inicio de la senhal medido en milisegundos desde
      *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
-     * @param sMagnitude magnitud de la señal.
+     * @param sMagnitude magnitud de la senhal.
      */
     public Signal(String sName, float[] sValues, float frec, long sStart, String sMagnitude) {
         this(sName, sValues, frec, sStart, sMagnitude, null);
@@ -82,14 +83,14 @@ public class Signal {
     /**
      * Crea una nueva instancia de Signal.
      *
-     * @param sName nombre de la señal.
-     * @param sValues valores de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sName nombre de la senhal.
+     * @param sValues valores de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
-     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     * @param sStart long instante de inicio de la senhal medido en milisegundos desde
      *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
-     * @param sMagnitude magnitud de la señal.
-     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     * @param sMagnitude magnitud de la senhal.
+     * @param emphasis Nivel de enfasis con que se debe representar la senhal.
      *   Debe contener valores entre [0, 100].
      */
     public Signal(String sName, float[] sValues, float frec, long sStart, String sMagnitude, short[] emphasis) {
@@ -97,7 +98,7 @@ public class Signal {
         values = sValues;
         frecuency = frec;
         start = sStart;
-        imaginary=false;
+        imaginary = false;
         properties = new ChannelProperties(sName, sStart, frec, sValues.length);
         setMagnitude(sMagnitude);
         if (emphasis != null) {
@@ -114,18 +115,18 @@ public class Signal {
         DefaultGridPlugin defaultGridPlugin = new DefaultGridPlugin();
         setGrid(defaultGridPlugin);
         defaultGridPlugin.setSignal(this);
-        externalProperties=Collections.synchronizedMap(new HashMap<String,Object>());
+        externalProperties = Collections.synchronizedMap(new HashMap<String, Object>());
     }
 
     /*private short[] getColors(int i) {
-    short[] temp = new short[i];
-    for (int index = 0; index < temp.length; index++) {
-    temp[index] = (short) (index % 100);
-    }
-    return temp;
-    }*/
+         short[] temp = new short[i];
+         for (int index = 0; index < temp.length; index++) {
+         temp[index] = (short) (index % 100);
+         }
+         return temp;
+         }*/
     /**
-     * Devuelve el objeto {@link ChannelProperties} asociado con esta señal.
+     * Devuelve el objeto {@link ChannelProperties} asociado con esta senhal.
      *
      * @return {@link ChannelProperties}
      */
@@ -136,7 +137,7 @@ public class Signal {
     /**
      * getName
      *
-     * @return nombre asociado con la señal.
+     * @return nombre asociado con la senhal.
      */
     public String getName() {
         return name;
@@ -145,7 +146,7 @@ public class Signal {
     /**
      * getSRate
      *
-     * @return frecuencia de muestreo de la señal medida en hercios.
+     * @return frecuencia de muestreo de la senhal medida en hercios.
      */
     public float getSRate() {
         return frecuency;
@@ -154,7 +155,7 @@ public class Signal {
     /**
      * getStart
      *
-     * @return instante de inicio de la señal medido en milisegundos
+     * @return instante de inicio de la senhal medido en milisegundos
      * desde 00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
      */
     public long getStart() {
@@ -164,7 +165,7 @@ public class Signal {
     /**
      * getMagnitude
      *
-     * @return  magnitud de la señal.
+     * @return  magnitud de la senhal.
      */
     public String getMagnitude() {
         return magnitude;
@@ -173,7 +174,7 @@ public class Signal {
     /**
      * getValues
      *
-     * @return valores de la señal.
+     * @return valores de la senhal.
      */
     public float[] getValues() {
         return values;
@@ -182,7 +183,7 @@ public class Signal {
     /**
      * getEmphasisLevel
      *
-     * @return Valores de énfasis de la señal. Deben ser números enteros
+     * @return Valores de enfasis de la senhal. Deben ser numeros enteros
      * comprendidos entre [0, 100].
      */
     public short[] getEmphasisLevel() {
@@ -196,7 +197,7 @@ public class Signal {
     /**
      * setEmphasisLevel
      *
-     * @param emphasis Valores de énfasis de la señal. Deben ser números
+     * @param emphasis Valores de enfasis de la senhal. Deben ser numeros
      * enteros comprendidos entre [0, 100].
      */
     public void setEmphasisLevel(short[] emphasis) {
@@ -207,7 +208,7 @@ public class Signal {
     /**
      * hasColors
      *
-     * @return boolean true si tienen niveles de énfasis asociado,
+     * @return boolean true si tienen niveles de enfasis asociado,
      * false en caso contrario.
      */
     public boolean hasEmphasisLevel() {
@@ -215,7 +216,7 @@ public class Signal {
     }
 
     public void eraseEmphasis() {
-        this.emphasis=null;
+        this.emphasis = null;
         this.setHasEmphasis(false);
     }
 
@@ -231,7 +232,7 @@ public class Signal {
     /**
      * setName
      *
-     * @param name nombre de la señal.
+     * @param name nombre de la senhal.
      */
     protected void setName(String name) {
         this.name = name;
@@ -241,7 +242,7 @@ public class Signal {
     /**
      * setFrecuency
      *
-     * @param frecuency frecuencia de la señal medida en hercios.
+     * @param frecuency frecuencia de la senhal medida en hercios.
      */
     public void setFrecuency(float frecuency) {
         if (this.frecuency != frecuency) {
@@ -253,7 +254,7 @@ public class Signal {
     /**
      * setStart
      *
-     * @param start instante de inicio de la señal medido en milisegundos
+     * @param start instante de inicio de la senhal medido en milisegundos
      * desde 00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
      */
     public void setStart(long start) {
@@ -267,7 +268,7 @@ public class Signal {
     /**
      * setMagnitude
      *
-     * @param magnitude magnitud de la señal.
+     * @param magnitude magnitud de la senhal.
      */
     public void setMagnitude(String magnitude) {
         if (this.magnitude == null || !this.magnitude.equals(magnitude)) {
@@ -279,7 +280,7 @@ public class Signal {
     /**
      * setZoom
      *
-     * @param zoom empleado en la representación en pantalla.
+     * @param zoom empleado en la representacion en pantalla.
      */
     public void setZoom(float zoom) {
         if (properties.getZoom() != zoom) {
@@ -328,11 +329,11 @@ public class Signal {
     /**
      * setVisibleRange
      *
-     * @param minValue float valor mínimo del eje de abcisas.
-     * @param maxValue float valor máximo del eje de artistas. debe cumplirse
+     * @param minValue float valor minimo del eje de abcisas.
+     * @param maxValue float valor maximo del eje de artistas. debe cumplirse
      * que maxValue>minValue.
      * @param abscissaValue valor en el que se mostrara el eje de abscissas.
-     * @return boolean true si la operación se pudo completar con éxito,
+     * @return boolean true si la operacion se pudo completar con exito,
      * false en caso contrario.
      */
     public boolean setVisibleRange(float abscissaValue, float maxValue, float range) {
@@ -347,8 +348,8 @@ public class Signal {
      * adjustVisibleRange
      *
      * @param channelHeight altura que se desea tenga el canal en el cual
-     * se visualice esta señal.
-     * @return boolean true si la operación se pudo completar con éxito,
+     * se visualice esta senhal.
+     * @return boolean true si la operacion se pudo completar con exito,
      * false en caso contrario.
      */
     public boolean adjustVisibleRange() {
@@ -397,7 +398,7 @@ public class Signal {
                 at net.javahispano.jsignalwb.JSWBManager.runAlgorithm(JSWBManager.java:725)
                 at net.javahispano.jsignalwb.JSWBManager.runAlgorithm(JSWBManager.java:675)
                 at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.jButton3ActionPerformed(DefaultAlgorithmConfiguration.java:441)
-                at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.access$000(DefaultAlgorithmConfiguration.java:28)
+         at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.access$000(DefaultAlgorithmConfiguration.java:28)
                 at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration$1.actionPerformed(DefaultAlgorithmConfiguration.java:135)
                 at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1995)
                 at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2318)
@@ -445,7 +446,7 @@ public class Signal {
     }
 
     /** Always call first to the hasOwnGrid method
-     *   @return {@link GridPlugin} plugin asociado a la señal
+     *   @return {@link GridPlugin} plugin asociado a la senhal
      */
     public GridPlugin getGrid() {
         return grid;
@@ -455,9 +456,10 @@ public class Signal {
         this.grid = grid;
         //ownGrid=true;
     }
+
     /* public boolean hasOwnGrid() {
-    return ownGrid;
-    }*/
+         return ownGrid;
+         }*/
 
     public boolean isImaginary() {
         return imaginary;
@@ -472,37 +474,39 @@ public class Signal {
         this.properties.setDataSize(values.length);
     }
 
-    public Object setProperty(String property, Object value){
-        synchronized(externalProperties){
-            return externalProperties.put(property,value);
+    public Object setProperty(String property, Object value) {
+        synchronized (externalProperties) {
+            return externalProperties.put(property, value);
         }
     }
 
-    public Object getProperty(String property){
-        synchronized(externalProperties){
+    public Object getProperty(String property) {
+        synchronized (externalProperties) {
             return externalProperties.get(property);
         }
     }
 
-    public void removeProperty(String property){
-        synchronized (externalProperties){
-            if(externalProperties.containsKey(property)){
+    public void removeProperty(String property) {
+        synchronized (externalProperties) {
+            if (externalProperties.containsKey(property)) {
                 externalProperties.remove(property);
             }
         }
     }
-    public void cleanProperties(){
-        synchronized (externalProperties){
+
+    public void cleanProperties() {
+        synchronized (externalProperties) {
             externalProperties.clear();
         }
     }
 
-    public List<String> getAvailableProperties(){
-        List<String> tempProp=new ArrayList<String>();
-        synchronized(externalProperties){
-            Iterator<String> it=externalProperties.keySet().iterator();
-            while(it.hasNext())
+    public List<String> getAvailableProperties() {
+        List<String> tempProp = new ArrayList<String>();
+        synchronized (externalProperties) {
+            Iterator<String> it = externalProperties.keySet().iterator();
+            while (it.hasNext()) {
                 tempProp.add(it.next());
+            }
         }
         return tempProp;
     }

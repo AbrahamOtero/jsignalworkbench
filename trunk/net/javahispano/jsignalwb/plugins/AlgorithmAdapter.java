@@ -11,7 +11,7 @@ import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 /*
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 public abstract class AlgorithmAdapter extends PluginAdapter implements
@@ -20,7 +20,7 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     private boolean executionCanceled = false;
 
     /**
-     * Por defecto no proporciona interfaz propia de ejecución.
+     * Por defecto no proporciona interfaz propia de ejecucion.
      *
      * @return boolean
      */
@@ -56,9 +56,9 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     }
 
     /**
-     * El usuario que implemente esta clase puede elegir sobre escribir sólo este método para
-     * procesar su señal. A este método se le pasa el array de datos
-     * de la primera señal que haya seleccionado el usuario.
+     * El usuario que implemente esta clase puede elegir sobre escribir solo este metodo para
+     * procesar su senhal. A este metodo se le pasa el array de datos
+     * de la primera senhal que haya seleccionado el usuario.
      *
      * @param sm SignalManager
      * @param signals List
@@ -77,8 +77,8 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     }
 
     /**
-     * Devuelve 0; este valor indica que el algoritmo no tiene un número máximo
-     * de señales/intervalos a procesar.
+     * Devuelve 0; este valor indica que el algoritmo no tiene un numero maximo
+     * de senhales/intervalos a procesar.
      *
      * @return int
      */
@@ -91,7 +91,7 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     }
 
     /**
-     * Devuelve true si la ejecución del algoritmo ha sido cancelada.
+     * Devuelve true si la ejecucion del algoritmo ha sido cancelada.
      *
      * @return boolean
      */
@@ -100,9 +100,9 @@ public abstract class AlgorithmAdapter extends PluginAdapter implements
     }
 
     /**
-     * Por defecto los algoritmo se muestran en el menú de plugins y en la barra
+     * Por defecto los algoritmo se muestran en el menu de plugins y en la barra
      * de tareas. Este comportamiento puede cambiarse sobreescribiendo este
-     * método.
+     * metodo.
      *
      * @param gUIPositions GUIPositions
      * @return boolean

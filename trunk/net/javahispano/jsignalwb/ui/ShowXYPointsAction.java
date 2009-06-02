@@ -9,18 +9,14 @@
 
 package net.javahispano.jsignalwb.ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import javax.swing.AbstractAction;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
-import java.awt.Toolkit;
-import java.awt.Image;
+
+import javax.swing.*;
+
 import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
 
 /**
  *

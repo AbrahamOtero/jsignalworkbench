@@ -6,14 +6,10 @@
 
 package net.javahispano.jsignalwb.jsignalmonitor;
 
-import java.awt.Cursor;
+import java.awt.*;
 import java.awt.event.MouseListener;
-import javax.swing.Icon;
-import java.awt.Toolkit;
-import java.awt.Image;
-import javax.swing.ImageIcon;
+
 import javax.swing.*;
-import javax.swing.border.*;
 
 /**
  *
@@ -173,11 +169,11 @@ class ChannelArrowsControlPanel extends javax.swing.JPanel {
 
     private void mouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getSource().equals(labelUp)) {
-            jsmPanel.setVerticalZoom(channelName, ( (jsmPanel.getChannelProperties(channelName).getZoom() * 120)));
+            jsmPanel.setVerticalZoom(channelName, ((jsmPanel.getChannelProperties(channelName).getZoom() * 120)));
             //zoom.setText("Zoom: "+(int)(jsmPanel.getChannelProperties(channelName).getZoom()*arrowSize0)+"%");
             jsmPanel.refresh();
         } else if (evt.getSource().equals(labelDown)) {
-            float newZoom =  (jsmPanel.getChannelProperties(channelName).getZoom() * 80);
+            float newZoom = (jsmPanel.getChannelProperties(channelName).getZoom() * 80);
             if (newZoom > 0) {
                 jsmPanel.setVerticalZoom(channelName, newZoom);
                 //zoom.setText("Zoom: "+newZoom+"%");

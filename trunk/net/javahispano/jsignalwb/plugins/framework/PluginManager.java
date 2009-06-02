@@ -1,28 +1,19 @@
 package net.javahispano.jsignalwb.plugins.framework;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import net.javahispano.jsignalwb.framework.ExceptionsCollector;
+import java.io.*;
 import java.net.*;
+import java.util.*;
+import java.util.List;
 import java.util.jar.JarFile;
+
+import javax.swing.*;
+
+import net.javahispano.jsignalwb.framework.ExceptionsCollector;
+import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.debug.DebugPluginInfo;
 import net.javahispano.jsignalwb.plugins.defaults.*;
-import net.javahispano.jsignalwb.plugins.*;
-
 
 
 /**
@@ -30,10 +21,10 @@ import net.javahispano.jsignalwb.plugins.*;
  * cargados en el entorno. Permite cargar plugins, obtener una instancia de
  * cualquier plugin cargado, etctera.
  *
- * @todo los métodos getXXXPlugin son bastante confusos. Algunos de ellos (casi todos) cargarán el plugins y hace falta.
- * Otros sólo devuelven el plugins y yo estaba cargado.
+ * @todo los metodos getXXXPlugin son bastante confusos. Algunos de ellos (casi todos) cargaran el plugins y hace falta.
+ * Otros solo devuelven el plugins y yo estaba cargado.
  *
- *  * @author Román Segador y Abraham Otero
+ *  * @author Roman Segador y Abraham Otero
  *    Copyright 2006-2007. This software is under the Apache License Version 2.0
  *   (http://www.apache.org/licenses/).
  */
@@ -67,36 +58,36 @@ public class PluginManager {
         /*if (pm != null) {
             throw new RuntimeException(
                     "PluginManager had been initialized before");
-        }*/
+                 }*/
         classLoader = ClassLoader.getSystemClassLoader();
         pluginAssociation = new HashMap<String, Object>();
         iconsAssociation = new HashMap<String, String>();
         pluginAssociation.put("loader:defaultLoader",
-                "net.javahispano.jsignalwb.io.DefaultLoader");
+                              "net.javahispano.jsignalwb.io.DefaultLoader");
 //        pluginAssociation.put("loader:basicLoader",
 //                "net.javahispano.jsignalwb.io.BasicLoader");
         pluginAssociation.put("saver:defaultSaver",
-                "net.javahispano.jsignalwb.io.DefaultSaver");
+                              "net.javahispano.jsignalwb.io.DefaultSaver");
 //        pluginAssociation.put("saver:basicSaver",
 //                "net.javahispano.jsignalwb.io.BasicSaver");
         pluginAssociation.put("mark:Default Instant Mark",
-                new DefaultInstantMark());
+                              new DefaultInstantMark());
         pluginAssociation.put("mark:Default Interval Mark",
-                new DefaultIntervalMark());
+                              new DefaultIntervalMark());
         pluginAssociation.put("mark:Instant Icon Mark",
-                new InstantIconMark());
+                              new InstantIconMark());
         pluginAssociation.put("annotation:Default Instant Annotation",
-                new DefaultInstantAnnotation());
+                              new DefaultInstantAnnotation());
         pluginAssociation.put("annotation:Default Interval Annotation",
-                new DefaultIntervalAnnotation());
+                              new DefaultIntervalAnnotation());
 //        pluginAssociation.put("grid:Old Default Grid",
 //                "net.javahispano.jsignalwb.plugins.OldGridPlugin");
         pluginAssociation.put("grid:Default grid plugin",
-                "net.javahispano.jsignalwb.plugins.defaults.DefaultGridPlugin");
+                              "net.javahispano.jsignalwb.plugins.defaults.DefaultGridPlugin");
         pluginAssociation.put("grid:Temporal Axis Grid",
-                "net.javahispano.jsignalwb.plugins.defaults.AxesGridPlugin");
+                              "net.javahispano.jsignalwb.plugins.defaults.AxesGridPlugin");
         pluginAssociation.put("generic:JSWTextProcessorPlugin",
-                "net.javahispano.jsignalwb.ui.texteditor.JSWTextProcessorPlugin");
+                              "net.javahispano.jsignalwb.ui.texteditor.JSWTextProcessorPlugin");
 
         //iconsAssociation.put("algorithm:Mark Negative Values","notAvailable.jpg");
         factoryPlugin = new FactoryPlugin(pluginAssociation);
@@ -119,50 +110,49 @@ public class PluginManager {
     }
 
     /**
-     * Devuelve el icono asociado con un determinado plugin con un tamaño de 20 x 20 píxeles.
+     * Devuelve el icono asociado con un determinado plugin con un tamanho de 20 x 20 pixeles.
      *
      * @param pluginType tipo del plugin.
      * @param pluginName nombre del plugin.
-     * @return icono asociado con el plugin requerido y con el tamaño
+     * @return icono asociado con el plugin requerido y con el tamanho
      *   especificado.
      */
     public Icon getIconDefaultSize(String pluginType, String pluginName) {
         ImageIcon ii = (ImageIcon) (getIcon(pluginType, pluginName));
         if (ii != null) {
-            return new ImageIcon(ii.getImage().getScaledInstance(20,20,Image.SCALE_SMOOTH));
-        }else{
+            return new ImageIcon(ii.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+        } else {
             return new ImageIcon(generateImage(pluginName));
         }
     }
 
     /**
-  * Devuelve el icono asociado con un determinado plugin.
-  *
-  * @param pluginType tipo del plugin.
-  * @param pluginName nombre del plugin.
-  * @param height altura del icono.
-  * @param width ancho del icono.
-  * @return icono asociado con el plugin requerido y con el tamaño
-  *   especificado.
-  */
- public Icon getIconDefaultSize(String pluginType, String pluginName, int width, int height) {
-     ImageIcon ii = (ImageIcon) (getIcon(pluginType, pluginName));
-     if (ii != null) {
-         return new ImageIcon(ii.getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH));
-     }else{
-         return new ImageIcon(generateImage(pluginName).getScaledInstance(width,height,Image.SCALE_SMOOTH));
-     }
- }
+     * Devuelve el icono asociado con un determinado plugin.
+     *
+     * @param pluginType tipo del plugin.
+     * @param pluginName nombre del plugin.
+     * @param height altura del icono.
+     * @param width ancho del icono.
+     * @return icono asociado con el plugin requerido y con el tamanho
+     *   especificado.
+     */
+    public Icon getIconDefaultSize(String pluginType, String pluginName, int width, int height) {
+        ImageIcon ii = (ImageIcon) (getIcon(pluginType, pluginName));
+        if (ii != null) {
+            return new ImageIcon(ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+        } else {
+            return new ImageIcon(generateImage(pluginName).getScaledInstance(width, height, Image.SCALE_SMOOTH));
+        }
+    }
 
 
-
-   /*
-    * Devuelve el icono asociado con un determinado plugin.
-    *
-    * @param pluginType tipo del plugin.
-    * @param pluginName nombre del plugin.
-    * @return icono asociado con el plugin requerido.
-    */
+    /*
+     * Devuelve el icono asociado con un determinado plugin.
+     *
+     * @param pluginType tipo del plugin.
+     * @param pluginName nombre del plugin.
+     * @return icono asociado con el plugin requerido.
+     */
     /**
      * getIcon
      *
@@ -173,11 +163,11 @@ public class PluginManager {
      */
     public Icon getIcon(String pluginType, String pluginName) {
         try {
-            if(isPluginRegistered(pluginType,pluginName)){
+            if (isPluginRegistered(pluginType, pluginName)) {
                 if (isIconRegistered(pluginType, pluginName)) {
                     if (isPluginLoaded(pluginType, pluginName)) {
                         return new ImageIcon(Toolkit.getDefaultToolkit().
-                                createImage(pluginAssociation.get(
+                                             createImage(pluginAssociation.get(
                                 pluginType + ":" + pluginName).getClass().
                                 getResource(iconsAssociation.get(pluginType + ":" +
                                 pluginName))));
@@ -185,13 +175,13 @@ public class PluginManager {
                         URL url = classLoader.loadClass((
                                 String) (pluginAssociation.get(pluginType + ":" +
                                 pluginName))).getResource(iconsAssociation.get(
-                                pluginType + ":" + pluginName));
+                                        pluginType + ":" + pluginName));
 
-                        if (url !=null) {
+                        if (url != null) {
                             Image image = Toolkit.getDefaultToolkit().
-                                    createImage(url);
+                                          createImage(url);
                             return new ImageIcon(image);
-                        } else{
+                        } else {
 //
                             return new ImageIcon(generateImage(pluginName));
 //                            return new ImageIcon(
@@ -200,9 +190,9 @@ public class PluginManager {
                         }
                     }
                 } else {
-                    return this.getPlugin(pluginType+":"+pluginName).getIcon();
+                    return this.getPlugin(pluginType + ":" + pluginName).getIcon();
                 }
-            }else{
+            } else {
                 return new ImageIcon(generateImage(pluginName));
 //                return new ImageIcon(
 //                        this.getClass().getResource(
@@ -210,25 +200,26 @@ public class PluginManager {
             }
         } catch (ClassNotFoundException ex) {
             throw new PluginLoadException("Error loading icon from " +
-                    pluginName, ex);
+                                          pluginName, ex);
         }
     }
 
-    private Image generateImage(String name){
-       name=name.toUpperCase();
-        BufferedImage bufferedImage=new BufferedImage(20,20,BufferedImage.TYPE_INT_RGB);
-        char first=name.charAt(0);
-        char last=name.charAt(name.length()-1);
-        Graphics2D g2d=bufferedImage.createGraphics();
-        Font font=new Font(Font.SANS_SERIF, Font.BOLD, 13);
+    private Image generateImage(String name) {
+        name = name.toUpperCase();
+        BufferedImage bufferedImage = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
+        char first = name.charAt(0);
+        char last = name.charAt(name.length() - 1);
+        Graphics2D g2d = bufferedImage.createGraphics();
+        Font font = new Font(Font.SANS_SERIF, Font.BOLD, 13);
         g2d.setBackground(Color.LIGHT_GRAY);
-        g2d.clearRect(0,0,20,20);
+        g2d.clearRect(0, 0, 20, 20);
         g2d.setColor(Color.RED);
         g2d.setFont(font);
-        g2d.drawString(String.valueOf(first),1,10);
-        g2d.drawString(String.valueOf(last),10,20);
+        g2d.drawString(String.valueOf(first), 1, 10);
+        g2d.drawString(String.valueOf(last), 10, 20);
         return bufferedImage;
     }
+
     /**
      * Registra el plugin indicado.
      *
@@ -240,7 +231,7 @@ public class PluginManager {
      *   false en caso contrario.
      */
     public boolean registerPlugin(String pluginType, String pluginName,
-            String pluginBaseClass) {
+                                  String pluginBaseClass) {
         String key = pluginType + ":" + pluginName;
         return registerPlugin(key, pluginBaseClass);
     }
@@ -311,7 +302,7 @@ public class PluginManager {
     }
 
     /**
-     * Permite averiguar si un plugin está o no registrado.
+     * Permite averiguar si un plugin esta o no registrado.
      *
      * @param pluginType tipo de plugin a registrar.
      * @param pluginName nombre del plugin.
@@ -323,7 +314,7 @@ public class PluginManager {
     }
 
     /**
-     * Permite averiguar si un plugin está o aún no registrado.
+     * Permite averiguar si un plugin esta o aun no registrado.
      *
      * @param key Clave asociada con este plugin. Las claves se forman
      *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
@@ -336,7 +327,7 @@ public class PluginManager {
     }
 
     /**
-     * Permite averiguar si un plugin está o no cargado en el entorno.
+     * Permite averiguar si un plugin esta o no cargado en el entorno.
      *
      * @param pluginType tipo de plugin a registrar.
      * @param pluginName nombre del plugin.
@@ -349,7 +340,7 @@ public class PluginManager {
     }
 
     /**
-     * Permite averiguar si un plugin está o no cargado en el entorno.
+     * Permite averiguar si un plugin esta o no cargado en el entorno.
      *
      * @param key Clave asociada con este plugin. Las claves se forman
      *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
@@ -365,8 +356,8 @@ public class PluginManager {
      *
      * @param defaultDirectory String
      */
-    public void setDefaultDirectory(String defaultDirectory){
-        this.defaultDirectory=defaultDirectory;
+    public void setDefaultDirectory(String defaultDirectory) {
+        this.defaultDirectory = defaultDirectory;
         searchPlugins();
     }
 
@@ -379,6 +370,7 @@ public class PluginManager {
     public void searchPlugins() {
         searchPlugins(defaultDirectory, new ExceptionsCollector(new JFrame()));
     }
+
     /**
      * Registra los plugins que se encuentren en el directorio indicado en los
      * paramentros.
@@ -391,8 +383,8 @@ public class PluginManager {
     }
 
     /**
-     * Registra los plugin del directorio por defecto y los que se le pasen como segundo parámetro.
-     * Sólo se usa para desarrollar plugins.
+     * Registra los plugin del directorio por defecto y los que se le pasen como segundo parametro.
+     * Solo se usa para desarrollar plugins.
      *
      * @param names String[] nombres de los plugin a registrar
      * @param types String[] tipos de los plugin a registrar
@@ -407,10 +399,10 @@ public class PluginManager {
      * }*/
 
     /** don't designed as API part*/
-    public void registerDebugPlugins(List<DebugPluginInfo> plugins){
-        for(DebugPluginInfo d:plugins){
-            pluginAssociation.put(d.getPluginType()+":"+d.getPluginName(),
-                    d.getPlugin());
+    public void registerDebugPlugins(List<DebugPluginInfo> plugins) {
+        for (DebugPluginInfo d : plugins) {
+            pluginAssociation.put(d.getPluginType() + ":" + d.getPluginName(),
+                                  d.getPlugin());
         }
     }
 
@@ -426,9 +418,9 @@ public class PluginManager {
      * @param key Clave del plugin. Las claves se forman concatenando el tipo
      *   del plugin con ":" y con el nombre del plugin.
      * @return {@link Plugin} solicitado. un
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
      */
-    public Plugin getPlugin(String key)  throws PluginLoadException {
+    public Plugin getPlugin(String key) throws PluginLoadException {
         Object p = factoryPlugin.getPlugin(key, classLoader);
         if (p != null && p instanceof Plugin) {
             return (Plugin) p;
@@ -442,8 +434,8 @@ public class PluginManager {
      * Proporciona el {@link Loader} registrado con el nombre name.
      *
      * @param name nombre del plugin.
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
-     * @return {@link Loader} asociado con el nombre que paso como parámetro.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
+     * @return {@link Loader} asociado con el nombre que paso como parametro.
      */
     public Loader getLoader(String name) throws PluginLoadException {
         Object l = factoryPlugin.getPlugin("loader:" + name, classLoader);
@@ -462,25 +454,27 @@ public class PluginManager {
      *
      * @return Lista con todos los objetos {@link Loader}.
      */
-    public ArrayList<Loader> getAllLoaders(){
-        ArrayList<Loader> loaders=new ArrayList<Loader>();
-        ArrayList<String> names=new ArrayList<String>();
-        Iterator<String> it=pluginAssociation.keySet().iterator();
-        while(it.hasNext()){
-            String plugin=it.next();
-            if(plugin.startsWith("loader:"))
+    public ArrayList<Loader> getAllLoaders() {
+        ArrayList<Loader> loaders = new ArrayList<Loader>();
+        ArrayList<String> names = new ArrayList<String>();
+        Iterator<String> it = pluginAssociation.keySet().iterator();
+        while (it.hasNext()) {
+            String plugin = it.next();
+            if (plugin.startsWith("loader:")) {
                 names.add(plugin);
+            }
         }
-        for (String plugin :names)
+        for (String plugin : names) {
             try {
-            loaders.add((Loader) getPlugin(plugin));
-            //haremos un esfuerzo para cargar la mayor parte de los plugin posible
-            //si alguno falla no notificamos ya que el usuario puede no ser consciente
-            //de esta operación. Tampoco avisamos al código cliente
-            //porque no hay nada que éste pueda hacer para solucionar el fallo
-        } catch (PluginLoadException ex) {
-            System.out.println("Error intentar cargar un plugin");
-            ex.printStackTrace();
+                loaders.add((Loader) getPlugin(plugin));
+                //haremos un esfuerzo para cargar la mayor parte de los plugin posible
+                //si alguno falla no notificamos ya que el usuario puede no ser consciente
+                //de esta operacion. Tampoco avisamos al codigo cliente
+                //porque no hay nada que este pueda hacer para solucionar el fallo
+            } catch (PluginLoadException ex) {
+                System.out.println("Error intentar cargar un plugin");
+                ex.printStackTrace();
+            }
         }
         return loaders;
     }
@@ -489,8 +483,8 @@ public class PluginManager {
      * Proporciona el {@link Saver} registrado con el nombre name.
      *
      * @param name nombre del plugin.
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
-     * @return {@link Saver} asociado con el nombre que paso como parámetro.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
+     * @return {@link Saver} asociado con el nombre que paso como parametro.
      */
 
     public Saver getSaver(String name) throws PluginLoadException {
@@ -509,25 +503,27 @@ public class PluginManager {
      *
      * @return Lista con todos los objetos {@link Saver}.
      */
-    public ArrayList<Saver> getAllSavers(){
-        ArrayList<Saver> savers=new ArrayList<Saver>();
-        ArrayList<String> names=new ArrayList<String>();
-        Iterator<String> it=pluginAssociation.keySet().iterator();
-        while(it.hasNext()){
-            String plugin=it.next();
-            if(plugin.startsWith("saver:"))
+    public ArrayList<Saver> getAllSavers() {
+        ArrayList<Saver> savers = new ArrayList<Saver>();
+        ArrayList<String> names = new ArrayList<String>();
+        Iterator<String> it = pluginAssociation.keySet().iterator();
+        while (it.hasNext()) {
+            String plugin = it.next();
+            if (plugin.startsWith("saver:")) {
                 names.add(plugin);
+            }
         }
-        for(String plugin:names)
+        for (String plugin : names) {
             try {
-            savers.add((Saver) getPlugin(plugin));
-            //haremos un esfuerzo para cargar la mayor parte de los plugin posible
-            //si alguno falla no notificamos ya que el usuario puede no ser consciente
-            //de esta operación. Tampoco avisamos al código cliente
-            //porque no hay nada que éste pueda hacer para solucionar el fallo
-        } catch (PluginLoadException ex) {
-            System.out.println("Error intentar cargar un plugin");
-            ex.printStackTrace();
+                savers.add((Saver) getPlugin(plugin));
+                //haremos un esfuerzo para cargar la mayor parte de los plugin posible
+                //si alguno falla no notificamos ya que el usuario puede no ser consciente
+                //de esta operacion. Tampoco avisamos al codigo cliente
+                //porque no hay nada que este pueda hacer para solucionar el fallo
+            } catch (PluginLoadException ex) {
+                System.out.println("Error intentar cargar un plugin");
+                ex.printStackTrace();
+            }
         }
         return savers;
     }
@@ -538,8 +534,8 @@ public class PluginManager {
      *
      *
      * @param name nombre del plugin.
-     * @return {@link Grid} asociado con el nombre que paso como parámetro.
-     * @throws PluginLoadExGridPluginion Si ha habido algún error al cargar el plugin.
+     * @return {@link Grid} asociado con el nombre que paso como parametro.
+     * @throws PluginLoadExGridPluginion Si ha habido algun error al cargar el plugin.
      */
     public GridPlugin createGridPlugin(String name) throws PluginLoadException {
         Object g = factoryPlugin.getPlugin("grid:" + name, classLoader);
@@ -547,9 +543,9 @@ public class PluginManager {
             try {
                 return (GridPlugin) g.getClass().newInstance();
             } catch (InstantiationException ex) {
-                throw new PluginLoadException("Error instantiation grid",ex);
+                throw new PluginLoadException("Error instantiation grid", ex);
             } catch (IllegalAccessException ex) {
-                throw new PluginLoadException("Error instantiation grid",ex);
+                throw new PluginLoadException("Error instantiation grid", ex);
             }
         } else {
             return null;
@@ -560,8 +556,8 @@ public class PluginManager {
      * Proporciona el {@link Algorithm} registrado con el nombre name.
      *
      * @param name nombre del plugin.
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
-     * @return {@link Algorithm} asociado con el nombre que paso como parámetro.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
+     * @return {@link Algorithm} asociado con el nombre que paso como parametro.
      */
     public Algorithm getAlgorithm(String name) throws PluginLoadException {
         Object a = factoryPlugin.getPlugin("algorithm:" + name, classLoader);
@@ -576,8 +572,8 @@ public class PluginManager {
      * Proporciona el {@link Generic} registrado con el nombre name.
      *
      * @param name nombre del plugin.
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
-     * @return {@link Generic} asociado con el nombre que paso como parámetro.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
+     * @return {@link Generic} asociado con el nombre que paso como parametro.
      */
     public GenericPlugin getGeneric(String name) throws PluginLoadException {
         Object g = factoryPlugin.getPlugin("generic:" + name, classLoader);
@@ -593,8 +589,8 @@ public class PluginManager {
      * nombre name.
      *
      * @param name nombre del plugin.
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
-     * @return {@link MarkPlugin} asociado con el nombre que paso como parámetro.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
+     * @return {@link MarkPlugin} asociado con el nombre que paso como parametro.
      */
     public MarkPlugin createMarkPlugin(String name) throws PluginLoadException {
         Object m = factoryPlugin.getPlugin("mark:" + name, classLoader);
@@ -602,9 +598,9 @@ public class PluginManager {
             try {
                 return (MarkPlugin) m.getClass().newInstance();
             } catch (IllegalAccessException ex) {
-                throw new PluginLoadException("Error instantiation mark",ex);
+                throw new PluginLoadException("Error instantiation mark", ex);
             } catch (InstantiationException ex) {
-                throw new PluginLoadException("Error instantiation mark",ex);
+                throw new PluginLoadException("Error instantiation mark", ex);
             }
         } else {
             return null;
@@ -615,15 +611,16 @@ public class PluginManager {
      *  MarkPlugin} registrados en el sistema.
      *  @return {@link List}<String> listado de {@link MarkPlugin} registrados.
      */
-    public List<String> getRegisteredMarks(){
+    public List<String> getRegisteredMarks() {
         return getRegisteredPlugins().get("mark");
     }
+
     /**
      * Proporciona el {@link AnnotationPlugin} registrado con el nombre name.
      *
      * @param name nombre del plugin.
-     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
-     * @return {@link AnnotationPlugin} asociado con el nombre que paso como parámetro.
+     * @throws PluginLoadException Si ha habido algun error al cargar el plugin.
+     * @return {@link AnnotationPlugin} asociado con el nombre que paso como parametro.
      */
     public AnnotationPlugin createAnnotationPlugin(String name) throws PluginLoadException {
         Object a = factoryPlugin.getPlugin("annotation:" + name, classLoader);
@@ -631,9 +628,9 @@ public class PluginManager {
             try {
                 return (AnnotationPlugin) a.getClass().newInstance();
             } catch (IllegalAccessException ex) {
-                throw new PluginLoadException("Error instantiation annotation",ex);
+                throw new PluginLoadException("Error instantiation annotation", ex);
             } catch (InstantiationException ex) {
-                throw new PluginLoadException("Error instantiation annotation",ex);
+                throw new PluginLoadException("Error instantiation annotation", ex);
             }
         } else {
             return null;
@@ -644,19 +641,21 @@ public class PluginManager {
      *  AnnotationPlugin} registrados en el sistema.
      *  @return {@link List}<String> listado de {@link AnnotationPlugin} registrados.
      */
-    public List<String> getRegisteredAnnotations(){
+    public List<String> getRegisteredAnnotations() {
         return getRegisteredPlugins().get("annotation");
     }
+
     /** Devuelve un {@link List}<String> que contiene el nombre de los {@link
      *  GridPlugin} registrados en el sistema.
      *  @return {@link List}<String> listado de {@link GridPlugin} registrados.
      */
-    public List<String> getRegisteredGrids(){
+    public List<String> getRegisteredGrids() {
         return getRegisteredPlugins().get("grid");
     }
+
     /**
      * Devuelve un listado con los nombres de todos los plugin registrados en el entorno.
-     * Agrupados por categorias.No provocará que se carguen todos los plugin.
+     * Agrupados por categorias.No provocara que se carguen todos los plugin.
      *
      * @return HashMap donde las claves son los distintos tipos de plugin y el
      *   valor asociado con cada clave es un ArrayList<String> con un listado de
@@ -686,7 +685,7 @@ public class PluginManager {
     /**
      * Devuelve una lista con todas las claves de los plugins cargados
      * actualmente en el entorno(Los que solo estan registrados no seran devueltos).
-     * No provoca que se cargue ningún plugin.
+     * No provoca que se cargue ningun plugin.
      *
      * @return Lista con todas las claves de los plugin cargados.
      */
@@ -708,10 +707,10 @@ public class PluginManager {
      *
      * @return Array con todos los ficheros .jar de los plugin instalados.
      */
-    public File[] getInstalledPlugins(){
-        File file=new File(System.getProperty("user.home")+"/.JSignalWorkBench");
-        if(file.exists()){
-            File[] files=file.listFiles(
+    public File[] getInstalledPlugins() {
+        File file = new File(System.getProperty("user.home") + "/.JSignalWorkBench");
+        if (file.exists()) {
+            File[] files = file.listFiles(
                     new FileFilter() {
                 public boolean accept(File fileToBeFiltered) {
                     return fileToBeFiltered.getName().toLowerCase().endsWith(
@@ -720,21 +719,24 @@ public class PluginManager {
             }
             );
             return files;
-        }else
+        } else {
             return null;
+        }
     }
+
     private void searchPlugins(String directory, ExceptionsCollector ec) {
         classLoader = PluginBrowser.install(this, classLoader,
-                PluginBrowser.search(new File(directory)), ec);
+                                            PluginBrowser.search(new File(directory)), ec);
         ec.showExceptions(
                 "The following errors appeared while looking for plugins:");
     }
 
-    private void loadPreviousPlugins(){
-        File f=new File(System.getProperty("user.home")+"/.JSignalWorkBench");
-        if(!f.exists())
+    private void loadPreviousPlugins() {
+        File f = new File(System.getProperty("user.home") + "/.JSignalWorkBench");
+        if (!f.exists()) {
             f.mkdir();
-        File[] files=f.listFiles(
+        }
+        File[] files = f.listFiles(
                 new FileFilter() {
             public boolean accept(File fileToBeFiltered) {
                 return fileToBeFiltered.getName().toLowerCase().endsWith(
@@ -742,12 +744,12 @@ public class PluginManager {
             }
         }
         );
-        URL[] urls=new URL[files.length];
-        for(int index=0;index<files.length;index++){
+        URL[] urls = new URL[files.length];
+        for (int index = 0; index < files.length; index++) {
             try {
-                JarFile jar=new JarFile(files[index]);
+                JarFile jar = new JarFile(files[index]);
                 PluginBrowser.loadPlugin(jar, this);
-                urls[index]=files[index].toURI().toURL();
+                urls[index] = files[index].toURI().toURL();
                 jar.close();
             } catch (MalformedURLException ex) {
                 ex.printStackTrace();
@@ -755,6 +757,6 @@ public class PluginManager {
                 ex.printStackTrace();
             }
         }
-        classLoader = new URLClassLoader(urls,classLoader);
+        classLoader = new URLClassLoader(urls, classLoader);
     }
 }

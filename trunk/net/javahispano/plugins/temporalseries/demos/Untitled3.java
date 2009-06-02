@@ -1,10 +1,9 @@
 package net.javahispano.plugins.temporalseries.demos;
 
-import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
+
 import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 
 /**
  * <p>Title: </p>
@@ -32,13 +31,14 @@ public class Untitled3 extends AlgorithmAdapter {
     public String getName() {
         return "aa";
     }
+
     public void runAlgorithm(SignalManager sm,
-                          List<SignalIntervalProperties> signals) {
-        Signal s  = signals.get(0).getSignal();
-        float [] f= s.getValues();
+                             List<SignalIntervalProperties> signals) {
+        Signal s = signals.get(0).getSignal();
+        float[] f = s.getValues();
         for (int i = 0; i < f.length; i++) {
-                             f[i]= 200*f[i];
-                                  }
- }
+            f[i] = 200 * f[i];
+        }
+    }
 
 }

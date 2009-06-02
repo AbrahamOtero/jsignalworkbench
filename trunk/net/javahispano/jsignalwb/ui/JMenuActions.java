@@ -7,16 +7,16 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.KeyEvent;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+
+import javax.swing.*;
+
 import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class JMenuActions extends JMenu{
+public class JMenuActions extends JMenu {
 
     public JMenuActions(JSWBManager jswbManager) {
         super("Actions");
@@ -31,15 +31,15 @@ public class JMenuActions extends JMenu{
         add(new JRadioButtonMenuItemAddMarks(jswbManager.getJSignalMonitor()));
         addSeparator();
         add(new JMenuItem(new AdjustSignalVisibleRangeAction(jswbManager)));
-        add(new JMenuItem(new AdjustSignalVisibleRangeAction(0.6666f,jswbManager)));
-        add(new JMenuItem(new AdjustSignalVisibleRangeAction(0.5f,jswbManager)));
+        add(new JMenuItem(new AdjustSignalVisibleRangeAction(0.6666f, jswbManager)));
+        add(new JMenuItem(new AdjustSignalVisibleRangeAction(0.5f, jswbManager)));
         addSeparator();
         add(new JRadioButtonMenuItemDebugModeOnRestart());
-        add(new JMenuItem(new ShowJSMPropertiesAction(jswbManager,jswbManager.getParentWindow())));
-        if(jswbManager.getParentWindow()!=null &&
-                (jswbManager.getParentWindow() instanceof JFrame)){
+        add(new JMenuItem(new ShowJSMPropertiesAction(jswbManager, jswbManager.getParentWindow())));
+        if (jswbManager.getParentWindow() != null &&
+            (jswbManager.getParentWindow() instanceof JFrame)) {
             addSeparator();
-            add(new LookAndFeelAction((JFrame)jswbManager.getParentWindow()));
+            add(new LookAndFeelAction((JFrame) jswbManager.getParentWindow()));
         }
     }
 

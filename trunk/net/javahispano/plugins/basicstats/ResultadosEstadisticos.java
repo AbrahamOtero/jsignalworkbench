@@ -3,8 +3,9 @@ package net.javahispano.plugins.basicstats;
 /**
  *
  */
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>
@@ -17,14 +18,14 @@ import java.util.*;
 
 public class ResultadosEstadisticos implements Serializable {
     private float mediaAritmetica, mediana, varianza, desviacionTipica,
-            errorEstandar, cocienteVariacion;
+    errorEstandar, cocienteVariacion;
     private float[] intervaloConfianza = new float[2];
     private HashMap percentiles = new HashMap();
-    private String comentario, fechaInicio, fechaFin, nombreSeñal;
+    private String comentario, fechaInicio, fechaFin, nombreSenhal;
     private boolean tienePercentiles = true;
 
     /**
-     * Construye un Resultado estadístico, se le paso tod menos el comentario.
+     * Construye un Resultado estadistico, se le paso tod menos el comentario.
      * @param media_aritmetica
      * @param mediana
      * @param varianza
@@ -36,7 +37,7 @@ public class ResultadosEstadisticos implements Serializable {
      * @param valores_percentiles
      * @param fecha_inicio
      * @param fecha_fin
-     * @param nombre_señal
+     * @param nombre_senhal
      */
     public ResultadosEstadisticos(float mediaAritmetica, float mediana,
                                   float varianza,
@@ -46,7 +47,7 @@ public class ResultadosEstadisticos implements Serializable {
                                   int[] percentiles,
                                   float[] valores_percentiles,
                                   String fechaInicio, String fecha_fin,
-                                  String nombreSeñal) throws
+                                  String nombreSenhal) throws
             NotPercentilException {
         this.mediaAritmetica = mediaAritmetica;
         this.mediana = mediana;
@@ -57,7 +58,7 @@ public class ResultadosEstadisticos implements Serializable {
         this.intervaloConfianza = Arrays.copyOf(intervaloConfianza, intervaloConfianza.length);
         this.fechaFin = fecha_fin;
         this.fechaInicio = fechaInicio;
-        this.nombreSeñal = nombreSeñal;
+        this.nombreSenhal = nombreSenhal;
         if (percentiles != null) {
             this.tienePercentiles = true;
             if (percentiles.length != valores_percentiles.length) {
@@ -76,9 +77,10 @@ public class ResultadosEstadisticos implements Serializable {
         }
     }
 
-    public String getKey(){
-        return nombreSeñal + fechaInicio + fechaFin;
+    public String getKey() {
+        return nombreSenhal + fechaInicio + fechaFin;
     }
+
     public float getMediaAritmetica() {
         return mediaAritmetica;
     }
@@ -104,7 +106,7 @@ public class ResultadosEstadisticos implements Serializable {
     }
 
     public float[] getIntervaloDeConfianza() {
-        return Arrays.copyOf(intervaloConfianza,intervaloConfianza.length);
+        return Arrays.copyOf(intervaloConfianza, intervaloConfianza.length);
     }
 
     public HashMap getPercentiles() {
@@ -171,8 +173,8 @@ public class ResultadosEstadisticos implements Serializable {
         return fechaFin;
     }
 
-    public String getNombreSeñal() {
-        return nombreSeñal;
+    public String getNombreSenhal() {
+        return nombreSenhal;
     }
 
     protected void setFechaInicio(String _fecha_inicio) {
@@ -185,10 +187,10 @@ public class ResultadosEstadisticos implements Serializable {
 
     /**
      * Permite modificar el nombnre de este estdistico.
-     * @param _nombre_señal
+     * @param _nombre_senhal
      */
-    public void setNombreSeñal(String _nombre_señal) {
-        nombreSeñal = _nombre_señal;
+    public void setNombreSenhal(String _nombre_senhal) {
+        nombreSenhal = _nombre_senhal;
     }
 
     /**
@@ -208,7 +210,7 @@ public class ResultadosEstadisticos implements Serializable {
     }
 
     /**
-     * Elimina los percentiles de este resultado estadístico.
+     * Elimina los percentiles de este resultado estadistico.
      */
     public void invalidaPercentiles() {
         this.percentiles = null;

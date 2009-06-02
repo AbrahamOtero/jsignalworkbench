@@ -10,7 +10,7 @@ import java.awt.Point;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class MarkPaintInfo {
     private Point point;
@@ -20,16 +20,16 @@ public class MarkPaintInfo {
     private int minValueY;
     private int width;
     private int height;
-    
-    public MarkPaintInfo(Point point,Point startValue,Point endValue,
-            int maxValueY,int minValueY,int width,int height) {
-        this.point=point;
-        this.startValue=startValue;
-        this.endValue=endValue;
-        this.maxValueY=maxValueY;
-        this.minValueY=minValueY;
-        this.width=width;
-        this.height=height;
+
+    public MarkPaintInfo(Point point, Point startValue, Point endValue,
+                         int maxValueY, int minValueY, int width, int height) {
+        this.point = point;
+        this.startValue = startValue;
+        this.endValue = endValue;
+        this.maxValueY = maxValueY;
+        this.minValueY = minValueY;
+        this.width = width;
+        this.height = height;
     }
 
     public Point getPoint() {
@@ -59,20 +59,21 @@ public class MarkPaintInfo {
     public int getHeight() {
         return height;
     }
-    
-    public boolean equals(MarkPaintInfo mpi){
-        if(mpi.getPoint().x==point.x &&
-           mpi.getPoint().y==point.y &&
-           mpi.getStartValue().x==startValue.x &&
-           mpi.getStartValue().y==startValue.y &&
-           mpi.getEndValue().x==endValue.x &&
-           mpi.getEndValue().y==endValue.y &&
-           mpi.getMaxValueY()==maxValueY &&
-           mpi.getMinValueY()==minValueY &&
-           mpi.getHeight()==height &&
-           mpi.getWidth()==width)
+
+    public boolean equals(MarkPaintInfo mpi) {
+        if (mpi.getPoint().x == point.x &&
+            mpi.getPoint().y == point.y &&
+            mpi.getStartValue().x == startValue.x &&
+            mpi.getStartValue().y == startValue.y &&
+            mpi.getEndValue().x == endValue.x &&
+            mpi.getEndValue().y == endValue.y &&
+            mpi.getMaxValueY() == maxValueY &&
+            mpi.getMinValueY() == minValueY &&
+            mpi.getHeight() == height &&
+            mpi.getWidth() == width) {
             return true;
+        }
         return false;
     }
-    
+
 }

@@ -9,22 +9,21 @@
 
 package net.javahispano.jsignalwb.plugins;
 
-import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.JSignalMonitorMark;
 
 /**
  * Esta interfaz se corresponde con el plugin de marcas. Tiene los metodos globales
  * de cualquier plugin, asi como aquellos de la interfaz {@link JSignalMonitorMark}
- * para que estas marcas puedan ser representadas en JSignalMonitor. Ademas se añaden
+ * para que estas marcas puedan ser representadas en JSignalMonitor. Ademas se anhaden
  * dos metodos para que la marca indique si es un intervalo y en tal caso en que instante
  * finaliza.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
-public interface MarkPlugin extends Plugin,JSignalMonitorMark{
+public interface MarkPlugin extends Plugin, JSignalMonitorMark {
 
 
     /**
@@ -33,6 +32,7 @@ public interface MarkPlugin extends Plugin,JSignalMonitorMark{
      * @param markTime Tiempo en que se establece la marca.
      */
     public void setMarkTime(long markTime);
+
     /**
      * Metodo necesario para indicarle a la marca en que instante finaliza el intervalo.
      * No debe ser accedido en caso de que la marca no se corresponda con un

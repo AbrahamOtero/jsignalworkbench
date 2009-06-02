@@ -2,7 +2,7 @@ package net.javahispano.jsignalwb.jsignalmonitor;
 
 /**
  * <p>Title: Herraienta de monitorizacion</p>
- * <p>Description: Clase que permite remuestrar una señal</p>
+ * <p>Description: Clase que permite remuestrar una senhal</p>
  * <p>Copyright: Copyright (c) 1999</p>
  * <p>Company: GSI</p>
  * @author Abraham Otero
@@ -20,7 +20,7 @@ public class Resample {
      * @return array con los datos remuesrteados
      */
     public static float[] resampleFs(float data[], float startFs,
-                                       float endFs) {
+                                     float endFs) {
         return resampleFs(data, startFs, endFs, false);
     }
 
@@ -35,8 +35,8 @@ public class Resample {
      * @return array con los datos remuesrteados
      */
     public static float[] resampleFs(float data[], float startFs,
-                                       float endFs,
-                                       boolean smooth) {
+                                     float endFs,
+                                     boolean smooth) {
         return resampleT(data, 1 / startFs, 1 / endFs, smooth);
     }
 
@@ -52,7 +52,7 @@ public class Resample {
      */
 
     public static float[] resampleT(float data[], float startPeriod,
-                                      float endPeriod) {
+                                    float endPeriod) {
         return resampleT(data, startPeriod, endPeriod, false);
     }
 
@@ -66,29 +66,29 @@ public class Resample {
      */
 
     public static float[] resampleT(float data[], float startPeriod,
-                                      float endPeriod,
-                                      boolean smooth) {
+                                    float endPeriod,
+                                    boolean smooth) {
         int numDatos = data.length;
-        float relation=(startPeriod / endPeriod);
-        //El numero de datos finales será el entyero superior a numDatos*periodoInicial/periodoFinal
+        float relation = (startPeriod / endPeriod);
+        //El numero de datos finales sera el entyero superior a numDatos*periodoInicial/periodoFinal
         int nuevoNumDatos = (int) (numDatos * relation);
         float[] nuevoDatos = new float[nuevoNumDatos];
         for (int i = 0; i < numDatos; i++) {
             //Empezamos a rellenar en el dato correspondiente a i
-            int primerDatoARellenar = (int)( i * (relation));
+            int primerDatoARellenar = (int) (i * (relation));
             //Seguimos hasta el dato correspondiente a i+1
             int ultimoDatoARellenar = (int) (((i + 1) * (relation)));
             for (int j = primerDatoARellenar; j < ultimoDatoARellenar; j++) {
 
                 //Si el dato nuevo se corresponde a varios antiguos y se quiere suavizado
                 if (endPeriod > startPeriod && smooth) {
-                    //El último dato que no ue empleado para rellenar
-                    int anteriorDato = i - (int) (1/relation);
+                    //El ultimo dato que no ue empleado para rellenar
+                    int anteriorDato = i - (int) (1 / relation);
                     anteriorDato = Math.max(0, anteriorDato);
-                    //Este es el número de dtaos qeu saltamos
+                    //Este es el numero de dtaos qeu saltamos
                     int nunDatosSaltados = i - anteriorDato;
                     float sum = 0;
-                    //Hacemos la media aritmética desde el último dato que no empleamos hasta
+                    //Hacemos la media aritmetica desde el ultimo dato que no empleamos hasta
                     //el presente, y ese es el valor que empleamos para el nuevo dato
                     for (int k = anteriorDato; k < i; k++) {
                         sum += data[k];
@@ -114,7 +114,7 @@ public class Resample {
      * @return array con los datos remuesrteados
      */
     public static short[] resampleFs(short data[], float startFs,
-                                       float endFs) {
+                                     float endFs) {
         return resampleFs(data, startFs, endFs, false);
     }
 
@@ -129,8 +129,8 @@ public class Resample {
      * @return array con los datos remuesrteados
      */
     public static short[] resampleFs(short data[], float startFs,
-                                       float endFs,
-                                       boolean smooth) {
+                                     float endFs,
+                                     boolean smooth) {
         return resampleT(data, 1 / startFs, 1 / endFs, smooth);
     }
 
@@ -146,7 +146,7 @@ public class Resample {
      */
 
     public static short[] resampleT(short data[], float startPeriod,
-                                      float endPeriod) {
+                                    float endPeriod) {
         return resampleT(data, startPeriod, endPeriod, false);
     }
 
@@ -160,34 +160,34 @@ public class Resample {
      */
 
     public static short[] resampleT(short data[], float startPeriod,
-                                      float endPeriod,
-                                      boolean smooth) {
+                                    float endPeriod,
+                                    boolean smooth) {
         int numDatos = data.length;
-        float relation=(startPeriod / endPeriod);
-        //El numero de datos finales será el entyero superior a numDatos*periodoInicial/periodoFinal
+        float relation = (startPeriod / endPeriod);
+        //El numero de datos finales sera el entyero superior a numDatos*periodoInicial/periodoFinal
         int nuevoNumDatos = (int) (numDatos * relation);
         short[] nuevoDatos = new short[nuevoNumDatos];
         for (int i = 0; i < numDatos; i++) {
             //Empezamos a rellenar en el dato correspondiente a i
-            int primerDatoARellenar = (int)( i * (relation));
+            int primerDatoARellenar = (int) (i * (relation));
             //Seguimos hasta el dato correspondiente a i+1
             int ultimoDatoARellenar = (int) (((i + 1) * (relation)));
             for (int j = primerDatoARellenar; j < ultimoDatoARellenar; j++) {
 
                 //Si el dato nuevo se corresponde a varios antiguos y se quiere suavizado
                 if (endPeriod > startPeriod && smooth) {
-                    //El último dato que no ue empleado para rellenar
-                    int anteriorDato = i - (int) (1/relation);
+                    //El ultimo dato que no ue empleado para rellenar
+                    int anteriorDato = i - (int) (1 / relation);
                     anteriorDato = Math.max(0, anteriorDato);
-                    //Este es el número de dtaos qeu saltamos
+                    //Este es el numero de dtaos qeu saltamos
                     int nunDatosSaltados = i - anteriorDato;
                     short sum = 0;
-                    //Hacemos la media aritmética desde el último dato que no empleamos hasta
+                    //Hacemos la media aritmetica desde el ultimo dato que no empleamos hasta
                     //el presente, y ese es el valor que empleamos para el nuevo dato
                     for (int k = anteriorDato; k < i; k++) {
                         sum += data[k];
                     }
-                    sum = (short)(sum / nunDatosSaltados);
+                    sum = (short) (sum / nunDatosSaltados);
                     nuevoDatos[j] = sum;
                 } else {
                     nuevoDatos[j] = data[i];
@@ -198,8 +198,9 @@ public class Resample {
         }
         return nuevoDatos;
     }
+
     /**
-     * Elimina los 0 finales de las señales
+     * Elimina los 0 finales de las senhales
      * @param datos
      * @return
      */

@@ -9,29 +9,26 @@ package net.javahispano.jsignalwb.ui;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyVetoException;
+import java.beans.*;
 import java.util.Date;
-import javax.swing.JWindow;
+
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.SignalManager;
-import net.javahispano.jsignalwb.SignalNotFoundException;
+
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
-import net.javahispano.jsignalwb.utilities.ui.*;
 
-public class ConfigureSignalPanel extends javax.swing.JPanel implements PropertyChangeListener,DocumentListener{
+public class ConfigureSignalPanel extends javax.swing.JPanel implements PropertyChangeListener, DocumentListener {
     String signalName;
     SignalManager sm;
     JSWBManager jswbManager;
     /** Creates new form ConfigureSignalPanel2 */
-    public ConfigureSignalPanel(String signalName,JSWBManager jswbManager) {
-        this.jswbManager=jswbManager;
-        this.signalName=signalName;
-        this.sm=jswbManager.getSignalManager();
+    public ConfigureSignalPanel(String signalName, JSWBManager jswbManager) {
+        this.jswbManager = jswbManager;
+        this.signalName = signalName;
+        this.sm = jswbManager.getSignalManager();
         initComponents();
 //        abscissaValueTextField.setEnabled(false);
         minVisibleTextField.setEnabled(false);
@@ -49,46 +46,51 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
         } catch (PropertyVetoException ex) {
             ex.printStackTrace();
         }
-        datePicker1.addPropertyChangeListener(datePicker1.PROPERTY_NAME_DATE,this);
+        datePicker1.addPropertyChangeListener(datePicker1.PROPERTY_NAME_DATE, this);
         applyButton.setEnabled(false);
         initPropertiesListeners();
         abscissaIntervalRadioButton.grabFocus();
     }
 
-    public void changedUpdate(DocumentEvent evt){
-        documentEvent(evt);
-    }
-    public void removeUpdate(DocumentEvent evt){
-        documentEvent(evt);
-    }
-    public void insertUpdate(DocumentEvent evt){
+    public void changedUpdate(DocumentEvent evt) {
         documentEvent(evt);
     }
 
-    private void documentEvent(DocumentEvent evt){
-        String property=evt.getDocument().getProperty("textField").toString();
+    public void removeUpdate(DocumentEvent evt) {
+        documentEvent(evt);
+    }
 
-        if(property.equals("name"))
-            name=true;
-        else if(property.equals("abscissa"))
-            abscissa=true;
-        else if(property.equals("start"))
-            start=true;
-        else if(property.equals("frecuency"))
-            frec=true;
-        else if(property.equals("magnitude"))
-            magnitude=true;
-        else if(property.equals("zoom"))
-            zoom=true;
+    public void insertUpdate(DocumentEvent evt) {
+        documentEvent(evt);
+    }
+
+    private void documentEvent(DocumentEvent evt) {
+        String property = evt.getDocument().getProperty("textField").toString();
+
+        if (property.equals("name")) {
+            name = true;
+        } else if (property.equals("abscissa")) {
+            abscissa = true;
+        } else if (property.equals("start")) {
+            start = true;
+        } else if (property.equals("frecuency")) {
+            frec = true;
+        } else if (property.equals("magnitude")) {
+            magnitude = true;
+        } else if (property.equals("zoom")) {
+            zoom = true;
+        }
         /*else if(property.equals("abscissaValue"))
             abscissaValue=true;*/
-        else if(property.equals("interval"))
-            interval=true;
+        else if (property.equals("interval")) {
+            interval = true;
+        }
         evt.getDocument().removeDocumentListener(this);
         checkApplyButton();
     }
-    private void initPropertiesListeners(){
-        zoom=abscissa=frec=start=magnitude=visible=name=/*abscissaValue=*/false;
+
+    private void initPropertiesListeners() {
+        zoom = abscissa = frec = start = magnitude = visible = name = /*abscissaValue=*/ false;
         nameTextField.getDocument().addDocumentListener(this);
 //        abscissaTextField.getDocument().addDocumentListener(this);
         jTextFieldDate1.getDocument().addDocumentListener(this);
@@ -98,38 +100,42 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
 //        abscissaValueTextField.getDocument().addDocumentListener(this);
         minVisibleTextField.getDocument().addDocumentListener(this);
         maxVisibleTextField.getDocument().addDocumentListener(this);
-        nameTextField.getDocument().putProperty("textField","name");
+        nameTextField.getDocument().putProperty("textField", "name");
 //        abscissaTextField.getDocument().putProperty("textField","abscissa");
-        jTextFieldDate1.getDocument().putProperty("textField","start");
-        frecuencyTextField.getDocument().putProperty("textField","frecuency");
-        magnitudeTextField.getDocument().putProperty("textField","magnitude");
-        zoomTextField.getDocument().putProperty("textField","zoom");
+        jTextFieldDate1.getDocument().putProperty("textField", "start");
+        frecuencyTextField.getDocument().putProperty("textField", "frecuency");
+        magnitudeTextField.getDocument().putProperty("textField", "magnitude");
+        zoomTextField.getDocument().putProperty("textField", "zoom");
 //        abscissaValueTextField.getDocument().putProperty("textField","interval");
-        minVisibleTextField.getDocument().putProperty("textField","interval");
-        maxVisibleTextField.getDocument().putProperty("textField","interval");
+        minVisibleTextField.getDocument().putProperty("textField", "interval");
+        maxVisibleTextField.getDocument().putProperty("textField", "interval");
     }
 
-    private void checkApplyButton(){
-        if(name||abscissa||start||frec||magnitude||zoom||/*abscissaValue||*/interval)
+    private void checkApplyButton() {
+        if (name || abscissa || start || frec || magnitude || zoom || /*abscissaValue||*/ interval) {
             applyButton.setEnabled(true);
-        else
+        } else {
             applyButton.setEnabled(false);
-    }
-    public void propertyChange(PropertyChangeEvent evt){
-        if("date".equals(evt.getPropertyName())){
-            Date date=datePicker1.getDate();
-            if(date!=null)
-                jTextFieldDate1.setText(TimeRepresentation.timeToString(
-                        swapDateNoChangeTime(
-                        sm.getSignal(signalName).getStart(),date.getTime())));
         }
     }
+
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("date".equals(evt.getPropertyName())) {
+            Date date = datePicker1.getDate();
+            if (date != null) {
+                jTextFieldDate1.setText(TimeRepresentation.timeToString(
+                        swapDateNoChangeTime(
+                                sm.getSignal(signalName).getStart(), date.getTime())));
+            }
+        }
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
      */
-    // <editor-fold defaultstate="collapsed" desc=" Código Generado  ">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc=" Codigo Generado  ">//GEN-BEGIN:initComponents
     private void initComponents() {
         buttonGroup1 = new javax.swing.ButtonGroup();
         nameLabel = new javax.swing.JLabel();
@@ -171,7 +177,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
         magnitudeLabel.setText("Magnitude:");
 
         visibleCheckBox.setSelected(sm.getSignal(signalName).getProperties().isVisible()
-        );
+                );
         visibleCheckBox.setText("Visible:");
         visibleCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         visibleCheckBox.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -236,32 +242,37 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
         javax.swing.GroupLayout minMaxPanelLayout = new javax.swing.GroupLayout(minMaxPanel);
         minMaxPanel.setLayout(minMaxPanelLayout);
         minMaxPanelLayout.setHorizontalGroup(
-            minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(minMaxPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(minVisibleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(maxVisibleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
-        );
+                minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(minMaxPanelLayout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(jLabel1)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(minVisibleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jLabel2)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(maxVisibleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 87,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addContainerGap(174, Short.MAX_VALUE))
+                );
         minMaxPanelLayout.setVerticalGroup(
-            minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(minMaxPanelLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(minMaxPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(minVisibleTextField)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(maxVisibleTextField)))
-                .addContainerGap())
-        );
+                minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(minMaxPanelLayout.createSequentialGroup()
+                          .addGap(13, 13, 13)
+                          .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(minMaxPanelLayout.createSequentialGroup()
+                                              .addGap(6, 6, 6)
+                                              .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                BASELINE)
+                                              .addComponent(minVisibleTextField)
+                                              .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                              .addComponent(maxVisibleTextField)))
+                          .addContainerGap())
+                );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         zoomLabel.setText("Zoom:");
@@ -271,144 +282,178 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
         zoomSlider.setMinorTickSpacing(25);
         zoomSlider.setPaintTicks(true);
         zoomSlider.setSnapToTicks(true);
-        zoomSlider.setValue((int)(sm.getSignal(signalName).getProperties().getZoom()*100));
+        zoomSlider.setValue((int) (sm.getSignal(signalName).getProperties().getZoom() * 100));
         zoomSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 zoomSliderStateChanged(evt);
             }
         });
 
-        zoomTextField.setText(Integer.toString((int)(sm.getSignal(signalName).getProperties().getZoom()*100)));
+        zoomTextField.setText(Integer.toString((int) (sm.getSignal(signalName).getProperties().getZoom() * 100)));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(zoomLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zoomSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(zoomLabel)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(zoomSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(zoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 58,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addContainerGap())
+                );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(zoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(zoomLabel)
-                    .addComponent(zoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(zoomSlider, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(zoomLabel)
+                                    .addComponent(zoomTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(abscissaZoomRadioButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(abscissaIntervalRadioButton)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(abscissaZoomRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                          .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                              .addContainerGap()
+                                              .addComponent(abscissaZoomRadioButton))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                              .addGap(27, 27, 27)
+                                              .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                              jPanel1Layout.createSequentialGroup()
+                                              .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                              .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.
+                Alignment.LEADING)
                 .addComponent(abscissaIntervalRadioButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                          .addGap(17, 17, 17)
+                          .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                          .addContainerGap())
+                );
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addComponent(abscissaZoomRadioButton)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(abscissaIntervalRadioButton)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameLabel)
-                            .addComponent(startTimeLabel)
-                            .addComponent(frecuencyLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                .addComponent(nameLabel)
+                .addComponent(startTimeLabel)
+                .addComponent(frecuencyLabel))
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.
+                LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDate1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(frecuencyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(magnitudeLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(magnitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(visibleCheckBox)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(applyButton, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
+                                    .addComponent(jTextFieldDate1, javax.swing.GroupLayout.Alignment.LEADING,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE, 152,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 22,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createSequentialGroup()
+                          .addComponent(frecuencyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 54,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(magnitudeLabel)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(magnitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(visibleCheckBox)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                              .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, 149,
+                Short.MAX_VALUE)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(applyButton, javax.swing.GroupLayout.DEFAULT_SIZE, 142,
+                Short.MAX_VALUE)
+                                              .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                              .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162,
+                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                          .addContainerGap())
+                );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameLabel)
-                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(startTimeLabel))
-                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(frecuencyLabel)
-                    .addComponent(frecuencyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(magnitudeLabel)
-                    .addComponent(magnitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(visibleCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
-                    .addComponent(okButton)
-                    .addComponent(applyButton)
-                    .addComponent(cancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-    }// </editor-fold>//GEN-END:initComponents
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                          .addContainerGap()
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(nameLabel)
+                                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                              .addComponent(jTextFieldDate1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                              .addComponent(startTimeLabel))
+                                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(frecuencyLabel)
+                                    .addComponent(frecuencyTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(magnitudeLabel)
+                                    .addComponent(magnitudeTextField, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                  javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                  javax.swing.GroupLayout.PREFERRED_SIZE))
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(visibleCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 21,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                                    .addComponent(okButton)
+                                    .addComponent(applyButton)
+                                    .addComponent(cancelButton))
+                          .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                );
+    } // </editor-fold>//GEN-END:initComponents
 
-    private void radioButtons(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtons
-        if("zoom".equals(evt.getActionCommand())){
+    private void radioButtons(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_radioButtons
+        if ("zoom".equals(evt.getActionCommand())) {
 //            abscissaValueTextField.setEnabled(false);
             zoomSlider.setEnabled(true);
             zoomTextField.setEnabled(true);
@@ -416,7 +461,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
             maxVisibleTextField.setEnabled(false);
             zoomTextField.grabFocus();
         }
-        if("interval".equals(evt.getActionCommand())){
+        if ("interval".equals(evt.getActionCommand())) {
             minVisibleTextField.setEnabled(true);
             maxVisibleTextField.setEnabled(true);
 //            abscissaValueTextField.setEnabled(true);
@@ -424,63 +469,66 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
             zoomTextField.setEnabled(false);
             minVisibleTextField.grabFocus();
         }
-    }//GEN-LAST:event_radioButtons
+    } //GEN-LAST:event_radioButtons
 
-    private void visibleCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_visibleCheckBoxItemStateChanged
-        visible=true;
+    private void visibleCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) { //GEN-FIRST:event_visibleCheckBoxItemStateChanged
+        visible = true;
         applyButton.setEnabled(true);
-    }//GEN-LAST:event_visibleCheckBoxItemStateChanged
+    } //GEN-LAST:event_visibleCheckBoxItemStateChanged
 
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        if(apply())
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_okButtonActionPerformed
+        if (apply()) {
             hideJWindow();
-    }//GEN-LAST:event_okButtonActionPerformed
+        }
+    } //GEN-LAST:event_okButtonActionPerformed
 
-    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
+    private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_applyButtonActionPerformed
         apply();
-    }//GEN-LAST:event_applyButtonActionPerformed
+    } //GEN-LAST:event_applyButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_cancelButtonActionPerformed
         hideJWindow();
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    } //GEN-LAST:event_cancelButtonActionPerformed
 
-    private void zoomSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_zoomSliderStateChanged
-        if(zoomSlider.getValue()>0)
+    private void zoomSliderStateChanged(javax.swing.event.ChangeEvent evt) { //GEN-FIRST:event_zoomSliderStateChanged
+        if (zoomSlider.getValue() > 0) {
             zoomTextField.setText(Integer.toString(zoomSlider.getValue()));
-        else
+        } else {
             zoomTextField.setText("1");
-        zoom=true;
+        }
+        zoom = true;
         applyButton.setEnabled(true);
-    }//GEN-LAST:event_zoomSliderStateChanged
+    } //GEN-LAST:event_zoomSliderStateChanged
 
-    public void showJWindow(Window owner){
-        jw=new JWindow(owner);
+    public void showJWindow(Window owner) {
+        jw = new JWindow(owner);
         //jw.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint());
         jw.add(this);
         jw.setSize(this.getPreferredSize());
         jw.setLocationRelativeTo(owner);
         jw.setVisible(true);
     }
-    private void hideJWindow(){
+
+    private void hideJWindow() {
         jw.dispose();
     }
 
-    private boolean apply(){
-        boolean flag=true;
-        if(zoom){
-            if(abscissaZoomRadioButton.isSelected()){
-                float zoomValue=0;
+    private boolean apply() {
+        boolean flag = true;
+        if (zoom) {
+            if (abscissaZoomRadioButton.isSelected()) {
+                float zoomValue = 0;
                 try {
                     zoomValue = Float.valueOf(zoomTextField.getText());
                 } catch (NumberFormatException ex) {
                     ex.printStackTrace();
                 }
-                if(zoomValue>0){
-                    sm.setSignalZoom(signalName,zoomValue/100f);
+                if (zoomValue > 0) {
+                    sm.setSignalZoom(signalName, zoomValue / 100f);
                     zoomTextField.setBackground(Color.WHITE);
-                }else{
+                } else {
                     zoomTextField.setBackground(Color.RED);
-                    flag=false;
+                    flag = false;
                 }
             }
         }
@@ -513,70 +561,69 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
                 }
             }
 
-        }*/
-        if(frec){
-            float frecValue=0;
+                 }*/
+        if (frec) {
+            float frecValue = 0;
             try {
                 frecValue = Float.valueOf(frecuencyTextField.getText());
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
             }
-            if(frecValue>0){
-                sm.setSignalFrecuency(signalName,frecValue);
+            if (frecValue > 0) {
+                sm.setSignalFrecuency(signalName, frecValue);
                 frecuencyTextField.setBackground(Color.WHITE);
-            }else{
+            } else {
                 frecuencyTextField.setBackground(Color.RED);
-                flag=false;
+                flag = false;
             }
 
         }
-        if(start){
-            String dateValue=jTextFieldDate1.getFormattedText();
-            if(!dateValue.equals("")){
+        if (start) {
+            String dateValue = jTextFieldDate1.getFormattedText();
+            if (!dateValue.equals("")) {
                 try {
                     sm.setSignalStartTime(signalName,
-                            TimeRepresentation.stringToMillis(dateValue,true,true,true));
+                                          TimeRepresentation.stringToMillis(dateValue, true, true, true));
                     jTextFieldDate1.setBackground(Color.WHITE);
-                } catch(Exception ex){
+                } catch (Exception ex) {
                     jTextFieldDate1.setBackground(Color.RED);
                 }
-            }
-            else{
+            } else {
                 jTextFieldDate1.setBackground(Color.RED);
-                flag=false;
+                flag = false;
             }
         }
-        if(magnitude){
-            String magnitudeValue=magnitudeTextField.getText();
-            if(!magnitudeValue.equals("")){
-                sm.setSignalMagnitude(signalName,magnitudeValue);
+        if (magnitude) {
+            String magnitudeValue = magnitudeTextField.getText();
+            if (!magnitudeValue.equals("")) {
+                sm.setSignalMagnitude(signalName, magnitudeValue);
                 magnitudeTextField.setBackground(Color.WHITE);
-            }else{
+            } else {
                 magnitudeTextField.setBackground(Color.RED);
-                flag=false;
+                flag = false;
             }
         }
-        if(visible){
-            sm.setSignalVisible(signalName,visibleCheckBox.isSelected());
+        if (visible) {
+            sm.setSignalVisible(signalName, visibleCheckBox.isSelected());
         }
 
-        if(abscissaIntervalRadioButton.isSelected() && interval){
-            boolean flag2=false;
-            boolean flag3=false;
+        if (abscissaIntervalRadioButton.isSelected() && interval) {
+            boolean flag2 = false;
+            boolean flag3 = false;
 //            boolean flag4=false;
-            float newMin=0;
+            float newMin = 0;
             try {
                 newMin = Float.parseFloat(minVisibleTextField.getText());
                 minVisibleTextField.setBackground(Color.WHITE);
-                flag2=true;
+                flag2 = true;
             } catch (NumberFormatException ex) {
                 minVisibleTextField.setBackground(Color.RED);
             }
-            float newMax=0;
+            float newMax = 0;
             try {
                 newMax = Float.parseFloat(maxVisibleTextField.getText());
                 maxVisibleTextField.setBackground(Color.WHITE);
-                flag3=true;
+                flag3 = true;
             } catch (NumberFormatException ex) {
                 maxVisibleTextField.setBackground(Color.RED);
             }
@@ -588,30 +635,30 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
 //                } catch (NumberFormatException ex) {
 //                    abscissaValueTextField.setBackground(Color.RED);
 //                }
-            if(flag2&&flag3){
-                try{
-                    jswbManager.setSignalVisibleRange(signalName,newMin,newMax);
+            if (flag2 && flag3) {
+                try {
+                    jswbManager.setSignalVisibleRange(signalName, newMin, newMax);
                     maxVisibleTextField.setBackground(Color.WHITE);
                     minVisibleTextField.setBackground(Color.WHITE);
 //                    abscissaValueTextField.setBackground(Color.WHITE);
-                }catch(SignalNotFoundException ex){
+                } catch (SignalNotFoundException ex) {
                     maxVisibleTextField.setBackground(Color.RED);
                     minVisibleTextField.setBackground(Color.RED);
 //                    abscissaValueTextField.setBackground(Color.RED);
-                    flag=false;
+                    flag = false;
                 }
             }
         }
 
-        if(name){
-            String newName=nameTextField.getText();
-            if(!newName.equals("")){
-                sm.renameSignal(signalName,newName);
-                signalName=newName;
+        if (name) {
+            String newName = nameTextField.getText();
+            if (!newName.equals("")) {
+                sm.renameSignal(signalName, newName);
+                signalName = newName;
                 nameTextField.setBackground(Color.WHITE);
-            }else{
+            } else {
                 nameTextField.setBackground(Color.RED);
-                flag=false;
+                flag = false;
             }
         }
         initPropertiesListeners();
@@ -621,7 +668,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
     }
 
     /**
-    * @param old long
+     * @param old long
      * @param newTime long
      * @return long
      */
@@ -633,7 +680,8 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
 
         return newDateTime.getMillis();
     }
-    // Declaración de varibales -no modificar//GEN-BEGIN:variables
+
+    // Declaracion de varibales -no modificar//GEN-BEGIN:variables
     private javax.swing.JRadioButton abscissaIntervalRadioButton;
     private javax.swing.JRadioButton abscissaZoomRadioButton;
     private javax.swing.JButton applyButton;
@@ -660,7 +708,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
     private javax.swing.JLabel zoomLabel;
     private javax.swing.JSlider zoomSlider;
     private javax.swing.JTextField zoomTextField;
-    // Fin de declaración de variables//GEN-END:variables
+    // Fin de declaracion de variables//GEN-END:variables
     private JWindow jw;
     private boolean name;
     private boolean visible;
@@ -668,7 +716,7 @@ public class ConfigureSignalPanel extends javax.swing.JPanel implements Property
     private boolean start;
     private boolean frec;
     private boolean abscissa;
-   //private boolean abscissaValue;
+    //private boolean abscissaValue;
     private boolean zoom;
     private boolean interval;
 

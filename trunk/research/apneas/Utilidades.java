@@ -2,10 +2,9 @@ package research.apneas;
 
 import java.awt.Color;
 import static java.lang.Math.*;
+import java.util.Arrays;
 
 import net.javahispano.fuzzyutilities.representation.TrapezoidalDistribution;
-import java.util.Arrays;
-import net.javahispano.jsignalwb.*;
 
 public class Utilidades {
 
@@ -15,12 +14,12 @@ public class Utilidades {
      * de datosAnteriores y hasta datosPosteriores el valor basal
      * correspondiente con cada muestra. Para ello, se toma en torno a cada
      * muestra una ventana temporal que comienza datosAnteriores datos antes de
-     * la muestra y se extiende hasta datosPosteriores después de la muestra. Se
+     * la muestra y se extiende hasta datosPosteriores despues de la muestra. Se
      * calcula el valor medio de todas las muestras comprendidas en ese
-     * intervalo tales que su valor en magnitud se encuentra en el 10% de valores más altos
-     * dentro de ese intervalo. En caso de que posibilidad sea null se considerarán para el
-     * cálculo del valor basal de cada punto  Todas las muestras del intervalo.
-     * El array que devuelve contiene en cada oposición el valor basal
+     * intervalo tales que su valor en magnitud se encuentra en el 10% de valores mas altos
+     * dentro de ese intervalo. En caso de que posibilidad sea null se consideraran para el
+     * calculo del valor basal de cada punto  Todas las muestras del intervalo.
+     * El array que devuelve contiene en cada oposicion el valor basal
      * correspondiente a esa muestra.
      *
      * @param datos float[]
@@ -32,14 +31,14 @@ public class Utilidades {
         float[] basal = new float[datos.length];
         float p[] = new float[datosAnteriores + datosPosteriores];
         //el paso es la dcima parte de la ventana temporal
-        final int paso = max(1, (datosAnteriores + datosPosteriores)/10);
+        final int paso = max(1, (datosAnteriores + datosPosteriores) / 10);
         for (int i = datosAnteriores; i < datos.length - datosPosteriores; i += paso) {
             for (int j = i; j < i + p.length && j < datos.length; j++) {
                 p[j - i] = datos[j];
             }
             Arrays.sort(p);
             float suma = 0;
-            //sólo se considera el 10% de los datos mayores
+            //solo se considera el 10% de los datos mayores
             for (int j = p.length * 95 / 100; j < p.length; j++) {
                 suma += p[j];
             }
@@ -49,7 +48,7 @@ public class Utilidades {
             }
         }
 
-        //llenamos el principio y al final con el último un valor basal, o el primero, segun corresponda
+        //llenamos el principio y al final con el ultimo un valor basal, o el primero, segun corresponda
         for (int i = 0; i < datosAnteriores; i++) {
             basal[i] = basal[datosAnteriores];
         }
@@ -65,12 +64,12 @@ public class Utilidades {
      * de datosAnteriores y hasta datosPosteriores el valor basal
      * correspondiente con cada muestra. Para ello, se toma en torno a cada
      * muestra una ventana temporal que comienza datosAnteriores datos antes de
-     * la muestra y se extiende hasta datosPosteriores después de la muestra. Se
+     * la muestra y se extiende hasta datosPosteriores despues de la muestra. Se
      * calcula el valor medio de todas las muestras comprendidas en ese
      * intervalo es tal que el valor correspondiente de posibilidad sea la
-     * unidad. En caso de que posibilidad sea null se considerarán para el
-     * cálculo del valor basal de cada punto todas las muestras del intervalo.
-     * El array que devuelve contiene en cada oposición el valor basal
+     * unidad. En caso de que posibilidad sea null se consideraran para el
+     * calculo del valor basal de cada punto todas las muestras del intervalo.
+     * El array que devuelve contiene en cada oposicion el valor basal
      * correspondiente a esa muestra.
      *
      * @param datos float[]
@@ -79,12 +78,12 @@ public class Utilidades {
      * @param datosPosteriores int
      * @return float[]
      */
-    public static float[] calcularBasal(float[] datos, float[] posibilidad,  int datosAnteriores,
+    public static float[] calcularBasal(float[] datos, float[] posibilidad, int datosAnteriores,
                                         int datosPosteriores) {
         float[] basal = new float[datos.length];
         //@todo cambio reciente: antes el paso era de uno
-        int paso= max(1,min (datosAnteriores, datosPosteriores)/10);
-        for (int i = datosAnteriores; i < datos.length - datosPosteriores; i+= paso) {
+        int paso = max(1, min(datosAnteriores, datosPosteriores) / 10);
+        for (int i = datosAnteriores; i < datos.length - datosPosteriores; i += paso) {
             float suma = 0;
             int cont = 0;
             if (posibilidad != null) {
@@ -101,12 +100,12 @@ public class Utilidades {
                 }
             }
             float tmp = suma / cont;
-           for (int j = i; j < i+ paso; j++) {
+            for (int j = i; j < i + paso; j++) {
                 basal[j] = tmp;
             }
         }
 
-        //llenamos el principio y al final con el último un valor basal, o el primero, segun corresponda
+        //llenamos el principio y al final con el ultimo un valor basal, o el primero, segun corresponda
         for (int i = 0; i < datosAnteriores; i++) {
             basal[i] = basal[datosAnteriores];
         }
@@ -117,10 +116,10 @@ public class Utilidades {
     }
 
     /**
-     * Calcula la pendiente entorno al índice que se le pasa empleando para ello
-     * una ventana temporal de tamaño duración centrada en dicho índice. La
+     * Calcula la pendiente entorno al indice que se le pasa empleando para ello
+     * una ventana temporal de tamanho duracion centrada en dicho indice. La
      * pendiente se calcula sobre los datos del array que se le pasa como
-     * argumento y se da en unidades que ha variado la señal en un periodo de
+     * argumento y se da en unidades que ha variado la senhal en un periodo de
      * muestreo.
      *
      * @param ventana int
@@ -129,15 +128,15 @@ public class Utilidades {
      * @return float
      */
     public static float pendienteEnTornoA(int ventana, int indice, float[] d) {
-        int minimo = indice - ventana / 2; //centramos sobre el índice
+        int minimo = indice - ventana / 2; //centramos sobre el indice
         int maximo = indice + ventana / 2;
         float pendiente = (d[maximo] - d[minimo]) / (maximo - minimo);
         return pendiente;
     }
 
     /**
-     * Calcula el valor medio entorno al índice que se le pasa empleando para ello
-     * una ventana temporal de tamaño duración centrada en dicho índice. El valor
+     * Calcula el valor medio entorno al indice que se le pasa empleando para ello
+     * una ventana temporal de tamanho duracion centrada en dicho indice. El valor
      * medio se calcula sobre los datos del array que se le pasa como argumento.
      *
      * @param ventana int
@@ -146,7 +145,7 @@ public class Utilidades {
      * @return float
      */
     public static float valorMedioEnTornoA(int ventana, int indice, float[] d) {
-        int minimo = indice - ventana / 2; //centramos sobre el índice
+        int minimo = indice - ventana / 2; //centramos sobre el indice
         int maximo = indice + ventana / 2;
         maximo = min(d.length, maximo);
         float suma = 0;
@@ -157,7 +156,7 @@ public class Utilidades {
     }
 
     public static float valorMedioEnTornoA2(int ventana, int indice, float[] d) {
-        int minimo = indice - ventana / 2; //centramos sobre el índice
+        int minimo = indice - ventana / 2; //centramos sobre el indice
         int maximo = indice + ventana / 2;
         maximo = min(d.length, maximo);
         float suma = 0;
@@ -177,8 +176,8 @@ public class Utilidades {
     }
 
     /**
-     * Calcula el valor medio entorno al índice que se le pasa empleando para ello
-     * una ventana temporal de tamaño duración centrada en dicho índice. El valor
+     * Calcula el valor medio entorno al indice que se le pasa empleando para ello
+     * una ventana temporal de tamanho duracion centrada en dicho indice. El valor
      * medio se calcula sobre los datos del array que se le pasa como argumento.
      *
      * @param ventana int
@@ -187,7 +186,7 @@ public class Utilidades {
      * @return float
      */
     public static float energiaEnTornoA(int ventana, int indice, float[] d) {
-        int minimo = indice - ventana / 2; //centramos sobre el índice
+        int minimo = indice - ventana / 2; //centramos sobre el indice
         int maximo = indice + ventana / 2;
         maximo = min(d.length, maximo);
         minimo = max(minimo, ventana / 2);
@@ -200,7 +199,7 @@ public class Utilidades {
 
     /**
      * Calcula para el array de dantos que se le pasa como argumento cual es su
-     * compatibilidad con la pendiente (representada mediante una distribución
+     * compatibilidad con la pendiente (representada mediante una distribucion
      * de posibilidad trapezoial) que se le pasa como argumento. La
      * compatibilidad para cada muestra se representa como un valor entre 0 y
      * 100 y se vuelve en el array resultado.
@@ -220,7 +219,7 @@ public class Utilidades {
 
     /**
      * Calcula para el array de dantos que se le pasa como argumento cual es su
-     * compatibilidad con la pendiente (representada mediante una distribución
+     * compatibilidad con la pendiente (representada mediante una distribucion
      * de posibilidad trapezoial) que se le pasa como argumento. La
      * compatibilidad para cada muestra se representa como un valor entre 0 y
      * 100 y se vuelve en el array resultado.
@@ -243,13 +242,13 @@ public class Utilidades {
 
 
     /**
-     * Rellena todos los valores del array que sean menores que límite con el
-     * último valor a la izquierda del valor menor que el límite que era mayor
-     * que el límite; siempre y cuando no haya más de persistencia valores
-     * seguidos que son menores que el límite.
+     * Rellena todos los valores del array que sean menores que limite con el
+     * ultimo valor a la izquierda del valor menor que el limite que era mayor
+     * que el limite; siempre y cuando no haya mas de persistencia valores
+     * seguidos que son menores que el limite.
      *
      * @param datos float[]
-     * @param persistencia número de muestras mximas consecutivas a rellenar
+     * @param persistencia numero de muestras mximas consecutivas a rellenar
      * @param limite float
      */
     public static void rellenarHuecos(float[] datos, int persistencia, float limite) {
@@ -290,23 +289,23 @@ public class Utilidades {
 
     /**
      * Rellena todos los valores del array que sean menores que 0 con el
-     * último valor a la izquierda del valor menor que el límite que era mayor
-     * que 0; siempre y cuando no haya más de persistencia valores
+     * ultimo valor a la izquierda del valor menor que el limite que era mayor
+     * que 0; siempre y cuando no haya mas de persistencia valores
      * seguidos que son menores que 0.
      *
      * @param datos float[]
-     * @param persistencia número de muestras mximas consecutivas a rellenar
+     * @param persistencia numero de muestras mximas consecutivas a rellenar
      */
     public static void rellenarHuecos(float[] datos, int persistencia) {
         rellenarHuecos(datos, persistencia, 0);
     }
 
     /**
-     * Este método devuelve un array cuyos elementos se encuentran en orden
+     * Este metodo devuelve un array cuyos elementos se encuentran en orden
      * inverso al array argumento; es decir, el primer elemento del array
-     * argumento es el último elemento del array resultado, el segundo elemento
-     * del primer array es el penúltimo elemento de array resultado... y el
-     * último elemento del primer array es el primer elemento del array
+     * argumento es el ultimo elemento del array resultado, el segundo elemento
+     * del primer array es el penultimo elemento de array resultado... y el
+     * ultimo elemento del primer array es el primer elemento del array
      * resultado.
      *
      * @param original float[]

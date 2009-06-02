@@ -9,9 +9,9 @@ import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 /**
     /**
   * Aplica un filtro pasa banda con las siguientes frecuencias de corte:
-  * fc1=0.20;  Hz: 1 respiración cada 5 segundos
-  * fc2=0.45;  Hz: 1 respiración cada 2 segundos
-  * No modifica los datos originales; devuelve un array el mismo tamaño que
+  * fc1=0.20;  Hz: 1 respiracion cada 5 segundos
+  * fc2=0.45;  Hz: 1 respiracion cada 2 segundos
+  * No modifica los datos originales; devuelve un array el mismo tamanho que
   * el original con los datos filtrados.
   *
   * @author Abraham Otero
@@ -50,9 +50,9 @@ public class FiltroNasal extends AlgorithmAdapter {
 
     /**
      * Aplica un filtro pasa banda con las siguientes frecuencias de corte:
-     * fc1=0.20;  Hz: 1 respiración cada 5 segundos
-     * fc2=0.45;  Hz: 1 respiración cada 2 segundos
-     * No modifica los datos originales; devuelve un array el mismo tamaño que
+     * fc1=0.20;  Hz: 1 respiracion cada 5 segundos
+     * fc2=0.45;  Hz: 1 respiracion cada 2 segundos
+     * No modifica los datos originales; devuelve un array el mismo tamanho que
      * el original con los datos filtrados.
      *
      * @param datos float[]

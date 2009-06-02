@@ -17,21 +17,21 @@ public class IntervalSelectedEvent {
     private String channelName;
     private long startTime;
     private long endTime;
-    
+
     /** Creates a new instance of IntervalSelectedEvent */
-    public IntervalSelectedEvent(String channelName){
-        this.channelName=channelName;
-        this.startTime=-1;
-        this.endTime=-1;
+    public IntervalSelectedEvent(String channelName) {
+        this.channelName = channelName;
+        this.startTime = -1;
+        this.endTime = -1;
     }
-    
+
     /** genera un evento nuevo. Si alguno de los tiempos no es valido(menos que 0)
-     *  se estimara que la seleccion de la señal es completa*/
-    
-    public IntervalSelectedEvent(String channelName,long startTime,long endTime) {
-        this.channelName=channelName;
-        this.startTime=Math.min(startTime,endTime);
-        this.endTime=Math.max(startTime,endTime);
+     *  se estimara que la seleccion de la senhal es completa*/
+
+    public IntervalSelectedEvent(String channelName, long startTime, long endTime) {
+        this.channelName = channelName;
+        this.startTime = Math.min(startTime, endTime);
+        this.endTime = Math.max(startTime, endTime);
     }
 
     public String getChannelName() {
@@ -45,11 +45,13 @@ public class IntervalSelectedEvent {
     public long getEndTime() {
         return endTime;
     }
-    
-    public boolean isFullSignal(){
-        if(startTime<0||endTime<0)
+
+    public boolean isFullSignal() {
+        if (startTime < 0 || endTime < 0) {
             return true;
-        else return false;
+        } else {
+            return false;
+        }
     }
-    
+
 }

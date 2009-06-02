@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.data;
 
-import java.util.*;
+import java.util.TreeSet;
 
 public class AlmacenDatosByte extends AlmacenDatos {
     private byte datos[][];

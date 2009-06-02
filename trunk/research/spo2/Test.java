@@ -11,8 +11,8 @@ package research.spo2;
 public class Test {
 
     public static void main(String[] args) {
-        test(Test.test);// test de datos ficticios
-       // test(Test.testReal);// test de datos reales
+        test(Test.test); // test de datos ficticios
+        // test(Test.testReal);// test de datos reales
     }
 
     private static void test(float[] test) {
@@ -20,7 +20,7 @@ public class Test {
         b.setTiempoInicial(inicio); //esto es opcional; le ponemos el tiempo de inicio
         for (int i = 0; i < test.length; i++) {
             /**
-             //Salita esperada al descomentar estas líneas con el conjunto de datos test:
+             //Salita esperada al descomentar estas lineas con el conjunto de datos test:
              //Comienzo: 11 Fin: 0 Posibilidad: 0.0 Valor minimo: 0.0
              //Comienzo: 11 Fin: 21 Posibilidad: 0.6666666 Valor minimo: 93.0
              //Comienzo: 100 Fin: 0 Posibilidad: 0.0 Valor minimo: 0.0
@@ -32,7 +32,7 @@ public class Test {
                }*/
             Desaturacion d = b.anadeDato(test[i]); //le pasamos muestra a muestra los datos
             if (d != null) {
-                System.out.println(d.toString()); //información para depurar
+                System.out.println(d.toString()); //informacion para depurar
             }
         }
     }

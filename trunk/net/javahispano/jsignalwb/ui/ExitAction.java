@@ -7,25 +7,27 @@
 package net.javahispano.jsignalwb.ui;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
-import net.javahispano.jsignalwb.JSWBManager;
+
 import net.javahispano.jsignalwb.EnvironmentConfiguration;
+import net.javahispano.jsignalwb.JSWBManager;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class ExitAction extends AbstractAction {
 
     public ExitAction() {
-        this.putValue(NAME,"Exit");
-        this.putValue(SHORT_DESCRIPTION,"Leave the application...");
-        this.putValue(ACCELERATOR_KEY,KeyStroke.getKeyStroke("ctrl E"));
+        this.putValue(NAME, "Exit");
+        this.putValue(SHORT_DESCRIPTION, "Leave the application...");
+        this.putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl E"));
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(JSWBManager.getJSWBManagerInstance().prepareClose(false)){
+        if (JSWBManager.getJSWBManagerInstance().prepareClose(false)) {
             EnvironmentConfiguration.getInstancia().almacenaADisco();
             System.exit(0);
         }

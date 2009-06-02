@@ -1,6 +1,5 @@
 package research.beats.anotaciones;
 
-import net.javahispano.jsignalwb.plugins.defaults.*;
 
 /**
  * <p>Title: </p>
@@ -16,11 +15,11 @@ import net.javahispano.jsignalwb.plugins.defaults.*;
  */
 public class LatidoAnotacion extends LimitacionAnotacion {
 
-   public LatidoAnotacion () {
+    public LatidoAnotacion() {
         this.setTipo(LimitacionAnotacion.N);
     }
 
-      public String getName() {
+    public String getName() {
         return "Latido normal";
     }
 }

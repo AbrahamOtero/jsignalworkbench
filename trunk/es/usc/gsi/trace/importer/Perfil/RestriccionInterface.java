@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.Perfil;
 
-import java.io.*;
+import java.io.Serializable;
 
 public interface RestriccionInterface extends Serializable {
     /**

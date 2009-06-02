@@ -2,12 +2,12 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.data;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
-import es.usc.gsi.trace.importer.Perfil.*;
+import es.usc.gsi.trace.importer.Perfil.PTBMInterface;
 import es.usc.gsi.trace.importer.estadisticos.*;
-import es.usc.gsi.trace.importer.jsignalmonold.*;
+import es.usc.gsi.trace.importer.jsignalmonold.SamplesToDate;
 import es.usc.gsi.trace.importer.jsignalmonold.annotations.*;
 
 public class GestorDatos {
@@ -92,7 +92,7 @@ public class GestorDatos {
     }
 
     /**
-     * ¿Merece la pena implementarlo
+     * Merece la pena implementarlo
      * @param datos
      * @todo vale para algo?
      */
@@ -864,8 +864,8 @@ public class GestorDatos {
      * @param rango
      */
     public void anhadeSenhal(float[] nueva_senal, String nombre, String leyenda,
-                           String Leyenda_temporal, float fs,
-                           float[] rango) {
+                             String Leyenda_temporal, float fs,
+                             float[] rango) {
         //PUTO BUG Desmonitorizo la posibilidad antes de nada:
         if (this.getPosibilidadTotal() != null) {
             byte[] tmp = this.getPosibilidadTotal();

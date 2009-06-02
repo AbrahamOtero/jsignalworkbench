@@ -11,6 +11,7 @@ package net.javahispano.jsignalwb.ui;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
 
@@ -18,61 +19,67 @@ import net.javahispano.jsignalwb.Signal;
  *
  * @author Roman
  */
-public class JMenuSignal extends JMenu{
+public class JMenuSignal extends JMenu {
     Signal signal;
     /** Creates a new instance of SignalAction */
-    public JMenuSignal(JSWBManager jswbManager,String signalName) {
-        this(jswbManager,signalName,true,true,true,true,true,true,true,true,true,true,true);
+    public JMenuSignal(JSWBManager jswbManager, String signalName) {
+        this(jswbManager, signalName, true, true, true, true, true, true, true, true, true, true, true);
     }
-    public JMenuSignal(JSWBManager jswbManager,String signalName,
-            boolean properties,boolean visible,boolean imaginary,boolean showEmphasis,boolean zoom,boolean position,
-            boolean color,boolean remove,boolean invade,boolean grid,boolean adjust) {
+
+    public JMenuSignal(JSWBManager jswbManager, String signalName,
+                       boolean properties, boolean visible, boolean imaginary, boolean showEmphasis, boolean zoom,
+                       boolean position,
+                       boolean color, boolean remove, boolean invade, boolean grid, boolean adjust) {
         super(signalName);
-        this.signal=jswbManager.getSignalManager().getSignal(signalName);
-        if(visible){
-            add(new JRadioButtonMenuItemVisible(jswbManager,signalName));
+        this.signal = jswbManager.getSignalManager().getSignal(signalName);
+        if (visible) {
+            add(new JRadioButtonMenuItemVisible(jswbManager, signalName));
         }
-        if(imaginary)
+        if (imaginary) {
             add(new JRadioButtonMenuItemSetSignalImaginary(signalName));
-        if(showEmphasis)
+        }
+        if (showEmphasis) {
             add(new JRadioButtonMenuItemShowEmphasisLevel(signalName));
-        if(visible||showEmphasis||imaginary)
-            addSeparator();
-        if(color){            
-            add(new SignalDataColorAction(jswbManager,signalName));
+        }
+        if (visible || showEmphasis || imaginary) {
             addSeparator();
         }
-        if(zoom)
-            add(new JMenuZoom(jswbManager.getJSignalMonitor(),signalName));
-        if(position)
-            add(new JMenuChangePosition(jswbManager.getJSignalMonitor(),signalName));
-        if(invade){
-            add(new JRadioButtonMenuItemInvadeNearChannels(jswbManager,signal.getProperties()));
-        }   
-        if(grid){
+        if (color) {
+            add(new SignalDataColorAction(jswbManager, signalName));
             addSeparator();
-            if(jswbManager.getSignalManager().isSignalVisible(signalName)){
-                add(new ConfigureGridAction(jswbManager.getJSignalMonitor().getChannelGrid(signalName),jswbManager.getParentWindow()));
-                add(new JMenuGrids(signalName,jswbManager));
+        }
+        if (zoom) {
+            add(new JMenuZoom(jswbManager.getJSignalMonitor(), signalName));
+        }
+        if (position) {
+            add(new JMenuChangePosition(jswbManager.getJSignalMonitor(), signalName));
+        }
+        if (invade) {
+            add(new JRadioButtonMenuItemInvadeNearChannels(jswbManager, signal.getProperties()));
+        }
+        if (grid) {
+            addSeparator();
+            if (jswbManager.getSignalManager().isSignalVisible(signalName)) {
+                add(new ConfigureGridAction(jswbManager.getJSignalMonitor().getChannelGrid(signalName),
+                                            jswbManager.getParentWindow()));
+                add(new JMenuGrids(signalName, jswbManager));
             }
         }
-        
-        
-        if(adjust){
+
+        if (adjust) {
             addSeparator();
-            add(new JMenuItem(new AdjustSignalVisibleRangeAction(signalName,jswbManager)));
-            add(new JMenuItem(new AdjustSignalVisibleRangeAction(signalName,0.666f,jswbManager)));
-            add(new JMenuItem(new AdjustSignalVisibleRangeAction(signalName,0.5f,jswbManager)));
+            add(new JMenuItem(new AdjustSignalVisibleRangeAction(signalName, jswbManager)));
+            add(new JMenuItem(new AdjustSignalVisibleRangeAction(signalName, 0.666f, jswbManager)));
+            add(new JMenuItem(new AdjustSignalVisibleRangeAction(signalName, 0.5f, jswbManager)));
         }
-        if(remove){
+        if (remove) {
             addSeparator();
-            add(new JMenuItem(new RemoveAction(jswbManager,signalName)));
+            add(new JMenuItem(new RemoveAction(jswbManager, signalName)));
         }
-        
-        
-        if(properties){
+
+        if (properties) {
             addSeparator();
-            add(new JMenuItem(new ShowPropertiesAction(signalName,jswbManager,jswbManager.getParentWindow())));
+            add(new JMenuItem(new ShowPropertiesAction(signalName, jswbManager, jswbManager.getParentWindow())));
         }
     }
 }

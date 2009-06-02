@@ -13,11 +13,9 @@ import javax.swing.ImageIcon;
 
 import net.javahispano.jsignalwb.JSWBManager;
 
-import net.javahispano.jsignalwb.plugins.*;
-
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
 
@@ -81,9 +79,10 @@ public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
         return category;
     }
 
-    public void setCategory(String category){
-        this.category=category;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
     public boolean isInterval() {
         return true;
     }
@@ -119,7 +118,7 @@ public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
     public String getDataToSave() {
         return "title:" + title + "|| comentary:" + comentary + " || icon:" +
                 imagePath + " || isImage:" + isImage + "|| color:" +
-                color.getRGB()+ "|| category: " + category;
+                color.getRGB() + "|| category: " + category;
     }
 
 
@@ -133,9 +132,9 @@ public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
         data = data.substring(data.indexOf("isImage:") + 8);
         isImage = Boolean.parseBoolean(data.substring(0, data.indexOf("||")));
         data = data.substring(data.indexOf("color:") + 6);
-        color = new Color(Integer.parseInt(data.substring(0,data.indexOf("||"))));
+        color = new Color(Integer.parseInt(data.substring(0, data.indexOf("||"))));
         data = data.substring(data.indexOf("category:") + 9);
-        category=data;
+        category = data;
         System.out.println(imagePath);
         if (!imagePath.trim().equals("default")) {
             image = new ImageIcon(imagePath).getImage();
@@ -206,7 +205,7 @@ public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
         refreshBufferedImage();
     }
 
-    public String getTextToShow(){
+    public String getTextToShow() {
         return title;
     }
 
@@ -231,7 +230,7 @@ public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
                                         this.height - this.barHeight);
             g2d.fillRect(4, barYPosition, this.width - 8,
                          barHeight);
-            if(height>15){
+            if (height > 15) {
                 g2d.setColor(fontColor);
                 g2d.drawString(getTextToShow(), 6, barYPosition - 2);
             }
@@ -244,17 +243,17 @@ public class DefaultIntervalAnnotation extends AnnotationPluginAdapter {
         return true;
     }
 
-    public void paint(Graphics2D g2d, Point p, int height, int width){
-            if(height>0 && width>0 && (this.height!=height || this.width!= width)){
-                this.height=height;
-                this.width=width;
-                refreshBufferedImage();
-            }
-            g2d.drawImage(bufferedImage,p.x,p.y,null);
+    public void paint(Graphics2D g2d, Point p, int height, int width) {
+        if (height > 0 && width > 0 && (this.height != height || this.width != width)) {
+            this.height = height;
+            this.width = width;
+            refreshBufferedImage();
+        }
+        g2d.drawImage(bufferedImage, p.x, p.y, null);
     }
 
-    public Image getDefaultImage(){
-        return  new ImageIcon(DefaultIntervalAnnotation.class.getResource(
+    public Image getDefaultImage() {
+        return new ImageIcon(DefaultIntervalAnnotation.class.getResource(
                 "images/defaultIconMark.png")).getImage();
     }
 

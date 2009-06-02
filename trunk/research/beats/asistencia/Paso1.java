@@ -1,20 +1,15 @@
 package research.beats.asistencia;
 
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.plugins.Plugin;
-import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import research.beats.Bdac;
-import research.beats.SampleRate;
-import javax.swing.Icon;
-import research.beats.anotaciones.LatidoAnotacion;
-import net.javahispano.jsignalwb.SignalManager;
-import java.util.List;
-import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
-import java.awt.Color;
 import java.util.Collection;
-import net.javahispano.jsignalwb.JSWBManager;
+import java.util.List;
+
+import javax.swing.Icon;
+
+import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
+import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 
 /**
  * <p>Title: </p>

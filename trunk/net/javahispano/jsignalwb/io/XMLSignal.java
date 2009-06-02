@@ -6,12 +6,12 @@
 
 package net.javahispano.jsignalwb.io;
 
-import java.io.File;
 import java.util.Iterator;
 import java.util.List;
-import net.javahispano.jsignalwb.*;
+
+import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
-import org.jdom.*;
+import org.jdom.Element;
 
 /**
  *
@@ -32,17 +32,17 @@ class XMLSignal extends Element {
         setAttribute("Size", Integer.toString(s.getValues().length));
         addContent(new XMLGrid(s.getGrid()));
         addContent(new XMLChannelProperties(s.getProperties()));
-        
-        List<MarkPlugin> marks=s.getAllMarks();
-        for(MarkPlugin mark:marks){
+
+        List<MarkPlugin> marks = s.getAllMarks();
+        for (MarkPlugin mark : marks) {
             addContent(new XMLMark(mark));
         }
-        
-        Iterator<String> it=s.getAvailableProperties().iterator();
-        while(it.hasNext()){
-            String property=it.next();
-            Object bean=s.getProperty(property);            
-            addContent(new XMLProperty(property,bean));
+
+        Iterator<String> it = s.getAvailableProperties().iterator();
+        while (it.hasNext()) {
+            String property = it.next();
+            Object bean = s.getProperty(property);
+            addContent(new XMLProperty(property, bean));
         }
     }
 

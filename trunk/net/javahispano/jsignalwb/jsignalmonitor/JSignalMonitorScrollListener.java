@@ -5,7 +5,7 @@ package net.javahispano.jsignalwb.jsignalmonitor;
  * eventos de cambio de valor de la scroll de JSignalMonitor.
  *
  * @author This software is under the Apache License Version 2.0
- *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Roman Segador y
  *   Abraham Otero
  */
 interface JSignalMonitorScrollListener {

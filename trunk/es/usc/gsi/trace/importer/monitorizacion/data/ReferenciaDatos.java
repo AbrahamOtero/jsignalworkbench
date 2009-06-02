@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.data;
 
-import java.util.*;
+import java.util.LinkedList;
 
 /**
  * Contien las referencias a los arrays que conriene los datos que se estan

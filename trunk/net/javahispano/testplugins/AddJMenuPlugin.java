@@ -8,12 +8,13 @@ package net.javahispano.testplugins;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.GenericPluginAdapter;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class AddJMenuPlugin extends GenericPluginAdapter {
 
@@ -25,7 +26,7 @@ public class AddJMenuPlugin extends GenericPluginAdapter {
     }
 
     public void launch(JSWBManager jswbManager) {
-        JMenu menu=new JMenu("Menu de prueba");
+        JMenu menu = new JMenu("Menu de prueba");
         menu.add(new JMenuItem("menu de prueba"));
         jswbManager.addJMenuBarItem(menu);
     }

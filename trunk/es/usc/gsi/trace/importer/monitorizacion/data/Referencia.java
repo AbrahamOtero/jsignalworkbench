@@ -2,7 +2,7 @@
 
 package es.usc.gsi.trace.importer.monitorizacion.data;
 
-import java.util.*;
+import java.util.LinkedList;
 
 
 abstract class Referencia

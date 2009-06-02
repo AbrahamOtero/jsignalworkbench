@@ -1,7 +1,7 @@
 package es.usc.gsi.conversorDatosMIT.conversormitdb;
 
 
-import es.usc.gsi.conversorDatosMIT.interfaz.*;
+import es.usc.gsi.conversorDatosMIT.interfaz.VentanaPrincipal;
 
 public class Principal {
 

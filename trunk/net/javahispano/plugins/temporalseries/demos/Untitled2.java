@@ -1,11 +1,11 @@
 package net.javahispano.plugins.temporalseries.demos;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.javahispano.jsignalwb.SignalManager;
+import net.javahispano.plugins.temporalseries.TemporalSeries;
 import net.javahispano.plugins.temporalseries.TemporalSeriesAlgorithm;
-import java.util.*;
-import net.javahispano.plugins.temporalseries.*;
 
 /**
  * <p>Title: </p>
@@ -44,19 +44,19 @@ public class Untitled2 extends TemporalSeriesAlgorithm {
      */
     public void processTemporalSeries(SignalManager sm, List signals) {
         Iterator<TemporalSeries> it = signals.iterator();
-if (signals.size()!=1) {
-    System.out.println("Error en el número de señales seleccionadas");
-    return;
-}
-TemporalSeries seno=it.next();
-seno.setValueAt(15,45);
-seno.setValueAt(-25,45);
-int max = seno.getMaxIndex();
-int min = seno.getMinIndex();
-for (int i = min; i < max; i++) {
-    seno.setValueAt(i,Math.abs(seno.getValueAt(i)));
-}
+        if (signals.size() != 1) {
+            System.out.println("Error en el numero de senhales seleccionadas");
+            return;
+        }
+        TemporalSeries seno = it.next();
+        seno.setValueAt(15, 45);
+        seno.setValueAt( -25, 45);
+        int max = seno.getMaxIndex();
+        int min = seno.getMinIndex();
+        for (int i = min; i < max; i++) {
+            seno.setValueAt(i, Math.abs(seno.getValueAt(i)));
+        }
 
-seno.setMinIndex(-100);
+        seno.setMinIndex( -100);
     }
 }

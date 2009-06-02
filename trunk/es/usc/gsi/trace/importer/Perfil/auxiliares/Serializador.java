@@ -3,7 +3,7 @@ package es.usc.gsi.trace.importer.Perfil.auxiliares;
 import java.io.*;
 import java.util.jar.*;
 
-import es.usc.gsi.trace.importer.Perfil.*;
+import es.usc.gsi.trace.importer.Perfil.PTBMInterface;
 
 
 public class Serializador {

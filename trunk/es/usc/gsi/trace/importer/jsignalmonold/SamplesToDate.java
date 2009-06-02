@@ -1,9 +1,10 @@
 package es.usc.gsi.trace.importer.jsignalmonold;
 
-import java.text.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 
 /**

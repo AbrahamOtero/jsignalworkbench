@@ -1,11 +1,9 @@
 package net.javahispano.testplugins;
 
-import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
-import net.javahispano.jsignalwb.SignalManager;
 import java.util.List;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
-import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalNotFoundException;
+
+import net.javahispano.jsignalwb.*;
+import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 
 public class PruebaDeConcurrenciaParaSwing extends AlgorithmAdapter {
     public PruebaDeConcurrenciaParaSwing() {
@@ -25,7 +23,7 @@ public class PruebaDeConcurrenciaParaSwing extends AlgorithmAdapter {
                        "12", "13", "14", "15", "16", "17", "18", "19", "20",
                        "21", "22", "23", "24", "25", "26", "27", "28", "29",
                        "30"};
-    int i,j,k,l,m;
+    int i, j, k, l, m;
     public void runAlgorithm(final SignalManager sm,
                              List<SignalIntervalProperties> signals) {
         final Signal s = signals.get(0).getSignal();
@@ -40,69 +38,64 @@ public class PruebaDeConcurrenciaParaSwing extends AlgorithmAdapter {
                                               "magnitud");
                     try {
                         sm.addSignal(nueva);
-                    } catch(SignalNotFoundException evt) {
+                    } catch (SignalNotFoundException evt) {
                         System.out.println(evt.getSignalName());
                     }
                 }
             };
 
             javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
-
-
 
             esperar(100);
         }
 
         for (j = 0; j < nombres.length && (!isExecutionCanceled()); j++) {
 
-        Runnable uiUpdateRunnable = new Runnable() {
+            Runnable uiUpdateRunnable = new Runnable() {
                 public void run() {
 
                     try {
                         sm.setSignalVisibleRange(nombres[j], -5, 6);
-                    } catch(SignalNotFoundException evt) {
+                    } catch (SignalNotFoundException evt) {
                         System.out.println(evt.getSignalName());
                     }
                 }
             };
 
             javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
-
 
             esperar(100);
         }
 
         for (k = 0; k < nombres.length && (!isExecutionCanceled()); k++) {
 
-          Runnable uiUpdateRunnable = new Runnable() {
+            Runnable uiUpdateRunnable = new Runnable() {
                 public void run() {
-                    try{
+                    try {
                         sm.setSignalVisible(nombres[k], false);
-                    } catch(SignalNotFoundException evt){
+                    } catch (SignalNotFoundException evt) {
                         System.out.println(evt.getSignalName());
                     }
                 }
             };
 
             javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
-
 
             esperar(100);
         }
         for (l = 0; l < nombres.length && (!isExecutionCanceled()); l++) {
 
-           Runnable uiUpdateRunnable = new Runnable() {
+            Runnable uiUpdateRunnable = new Runnable() {
                 public void run() {
-                    try{
+                    try {
                         sm.setSignalVisible(nombres[l], true);
-                    } catch(SignalNotFoundException evt){
+                    } catch (SignalNotFoundException evt) {
                         System.out.println(evt.getSignalName());
                     }
                 }
             };
 
             javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
-
 
             esperar(100);
         }
@@ -111,16 +104,15 @@ public class PruebaDeConcurrenciaParaSwing extends AlgorithmAdapter {
 
             Runnable uiUpdateRunnable = new Runnable() {
                 public void run() {
-                    try{
+                    try {
                         sm.removeSignal(nombres[m]);
-                    } catch(SignalNotFoundException evt){
+                    } catch (SignalNotFoundException evt) {
                         System.out.println(evt.getSignalName());
                     }
                 }
             };
 
             javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
-
 
             esperar(100);
         }

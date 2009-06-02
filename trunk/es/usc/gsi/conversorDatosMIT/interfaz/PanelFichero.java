@@ -2,7 +2,8 @@ package es.usc.gsi.conversorDatosMIT.interfaz;
 
 import javax.swing.*;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
+import es.usc.gsi.conversorDatosMIT.ficheros.Parametro;
 
 public class PanelFichero extends JPanel {
 

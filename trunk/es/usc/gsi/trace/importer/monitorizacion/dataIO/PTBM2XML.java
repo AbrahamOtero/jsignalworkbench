@@ -1,15 +1,15 @@
 package es.usc.gsi.trace.importer.monitorizacion.dataIO;
 
 import java.io.*;
-import java.text.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import es.usc.gsi.trace.importer.Perfil.*;
 import org.jdom.*;
 import org.jdom.Attribute;
-import org.jdom.filter.*;
-import org.jdom.input.*;
-import org.jdom.output.*;
+import org.jdom.filter.ContentFilter;
+import org.jdom.input.SAXBuilder;
+import org.jdom.output.XMLOutputter;
 
 class MyFloat {
     private static boolean hay_parser = false;
@@ -438,7 +438,7 @@ public class PTBM2XML {
                 ptbm = new PTBM(nombrePTBM, comentarioPTBM, ptb);
                 primer_ptb = false;
             } else {
-                ptbm.anhadePTB(ptb, num_PTB, PTBM.AÑADIR);
+                ptbm.anhadePTB(ptb, num_PTB, PTBM.ANHADIR);
             }
 
             //Comenzamos a RECOPILAR PUNTOS SIGNIFICATIVOS:
@@ -462,8 +462,8 @@ public class PTBM2XML {
                     //Si es el primer o segundo Pto Sig ya esta anhadido al PTB
                     if (num_PtoSig < 2) {
                         ptb.anhadeRestriccion(0, num_PtoSig,
-                                             restriciones_de_un_PToSig[i], null,
-                                             PTBM.AÑADIR);
+                                              restriciones_de_un_PToSig[i], null,
+                                              PTBM.ANHADIR);
                     }
                     //Si no lo era y si es la primera restriccion => preimero anhadir el PtoSig al PTB:
                     else if (i == 0) {
@@ -474,8 +474,8 @@ public class PTBM2XML {
                     //Si no es que ya esta anhadido el PtoSig => anhadimos solo la restricion
                     else {
                         ptb.anhadeRestriccion(num_PTB, num_PtoSig,
-                                             restriciones_de_un_PToSig[i], null,
-                                             PTBM.AÑADIR);
+                                              restriciones_de_un_PToSig[i], null,
+                                              PTBM.ANHADIR);
                     }
                 }
             }

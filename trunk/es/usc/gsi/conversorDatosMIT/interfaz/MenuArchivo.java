@@ -1,9 +1,9 @@
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
 import java.awt.event.*;
-import java.util.*;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class MenuArchivo extends JMenu implements ActionListener {
 

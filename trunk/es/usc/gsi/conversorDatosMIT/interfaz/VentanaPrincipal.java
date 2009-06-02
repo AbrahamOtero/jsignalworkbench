@@ -2,10 +2,10 @@
 // aplicacion standalone.
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -50,8 +50,8 @@ public class VentanaPrincipal extends JFrame {
     }
 
     // InnerClass: Eventos de Ventana
-    // LLAMAR A MÉTODOS DEL CONTROLADOR PARA COMPROBAR QUE TODO ESTÁ CORRECTO
-    // ANTES DE CERRAR LA APLICACIÓN
+    // LLAMAR A METODOS DEL CONTROLADOR PARA COMPROBAR QUE TODO ESTA CORRECTO
+    // ANTES DE CERRAR LA APLICACION
     class EventoVentana extends WindowAdapter {
 
         public void windowClosing(WindowEvent e) {

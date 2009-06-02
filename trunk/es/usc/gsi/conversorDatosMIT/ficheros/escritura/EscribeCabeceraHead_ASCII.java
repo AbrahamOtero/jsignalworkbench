@@ -1,10 +1,11 @@
 package es.usc.gsi.conversorDatosMIT.ficheros.escritura;
 
 import java.io.*;
-import java.util.*;
+import java.util.Vector;
 
-import es.usc.gsi.conversorDatosMIT.ficheros.*;
-import es.usc.gsi.conversorDatosMIT.utilidades.*;
+import es.usc.gsi.conversorDatosMIT.ficheros.FicheroHead;
+import es.usc.gsi.conversorDatosMIT.ficheros.Parametro;
+import es.usc.gsi.conversorDatosMIT.utilidades.ParseadorCadena;
 
 public class EscribeCabeceraHead_ASCII {
 
@@ -16,7 +17,7 @@ public class EscribeCabeceraHead_ASCII {
 
         // Preprocesado del nombre de fichero para generar el nombre del .cxp
         if (ficheroDestino.getName().indexOf(".txt") != -1) { // Si ya tiene extension .txt
-            // SOLUCION PROVISIONAL: FALLARÁ SI EL FICHERO TIENE .ALGO Y .TXT AL FINAL.
+            // SOLUCION PROVISIONAL: FALLARA SI EL FICHERO TIENE .ALGO Y .TXT AL FINAL.
             String[] nombreSinExtension = ParseadorCadena.split(ficheroDestino.
                     getName(), ".");
             String pathSinExtension = ficheroDestino.getParent() +

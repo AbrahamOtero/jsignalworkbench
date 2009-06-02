@@ -6,11 +6,10 @@
 
 package net.javahispano.testplugins;
 
-import java.util.List;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
 public class DebugBean {
     private int val1;

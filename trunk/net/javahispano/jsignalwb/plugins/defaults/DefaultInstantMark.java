@@ -9,22 +9,21 @@
 
 package net.javahispano.jsignalwb.plugins.defaults;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Window;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import javax.swing.ImageIcon;
-import net.javahispano.jsignalwb.JSWBManager;
 
-import net.javahispano.jsignalwb.plugins.*;
+import javax.swing.ImageIcon;
+
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.MarkPluginAdapter;
+
 //import net.javahispano.jsignalwb.Signal;
 
 /**
  *
  * @author Roman
  */
-public class DefaultInstantMark extends MarkPluginAdapter{
+public class DefaultInstantMark extends MarkPluginAdapter {
     private long markTime;
     private String title;
     private String comentary;
@@ -37,13 +36,13 @@ public class DefaultInstantMark extends MarkPluginAdapter{
     private JSWBManager jswbManager;
     /** Creates a new instance of DefaultInstantMark */
     public DefaultInstantMark() {
-        markTime=0;
-        title="Write here the mark title...";
-        comentary="Write here your comentary....";
-        color=Color.RED;
-        imagePath="default";
-        image=getDefaultImage();
-        jswbManager=null;
+        markTime = 0;
+        title = "Write here the mark title...";
+        comentary = "Write here your comentary....";
+        color = Color.RED;
+        imagePath = "default";
+        image = getDefaultImage();
+        jswbManager = null;
         setIsImage(false);
     }
 
@@ -52,7 +51,7 @@ public class DefaultInstantMark extends MarkPluginAdapter{
     }
 
     public void setMarkTime(long markTime) {
-        this.markTime=markTime;
+        this.markTime = markTime;
     }
 
     public long getMarkTime() {
@@ -62,33 +61,36 @@ public class DefaultInstantMark extends MarkPluginAdapter{
     public Image getImage() {
         return bufferedImage;
     }
+
 //    public void setSignal(Signal signal){
 //        this.signal=signal;
 //    }
 
     public void setJSWBManager(JSWBManager jswbManager) {
-        this.jswbManager=jswbManager;
+        this.jswbManager = jswbManager;
     }
 
     public void showMarkInfo(Window owner) {
-        new DefaultInstantMarkInfoPanel(signal,this).showJWindow(owner);
+        new DefaultInstantMarkInfoPanel(signal, this).showJWindow(owner);
     }
 
-    public JSWBManager getJSWBManager(){
+    public JSWBManager getJSWBManager() {
         return jswbManager;
     }
-    public void setTitle(String title){
-        this.title=title;
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setComentary(String comentary){
-        this.comentary=comentary;
+    public void setComentary(String comentary) {
+        this.comentary = comentary;
     }
 
-    public String getComentary(){
+    public String getComentary() {
         return comentary;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return title;
     }
 
@@ -97,27 +99,27 @@ public class DefaultInstantMark extends MarkPluginAdapter{
     }
 
     public String getDataToSave() {
-        return "title:"+ title + "|| comentary:"+comentary +" || icon:"+
-                imagePath+" || isImage:"+isImage+"|| color:"+color.getRGB();
+        return "title:" + title + "|| comentary:" + comentary + " || icon:" +
+                imagePath + " || isImage:" + isImage + "|| color:" + color.getRGB();
     }
 
     public void setSavedData(String data) {
-        data=data.substring(data.indexOf("title:")+6);
-        title=data.substring(0,data.indexOf("||"));
-        data=data.substring(data.indexOf("comentary:")+10);
-        comentary=data.substring(0,data.indexOf("||"));
-        data=data.substring(data.indexOf("icon:")+5);
-        imagePath=data.substring(0,data.indexOf("||"));
-        data=data.substring(data.indexOf("isImage:")+8);
-        isImage=Boolean.parseBoolean(data.substring(0,data.indexOf("||")));
-        data=data.substring(data.indexOf("color:")+6);
-        color=new Color(Integer.parseInt(data));
-        if(!imagePath.trim().equals("default")){
-            image=new ImageIcon(imagePath).getImage();
-        }else{
-            image=getDefaultImage();
+        data = data.substring(data.indexOf("title:") + 6);
+        title = data.substring(0, data.indexOf("||"));
+        data = data.substring(data.indexOf("comentary:") + 10);
+        comentary = data.substring(0, data.indexOf("||"));
+        data = data.substring(data.indexOf("icon:") + 5);
+        imagePath = data.substring(0, data.indexOf("||"));
+        data = data.substring(data.indexOf("isImage:") + 8);
+        isImage = Boolean.parseBoolean(data.substring(0, data.indexOf("||")));
+        data = data.substring(data.indexOf("color:") + 6);
+        color = new Color(Integer.parseInt(data));
+        if (!imagePath.trim().equals("default")) {
+            image = new ImageIcon(imagePath).getImage();
+        } else {
+            image = getDefaultImage();
         }
-            refreshBufferedImage();
+        refreshBufferedImage();
     }
 
     public String getToolTipText() {
@@ -141,7 +143,8 @@ public class DefaultInstantMark extends MarkPluginAdapter{
         this.image = image;
         //refreshBufferedImage();
     }
-    public Image getImageToShow(){
+
+    public Image getImageToShow() {
         return image;
     }
 
@@ -158,20 +161,21 @@ public class DefaultInstantMark extends MarkPluginAdapter{
         this.imagePath = imagePath;
     }
 
-    private void refreshBufferedImage(){
-        if(isImage){
-            bufferedImage=new BufferedImage(15,15,BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2d=bufferedImage.createGraphics();
-            g2d.drawImage(image,0,0,15,15,null);
-        }else{
-            bufferedImage=new BufferedImage(5,15,BufferedImage.TYPE_INT_RGB);
-            Graphics2D g2d=bufferedImage.createGraphics();
+    private void refreshBufferedImage() {
+        if (isImage) {
+            bufferedImage = new BufferedImage(15, 15, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.drawImage(image, 0, 0, 15, 15, null);
+        } else {
+            bufferedImage = new BufferedImage(5, 15, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g2d = bufferedImage.createGraphics();
             g2d.setColor(color);
-            g2d.fillRect(0,0,5,15);
+            g2d.fillRect(0, 0, 5, 15);
         }
     }
-    public Image getDefaultImage(){
+
+    public Image getDefaultImage() {
         return new ImageIcon(DefaultInstantMark.class.getResource(
-                                    "images/defaultIconMark.png")).getImage();
+                "images/defaultIconMark.png")).getImage();
     }
 }

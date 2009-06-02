@@ -8,15 +8,16 @@ package net.javahispano.testplugins;
 
 import javax.swing.JButton;
 import javax.swing.JToolBar;
+
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.GenericPluginAdapter;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class AddComponentPlugin extends GenericPluginAdapter{
-    private int count= -1;
+public class AddComponentPlugin extends GenericPluginAdapter {
+    private int count = -1;
     public AddComponentPlugin() {
 
     }
@@ -26,40 +27,39 @@ public class AddComponentPlugin extends GenericPluginAdapter{
     }
 
     public void launch(JSWBManager jswbManager) {
-        JSWBManager jswb=JSWBManager.getJSWBManagerInstance();
+        JSWBManager jswb = JSWBManager.getJSWBManagerInstance();
         count++;
 
-        if(count>10 || count == 0){
+        if (count > 10 || count == 0) {
             jswb.removeLeftComponent();
             jswb.removeRightComponent();
             jswb.removeLowerComponent();
             jswb.removeUpperComponent();
-        }
-        else if(count%4 == 0){
-            JToolBar bar=new JToolBar(JToolBar.HORIZONTAL);
+        } else if (count % 4 == 0) {
+            JToolBar bar = new JToolBar(JToolBar.HORIZONTAL);
             bar.setFloatable(false);
-            bar.add(new JButton(""+count));
+            bar.add(new JButton("" + count));
             jswb.setUpperComponent(bar);
-        }else if(count%4 == 1){
-            JToolBar bar=new JToolBar(JToolBar.VERTICAL);
+        } else if (count % 4 == 1) {
+            JToolBar bar = new JToolBar(JToolBar.VERTICAL);
             bar.setFloatable(false);
-            bar.add(new JButton(""+count));
+            bar.add(new JButton("" + count));
             jswb.setRightComponent(bar);
-        }else if(count%4 == 2){
-            JToolBar bar=new JToolBar(JToolBar.HORIZONTAL);
+        } else if (count % 4 == 2) {
+            JToolBar bar = new JToolBar(JToolBar.HORIZONTAL);
             bar.setFloatable(false);
-            bar.add(new JButton(""+count));
+            bar.add(new JButton("" + count));
             jswb.setLowerComponent(bar);
-        }else if(count%4 == 3){
-            JToolBar bar=new JToolBar(JToolBar.VERTICAL);
+        } else if (count % 4 == 3) {
+            JToolBar bar = new JToolBar(JToolBar.VERTICAL);
             bar.setFloatable(false);
-            bar.add(new JButton(""+count));
+            bar.add(new JButton("" + count));
             jswb.setLeftComponent(bar);
         }
-        System.out.println("--->"+jswb.hasLeftComponent()+"---"+
-                                  jswb.hasUpperComponent()+"---"+
-                                  jswb.hasRightComponent()+"---"+
-                                  jswb.hasLowerComponent());
+        System.out.println("--->" + jswb.hasLeftComponent() + "---" +
+                           jswb.hasUpperComponent() + "---" +
+                           jswb.hasRightComponent() + "---" +
+                           jswb.hasLowerComponent());
     }
 
 }

@@ -7,21 +7,23 @@
 package net.javahispano.jsignalwb.plugins.framework;
 
 import java.io.File;
+
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+
 import net.javahispano.jsignalwb.JSWBManager;
-import net.javahispano.jsignalwb.plugins.*;
+import net.javahispano.jsignalwb.plugins.Loader;
 
 /**
  *
- * @author Román Segador
+ * @author Roman Segador
  */
-public class LoaderRunner extends SwingWorker<Boolean, Void>{
+public class LoaderRunner extends SwingWorker<Boolean, Void> {
     private Loader loader;
     private File file;
-    public LoaderRunner(Loader loader,File file) {
-        this.loader=loader;
-        this.file=file;
+    public LoaderRunner(Loader loader, File file) {
+        this.loader = loader;
+        this.file = file;
     }
 
     protected Boolean doInBackground() throws Exception {
@@ -31,12 +33,12 @@ public class LoaderRunner extends SwingWorker<Boolean, Void>{
             ex.printStackTrace();
             JOptionPane.showMessageDialog(
                     JSWBManager.getParentWindow(),
-                    "Error loading..."+ex.getMessage());
+                    "Error loading..." + ex.getMessage());
         }
         return Boolean.valueOf(true);
     }
 
-     protected void done() {
+    protected void done() {
         //super.done();
         Boolean end = Boolean.valueOf(false);
         try {
@@ -45,9 +47,9 @@ public class LoaderRunner extends SwingWorker<Boolean, Void>{
             if (!isCancelled()) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null,
-                  "Ha sucedido un error al ejecutar el cargador "+
-                  loader.getName()+" versión "+
-                  loader.getPluginVersion(),
+                                              "Ha sucedido un error al ejecutar el cargador " +
+                                              loader.getName() + " version " +
+                                              loader.getPluginVersion(),
                                               "Error",
                                               JOptionPane.ERROR_MESSAGE);
             }
