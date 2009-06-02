@@ -78,10 +78,10 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         Desaturation desaturation = new Desaturation();
         desaturation.setAbsoluteBeginingTime(desatAnnotation.getMarkTime());
         //Los unicos metodos que te va a interesar de las anotaciones son los dos que se usan
-        //en la lÝnea que esta a continuacion: los que devuelve su instante de inicio y el fin
+        //en la linea que esta a continuacion: los que devuelve su instante de inicio y el fin
         desaturation.setDuration(desatAnnotation.getEndTime() - desatAnnotation.getMarkTime());
         //...
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aquí todos los episodios
         List<LimitacionAnotacion> limAnnotationList = desatAnnotation.getLimitationsList();
         for (LimitacionAnotacion limAnnotation : limAnnotationList) {
             FluxLimitation fluxLimitation = generateLimitation(limAnnotation);
@@ -104,7 +104,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         System.out.println("\t\tLimitación de flujo: " + limitationAnnotation.getMarkTime());
 
         FluxLimitation fluxLimitation = new FluxLimitation();
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aquí todos los Episodios
         List<LimitacionAnotacion> abdomenAnnotationList = limitationAnnotation.getAbdomenList();
         for (LimitacionAnotacion abdomenAnnotationLimitation : abdomenAnnotationList) {
             AbdominalMovementLimutation abdomenLimitation = generateAbdomenLimitation(abdomenAnnotationLimitation);
@@ -129,7 +129,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
     private AbdominalMovementLimutation generateAbdomenLimitation(LimitacionAnotacion abdominalLimitationAnnotation) {
         System.out.println("\t\t\tLimitación de movimiento abdominal: " + abdominalLimitationAnnotation.getMarkTime());
         AbdominalMovementLimutation abdominalLimitation = new AbdominalMovementLimutation();
-        //@Emma generar aquí todos los descriptores
+        //@Emma generar aquí todos los episodios
         return abdominalLimitation;
     }
 
@@ -144,7 +144,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
     private ThoracicMovementLimutation generateThoraxLimitation(LimitacionAnotacion thoraxLimitacionAnotacion) {
         System.out.println("\t\t\tLimitación de movimiento torácico: " + thoraxLimitacionAnotacion.getMarkTime());
         ThoracicMovementLimutation thoraxLimitacion = new ThoracicMovementLimutation();
-         //@Emma generar aquí todos los descriptores
+         //@Emma generar aquí todos los episodios
         return thoraxLimitacion;
     }
 
