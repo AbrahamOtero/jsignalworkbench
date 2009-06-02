@@ -346,9 +346,9 @@ public class PTB implements PTBInterface, Serializable {
 
     }
 
-    /**Cada vez que el usuario defina una restricción con el origen se invocará a este
-     * metodo y se añadirá en una lista sus offsets correspondientes. Si se elimina, se
-     * eliminará de esta lista.
+    /**Cada vez que el usuario defina una restriccion con el origen se invocara a este
+     * metodo y se añadira en una lista sus offsets correspondientes. Si se elimina, se
+     * eliminara de esta lista.
      */
     public void addOffset(String has, float[] off) {
         almacen_offset.put(has, new AuxiliarOffset(has, off));

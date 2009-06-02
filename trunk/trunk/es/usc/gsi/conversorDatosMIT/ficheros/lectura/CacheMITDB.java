@@ -2,7 +2,7 @@ package es.usc.gsi.conversorDatosMIT.ficheros.lectura;
 
 import java.io.*;
 
-// Los métodos de esta clase se superpondrán a los de RandomAccessFile: se devuelven
+// Los metodos de esta clase se superpondran a los de RandomAccessFile: se devuelven
 // los datos de la buffer mientras se pueda, y si no se recarga la buffer para poder devolverlos.
 public class CacheMITDB {
 
@@ -10,20 +10,20 @@ public class CacheMITDB {
     private byte[] buffer; // Array de almacenamiento en memoria
 
     private byte[] bufferNormal; // Array de tamaño igual al especificado para este buffer.
-    private byte[] bufferFinal; // Array de tamaño igual al número de bytes restantes.
-    // Se implementa este buffer para que el último buffer que se lea
+    private byte[] bufferFinal; // Array de tamaño igual al numero de bytes restantes.
+    // Se implementa este buffer para que el ultimo buffer que se lea
     // no devuelva una cantidad de 0's en el array debido a
     // que se intenta leer fuera del fichero. Por lo tanto,
-    // este último buffer debe ser de tamaño menor al normal.
+    // este ultimo buffer debe ser de tamaño menor al normal.
 
     private static final int TAMANHO_buffer = 10240; // Tamaño de la buffer: tamaño del array buffer.
 
-    private int numLectura = 0; // Número de veces que se ha rellenado el array
-    private int numMaxLecturasNormales; // Número de lecturas de buffers normales que podemos hacer
-    // Depués de este número de lecturas, deberemos leer un bufferFinal.
-    private long posicionLecturaActual = 0; // Posición de lectura actual dentro del fichero.
+    private int numLectura = 0; // Numero de veces que se ha rellenado el array
+    private int numMaxLecturasNormales; // Numero de lecturas de buffers normales que podemos hacer
+    // Depues de este numero de lecturas, deberemos leer un bufferFinal.
+    private long posicionLecturaActual = 0; // Posicion de lectura actual dentro del fichero.
 
-    private int posicionEnArray = 0; // Posición de lectura dentro del array.
+    private int posicionEnArray = 0; // Posicion de lectura dentro del array.
 
     public CacheMITDB(File ficheroDat) throws FileNotFoundException {
         this(ficheroDat, TAMANHO_buffer);
@@ -33,7 +33,7 @@ public class CacheMITDB {
             FileNotFoundException {
 
         this.numMaxLecturasNormales = (int) (ficheroDat.length() / bufferSize);
-        int bufferSizeFinal = (int) (ficheroDat.length() % bufferSize); // El tamaño del buffer final será el del resto.
+        int bufferSizeFinal = (int) (ficheroDat.length() % bufferSize); // El tamaño del buffer final sera el del resto.
 
         entrada = new RandomAccessFile(ficheroDat, "r");
 
@@ -51,12 +51,12 @@ public class CacheMITDB {
         if (posicion >= (posicionLecturaActual + buffer.length) ||
             posicion < posicionLecturaActual) {
 
-            numLectura = (int) (posicion / buffer.length); // División entera: nos indica qué cantidad de bufferes debemos avanzar para leer los datos
+            numLectura = (int) (posicion / buffer.length); // Division entera: nos indica que cantidad de bufferes debemos avanzar para leer los datos
             this.llenaBuffer();
 
         }
 
-        // Almacenamos la posición que se leerá del array.
+        // Almacenamos la posicion que se leera del array.
         posicionEnArray = (int) (posicion % buffer.length);
 
     }
@@ -67,8 +67,8 @@ public class CacheMITDB {
 
         for (int i = 0; i < resultado.length; i++) {
 
-            if (posicionEnArray + i >= buffer.length) { // Si nos salimos de índice mientras estamos leyendo...
-                numLectura++; // Avanzamos una posición de lectura para leer el siguiente array buffer.
+            if (posicionEnArray + i >= buffer.length) { // Si nos salimos de indice mientras estamos leyendo...
+                numLectura++; // Avanzamos una posicion de lectura para leer el siguiente array buffer.
                 if ( -1 == this.llenaBuffer()) {
                     return -1; // Cargamos la buffer y comprobamos que no hemos llegado al final del fichero.
                 }

@@ -1,5 +1,5 @@
-// Clase Paciente: encapsula la información general de un paciente
-// y su presentación gráfica.
+// Clase Paciente: encapsula la informacion general de un paciente
+// y su presentacion grafica.
 package es.usc.gsi.conversorDatosMIT.interfaz;
 
 import java.awt.*;
@@ -28,8 +28,8 @@ public class Paciente extends JPanel {
         this(ficherosHead, Paciente.LISTA);
     }
 
-    // Necesario llamar a este método después de haber añadido
-    // este componente a un contenedor: es la única manera de que el tamaño
+    // Necesario llamar a este metodo despues de haber añadido
+    // este componente a un contenedor: es la unica manera de que el tamaño
     // sea respecto al contenedor. MEJORAR ESTO.
     public void anhadeSubPanel() {
         // LLAMAR A MÉTODOS DE SUBPANELES??

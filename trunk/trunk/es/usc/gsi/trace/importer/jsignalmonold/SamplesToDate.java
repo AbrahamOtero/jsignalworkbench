@@ -8,8 +8,8 @@ import javax.swing.*;
 
 /**
  * Esta clase es util a la hora de averiguar la fecha a la cual corresponde una
- * determinada muestra. Esta clase se ha diseñado mediante el patrón Singleton,
- * se configura pasándole una fecha de nase y probee métodos para saber dada una
+ * determinada muestra. Esta clase se ha diseñado mediante el patron Singleton,
+ * se configura pasandole una fecha de nase y probee metodos para saber dada una
  * frecuencia de muestreo a que fecha corresponde una muestra, o a que muestra corresponde una fecha.
  *
  * <p>Title: </p>
@@ -43,7 +43,7 @@ public class SamplesToDate {
 
     /**
      * Data una fecha la toma como fecha base para todos os calculos que se le pidan
-     * a continuación: es la fecha dónde se empieza a monitorizar.
+     * a continuacion: es la fecha donde se empieza a monitorizar.
      * Su argumento debe ser una fecha completa.
      * @return true si no hay fallos en la fecha, false en caso contrario
      */
@@ -66,14 +66,14 @@ public class SamplesToDate {
      * hasta la fecha ctual
      * @param fecha_hasta fecha hasta lac ual deseamos sober cuantras muestras han
      * sucedido desde la fecha base
-     * @param fs frecuencia a la cual está muestreada la señal
-     * @return nuero de muestras transcurridas. Si hubo algún fallo en la oporacion
+     * @param fs frecuencia a la cual esta muestreada la señal
+     * @return nuero de muestras transcurridas. Si hubo algun fallo en la oporacion
      * devuelve Long.MIN_VALUE
      */
     public long getSamplesTill(String fecha_hasta, float fs) {
         Date date_fecha_hasta = null;
         boolean fallo = false;
-        //En este caso la fecha está en formato corto
+        //En este caso la fecha esta en formato corto
         if (fecha_hasta.length() < 9) {
             StringTokenizer tk = new StringTokenizer(fecha_hasta.trim(), ":", false);
             int hora = 0, minutos = 0, segundos = 0;
@@ -126,7 +126,7 @@ public class SamplesToDate {
                 fallo = true;
             }
             //Para estar seguros de no modificar la fecha del parser
-            //esta linea ha de ejecutarse tanto como si hay excepción como si no
+            //esta linea ha de ejecutarse tanto como si hay excepcion como si no
             parser_fecha_completa.setCalendar(tmp);
         }
         if (!fallo) {
@@ -142,8 +142,8 @@ public class SamplesToDate {
     /**
      * Este metodo devuelve un String con la fecha que correponde a una muestra
      * muestras de una señal con una frecuencia de muestreo fs. La calcula sobre
-     * la fecha base con la que se configuró este SamplesToDate.
-     * Según el valor del ultimo boolean se devolverá la fecha con o sin milisegundos.
+     * la fecha base con la que se configuro este SamplesToDate.
+     * Segun el valor del ultimo boolean se devolvera la fecha con o sin milisegundos.
      * @param muestras
      * @param fs
      * @param corta
@@ -164,7 +164,7 @@ public class SamplesToDate {
     /**
      * Este metodo devuelve un String con la fecha que correponde a una muestra
      * muestras de una señal con una frecuencia de muestreo fs. La calcula sobre
-     * la fecha base con la que se configuró este SamplesToDate.
+     * la fecha base con la que se configuro este SamplesToDate.
      * @param muestras
      * @param fs
      * @param corta
@@ -223,19 +223,19 @@ public class SamplesToDate {
             "<p><font color=\"#0000FF\" size=\"4\">dos posibles formatos para introducir una fecha:</font></p>" +
             "<p><font size=\"4\">&nbsp;</font></p>" +
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\"> 1) Formato Corto:&nbsp; </font><font color=\"#009933\">hora:minutos:segundos" +
-            "</font><font color=\"#0000FF\"> Ej: 22:30:00 serían las ocho</font></font></p>" +
+            "</font><font color=\"#0000FF\"> Ej: 22:30:00 serian las ocho</font></font></p>" +
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\">&nbsp;&nbsp;&nbsp;&nbsp; y media de la " +
-            "tarde. Al no indicar ni año, ni día ni mes se supone que</font></font></p>" +
+            "tarde. Al no indicar ni año, ni dia ni mes se supone que</font></font></p>" +
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\">&nbsp;&nbsp;&nbsp;&nbsp; son los del " +
-            "inicio de la monitorización.</font></font></p>" +
+            "inicio de la monitorizacion.</font></font></p>" +
 
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\"> 2) Formato Corto con milisegundos:&nbsp;" +
             "</font><font color=\"#009933\">hora:minutos:segundos:milisegundos </font></font></p>" +
-            "<p><font size=\"4\"><font color=\"#0000FF\"> &nbsp;&nbsp;&nbsp;&nbsp; Ej: 22:30:00:23 serían las ocho </font></font><font size=\"4\"><font color=\"#0000FF\"> " +
+            "<p><font size=\"4\"><font color=\"#0000FF\"> &nbsp;&nbsp;&nbsp;&nbsp; Ej: 22:30:00:23 serian las ocho </font></font><font size=\"4\"><font color=\"#0000FF\"> " +
             "y media de la tarde con 23 ms.</font></font></p>" +
             "<p><font size=\"4\" color=\"#0000FF\"> &nbsp;&nbsp;&nbsp;&nbsp; que en " +
             "A&ntilde;o, mes y dis</font><font size=\"4\"><font color=\"#0000FF\">&nbsp; " +
-            "son los del inicio de la monitorización.</font></font></p>" +
+            "son los del inicio de la monitorizacion.</font></font></p>" +
 
             "<p><font size=\"4\">&nbsp;&nbsp; <font color=\"#0000FF\"> 3)Formato Largo </font><font color=\"#009933\">" +
             "hora:minutos:segundos año/mes/dia</font></font></p>" +

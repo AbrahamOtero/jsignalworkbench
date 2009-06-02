@@ -58,7 +58,7 @@ public class ControladorInterfaz {
 
     public File abrirFichero(File archivoAbierto) {
 
-        FileFilter filtro = new FiltroHead(); //Sólo se escogen ficheros head
+        FileFilter filtro = new FiltroHead(); //Solo se escogen ficheros head
         dialogoAbrirGrabar.resetChoosableFileFilters(); // Borra todos los filtros anteriores.
         dialogoAbrirGrabar.setFileFilter(filtro);
         dialogoAbrirGrabar.setFileSelectionMode(JFileChooser.
@@ -86,7 +86,7 @@ public class ControladorInterfaz {
                 // MOSTRAR DIALOGO INFORMATIVO
                 System.out.println("Fichero .hea no valido");
                 this.muestraDialogoError(
-                        "Este fichero no es válido.\nPor favor, escoja otro fichero.");
+                        "Este fichero no es valido.\nPor favor, escoja otro fichero.");
                 this.abrirFichero(null);
             }
         } // Fin if JFileChooser
@@ -95,7 +95,7 @@ public class ControladorInterfaz {
 
     public File abrirPaciente(File archivoAbierto) {
 
-        FileFilter filtro = new FiltroDirectorio(); //Sólo se escogen directorios
+        FileFilter filtro = new FiltroDirectorio(); //Solo se escogen directorios
         dialogoAbrir.resetChoosableFileFilters(); // Borra todos los filtros anteriores.
         dialogoAbrir.setFileFilter(filtro);
         dialogoAbrir.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
@@ -114,8 +114,8 @@ public class ControladorInterfaz {
             FicheroHead[] fhG;
             try {
 
-                fhG = controlFicheros.getFicherosHeadDirectorio(f); //Obtiene ficheros .hea con formato válido para abrirlos.
-                this.cerrarPaciente(); // Si no se genera una excepción, podemos cerrar el paciente actual para crear uno nuevo
+                fhG = controlFicheros.getFicherosHeadDirectorio(f); //Obtiene ficheros .hea con formato valido para abrirlos.
+                this.cerrarPaciente(); // Si no se genera una excepcion, podemos cerrar el paciente actual para crear uno nuevo
                 for (int i = 0; i < fhG.length; i++) { // Almacena los ficheros en el vector y crea nuevas lenguetas en la ventana para verlos.
                     controlFicheros.setNuevoHead(fhG[i]);
                 }
@@ -127,7 +127,7 @@ public class ControladorInterfaz {
                 // MOSTRAR DIALOGO INFORMATIVO
                 System.out.println("Directorio no tiene ficheros .hea validos.");
                 this.muestraDialogoError(
-                        "Esta carpeta no contiene ficheros válidos.\nPor favor, escoja otra carpeta.");
+                        "Esta carpeta no contiene ficheros validos.\nPor favor, escoja otra carpeta.");
                 this.abrirPaciente(null);
             }
         } // Fin if JFileChooser
@@ -163,8 +163,8 @@ public class ControladorInterfaz {
     public Parametro[] getParametrosSeleccionados() throws OutOfMemoryError {
 
         try {
-            controlFicheros.esExportable(); // Comprobación de condiciones de exportación: este método
-            // sólo devuelve excepciones. ¿Poco ortodoxo?
+            controlFicheros.esExportable(); // Comprobacion de condiciones de exportacion: este metodo
+            // solo devuelve excepciones. ¿Poco ortodoxo?
             this.actualizaParametros();
         } catch (NoPacienteAbiertoException e) {
             this.muestraDialogoError("Debe abrir la carpeta de un paciente o un fichero antes de poder importar datos.");
@@ -192,8 +192,8 @@ public class ControladorInterfaz {
     public void exportaFicheros() {
 
         try {
-            controlFicheros.esExportable(); // Comprobación de condiciones de exportación: este método
-            // sólo devuelve excepciones. ¿Poco ortodoxo?
+            controlFicheros.esExportable(); // Comprobacion de condiciones de exportacion: este metodo
+            // solo devuelve excepciones. ¿Poco ortodoxo?
             this.actualizaParametros();
         } catch (NoPacienteAbiertoException e) {
             this.muestraDialogoError(
@@ -222,9 +222,9 @@ public class ControladorInterfaz {
         dialogoAbrirGrabar.setFileFilter(filtro);
         dialogoAbrirGrabar.setSelectedFile(null);
 
-        int opc = dialogoAbrirGrabar.showSaveDialog(panelPrincipal); // opción grabar/cancelar
+        int opc = dialogoAbrirGrabar.showSaveDialog(panelPrincipal); // opcion grabar/cancelar
 
-        if (opc == JFileChooser.APPROVE_OPTION) { // Si pulsamos botón "Grabar"
+        if (opc == JFileChooser.APPROVE_OPTION) { // Si pulsamos boton "Grabar"
             File f = dialogoAbrirGrabar.getSelectedFile();
 
             if (f.exists()) { // Si el fichero ya existe, preguntamos para sobreescribir.
@@ -240,7 +240,7 @@ public class ControladorInterfaz {
                 } catch (ErrorExportandoException e) {
                     this.muestraDialogoError(
                             "Error al exportar datos.\n" +
-                            "Por favor, escoja otra ubicación para el archivo de exportación"
+                            "Por favor, escoja otra ubicacion para el archivo de exportacion"
                             );
                     this.exportaFicheros(); // Si existe un error al exportar el archivo, empezamos de nuevo.
                 }
@@ -248,12 +248,12 @@ public class ControladorInterfaz {
             } // Fin if JOptionPane
 
             else {
-                this.exportaFicheros(); // Si decidimos no sobreescribir, empezamos de nuevo el proceso de exportación.
+                this.exportaFicheros(); // Si decidimos no sobreescribir, empezamos de nuevo el proceso de exportacion.
             }
 
         } // Fin if JFileChooser
 
-    } // Fin método exportaFicheros
+    } // Fin metodo exportaFicheros
 
     /* ERA PARA OBTENER EL FICHEROHEAD ASOCIADO A LA LENGUETA SELECCIONADA
        public FicheroHead getFicheroHeadSeleccionado() {
@@ -265,8 +265,8 @@ public class ControladorInterfaz {
     private void actualizaParametros() throws FechasIncorrectasException {
 
         try {
-            panelPrincipal.actualizaFrecuencias(); // Cambia los valores de las frecuencias de exportación al valor más reciente
-            panelPrincipal.actualizaFechas(); // Cambia los valores de las fechas de los parámetros
+            panelPrincipal.actualizaFrecuencias(); // Cambia los valores de las frecuencias de exportacion al valor mas reciente
+            panelPrincipal.actualizaFechas(); // Cambia los valores de las fechas de los parametros
         } catch (Exception e) {
 
             if (e instanceof FechaFinalMenorInicialException) {
@@ -285,10 +285,10 @@ public class ControladorInterfaz {
                 this.muestraDialogoError("Error: la fecha final es incorrecta");
             }
             if (e instanceof FechaFinalMayorOriginalException) {
-                this.muestraDialogoError("Error: la fecha final de remuestreo es mayor que la fecha final original.\nEn la fecha que ha escrito el muestreo ya había acabado.");
+                this.muestraDialogoError("Error: la fecha final de remuestreo es mayor que la fecha final original.\nEn la fecha que ha escrito el muestreo ya habia acabado.");
             }
             if (e instanceof FechaInicialMenorOriginalException) {
-                this.muestraDialogoError("Error: la fecha inicial de remuestreo es menor que la fecha inicial original.\nEn la fecha que ha escrito, el muestreo aún no había empezado.");
+                this.muestraDialogoError("Error: la fecha inicial de remuestreo es menor que la fecha inicial original.\nEn la fecha que ha escrito, el muestreo aun no habia empezado.");
             }
             throw new FechasIncorrectasException();
         }

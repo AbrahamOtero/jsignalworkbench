@@ -21,8 +21,8 @@ public class Attribute implements Serializable {
     public String valor;
 
     /**
-     * Pretende ser el conjunto de valores que podrá tomar el atributo. No se empleará
-     * en la primera versión.
+     * Pretende ser el conjunto de valores que podra tomar el atributo. No se empleara
+     * en la primera version.
      */
     public static String[] opciones_atributo;
     public static String[][] opciones_valor;

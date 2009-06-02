@@ -17,7 +17,7 @@ public class FiltroDirectorio extends FileFilter {
 
     // Debe devolver true si existen ficheros .hea en un determinado directorio:
     // esto es necesario para que podamos analizar los contenidos del directorio
-    // mediante el método isTraversable(File f) de la clase DialogoAbrir, que extiende a
+    // mediante el metodo isTraversable(File f) de la clase DialogoAbrir, que extiende a
     // JDialog
     public boolean accept(File f) {
 

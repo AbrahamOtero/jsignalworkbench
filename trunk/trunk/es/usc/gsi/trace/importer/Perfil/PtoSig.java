@@ -169,7 +169,7 @@ public class PtoSig implements PtoSigInterface, Serializable {
                 ((Restriccion) vectorRestricciones.elementAt(i)).setNumeroDePTB(
                         nuevo_numero);
             }
-            //Nunca debería ejecutarse esto, pero es necesio . Chapuzas S.A.
+            //Nunca deberia ejecutarse esto, pero es necesio . Chapuzas S.A.
             else if (((Restriccion) vectorRestricciones.elementAt(i)).
                      getNumeroDePTB() > num_ptb_borrado) {
                 vectorRestricciones.remove(i);

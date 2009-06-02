@@ -24,7 +24,7 @@ public class ResultadosEstadisticos implements Serializable {
     private boolean tiene_percentiles = true;
 
     /**
-     * Construye un Resultado estadístico, se le paso tod menos el comentario.
+     * Construye un Resultado estadistico, se le paso tod menos el comentario.
      * @param media_aritmetica
      * @param mediana
      * @param varianza
@@ -206,7 +206,7 @@ public class ResultadosEstadisticos implements Serializable {
     }
 
     /**
-     * Elimina los percentiles de este resultado estadístico.
+     * Elimina los percentiles de este resultado estadistico.
      */
     public void invalidaPercentiles() {
         this.percentiles = null;

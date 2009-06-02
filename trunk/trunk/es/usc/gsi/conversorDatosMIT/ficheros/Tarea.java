@@ -56,20 +56,20 @@ public class Tarea extends Thread implements Cancelar {
                          }
                          int[] pValorTemp = (new LeeFicheroDat(fh, p[j])).
                                             getTodosValores(); // Lectura de todos los valores
-                         p[j].setValores(pValorTemp); // Asigna los valores al parámetro.
+                         p[j].setValores(pValorTemp); // Asigna los valores al parametro.
                          copiaParamTemp.add(p[j]);
                          controlInterfaz.notificaProgreso(total++);
                      } // Fin if p[j]
                  } // Fin for j
              } // Fin for i
 
-             // Conversión a array.
+             // Conversion a array.
              parametros = new Parametro[copiaParamTemp.size()];
 
              for (int i = 0; i < parametros.length; i++) {
                  Parametro pTemp = (Parametro) copiaParamTemp.elementAt(i);
-                 parametros[i] = new Parametro(pTemp); // Creamos un array con copias de parámetros
-                 parametros[i].setValores(pTemp.getValores()); // Referenciamos los valores de un parámetro hacia otro.
+                 parametros[i] = new Parametro(pTemp); // Creamos un array con copias de parametros
+                 parametros[i].setValores(pTemp.getValores()); // Referenciamos los valores de un parametro hacia otro.
                  pTemp.setValores(null);
              }
          } catch (OutOfMemoryError err) {

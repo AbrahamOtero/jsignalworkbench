@@ -18,7 +18,7 @@ public class CargarDatosTxt extends CargarDatos {
     }
 
     /**
-     * @todo: Javier Salas cambió el formato de almacenamiento de salida de la herramienta de Vila.
+     * @todo: Javier Salas cambio el formato de almacenamiento de salida de la herramienta de Vila.
      * Cambi t por " ". Hice cambios con ese fin. Validarlo, no fijo que funcion siempre.
      */
     private void cargaDatos() {
@@ -67,7 +67,7 @@ public class CargarDatosTxt extends CargarDatos {
                             datos[lin][col] = 0;
                             lin++;
                             /*  //Si la primera columna es la que falta el dtao = \t 21 \t 23 \t...
-                              //Por lo que en ese caso no hay que consumir ningún\t adicional
+                              //Por lo que en ese caso no hay que consumir ningun\t adicional
                               if (tk2.hasMoreElements() && lin != 1) {
                                //consuminos el \t adicional
                                if (!(tk2.nextElement().equals("\t"))) {
@@ -77,7 +77,7 @@ public class CargarDatosTxt extends CargarDatos {
 
                         } else {
                             datos[lin][col] = Float.parseFloat(dato_fichero);
-                            //Si no estamos en la última columna
+                            //Si no estamos en la ultima columna
                             if (tk2.hasMoreElements()) {
                                 //consuminos el \t adicional
                                 String ultimo_token = tk2.nextToken();

@@ -1,6 +1,6 @@
 // Clase PanelPrincipal: sirve para poder añadir toda la funcionalidad de
-// la aplicación a otra aplicación como módulo independiente.
-// Lo único que hay que hacer es crear un nuevo objeto PanelPrincipal
+// la aplicacion a otra aplicacion como modulo independiente.
+// Lo unico que hay que hacer es crear un nuevo objeto PanelPrincipal
 // y añadirlo a otro contenedor.
 
 package es.usc.gsi.conversorDatosMIT.interfaz;
@@ -23,7 +23,7 @@ public class PanelPrincipal extends JPanel /* implements ComponentListener */ {
     public static final int ETIQUETAS = 1;
 
     private Paciente paciente = null;
-//  private Frame ventanaPrincipal=null; // Ventana principal de la aplicación.
+//  private Frame ventanaPrincipal=null; // Ventana principal de la aplicacion.
 
     PanelPrincipal() {
         // Enlazamos ambos controladores.

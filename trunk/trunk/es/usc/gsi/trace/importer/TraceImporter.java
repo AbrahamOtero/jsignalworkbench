@@ -33,10 +33,10 @@ public class TraceImporter extends LoaderAdapter {
     }
 
     /**
-     * Devuelve una decisión textual más amplia de la funcionalidad del
+     * Devuelve una decision textual mas amplia de la funcionalidad del
      * plugin.
      *
-     * @return descripción textual larga
+     * @return descripcion textual larga
      */
     public String getDescription() {
         return "permite importar las señales, junto con sus nombres, frecuencias de muestreo, etc. y las anotaciones contenidas en archivos de TRACE";
@@ -57,19 +57,19 @@ public class TraceImporter extends LoaderAdapter {
     }
 
     /**
-     * Devuelve la versión del plugin.
+     * Devuelve la version del plugin.
      *
-     * @return Versión del plugin
+     * @return Version del plugin
      */
     public String getPluginVersion() {
         return "0.5";
     }
 
     /**
-     * Devuelve una de extinción textual corta sobre la funcionalidad del
+     * Devuelve una de extincion textual corta sobre la funcionalidad del
      * plugin.
      *
-     * @return descripción textual corta
+     * @return descripcion textual corta
      */
     public String getShortDescription() {
         return "TRACE importer";

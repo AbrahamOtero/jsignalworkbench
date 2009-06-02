@@ -62,7 +62,7 @@ public class PanelInfo extends JPanel {
                          "<b>Inicio del muestreo:</b> " + fechaInicioMuestreo +
                          "<br>" +
                          "<b>Fin del muestreo:</b>" + fechaFinMuestreo + "<br>" +
-                         //  "<b>Número de muestras:</b> " + numMuestras + "<br>" +
+                         //  "<b>Numero de muestras:</b> " + numMuestras + "<br>" +
                          //  "<b>Frecuencia base de muestreo:</b> " + frecuenciaMuestreoFrame + " Hz" +
                          "</font></html>";
             break;

@@ -86,7 +86,7 @@ public class AlmacenDatosByte extends AlmacenDatos {
 
     /**
      * LLamar cuando se cree una nueva señal sin inicializarla a nada. Toma el mismo
-     *  tamaño que la señal situada en la posición 0 del arayy datos[].
+     *  tamaño que la señal situada en la posicion 0 del arayy datos[].
      */
     public void añadeSeñal() {
         byte[][] datos_tmp = new byte[datos.length + 1][];
@@ -98,7 +98,7 @@ public class AlmacenDatosByte extends AlmacenDatos {
     }
 
     /**
-     * Devuelve la longitud máxima de la señal más grande.
+     * Devuelve la longitud maxima de la señal mas grande.
      * @return
      */
     public int getMaximoNumeroDeDatos() {

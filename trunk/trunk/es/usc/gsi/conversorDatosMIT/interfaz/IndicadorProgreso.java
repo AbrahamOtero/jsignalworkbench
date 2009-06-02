@@ -1,5 +1,5 @@
 // *************
-// Todavía por implementar correctamente: centrar componentes, decicir tamaños,
+// Todavia por implementar correctamente: centrar componentes, decicir tamaños,
 // establecer modelo de communicaciones, usar multithreading para actualizarlo, etc.
 // ¿Es necesario hacer multithreading?
 // *************

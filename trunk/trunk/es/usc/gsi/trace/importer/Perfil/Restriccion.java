@@ -161,7 +161,7 @@ public class Restriccion implements RestriccionInterface, Serializable {
 
 
     /**
-     * Este método se emplea para saber si esta restricción es la que se toma como
+     * Este metodo se emplea para saber si esta restriccion es la que se toma como
      * referencia para que el primer PtoSig deje de ser flotante
      */
     public boolean isReferencia() {
@@ -332,8 +332,8 @@ public class Restriccion implements RestriccionInterface, Serializable {
     }
 
     /**
-     * Devuelve una distribucción de posibilidad respresentado la restricción temporal en
-     * número de muestras para una fs dada
+     * Devuelve una distribuccion de posibilidad respresentado la restriccion temporal en
+     * numero de muestras para una fs dada
      * @param fs
      * @return
      */
@@ -348,13 +348,13 @@ public class Restriccion implements RestriccionInterface, Serializable {
     }
 
     /**
-     * Devuelve una distribucción de posibilidad respresentado la restricción temporal en
-     * número de muestras para una fs dada
+     * Devuelve una distribuccion de posibilidad respresentado la restriccion temporal en
+     * numero de muestras para una fs dada
      * @param fs
      * @return
      */
     public String[] getMParaFs(float fs) {
-        //Si es semántica de tubo la multiplicamos por 1000 y putno, no tiene unidades temporales
+        //Si es semantica de tubo la multiplicamos por 1000 y putno, no tiene unidades temporales
         //pero para procesrla de modo estandar se divide por 1000 al cargarla
         if (semantica == Restriccion.SEMANTICA_TUBO_BORROSO) {
             fs = 1;

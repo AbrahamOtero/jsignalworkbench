@@ -199,7 +199,7 @@ public class FrameConversorMIT extends JDialog {
 
     void cancelar_actionPerformed(ActionEvent e) {
         int opcion = JOptionPane.showConfirmDialog(this,
-                "<html><body text=\"#000000\"><font size=\"5\" color=\"#0033FF\">&iquest;Seguro que desea cerrar la herramienta de conversión?</font></body></html>"
+                "<html><body text=\"#000000\"><font size=\"5\" color=\"#0033FF\">&iquest;Seguro que desea cerrar la herramienta de conversion?</font></body></html>"
                 , "Advertencia", JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
         if (opcion == JOptionPane.YES_OPTION) {

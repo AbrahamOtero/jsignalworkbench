@@ -86,7 +86,7 @@ class MyFloat {
     }
 
     /**
-     * Devuelve null si No se pudo completar la operación
+     * Devuelve null si No se pudo completar la operacion
      * @param numero
      * @return
      */
@@ -127,7 +127,7 @@ class MyFloat {
     }
 
     /**
-     * Emplear para cambiar el numero de dígitos decimales del patrón
+     * Emplear para cambiar el numero de digitos decimales del patron
      * @param numero_decimaales
      */
     public static void setNumeroDecimales(int numero_decimales) {
@@ -196,7 +196,7 @@ public class PTBM2XML {
         root.setAttribute("NumeroPTB", ptbm.getPTB().length + "");
         root.setAttribute("ComentarioPTBM", ptbm.getComentario());
         root.setAttribute("NombrePTBM", ptbm.getTitulo());
-        //Bucle que irá añadiendo los nodos PTB
+        //Bucle que ira añadiendo los nodos PTB
         PTBInterface[] ptb_array = ptbm.getPTB();
         for (int i = 0; i < ptb_array.length; i++) {
             //Creo el nodo PTB con sus atributos
@@ -292,14 +292,14 @@ public class PTBM2XML {
                     //Añadimos este elemnto al padre:
                     restriccion.addContent(restriccon_pendiente);
 
-                    //Semántica
+                    //Semantica
                     Element semantica = new Element("Semantica");
                     semantica.setAttribute("Tipo", sintaxis_int + "");
                     semantica.setAttribute("Cuantificador",
                                            cunatificadorInt + "");
                     restriccion.addContent(semantica);
 
-                    //Información para ayudar al usuario
+                    //Informacion para ayudar al usuario
                     Element infoUsuario = new Element("InformacionUsuario");
                     infoUsuario.setAttribute("MagnitudPrimerPtoSig",
                                              "" + magnitudPrimerPtoSigFloat);
@@ -311,7 +311,7 @@ public class PTBM2XML {
                 }
 
             }
-            //Distancia de separación entre PTB y longitud de la ventana temporal
+            //Distancia de separacion entre PTB y longitud de la ventana temporal
             Element distanciaEntrePTB = new Element("DistanciaEntrePTB");
             distanciaEntrePTB.setAttribute("InicioSoporte",
                                            "" +
@@ -347,7 +347,7 @@ public class PTBM2XML {
         distanciaEntrePTBM.setAttribute("FinSoporte",
                                         "" + ptbm.getFinSoporteSeparacion());
         root.addContent(distanciaEntrePTBM);
-        //Todo el documento debería estar creado, así que vamos a Almacenarlo:
+        //Todo el documento deberia estar creado, asi que vamos a Almacenarlo:
         XMLOutputter xml_outputter = new XMLOutputter();
         File file = new File(archivo);
         FileOutputStream out;
@@ -368,7 +368,7 @@ public class PTBM2XML {
 
     /**
      * Dada una cadena de caracteres que representa un archivo devuelve el PTBM contenido
-     * en el archivo. En éste debe haber una PTBM en formato XML.
+     * en el archivo. En este debe haber una PTBM en formato XML.
      * @param archivo
      * @return
      */
@@ -394,8 +394,8 @@ public class PTBM2XML {
 
         List lista_ptb = root.getContent(filtro);
         Iterator it = lista_ptb.iterator();
-        //Empleamos un floag para marcar el primer PTB, que se le pasará en el constructor
-        //Al PTBM, de los demás que se le añadirán
+        //Empleamos un floag para marcar el primer PTB, que se le pasara en el constructor
+        //Al PTBM, de los demas que se le añadiran
         PTBM ptbm = null;
         boolean primer_ptb = true;
         int num_PTB = -1;
@@ -406,7 +406,7 @@ public class PTBM2XML {
             //Cojo el primer elemento ptb y extraigo sus atributos
             Element ptb_xml = (Element) it.next();
             Attribute comentario = ptb_xml.getAttribute("ComentarioPTB");
-            //Si no hay comentario => es ya la separación entre PTB
+            //Si no hay comentario => es ya la separacion entre PTB
             if (comentario == null) {
                 //Este nodo realemente es la distancia
                 ultimoNodoDelPTBM = ptb_xml;
@@ -465,7 +465,7 @@ public class PTBM2XML {
                                              restriciones_de_un_PToSig[i], null,
                                              PTBM.AÑADIR);
                     }
-                    //Si no lo era y si es la primera restricción => preimero añadir el PtoSig al PTB:
+                    //Si no lo era y si es la primera restriccion => preimero añadir el PtoSig al PTB:
                     else if (i == 0) {
                         PtoSig pto_sig = new PtoSig(restriciones_de_un_PToSig[0],
                                 num_PTB, num_PtoSig);
@@ -485,8 +485,8 @@ public class PTBM2XML {
             Element ventanaTemporal_XML = ptb_xml.getChild(
                     "LongitudVentanaTemporal");
 
-            //Por motivos de compatibilidad hacia atás chequeamos si este PYB
-            //No tiene asociada esta información
+            //Por motivos de compatibilidad hacia atas chequeamos si este PYB
+            //No tiene asociada esta informacion
             if (distanciaEntrePTB_XML == null || ventanaTemporal_XML == null) {
                 continue;
             }
@@ -510,8 +510,8 @@ public class PTBM2XML {
         }
         //Leemos la distancia entre PTB y la ventana temporal
         Element distanciaEntrePTBM_XML = ultimoNodoDelPTBM; //root.getChild("DistanciaEntrePTBM");
-        //Por motivos de compatibilidad hacia atás chequeamos si este PTBM
-        //No tiene asociada esta información
+        //Por motivos de compatibilidad hacia atas chequeamos si este PTBM
+        //No tiene asociada esta informacion
         if (distanciaEntrePTBM_XML == null) {
             return ptbm;
         }
@@ -602,7 +602,7 @@ public class PTBM2XML {
                 sintaxis_int = sintaxis.getAttribute("Tipo").getIntValue();
                 Attribute cunatificadoSemanticaAtr = sintaxis.getAttribute(
                         "Cuantificador");
-                //Chequeo introduciodo para mantener la compatibilidad hacia atrás
+                //Chequeo introduciodo para mantener la compatibilidad hacia atras
                 if (cunatificadoSemanticaAtr != null) {
                     cunatificadoSemantica = cunatificadoSemanticaAtr.
                                             getIntValue();
@@ -615,14 +615,14 @@ public class PTBM2XML {
                 } else {
                     //Asumimos que es un fichero antiguo y que estab en segundos
                     unidadesTemporales = Restriccion.UNIDADES_SEGUNDOS;
-                    //Pasamos a milisegundos la restricción
+                    //Pasamos a milisegundos la restriccion
                     for (int i = 0; i < L.length; i++) {
                         L[i] = MyFloat.parseFloatSeguro(L[i]) * 1000 + "";
                         M[i] = MyFloat.parseFloatSeguro(M[i]) / 1000 + "";
                     }
 
                 }
-                //Infomación del usuario
+                //Infomacion del usuario
                 if (infoUsuario != null) {
                     magnitudPrimerPtoSig = infoUsuario.getAttribute(
                             "MagnitudPrimerPtoSig").getFloatValue();
@@ -641,7 +641,7 @@ public class PTBM2XML {
             } catch (DataConversionException ex) {
                 return null;
             }
-            //Creamos la restriccion con la información
+            //Creamos la restriccion con la informacion
             restriccion_array[num_restriciones] = new Restriccion(ptb_origen,
                     PtoSig_origen,
                     D, L, M, sintaxis_int, cunatificadoSemantica,

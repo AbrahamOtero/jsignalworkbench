@@ -33,10 +33,10 @@ public class GestorDatos {
     private boolean tiene_archivo_asociado = false;
     private String archivo;
 
-    //Maxima duración del regisstro como índice
+    //Maxima duracion del regisstro como indice
     private int duracion_total_registro;
 
-    //Seneles que se deben monitorizar (las que se monitorizaron la última vez).
+    //Seneles que se deben monitorizar (las que se monitorizaron la ultima vez).
     private int[] senales_que_se_monitorizaron_la_ultima_vez;
     /**
      * default constructor throws exception if the user tries to instantiate more than
@@ -123,7 +123,7 @@ public class GestorDatos {
      */
     public void setPos(int num_canal, int primero, int ultimo, byte pos) {
         byte[] tmp = (byte[]) almacen.getPos(num_canal);
-        //Si aún no había posibilidad asociada a este canal
+        //Si aun no habia posibilidad asociada a este canal
         if (tmp == null) {
             tmp = new byte[this.getNumeroDatos(num_canal)];
             this.almacen.setPos(num_canal, tmp);
@@ -332,7 +332,7 @@ public class GestorDatos {
     }
 
     /**
-     * Método al que se le pasa un almacenDatos, pásando éste a ser el almacen de
+     * Metodo al que se le pasa un almacenDatos, pasando este a ser el almacen de
      * datos de este gestos
      * @param AlmcenDatos
      */
@@ -398,13 +398,13 @@ public class GestorDatos {
     /**
      * Mantiene la consistencia del mapeo cuando se añade una señal.
      * La señal se añade antes de la posibilidad, por lo que abra que desplazar esta
-     * una posición hacia arriba.
+     * una posicion hacia arriba.
      */
     public void mantenconsitenciaAlAñadirSeñal() {
         //Si hay posibilidad
         if (almacen.getPosibilidadTotal() != null) {
             int numero_señales = almacen.getNumeroSenales();
-            //Y si ésta se esta monitorizando
+            //Y si esta se esta monitorizando
             if (this.mapea_senal_canal.get(new Integer(numero_señales)) != null) {
                 Integer num_canal = ((Integer)this.mapea_senal_canal.get(new
                         Integer(numero_señales)));
@@ -509,7 +509,7 @@ public class GestorDatos {
     }
 
     /**
-     * Permite averigura en que cana se está monitorizando la señal senal
+     * Permite averigura en que cana se esta monitorizando la señal senal
      * @param senal
      */
     public int getCanalDeSena(int num_canal) {
@@ -560,7 +560,7 @@ public class GestorDatos {
     }
 
     /**
-     * Indica si el almacen de datos actual está o no guardado
+     * Indica si el almacen de datos actual esta o no guardado
      */
     public boolean getEstaGuardado() {
         /* if (this.almacen != null) {
@@ -602,7 +602,7 @@ public class GestorDatos {
 
     /**
      * Devuelve una cadena de caractyeres que es el PAth absoluto, en el
-     * formato de la plataforma de ejecución, del archivo asociado al actual.
+     * formato de la plataforma de ejecucion, del archivo asociado al actual.
      * Si no hay almacen cargado cevuelve null.
      * almace de datos
      */
@@ -615,7 +615,7 @@ public class GestorDatos {
 
     /**
      * Asocia una cadena de caractyeres que es el PAth absoluto, en el
-     * formato de la plataforma de ejecución, del archivo asociado al actual
+     * formato de la plataforma de ejecucion, del archivo asociado al actual
      * almacen de datos
      */
     public void setArchivo(String _archivo) {
@@ -623,7 +623,7 @@ public class GestorDatos {
     }
 
     /**
-     * Este método devuelve el número de datos de un canal determinado
+     * Este metodo devuelve el numero de datos de un canal determinado
      */
 
     public int getNumeroDatos(int i) {
@@ -631,7 +631,7 @@ public class GestorDatos {
     }
 
     /**
-     * Este método devuelve el registro de la posicición especificad ane forma de un array
+     * Este metodo devuelve el registro de la posicicion especificad ane forma de un array
      */
     public Object getDatos(int i) {
         return this.almacen.getDatos(i);
@@ -650,8 +650,8 @@ public class GestorDatos {
     }
 
     /**
-     * Este método devuelve la posibilidad global de una detección a un almacen de datos
-     * El parámetro devuelto es un array indicando para cada instante temporal la posibilidad
+     * Este metodo devuelve la posibilidad global de una deteccion a un almacen de datos
+     * El parametro devuelto es un array indicando para cada instante temporal la posibilidad
      * entre 0 y 100 de la ocurrencia de un determinado evento
      * @return
      */
@@ -660,8 +660,8 @@ public class GestorDatos {
     }
 
     /**
-     * Este método asigna una posibilidad globar de una detección a un almacen de datos
-     * El parámetro devuelto es un array indicando para cada instante temporal la posibilidad
+     * Este metodo asigna una posibilidad globar de una deteccion a un almacen de datos
+     * El parametro devuelto es un array indicando para cada instante temporal la posibilidad
      * entre 0 y 100 de la ocurrencia de un determinado evento
      * @return
      * @todo un pocio chapuza la forma de elegir el tamaño del vector de posibilidades
@@ -707,8 +707,8 @@ public class GestorDatos {
     }
 
     /**
-     * Este método elimina el actual gestor de datos. La proxima vez que se solicite
-     * un gestor de datos se creará uno nuevo. Consecuentemente se elimina el
+     * Este metodo elimina el actual gestor de datos. La proxima vez que se solicite
+     * un gestor de datos se creara uno nuevo. Consecuentemente se elimina el
      * almacen de datos asociado.
      */
     public static void eliminaGestorDatos() {
@@ -721,7 +721,7 @@ public class GestorDatos {
     }
 
     /**
-     * Este método devuelve la fecha base de este almacen
+     * Este metodo devuelve la fecha base de este almacen
      * @return
      */
     public String getFechaBase() {
@@ -849,7 +849,7 @@ public class GestorDatos {
         this.duracion_total_registro = i;
     }
 
-    public int getMaximaDuraciónDelRegistro() {
+    public int getMaximaDuracionDelRegistro() {
         return duracion_total_registro;
     }
 
@@ -896,7 +896,7 @@ public class GestorDatos {
     }
 
     /**
-     * Añade una correlación al actual almacen.
+     * Añade una correlacion al actual almacen.
      * @param resultados
      */
     public void anadeCorrelacion(ResultadoCorrelacion resultados) {
@@ -916,7 +916,7 @@ public class GestorDatos {
     /**
      * Elimina la correlacion indicado por la key que se le pasa. La key de un estadistico es el
      * nombre que tiene la primera señal, mas el nombre de la segunada, mas la fecha de incio de la
-     * primera señal, más la fecha de inicio de la segunda señal mas la fecha de fin
+     * primera señal, mas la fecha de inicio de la segunda señal mas la fecha de fin
      * de la segunda señal, todos ellos cocatenados en un String.
      * @param estadistico
      * @return
@@ -926,7 +926,7 @@ public class GestorDatos {
     }
 
     /**
-     * Elimina la correlación que se le pasa.
+     * Elimina la correlacion que se le pasa.
      * @param estadistico
      * @return
      */
@@ -1003,7 +1003,7 @@ public class GestorDatos {
     }
 
     /**
-     * Devuelve un array con los ínidces de la sseñales que se están monitorizando en este momento.
+     * Devuelve un array con los inidces de la sseñales que se estan monitorizando en este momento.
      * @return
      * @todo: Leer la nota de abajo
      */
@@ -1033,7 +1033,7 @@ public class GestorDatos {
     }
 
     /**
-     * Modifica las senales que se monitoizaron la última vez. duvuelve null si no hay información.
+     * Modifica las senales que se monitoizaron la ultima vez. duvuelve null si no hay informacion.
      * @param _senales_que_se_monitorizaron_la_ultima_vez
      */
     public void setSenalesQueSeMonitorizaronLaUltimaVez(int[]
@@ -1055,7 +1055,7 @@ public class GestorDatos {
             nuevaLongitudMaxima = Math.max(nuevaLongitudMaxima,
                                            nuvosDatos.length);
             this.setDatos(i, nuvosDatos);
-            //Reajustamos también la posibilidad
+            //Reajustamos tambien la posibilidad
             //Primero comprovamos si esta señal tiene posibilidad
             if (!almacen.isPosAsociada(i)) {
                 continue;
@@ -1069,7 +1069,7 @@ public class GestorDatos {
             //Y almacenamos la nueva posibilidad
             almacen.setPos(i, nuevaPos);
         }
-        //Y finalmente reajusamos la longitud máxima de la posibilidad total
+        //Y finalmente reajusamos la longitud maxima de la posibilidad total
         byte[] posTotal = this.getPosibilidadTotal();
         if (posTotal != null) {
             byte[] nuevaPosTotal = new byte[nuevaLongitudMaxima];
@@ -1078,7 +1078,7 @@ public class GestorDatos {
             }
             almacen.setPosibilidadTotal(nuevaPosTotal);
         }
-        //Esto también cambia el tamaño del monitor
+        //Esto tambien cambia el tamaño del monitor
         this.setMaximaDuracionDelRegistro(nuevaLongitudMaxima);
 
     }

@@ -136,12 +136,12 @@ public class ControladorFicheros {
     }
 
     // Devuelve todos los ficheros head en un directorio menos los
-    // denotados por senal.hea y los no válidos.
+    // denotados por senal.hea y los no validos.
 
     public FicheroHead[] getFicherosHeadDirectorio(File f) throws
             DirectorioVacioException {
 
-        // Debe estar aquí: si no, cuando se crea ControladorInterfaz
+        // Debe estar aqui: si no, cuando se crea ControladorInterfaz
 
         FicheroHead[] res;
         File[] listaFicheros;
@@ -196,13 +196,13 @@ public class ControladorFicheros {
 
     }
 
-    // Verifica condiciones de exportación para decidir si se puede exportar el grupo de
+    // Verifica condiciones de exportacion para decidir si se puede exportar el grupo de
     // ficheros o no.
     public void esExportable() throws NoPacienteAbiertoException,
             NoParametroSeleccionadoException {
 
         if (ficherosHead.size() == 0) {
-            throw new NoPacienteAbiertoException(); // Si no se ha abierto ningún fichero head, no es exportable
+            throw new NoPacienteAbiertoException(); // Si no se ha abierto ningun fichero head, no es exportable
         }
 
         for (int i = 0; i < ficherosHead.size(); i++) {
@@ -212,15 +212,15 @@ public class ControladorFicheros {
 
             for (int j = 0; j < parG.length; j++) {
                 if (parG[j].getActivado()) {
-                    return; //Si existe algún parámetro activado, sí es exportable.
+                    return; //Si existe algun parametro activado, si es exportable.
                 }
             }
         }
 
-        throw new NoParametroSeleccionadoException(); // Si se ha acabado el bucle y no hay parámetros seleccionados
+        throw new NoParametroSeleccionadoException(); // Si se ha acabado el bucle y no hay parametros seleccionados
     }
 
-    // Creación y manejo de indicadores de progreso gráficos: son
+    // Creacion y manejo de indicadores de progreso graficos: son
     // aconsejables para operaciones intensivas en ficheros.
 
     public void creaIndicadorProgreso(Cancelar h, String titulo,
