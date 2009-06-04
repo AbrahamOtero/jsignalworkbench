@@ -42,7 +42,7 @@ public class DetectorDesaturaciones {
 
     //comienzo del soporte de la distribucion de posibilidad trapezoidal que indica la caida minima
     //de una desaturacion para ser considerada relevante
-    private final float limiteDesaturacionP0 = 3;
+    private final float limiteDesaturacionP0 = 2;
     //comienzo del nucleo de la distribucin anterior; el fin del nucleo es infinito
     private final float limiteDesaturacionP1 = 10;
     //comienzo del soporte de la distribucion de posibilidad trapezoidal que indica la

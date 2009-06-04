@@ -13,6 +13,8 @@ import net.javahispano.jsignalwb.io.BasicSaver;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
 import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
+import net.javahispano.jsignalwb.utilities.TimePositionConverter;
+import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 
 /**
  * <p>Title: </p>
@@ -39,7 +41,7 @@ public class ExportarLatiods extends AlgorithmAdapter {
     }
 
     public int numberOfSignalsNeeded() {
-        return 1;
+        return 0;
     }
 
     /**
@@ -160,16 +162,29 @@ public class ExportarLatiods extends AlgorithmAdapter {
                              List<SignalIntervalProperties> signals,
             AlgorithmRunner ar) {
         Signal signal;
-        if (signals.size() != 1) {
+        System.out.println(""+signals.size());
+      /*  if (signals.size() != 1) {
             this.errorMensaje();
             error = true;
             return;
-        } else {
-            signal = signals.get(0).getSignal();
-            List<MarkPlugin> l = signal.getAllMarks();
+        }*/
+    //    else{
+        List<MarkPlugin> l ;
+        SignalIntervalProperties interval = signals.get(0);
+        signal = interval.getSignal();
+            if (signals.get(0).isFullSignal()) {
+                l = signal.getAllMarks();
+            }
+            else{
+                l = new LinkedList<MarkPlugin>();
+                for (SignalIntervalProperties e : signals) {
+                List<MarkPlugin> kk = signal.getMarks(e.getStartTime(), e.getEndTime());
+                l.addAll(kk);
+                }
+            }
             List<DefaultIntervalMark> beatMarks = new LinkedList();
             for (MarkPlugin mark : l) {
-                if (mark instanceof DefaultIntervalMark && ((DefaultIntervalMark) mark).getTitle().equals("N")) {
+                if (mark instanceof DefaultIntervalMark && ((DefaultIntervalMark) mark).getComentary().equals("0")) {
                     beatMarks.add((DefaultIntervalMark) mark);
                 }
             }
@@ -179,15 +194,97 @@ public class ExportarLatiods extends AlgorithmAdapter {
                 return;
             }
             Collections.sort(beatMarks);
-            rr = new float[beatMarks.size()];
-            int i = 0;
-            for (MarkPlugin m : beatMarks) {
-                rr[i] = m.getMarkTime() - signal.getStart();
-                rr[i] /= 1000;
-                i++;
+            generateRR(signal, beatMarks);
+       // }
+        error = false;
+    }
+
+    private void generateRR(Signal signal, List<DefaultIntervalMark> beatMarks) {
+        rr = new float[beatMarks.size()];
+        boolean useMax = decideOnMaxMin(beatMarks);
+        int i = 0;
+        for (MarkPlugin m : beatMarks) {
+            long refinedRR = ajustarPrincipios(m, useMax);
+            rr[i] = refinedRR - signal.getStart();
+            rr[i] /= 1000;
+            i++;
+        }
+    }
+
+    /**
+     * Decide si la parte positiva o negativa del QRS es mas pronunciada.
+     *
+     * @param beatMarks List
+     * @return boolean cierto si debe usarse la parte positiva
+     */
+    private boolean decideOnMaxMin(List<DefaultIntervalMark> beatMarks) {
+        int counter = 0;
+        SignalManager sm = JSWBManager.getSignalManager();
+        Signal e = sm.getSignal("ECG");
+        float[] ec = e.getValues();
+        float min = 0, max = 0;
+        for (MarkPlugin m : beatMarks) {
+            int beging = TimePositionConverter.timeToPosition(m.getMarkTime(), e);
+            int end = TimePositionConverter.timeToPosition(m.getEndTime(), e);
+            float minValue = Float.POSITIVE_INFINITY;
+            float maxValue = Float.NEGATIVE_INFINITY;
+            for (int j = beging; j < end; j++) {
+                if (ec[j] < minValue) {
+                    minValue = ec[j];
+                }
+                if (ec[j] > maxValue) {
+                    maxValue = ec[j];
+                }
+            }
+            min += minValue;
+            max += maxValue;
+            counter++;
+            if (counter > 1000) {
+                break;
             }
         }
-        error = false;
+        if (Math.abs(min) > max) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Busca la parte mas positiva o la mas negativa del QRS, dependiendo del
+     * valor del segundo parametro.
+     *
+     * @param m MarkPlugin
+     * @param useMax boolean
+     * @return long
+     */
+    private long ajustarPrincipios(MarkPlugin m, boolean useMax) {
+        SignalManager sm = JSWBManager.getSignalManager();
+        Signal e = sm.getSignal("ECG");
+        float[] ec = e.getValues();
+        int begining = TimePositionConverter.timeToPosition(m.getMarkTime(), e);
+        int end = TimePositionConverter.timeToPosition(m.getEndTime(), e);
+        int selectedIndex = 0;
+        if (useMax) {
+            float mv = Float.NEGATIVE_INFINITY;
+            for (int i = begining; i < end; i++) {
+                if (ec[i] > mv) {
+                    mv = ec[i];
+                    selectedIndex = i;
+                }
+            }
+        } else {
+            float mv = Float.POSITIVE_INFINITY;
+            for (int i = begining; i < end; i++) {
+                if (ec[i] < mv) {
+                    mv = ec[i];
+                    selectedIndex = i;
+                }
+            }
+        }
+
+        long rrInterval = TimePositionConverter.positionToTime(selectedIndex, e);
+        return rrInterval;
     }
 
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {

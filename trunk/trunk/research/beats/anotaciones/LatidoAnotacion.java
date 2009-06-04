@@ -16,6 +16,7 @@ package research.beats.anotaciones;
 public class LatidoAnotacion extends LimitacionAnotacion {
 
     public LatidoAnotacion() {
+        super();
         this.setTipo(LimitacionAnotacion.N);
     }
 
