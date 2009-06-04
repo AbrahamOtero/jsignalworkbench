@@ -83,7 +83,6 @@ public class BorrarMarcasEnIntervalo extends AlgorithmAdapter implements Interva
 
         for (MarkPlugin m : eraseMarks) {
             signal.removeMark(m);
-            System.out.println("ssssssss");
         }
 
         JSWBManager.getJSignalMonitor().repaintChannels();

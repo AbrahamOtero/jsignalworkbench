@@ -50,12 +50,12 @@ public class DebugPluginsManager {
             plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Snoring Grid",
                                             new research.apneas.grid.SnoringGrid()));
             plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Default",
-                                            new research.apneas.grid.GridGris()));/**/
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
-                                        new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
+                                            new research.apneas.grid.GridGris()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
                                         new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
+/**/        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
+                                        new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "TRACE importer",
                                         new es.usc.gsi.trace.importer.TraceImporter()));
@@ -70,10 +70,10 @@ public class DebugPluginsManager {
                                         new TestDeteccion()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "ExportarLatidos",
                                         new ExportarLatiods()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Asociar Eventos",
-                                        new AssociateEvents()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Generar descriptores",
-                                        new GenerateDescriptors()));
+      //  plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Asociar Eventos",
+       //                                 new AssociateEvents()));
+      //  plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Generar descriptores",
+      //                                  new GenerateDescriptors()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Anotando latidos",
                                         new Paso1()));
@@ -103,8 +103,8 @@ public class DebugPluginsManager {
                plugins.add(new DebugPluginInfo("algorithm","AddSinPlugin",
                       new AddSinPlugin()));
         /**/
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Derivada",
-                                        new research.apneas.Derivada()));
+    /*/   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Derivada",
+                                        new research.apneas.Derivada()));/**/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar intervalo",
                                         new EraseInterval()));
 
@@ -119,7 +119,7 @@ public class DebugPluginsManager {
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Limitacion de flujo",
                                         new LimitacionAnotacion()));
 
-        plugins.add(new DebugPluginInfo(PluginTypes.MARK, "DesaturaciÃ³n",
+        plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Desaturación",
                                         new DesaturacionAnotacion()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Latido normal",

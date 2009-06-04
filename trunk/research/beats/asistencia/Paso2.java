@@ -40,7 +40,6 @@ public class Paso2 extends AlgorithmAdapter {
         for (int i = 1; i < d.length; i++) {
             if (d[i] >= 103) {
                 d[i] = d[i - 1];
-                System.out.println("ssssssssss");
             }
         }
         sm.setSignalVisible("Movimiento abdominal", true);
