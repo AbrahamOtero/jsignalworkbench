@@ -70,10 +70,10 @@ public class DebugPluginsManager {
                                         new TestDeteccion()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "ExportarLatidos",
                                         new ExportarLatiods()));
-      //  plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Asociar Eventos",
-       //                                 new AssociateEvents()));
-      //  plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Generar descriptores",
-      //                                  new GenerateDescriptors()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Asociar Eventos",
+                                        new AssociateEvents()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Generar descriptores",
+                                        new GenerateDescriptors()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Anotando latidos",
                                         new Paso1()));

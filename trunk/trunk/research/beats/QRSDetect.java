@@ -58,7 +58,7 @@ public class QRSDetect {
         initBlank = initMax = preBlankCnt = ddPtr = 0;
         sbcount = SampleRate.getMs1500();
 
-        preBlank = 2*SampleRate.getMs195();
+        preBlank = SampleRate.getMs195();
         filterDelay = ((SampleRate.getDerivLength() / 2)
                        + (SampleRate.getLpBufferLgth() / 2 - 1)
                        + ((SampleRate.getHpBufferLgth() - 1) / 2) +
