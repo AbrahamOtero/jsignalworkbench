@@ -121,10 +121,10 @@ public class LimitacionesDialog extends JDialog {
             }
         };
 
-      //  Timer timer = new Timer();
-      //  timer.schedule(timerTask, 3000);
+        Timer timer = new Timer();
+        timer.schedule(timerTask, 3000);
 
-        this.setVisible(true);
+        //this.setVisible(true);
     }
 
     public LimitacionesDialog(LimitacionAnotacion limitacionesAnotaciones) {
