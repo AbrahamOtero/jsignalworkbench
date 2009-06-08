@@ -56,7 +56,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
      * @return FluxLimitation
      */
     private Desaturation generateDesaturation(DesaturacionAnotacion desatAnnotation) throws RuntimeException {
-        System.out.println("Desaturacion: \n\t Principio: " + desatAnnotation.getMarkTime()
+        System.out.println("Hola Desaturacion: \n\t Principio: " + desatAnnotation.getMarkTime()
                            + " \n\t Indice del array correspondiente con el principio " +
                            TimePositionConverter.timeToPosition(desatAnnotation.getMarkTime(), sato2Signal)
                            + " \n\t Instante representado como hora natural " +
