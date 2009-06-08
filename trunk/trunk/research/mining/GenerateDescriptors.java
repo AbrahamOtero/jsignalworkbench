@@ -46,8 +46,8 @@ public class GenerateDescriptors extends AlgorithmAdapter {
     }
 
     /**
-     * Se le pasa una anotacion que representa una limitacion de flujo
-     * respiratorio y devuelve un objeto de tipo {@link Desaturation} conteniendo todos los
+     * Se le pasa una anotacion que representa una desaturacion
+     * y devuelve un objeto de tipo {@link Desaturation} conteniendo todos los
      * descriptores del evento representado por la anotacion. Entre los
      * descriptores, se encuentran las limitaciones de flujo respiratorio
      *asociadas con la limitacion.
@@ -81,7 +81,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         //en la linea que esta a continuacion: los que devuelve su instante de inicio y el fin
         desaturation.setDuration(desatAnnotation.getEndTime() - desatAnnotation.getMarkTime());
         //...
-        //@Emma generar aqui todos los episodios
+        //@Emma generar aqui todos los descriptores
         List<LimitacionAnotacion> limAnnotationList = desatAnnotation.getLimitationsList();
         for (LimitacionAnotacion limAnnotation : limAnnotationList) {
             FluxLimitation fluxLimitation = generateLimitation(limAnnotation);
@@ -104,7 +104,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         System.out.println("\t\tLimitacion de flujo: " + limitationAnnotation.getMarkTime());
 
         FluxLimitation fluxLimitation = new FluxLimitation();
-        //@Emma generar aqui todos los Episodios
+        //@Emma generar aqui todos los descriptores
         List<LimitacionAnotacion> abdomenAnnotationList = limitationAnnotation.getAbdomenList();
         for (LimitacionAnotacion abdomenAnnotationLimitation : abdomenAnnotationList) {
             AbdominalMovementLimutation abdomenLimitation = generateAbdomenLimitation(abdomenAnnotationLimitation);

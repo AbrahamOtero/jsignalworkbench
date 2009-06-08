@@ -48,9 +48,11 @@ public class FluxLimitation extends TemporalEvent {
      * EVERYTHING: {absoluteBeginingTime: HH:MM:SS} \t {GEN_LIM} \t {duration}
      * \t {type: A|H}  \t {energy}  \t {Tipo : basalEnergyBefore}   \t {Tipo :
      * basalEnergyAfter}  \t
-     * //info de la t mas grande \t {duration}  \t {type: A|H}  \t {energy}  \t
+     * //info de la limitacion toracica mas grande (mas tiempo)
+     * \t {duration}  \t {type: A|H}  \t {energy}  \t
      * {Tipo : basalEnergyBefore}   \t {Tipo : basalEnergyAfter}  \t
-     * //info de la a mas grande \t {duration}  \t {type: A|H}  \t {energy}  \t
+     * //info de la limitacion abdominal mas grande
+     * \t {duration}  \t {type: A|H}  \t {energy}  \t
      * {Tipo : basalEnergyBefore}   \t {Tipo : basalEnergyAfter}  \n
      *
      * @param level DETAILLEVEL

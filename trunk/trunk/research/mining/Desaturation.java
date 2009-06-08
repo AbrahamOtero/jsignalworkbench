@@ -51,8 +51,7 @@ public class Desaturation extends TemporalEvent {
     /**
      * LOW: {absoluteBeginingTime: HH:MM:SS} \t {GEN_DESAT} \t {duration}  \n
      *
-     * MEDIUM: {absoluteBeginingTime: HH:MM:SS} \t {GEN_DESAT} \t {duration}  \t
-     * {type: A|H}  \n
+     * MEDIUM: {absoluteBeginingTime: HH:MM:SS} \t {GEN_DESAT} \t {duration} \n
      *
      * HIGH: {absoluteBeginingTime: HH:MM:SS} \t {GEN_DESAT} \t {duration}  \t
      * {min}  \t {meanValue}  \t {beginValue}   \t {endValue} \t
