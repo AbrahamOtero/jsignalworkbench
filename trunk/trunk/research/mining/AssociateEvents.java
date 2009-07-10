@@ -55,12 +55,12 @@ public class AssociateEvents extends AlgorithmAdapter {
         assert (listMarkPlugins.size() == desatTree.size());
         asociateDesatAndLimit(limTree, desatTree);
 
-        associateLimitationsAndMovement(limAbdomen, desatTree);
-        associateLimitationsAndMovement(limTorax, desatTree);
+        associateLimitationsAndMovement(limAbdomen, desatTree,true);
+        associateLimitationsAndMovement(limTorax, desatTree,false);
     }
 
     private void associateLimitationsAndMovement(TreeSet<LimitacionAnotacion> limAbdomen,
-            TreeSet<DesaturacionAnotacion> desatTree) {
+            TreeSet<DesaturacionAnotacion> desatTree, boolean abdomen) {
         for (DesaturacionAnotacion desat : desatTree) {
             List<LimitacionAnotacion> limitationsList = desat.getLimitationsList();
             for (LimitacionAnotacion limitation : limitationsList) {
@@ -70,7 +70,11 @@ public class AssociateEvents extends AlgorithmAdapter {
                 end.setMarkTime(limitation.getMarkTime() + (limitation.getEndTime() - limitation.getMarkTime()) / 2);
                 Set<LimitacionAnotacion> abdomenEvents = limAbdomen.subSet(begin, end);
                 for (LimitacionAnotacion aa : abdomenEvents) {
-                    limitation.addAbdomenLimitation(aa);
+                    if (abdomen) {
+                        limitation.addAbdomenLimitation(aa);
+                    } else {
+                        limitation.addToraxLimitation(aa);
+                    }
                 }
             }
         }

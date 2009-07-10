@@ -2,6 +2,7 @@ package research.mining;
 
 import java.util.LinkedList;
 import java.util.List;
+import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 
 public class Desaturation extends TemporalEvent {
     //Minimo valor de la saturacion de oxigeno durante la desaturacion
@@ -70,8 +71,28 @@ public class Desaturation extends TemporalEvent {
      * @return String
      */
     public String genrateDescriptors(DETAILLEVEL level) {
-        //@Emma generar aqui todos los descriptores
-        return "";
+        String descriptors;
+  
+        descriptors = TimeRepresentation.timeToString(
+                                this.getAbsoluteBeginingTime(),false,true,false)
+                + "\tGEN_DESAT\t"+ this.getDuration();
+        if(level==DETAILLEVEL.HIGH || level==DETAILLEVEL.EVERYTHING){
+            descriptors += "\t" + min + "\t" + meanValue + "\t" + beginValue 
+                    + "\t" + endValue + "\t" + desaturatedArea + "\t" 
+                    + numDesaturations + "\t" + energyLimitations + "\t"
+                    + energyOutOfLimitations+ "\t" + basalEnergyBefore +  "\t"
+                    + basalEnergyAfter;
+            if(level==DETAILLEVEL.EVERYTHING){
+                descriptors += "\t";
+                for (FluxLimitation fluxLim : limitations) {
+                    descriptors += fluxLim.genrateDescriptors(DETAILLEVEL.EVERYTHING);
+
+                    descriptors = descriptors.replace('\n','\t');
+                }
+            }
+        }
+        descriptors += "\n";
+        return descriptors;
     }
 
 
@@ -117,6 +138,12 @@ public class Desaturation extends TemporalEvent {
 
     public float getRiseSlope() {
         return riseSlope;
+    }
+
+    public List<FluxLimitation> getLimitations(){
+        List<FluxLimitation> listCopy = new LinkedList(limitations);
+
+        return listCopy;
     }
 
     public float getEnergyLimitations() {
