@@ -29,8 +29,12 @@ public class SaveInfo {
      * @return String
      */
     public String genrateDescriptors() {
-        //@Emma generar aqui todos los descriptores
-        return "Nada";
+        String descriptors = "";
+
+        for(Desaturation desaturation: desatTree){
+            descriptors += desaturation.genrateDescriptors(level);
+        }
+        return descriptors;
     }
 
     public void saveDescriptors() {
