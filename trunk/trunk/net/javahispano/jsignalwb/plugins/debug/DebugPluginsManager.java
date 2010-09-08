@@ -23,6 +23,7 @@ import research.mining.GenerateDescriptors;
 import tmp.*;
 import research.mining.tmp.Media;
 import net.javahispano.jsignalwb.plugins.calculator.CalculatorAlgorithm;
+import research.descriptors.SeverityDescriptorsGenerator;
 
 /**
  *
@@ -43,25 +44,25 @@ public class DebugPluginsManager {
          * {@code plugins.add(new DebugPluginInfo(pluginType,pluginName,Plugin));}
          */
         /*/     plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Apnea Grid",
-                                            new research.apneas.grid.ApneaGrid()));
-            plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Respiratory effort Grid",
-                                            new research.apneas.grid.ApneaGrid()));
-         //   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Test",
-      //                                      new DetectorDesaturacionesWrapper()));
-            plugins.add(new DebugPluginInfo(PluginTypes.GRID, "SpO2 Grid",
-                                            new research.apneas.grid.SpO2Grid()));
-            plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Snoring Grid",
-                                            new research.apneas.grid.SnoringGrid()));
-            plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Default",
-                                            new research.apneas.grid.GridGris()));
+                                           new research.apneas.grid.ApneaGrid()));
+           plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Respiratory effort Grid",
+                                           new research.apneas.grid.ApneaGrid()));
+        //   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Test",
+              //                                      new DetectorDesaturacionesWrapper()));
+           plugins.add(new DebugPluginInfo(PluginTypes.GRID, "SpO2 Grid",
+                                           new research.apneas.grid.SpO2Grid()));
+           plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Snoring Grid",
+                                           new research.apneas.grid.SnoringGrid()));
+           plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Default",
+                                           new research.apneas.grid.GridGris()));
 
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
-                                        new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
-/**/
+                plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
+                                       new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
+        /**/
 
 
-/**/plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
-                                        new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
+        /**/plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
+                                            new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "TRACE importer",
                                         new es.usc.gsi.trace.importer.TraceImporter()));
 
@@ -99,24 +100,24 @@ public class DebugPluginsManager {
         /**/
 
         /*/  plugins.add(new DebugPluginInfo(PluginTypes.GENERIC, "Signal Generation",
-                                         new SignalGenerationPlugin()));
+                                        new SignalGenerationPlugin()));
 
-         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "SnoreAlgorithm",
-                                         new research.apneas.SnoreAlgorithm()));
-        /**/
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "SnoreAlgorithm",
+                                        new research.apneas.SnoreAlgorithm()));
+                /**/
         /*/
-               plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
-                      new PruebaDeConcurrenciaParaSwing ()));
+              plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
+                     new PruebaDeConcurrenciaParaSwing ()));
 
-               plugins.add(new DebugPluginInfo("algorithm","Concurrencia 2",
-                      new PruebaDeConcurrenciaParaSwing2()));
-               plugins.add(new DebugPluginInfo("algorithm","AddSignalPropertiesPlugin",
-                      new AddSignalPropertiesPlugin()));
-               plugins.add(new DebugPluginInfo("algorithm","AddSinPlugin",
-                      new AddSinPlugin()));
-        /**/
-    /*/   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Derivada",
-                                        new research.apneas.Derivada()));/**/
+              plugins.add(new DebugPluginInfo("algorithm","Concurrencia 2",
+                     new PruebaDeConcurrenciaParaSwing2()));
+              plugins.add(new DebugPluginInfo("algorithm","AddSignalPropertiesPlugin",
+                     new AddSignalPropertiesPlugin()));
+              plugins.add(new DebugPluginInfo("algorithm","AddSinPlugin",
+                     new AddSinPlugin()));
+                /**/
+        /*/   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Derivada",
+                                           new research.apneas.Derivada()));/**/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar intervalo",
                                         new EraseInterval()));
 
@@ -125,7 +126,7 @@ public class DebugPluginsManager {
 
          plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "basicLoader",
                                          new BasicLoader()));
-         /**/
+        /**/
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "HRVLoader",
                                         new HRVLoader()));
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Limitacion de flujo",
@@ -139,8 +140,8 @@ public class DebugPluginsManager {
 
         /**/
 
-plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar marcas",
-                                new BorrarMarcasEnIntervalo()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar marcas",
+                                        new BorrarMarcasEnIntervalo()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cerdo",
                                         new PigAlg()));
@@ -148,35 +149,34 @@ plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar marcas",
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Pico",
                                         new PicoCerdo()));
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Valle",
-                                        new  ValleCerdo()));
+                                        new ValleCerdo()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Filtrado cerdo",
                                         new AreaCerdo()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Visualizador de datos del cerdo",
                                         new VisualizadorDatosCerdo()));
-     /**/   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "X",
-                                        new ExportarParametros()));/**/
+        /**/plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "X",
+                                            new ExportarParametros())); /**/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculadora de parametros",
-                                                new CalculatorAlgorithm()));
-
-
-
+                                        new CalculatorAlgorithm()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Net",
                                         new NetWork()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Caracterizar la gravedad del paciente",
+                                        new SeverityDescriptorsGenerator()));
 
         /*/
-                plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
-               new PruebaDeConcurrenciaParaSwing()));
-                plugins.add(new DebugPluginInfo("generic","AddToolBarElementsPlugin",
-               new AddToolBarElementsPlugin()));
-                plugins.add(new DebugPluginInfo("generic","AddComponentPlugin",
-               new AddComponentPlugin()));
-                plugins.add(new DebugPluginInfo("generic","AddJMenuPlugin",
-               new AddJMenuPlugin()));
-        plugins.add(new DebugPluginInfo("generic","ShowSignalsPropertiesPlugin",
-               new ShowSignalsPropertiesPlugin()));
+               plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
+              new PruebaDeConcurrenciaParaSwing()));
+               plugins.add(new DebugPluginInfo("generic","AddToolBarElementsPlugin",
+              new AddToolBarElementsPlugin()));
+               plugins.add(new DebugPluginInfo("generic","AddComponentPlugin",
+              new AddComponentPlugin()));
+               plugins.add(new DebugPluginInfo("generic","AddJMenuPlugin",
+              new AddJMenuPlugin()));
+                plugins.add(new DebugPluginInfo("generic","ShowSignalsPropertiesPlugin",
+              new ShowSignalsPropertiesPlugin()));
 
-                /* */
+               /* */
 
 
         // DONT REMOVE THIS CODE
