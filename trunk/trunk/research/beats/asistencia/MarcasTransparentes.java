@@ -26,17 +26,21 @@ public class MarcasTransparentes extends AlgorithmAdapter {
     private boolean transparente = false;
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
-        Collection<MarkPlugin> listaMarcas = sm.getAllSignalMarks("ECG");
-        for (MarkPlugin s : listaMarcas) {
-            DefaultIntervalMark marca = (DefaultIntervalMark) s;
-            if (!transparente) {
-                marca.setInnerTransparencyLevel(0);
-                marca.setBorderTransparencyLevel(0);
-            } else {
-                marca.setInnerTransparencyLevel(50);
-                marca.setBorderTransparencyLevel(150);
+       Collection<Signal> allSignals = sm.getSignals();
+        for (Signal signal : allSignals) {
+            Collection<MarkPlugin> listaMarcas = signal.getAllMarks();
+            for (MarkPlugin s : listaMarcas) {
+                DefaultIntervalMark marca = (DefaultIntervalMark) s;
+                if (!transparente) {
+                    marca.setInnerTransparencyLevel(0);
+                    marca.setBorderTransparencyLevel(0);
+                } else {
+                    marca.setInnerTransparencyLevel(50);
+                    marca.setBorderTransparencyLevel(150);
+                }
             }
         }
+
         transparente = !transparente;
         JSWBManager.getJSignalMonitor().repaintChannels();
     }

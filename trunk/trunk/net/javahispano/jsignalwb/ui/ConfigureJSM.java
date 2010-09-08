@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Window;
 import java.beans.*;
 import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 import org.joda.time.DateTime;
 
@@ -34,7 +36,7 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
         initComponents();
         scroll = zoomH = false;
         jTextFieldDate1.setText(TimeRepresentation.timeToString(
-                jswbManager.getJSMScrollValue()));
+                calcularFechaBase()));
         datePicker1.showButtonOnly(true);
         try {
             datePicker1.setDate(new Date(jswbManager.getJSMScrollValue()));
@@ -45,6 +47,17 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
         applyButton.setEnabled(false);
         initPropertiesListeners();
         cancelButton.grabFocus();
+    }
+
+    /**
+     * calcularFechaBase
+     *
+     * @return long
+     */
+    private long calcularFechaBase() {
+       Collection <Signal> signals = jswbManager.getSignalManager().getSignals();
+       Signal cualquierSignal= (Signal)signals.toArray()[0];
+       return cualquierSignal.getStart();
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
@@ -270,12 +283,30 @@ public class ConfigureJSM extends javax.swing.JPanel implements PropertyChangeLi
             if (!dateValue.equals("")) {
                 try {
                     long newScroll = TimeRepresentation.stringToMillis(dateValue, true, true, true);
-                    if (newScroll >= jswbManager.getJSMScrollBaseTime() && newScroll <= jswbManager.getJSMMaxTime()) {
-                        jswbManager.setJSMScrollValue(newScroll);
+                   // if (newScroll >= jswbManager.getJSMScrollBaseTime() && newScroll <= jswbManager.getJSMMaxTime()) {
+                       Collection <Signal> signals = jswbManager.getSignalManager().getSignals();
+                       boolean b []= new boolean[signals.size()];
+                       int c=0;
+                       for (Signal s : signals) {
+                           s.setStart(newScroll);
+                           if (s.isVisible()) {
+                               b[c]= true;
+                           }
+                           else {
+                                b[c]= false;
+                           }
+                           c++;
+                       }
+                       c=0;
+                       for (Signal s : signals) {
+                           s.setVisible(false);
+                           s.setVisible(b[c]);
+                           c++;
+                       }
                         jTextFieldDate1.setBackground(Color.WHITE);
-                    } else {
+                   /* } else {
                         jTextFieldDate1.setBackground(Color.RED);
-                    }
+                    }*/
                 } catch (Exception ex) {
                     jTextFieldDate1.setBackground(Color.RED);
                     flag = false;

@@ -54,12 +54,21 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
     protected boolean load(File f, SignalManager sm) throws Exception {
         boolean flag = true;
         float[][] values = loadSignals(f);
+        Object[] signals = sm.getSignals().toArray();
+        Signal sr = null;
+        if (signals.length > 0) {
+          sr=(Signal) signals[0];
+        }
         if (values != null) {
             int i = 0;
             for (float[] val : values) {
                 Signal s = new Signal("Signal" + i, val);
                 s.setFrecuency(1);
                 i++;
+                if (sr != null) {
+                    s.setStart(sr.getStart());
+                    s.setFrecuency(sr.getSRate());
+                }
                 if (!sm.addSignal(s)) {
                     flag = false;
                 } else {

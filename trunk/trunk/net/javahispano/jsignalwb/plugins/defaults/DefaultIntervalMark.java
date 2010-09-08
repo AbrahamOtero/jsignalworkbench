@@ -14,6 +14,7 @@ import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
 import net.javahispano.jsignalwb.plugins.MarkPluginAdapter;
+import net.javahispano.jsignalwb.plugins.MarkPlugin;
 
 /**
  *
@@ -24,7 +25,7 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
     private long endTime;
     private String title;
     private String comentary;
-    private Color color;
+    protected Color color;
     private BufferedImage im;
     private JSWBManager jswbManager;
     private int extraheightPixels = 10;
@@ -244,7 +245,7 @@ public class DefaultIntervalMark extends MarkPluginAdapter implements Comparable
      * @todo Implement this java.lang.Comparable method
      */
     public int compareTo(Object o) {
-        DefaultIntervalMark i = (DefaultIntervalMark) o;
+        MarkPlugin i = (MarkPlugin) o;
         if (i.getMarkTime() < this.getMarkTime()) {
             return 1;
         } else if (i.getMarkTime() > this.getMarkTime()) {

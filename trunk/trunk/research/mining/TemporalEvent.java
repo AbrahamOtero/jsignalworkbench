@@ -19,7 +19,7 @@ public abstract class TemporalEvent implements Comparable {
             this.duration = duration;
         }
 
-        public abstract String genrateDescriptors(DETAILLEVEL level);
+      //  public abstract String genrateDescriptors(DETAILLEVEL level);
 
 
         public long getAbsoluteBeginingTime() {
@@ -48,12 +48,12 @@ public abstract class TemporalEvent implements Comparable {
          */
         public int compareTo(Object o) {
             TemporalEvent i = (TemporalEvent) o;
-            if (i.getAbsoluteBeginingTime() < this.getAbsoluteBeginingTime()) {
+            if (i.getAbsoluteBeginingTime() < this.absoluteBeginingTime) {
                 return 1;
-            } else if (i.getAbsoluteBeginingTime() > this.getAbsoluteBeginingTime()) {
+            } else if (i.getAbsoluteBeginingTime() > this.absoluteBeginingTime) {
                 return -1;
             }
-            return 0;
+            return 1;
         }
 
         public int hashCode() {

@@ -86,9 +86,9 @@ public class BasicLoader extends LoaderAdapter {
             //int signal = 0;
             pos = 0;
             temp = "";
+            int c =0;
             while ((line = input.readLine()) != null) {
                 st = new StringTokenizer(line, "; \t");
-
                 while (st.hasMoreTokens()) {
                     temp = st.nextToken();
                     values[pos][index1] = Float.parseFloat(temp);
@@ -97,6 +97,10 @@ public class BasicLoader extends LoaderAdapter {
                 }
                 pos = 0;
                 index1++;
+                c++;
+                if (c>280000) {
+                 //   System.out.println(""+c);
+                }
             }
 
         } finally {

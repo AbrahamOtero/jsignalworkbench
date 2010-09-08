@@ -34,6 +34,7 @@ public class DesaturacionAnotacion extends LimitacionAnotacion {
 
 
     public DesaturacionAnotacion() {
+        super();
         this.setTipo(LimitacionAnotacion.DESATURACION);
     }
 
@@ -48,7 +49,7 @@ public class DesaturacionAnotacion extends LimitacionAnotacion {
             limitation.setColor(Color.GREEN);
 
             for (LimitacionAnotacion e : limitation.getToraxList()) {
-                oldColorTorax.put(limitation, e.getColor());
+                oldColorTorax.put(e, e.getColor());
                 e.setColor(Color.GREEN);
             }
             for (LimitacionAnotacion e : limitation.getAbdomenList()) {

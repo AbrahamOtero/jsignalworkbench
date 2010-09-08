@@ -2,6 +2,9 @@ package research.apneas.spo2;
 
 import static java.lang.Math.*;
 import java.util.Arrays;
+import net.javahispano.jsignalwb.utilities.TimePositionConverter;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 
 /**
  *
@@ -60,7 +63,7 @@ public class DetectorDesaturaciones {
             1 / (limiteDesaturacionP1 - limiteDesaturacionP0);
     private final float bMagnitudDistribucionTrapezoidal =
             -limiteDesaturacionP0 * mTiempoDistribucionTrapezoidal;
-    private int valoVasalMinimo = 91;
+    private int valoVasalMinimo = 1;
     private float valoVasalMaximo = 100;
 
 
@@ -323,7 +326,13 @@ public class DetectorDesaturaciones {
      * @return Desaturacion
      */
     private Desaturacion crearDesaturacionFinal(int fin) {
-        Desaturacion d = new Desaturacion(origenDeTiempo, tiempoPrincipioDesat, refinarFin(fin));
+        int f = refinarFin(fin);
+        Desaturacion d = new Desaturacion(origenDeTiempo, tiempoPrincipioDesat, f);
+
+        if (f < tiempoPrincipioDesat) {
+            return null;
+        }
+
         d.setValorMinimo(valorMinDesat);
         d.setValorBasal(valorBasal);
         calculaCompatibilidad(d);
@@ -339,9 +348,6 @@ public class DetectorDesaturaciones {
      * @return int
      */
     private int refinarFin(int fin) {
-        if (true) {
-            return fin;
-        }
         int indice1 = indice;
         int indice2 = this.corrigeIndice(indice - 1);
         while (datos[indice1] <= datos[indice2]) {

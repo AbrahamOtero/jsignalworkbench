@@ -94,12 +94,13 @@ public class AssociateEvents extends AlgorithmAdapter {
             TreeSet<DesaturacionAnotacion> desatTree) {
         for (DesaturacionAnotacion desat : desatTree) {
             LimitacionAnotacion lim = limTree.floor(desat);
-            for (int i = 0; i < 2; i++) { //chapuza; a veces debe asociarse con una que no es la inmediatamente anterior
+            for (int i = 0; i < 2 && lim != null; i++) { //chapuza; a veces debe asociarse con una que no es la inmediatamente anterior
                 long tLimIni = lim.getMarkTime() / 1000;
                 long tdesatIni = desat.getMarkTime() / 1000;
                 if (tdesatIni > tLimIni + 10 && tdesatIni < tLimIni + 50) {
                     //no hace falta probar otra vez; la inmediatamente anterior es la buena
                     i = 2;
+                    limTree.remove(lim);
                     desat.addLimitation(lim);
                     boolean asociationPerformed = false;
                     do {
@@ -113,6 +114,7 @@ public class AssociateEvents extends AlgorithmAdapter {
                         long tLimEnd = lim.getEndTime() / 1000;
                         long tDesatEnd = desat.getEndTime() / 1000;
                         if (tDesatEnd > tLimEnd + 20) {
+                            limTree.remove(lim);
                             desat.addLimitation(lim);
                             asociationPerformed = true;
                         }

@@ -11,6 +11,7 @@ import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 import net.javahispano.jsignalwb.plugins.Plugin;
 import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import research.apneas.spo2.DetectorDesaturacionesWrapper;
+import research.beats.anotaciones.LimitacionAnotacion;
 
 /**
  * <p>Title: </p>
@@ -54,6 +55,15 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
     //parparametros ventilacion
     /**
      * se dan en tanto por ciento
+     *  private TrapezoidalDistribution magnitudHipoapnea = new
+            TrapezoidalDistribution(0F, 0F, 0.6F, 0.6F);
+    private TrapezoidalDistribution magnitudApnea = new
+            TrapezoidalDistribution(0F, 0F, 0.15F, 0.15F);
+
+    private TrapezoidalDistribution duracionHipoapnea = new
+            TrapezoidalDistribution(4, 4, 9.9F, 9.9F);
+    private TrapezoidalDistribution duracionApnea = new
+            TrapezoidalDistribution(4, 4, 9.9F, 9.9F);
      */
     private TrapezoidalDistribution magnitudHipoapnea = new
             TrapezoidalDistribution(0F, 0F, 0.75F, 0.75F);
@@ -107,6 +117,7 @@ public class ApneaAlgorithm extends AlgorithmAdapter {
      */
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
+
         Signal satO2, nasal;
         SignalIntervalProperties intervalo = signals.get(0);
         Signal s = intervalo.getSignal();

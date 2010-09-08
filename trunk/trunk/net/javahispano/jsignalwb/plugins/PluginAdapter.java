@@ -132,5 +132,30 @@ public abstract class PluginAdapter implements Plugin {
         g2d.drawString(String.valueOf(last), 10, 20);
         return new ImageIcon(bufferedImage);
     }
+    /**
+ * Genera un icono con la primera y ultima letra de la cadena de texto que
+ * se le pasa.
+ *
+ * @param name String
+ * @return Icon
+ */
+protected Icon generateImageSimple(String name,Color color) {
+    if (name.equals("")) {
+        name = "No icon";
+    }
+    name = name.toUpperCase();
+    BufferedImage bufferedImage = new BufferedImage(20, 20, BufferedImage.TYPE_INT_RGB);
+    char first = name.charAt(0);
+    char last = name.charAt(name.length() - 1);
+    Graphics2D g2d = bufferedImage.createGraphics();
+    Font font = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+    g2d.setBackground(Color.LIGHT_GRAY);
+    g2d.clearRect(0, 0, 20, 20);
+    g2d.setColor(color);
+    g2d.setFont(font);
+    g2d.drawString(String.valueOf(first), 3, 18);
+    return new ImageIcon(bufferedImage);
+}
+
 
 }

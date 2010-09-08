@@ -2,7 +2,9 @@ package research.mining;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
+import research.mining.FluxLimitation.Type;
 
 public class Desaturation extends TemporalEvent {
     //Minimo valor de la saturacion de oxigeno durante la desaturacion
@@ -70,28 +72,91 @@ public class Desaturation extends TemporalEvent {
      * @param level DETAILLEVEL
      * @return String
      */
-    public String genrateDescriptors(DETAILLEVEL level) {
+    public String genrateDescriptors(DETAILLEVEL level, long beginingRecording) {
         String descriptors;
-  
+
         descriptors = TimeRepresentation.timeToString(
                                 this.getAbsoluteBeginingTime(),false,true,false)
-                + "\tGEN_DESAT\t"+ this.getDuration();
+                 + "\t" + (this.getAbsoluteBeginingTime()-beginingRecording) + "\t"
+                 + this.getDuration()/1000F;
         if(level==DETAILLEVEL.HIGH || level==DETAILLEVEL.EVERYTHING){
-            descriptors += "\t" + min + "\t" + meanValue + "\t" + beginValue 
-                    + "\t" + endValue + "\t" + desaturatedArea + "\t" 
-                    + numDesaturations + "\t" + energyLimitations + "\t"
-                    + energyOutOfLimitations+ "\t" + basalEnergyBefore +  "\t"
-                    + basalEnergyAfter;
-            if(level==DETAILLEVEL.EVERYTHING){
+            descriptors += "\t" + min + "\t" + meanValue + "\t" + beginValue
+                    + "\t" + endValue + "\t" + (beginValue - min)+ "\t" +
+                   (endValue - min) + "\t" + fallDuration/1000F + "\t" + riseDuration/1000F + "\t" +
+                   fallSlope + "\t" + riseSlope + "\t" + desaturatedArea;
+                  //  + numDesaturations + "\t" + energyLimitations + "\t" +
+                  //  + energyOutOfLimitations+ "\t" + basalEnergyBefore +  "\t"
+                  //  + basalEnergyAfter;
+            if(level==DETAILLEVEL.MEDIUM || level==DETAILLEVEL.HIGH || level==DETAILLEVEL.EVERYTHING){
                 descriptors += "\t";
-                for (FluxLimitation fluxLim : limitations) {
-                    descriptors += fluxLim.genrateDescriptors(DETAILLEVEL.EVERYTHING);
-
-                    descriptors = descriptors.replace('\n','\t');
+                FluxLimitation fluxLim = generateSurrotageFluxLim ();
+                descriptors += fluxLim.genrateDescriptors(DETAILLEVEL.EVERYTHING, beginingRecording);
+                if (limitations.size()>1) {
+                    descriptors += "\ttrue";
                 }
-            }
+                else{
+                    descriptors += "\tfalse";
+                }
+                descriptors += "\t"+limitations.size();
+              /*  for (FluxLimitation fluxLim : limitations) {
+                    descriptors += fluxLim.genrateDescriptors(DETAILLEVEL.EVERYTHING, beginingRecording);
+                }*/
+                descriptors = generateTemporalRelations(descriptors);
+                //"Age	Weight	BMI	AHI
+                //Afternoon	MeanAp	MeanHy"+
+                //"	MeanDesat	MeandValSpO2	BasalSpO2	Diagnostic	ID\n"
+                descriptors += "\t" + "   111	 111	 111	 19.4"+
+                       "	false	  111	 111"+
+                       "	111	  111	 111	 91	 94.5	    Mild	     P287";
+           }
         }
         descriptors += "\n";
+        return descriptors;
+    }
+
+    /**
+     * generateSurrotageFluxLim
+     *
+     * @param limitations List
+     * @return FluxLimitation
+     */
+    private FluxLimitation generateSurrotageFluxLim() {
+        FluxLimitation fluxLimitation = new FluxLimitation();
+        fluxLimitation.setAbsoluteBeginingTime(limitations.get(0).getAbsoluteBeginingTime());
+        int duration=0,apneaCounter=0,hypopneaCounter=0,episodesCounter=0;
+        float energy=0,energyBefore=0,energyAfter=0;
+
+        for (FluxLimitation fluxLim : limitations) {
+            duration+=fluxLim.getDuration();
+            energy+=fluxLim.getEnergy();
+            energyBefore+=fluxLim.getBasalEnergyBefore();
+            energyAfter+=fluxLim.getBasalEnergyAfter();
+            if (fluxLim.getType()==Type.APNEA) {
+                apneaCounter++;
+            } else {
+                hypopneaCounter++;
+            }
+            episodesCounter++;
+        }
+        fluxLimitation.setDuration(duration);
+        fluxLimitation.setEnergy(energy);
+        fluxLimitation.setBasalEnergyBefore(energyBefore);
+        fluxLimitation.setBasalEnergyAfter(energyAfter);
+        if (apneaCounter>=hypopneaCounter) {
+            fluxLimitation.setType(Type.APNEA);
+        } else {
+            fluxLimitation.setType(Type.HIPOAPNEA);
+        }
+        return fluxLimitation;
+    }
+
+    private String generateTemporalRelations(String descriptors) {
+        FluxLimitation fluxLim = limitations.get(0);
+        descriptors += "\t" +  (this.getAbsoluteBeginingTime() - fluxLim.getAbsoluteBeginingTime())/1000F
+                 + "\t" +  (this.getAbsoluteBeginingTime() + this.getFallDuration()
+                 -fluxLim.getAbsoluteBeginingTime() - fluxLim.getDuration())/1000F
+                 + "\t" +  (this.getAbsoluteBeginingTime() + this.getDuration()
+                            -fluxLim.getAbsoluteBeginingTime() - fluxLim.getDuration())/1000F;
         return descriptors;
     }
 
@@ -216,10 +281,6 @@ public class Desaturation extends TemporalEvent {
 
     public void setBasalEnergyBefore(float basalEnergyBefore) {
         this.basalEnergyBefore = basalEnergyBefore;
-    }
-
-    public int compareTo(Object o) {
-        return 0;
     }
 
 }

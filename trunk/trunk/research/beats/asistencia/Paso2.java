@@ -42,8 +42,14 @@ public class Paso2 extends AlgorithmAdapter {
                 d[i] = d[i - 1];
             }
         }
-        sm.setSignalVisible("Movimiento abdominal", true);
-        sm.setSignalVisible("Movimiento toracico", true);
+        sm.setSignalVisible("ULF", true);
+        sm.setSignalVisible("VLF", true);
+        sm.setSignalVisible("LF", true);
+        sm.setSignalVisible("HF", true);
+        sm.setSignalVisible("LF/HF", true);
+        sm.setSignalVisible("HRV", true);
+       // sm.setSignalVisible("Movimiento abdominal", true);
+       // sm.setSignalVisible("Movimiento toracico", true);
         JSignalMonitor js = JSWBManager.getJSignalMonitor();
         js.setRepresentingXYValues(true);
         js.setMarksSelectionMode(true);

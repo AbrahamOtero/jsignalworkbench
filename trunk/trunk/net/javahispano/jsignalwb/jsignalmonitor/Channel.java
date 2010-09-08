@@ -74,16 +74,16 @@ class Channel implements ImageObserver {
             return Color.BLACK;
         }
         if (code < 20) {
-            return Color.GRAY;
-        }
-        if (code < 40) {
-            return Color.BLUE;
-        }
-        if (code < 60) {
             return Color.GREEN;
         }
-        if (code < 80) {
+        if (code < 40) {
             return Color.YELLOW;
+        }
+        if (code < 60) {
+            return Color.PINK;
+        }
+        if (code < 80) {
+            return Color.ORANGE;
         } else {
             return Color.RED;
         }

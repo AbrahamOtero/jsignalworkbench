@@ -59,7 +59,7 @@ public class FluxLimitation extends TemporalEvent {
      * @param level DETAILLEVEL
      * @return String
      */
-    public String genrateDescriptors(DETAILLEVEL level) {
+public String genrateDescriptors(DETAILLEVEL level, long beginingRecording) {
         //@Emma que valores hay que poner si no hay ninguna limitacion toracica o abdominal??(duration == 0)
         // ahora mismo no se añade nada a la string que se devuelve
         String descriptors;
@@ -80,7 +80,8 @@ public class FluxLimitation extends TemporalEvent {
             descriptors += this.getDuration();
         }
         else{
-            descriptors += "\tGEN_LIM\t" + this.getDuration();
+            descriptors +=   "\t" + (this.getAbsoluteBeginingTime()-beginingRecording)/1000F
+                     + "\t" + this.getDuration()/1000F;
             if(this.getType() == Type.APNEA)    descriptors += "\tA";
             else                                descriptors += "\tH";
 
@@ -88,7 +89,7 @@ public class FluxLimitation extends TemporalEvent {
                 descriptors += "\t" + this.getEnergy() + "\t"
                         + this.getBasalEnergyBefore() + "\t"
                         + this.getBasalEnergyAfter();
-                if(level == DETAILLEVEL.EVERYTHING){
+                if(false && level == DETAILLEVEL.EVERYTHING){
                     //info de la limitacion toracica mas larga
                     for(ThoracicMovementLimutation lim: thoracicLimitations){
                         if(lim.getDuration()>thoraxLim.getDuration())
@@ -129,7 +130,6 @@ public class FluxLimitation extends TemporalEvent {
                 }
             }
         }
-        descriptors += "\n";
         return descriptors;
     }
 
@@ -156,14 +156,14 @@ public class FluxLimitation extends TemporalEvent {
     public research.mining.FluxLimitation.Type getType() {
         return type;
     }
-    
+
     public List<AbdominalMovementLimutation> getAbdominalLimitations(){
-        List<AbdominalMovementLimutation> listCopy = 
+        List<AbdominalMovementLimutation> listCopy =
             new LinkedList<AbdominalMovementLimutation>(abdominalLimitations);
-        
+
         return listCopy;
     }
-    
+
     public List<ThoracicMovementLimutation> getThoracicLimitations(){
         List<ThoracicMovementLimutation> listCopy =
             new LinkedList<ThoracicMovementLimutation>(thoracicLimitations);

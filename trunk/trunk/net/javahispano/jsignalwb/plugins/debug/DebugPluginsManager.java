@@ -1,5 +1,5 @@
 /*
- * DebugPluginsManager.java
+ * DebugPlugsManager.java
  *
  * Created on 24 de julio de 2007, 1:39
  */
@@ -20,6 +20,9 @@ import research.beats.hrv.HRVLoader;
 import research.beats.hrv.MultiTXTLoader;
 import research.mining.AssociateEvents;
 import research.mining.GenerateDescriptors;
+import tmp.*;
+import research.mining.tmp.Media;
+import net.javahispano.jsignalwb.plugins.calculator.CalculatorAlgorithm;
 
 /**
  *
@@ -43,8 +46,8 @@ public class DebugPluginsManager {
                                             new research.apneas.grid.ApneaGrid()));
             plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Respiratory effort Grid",
                                             new research.apneas.grid.ApneaGrid()));
-            plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Test",
-                                            new DetectorDesaturacionesWrapper()));
+         //   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Test",
+      //                                      new DetectorDesaturacionesWrapper()));
             plugins.add(new DebugPluginInfo(PluginTypes.GRID, "SpO2 Grid",
                                             new research.apneas.grid.SpO2Grid()));
             plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Snoring Grid",
@@ -54,9 +57,11 @@ public class DebugPluginsManager {
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
                                         new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
-/**/        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
-                                        new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
+/**/
 
+
+/**/plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Estadistico",
+                                        new net.javahispano.plugins.basicstats.BasicStatisticsPlugin()));
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "TRACE importer",
                                         new es.usc.gsi.trace.importer.TraceImporter()));
 
@@ -77,15 +82,22 @@ public class DebugPluginsManager {
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Anotando latidos",
                                         new Paso1()));
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media",
+                                        new Media()));
+
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Anotando evento respiratorios",
                                         new Paso2()));
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "As",
+                                        new Paso3()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Marcas Transparentes",
                                         new MarcasTransparentes()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar marcas",
-                                        new BorrarMarcasEnIntervalo()));
-
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Apnea",
                                         new research.apneas.ApneaAlgorithm()));
+
+        /**/
+
         /*/  plugins.add(new DebugPluginInfo(PluginTypes.GENERIC, "Signal Generation",
                                          new SignalGenerationPlugin()));
 
@@ -113,7 +125,7 @@ public class DebugPluginsManager {
 
          plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "basicLoader",
                                          new BasicLoader()));
-
+         /**/
         plugins.add(new DebugPluginInfo(PluginTypes.LOADER, "HRVLoader",
                                         new HRVLoader()));
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Limitacion de flujo",
@@ -124,6 +136,33 @@ public class DebugPluginsManager {
 
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Latido normal",
                                         new LatidoAnotacion()));
+
+        /**/
+
+plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar marcas",
+                                new BorrarMarcasEnIntervalo()));
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cerdo",
+                                        new PigAlg()));
+
+        plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Pico",
+                                        new PicoCerdo()));
+        plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Valle",
+                                        new  ValleCerdo()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Filtrado cerdo",
+                                        new AreaCerdo()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Visualizador de datos del cerdo",
+                                        new VisualizadorDatosCerdo()));
+     /**/   plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "X",
+                                        new ExportarParametros()));/**/
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculadora de parametros",
+                                                new CalculatorAlgorithm()));
+
+
+
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Net",
+                                        new NetWork()));
 
         /*/
                 plugins.add(new DebugPluginInfo("algorithm","Concurrencia",

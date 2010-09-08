@@ -72,6 +72,13 @@ public class SignalManager {
         return false;
     }
 
+    public void hideAllSignals() {
+        for (Signal s : this.signals.values()) {
+            this.setSignalVisible(s.getName(), false);
+        }
+
+    }
+
     /**
      * Carga en el sistema la senal. En caso de que exista una senhal previa con
      * el mismo nombre devuelve false. Si se carga correctamente devuelve el
@@ -432,6 +439,29 @@ public class SignalManager {
                                               "Attempt of change settings of a non existent signal(" + signalName + ")");
         }
     }
+
+    public float getAbscissaValue(String signalName) {
+        Signal s = signals.get(signalName);
+        if (s != null) {
+            return s.getAbscissaValue();
+        } else {
+            throw new SignalNotFoundException(signalName,
+                                              "Attempt of change settings of a non existent signal(" + signalName + ")");
+        }
+
+    }
+
+    public float getMaxValue(String signalName) {
+        Signal s = signals.get(signalName);
+        if (s != null) {
+            return s.getMaxValue();
+        } else {
+            throw new SignalNotFoundException(signalName,
+                                              "Attempt of change settings of a non existent signal(" + signalName + ")");
+        }
+
+    }
+
 
     /**
      * Establece los valores maximos y minimos del eje de abcisas todas las senhales.

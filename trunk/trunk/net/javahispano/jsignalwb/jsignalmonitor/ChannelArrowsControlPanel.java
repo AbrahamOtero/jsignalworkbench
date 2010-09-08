@@ -169,11 +169,11 @@ class ChannelArrowsControlPanel extends javax.swing.JPanel {
 
     private void mouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getSource().equals(labelUp)) {
-            jsmPanel.setVerticalZoom(channelName, ((jsmPanel.getChannelProperties(channelName).getZoom() * 120)));
+            jsmPanel.setVerticalZoom(channelName, ((jsmPanel.getChannelProperties(channelName).getZoom() * 140)));
             //zoom.setText("Zoom: "+(int)(jsmPanel.getChannelProperties(channelName).getZoom()*arrowSize0)+"%");
             jsmPanel.refresh();
         } else if (evt.getSource().equals(labelDown)) {
-            float newZoom = (jsmPanel.getChannelProperties(channelName).getZoom() * 80);
+            float newZoom = (jsmPanel.getChannelProperties(channelName).getZoom() * 60);
             if (newZoom > 0) {
                 jsmPanel.setVerticalZoom(channelName, newZoom);
                 //zoom.setText("Zoom: "+newZoom+"%");
@@ -181,12 +181,12 @@ class ChannelArrowsControlPanel extends javax.swing.JPanel {
             }
         } else if (evt.getSource().equals(labelRight)) {
             long temp = jsmPanel.getScrollValue();
-            jsmPanel.setDataRate(jsmPanel.getDataRate() * 1.1f);
+            jsmPanel.setDataRate(jsmPanel.getDataRate() * 1.2f);
             //frecuency.setText("Frecuency: "+jsmPanel.getDataRate()+" Hz");
             jsmPanel.refresh();
             jsmPanel.setScrollValue(temp);
         } else if (evt.getSource().equals(labelLeft)) {
-            float newFrec = jsmPanel.getDataRate() * 0.9f;
+            float newFrec = jsmPanel.getDataRate() * 0.8f;
             if (newFrec > 0) {
                 long temp = jsmPanel.getScrollValue();
                 jsmPanel.setDataRate(newFrec);

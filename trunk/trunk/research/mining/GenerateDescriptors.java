@@ -42,13 +42,17 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         TreeSet<Desaturation> desatTree = new TreeSet<Desaturation>();
         for (DesaturacionAnotacion desat : desatAnnotationTree) {
             Desaturation desaturation = generateDesaturation(desat);
-            System.out.println(desaturation.genrateDescriptors(DETAILLEVEL.LOW)+"\n"+//@Emma borrar (solo para pruebas)
+          /*/  System.out.println(desaturation.genrateDescriptors(DETAILLEVEL.LOW)+"\n"+//@Emma borrar (solo para pruebas)
                 desaturation.genrateDescriptors(DETAILLEVEL.MEDIUM)+ "\n"+
                 desaturation.genrateDescriptors(DETAILLEVEL.HIGH)+ "\n"+
-                desaturation.genrateDescriptors(DETAILLEVEL.EVERYTHING));
+                desaturation.genrateDescriptors(DETAILLEVEL.EVERYTHING));/**/
             desatTree.add(desaturation);
         }
         SaveInfo generateInfo = new SaveInfo(desatTree);
+        generateInfo.setBeginingRecording(fluxSignal.getStart());
+        generateInfo.setLevel(DETAILLEVEL.EVERYTHING);
+        System.out.println(""+generateInfo.genrateDescriptors());
+        generateInfo.saveDescriptors();
 
     }
 
@@ -63,7 +67,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
      * @return FluxLimitation
      */
     private Desaturation generateDesaturation(DesaturacionAnotacion desatAnnotation) throws RuntimeException {
-        System.out.println("Desaturacion: \n\t Principio: " + desatAnnotation.getMarkTime()//@Emma borrar
+     /*/   System.out.println("Desaturacion: \n\t Principio: " + desatAnnotation.getMarkTime()//@Emma borrar
                            + " \n\t Indice del array correspondiente con el principio " +
                            TimePositionConverter.timeToPosition(desatAnnotation.getMarkTime(), sato2Signal)
                            + " \n\t Instante representado como hora natural " +
@@ -80,7 +84,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
                            + " \n\t Duracion en segundos " +
                            //Dividimos por 1000 para pasar de milisegundos a segundos
                            (desatAnnotation.getEndTime() - desatAnnotation.getMarkTime()) / 1000
-                );
+                );/**/
         int posMin,begin,end;
 
         Desaturation desaturation = new Desaturation();
@@ -88,7 +92,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         //Los unicos metodos que te va a interesar de las anotaciones son los dos que se usan
         //en la linea que esta a continuacion: los que devuelve su instante de inicio y el fin
         desaturation.setDuration(desatAnnotation.getEndTime() - desatAnnotation.getMarkTime());
-        
+
         begin = TimePositionConverter.timeToPosition(desatAnnotation.getMarkTime(),sato2Signal);
         end = TimePositionConverter.timeToPosition(desatAnnotation.getEndTime(),sato2Signal);
         posMin = calculatePosMin(sato2,begin,end);
@@ -97,11 +101,11 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         desaturation.setBeginValue(sato2[begin]);
         desaturation.setEndValue(sato2[end]);
 
-        desaturation.setFallDuration(TimePositionConverter.positionToTime(posMin, sato2Signal) 
+        desaturation.setFallDuration(TimePositionConverter.positionToTime(posMin, sato2Signal)
                 - TimePositionConverter.positionToTime(begin, sato2Signal));
         desaturation.setRiseDuration(TimePositionConverter.positionToTime(end, sato2Signal)
                 - TimePositionConverter.positionToTime(posMin, sato2Signal));
-        
+
         desaturation.setMeanValue(calculateMean(sato2,begin,end));
         desaturation.setFallSlope((sato2[posMin]-sato2[begin])/(posMin-begin));
         desaturation.setRiseSlope((sato2[end]-sato2[posMin])/(end-posMin));
@@ -124,8 +128,8 @@ public class GenerateDescriptors extends AlgorithmAdapter {
                 desaturation));
         desaturation.setBasalEnergyBefore(calcBasalEnergyBefore(list));
         desaturation.setBasalEnergyAfter(calcBasalEnergyAfter(list));
-       
-        System.out.println("\nMinimo: " + desaturation.getMin()//@Emma borrar
+
+      /*/  System.out.println("\nMinimo: " + desaturation.getMin()//@Emma borrar
             + "\nBegin value: " + desaturation.getBeginValue()
             + "\nEnd value: " + desaturation.getEndValue()
             + "\nFall Duration: " + desaturation.getFallDuration()
@@ -145,8 +149,8 @@ public class GenerateDescriptors extends AlgorithmAdapter {
                     + "\nEnergy: "+ lim.getEnergy()
                     + "\nEnergy Before: "+ lim.getBasalEnergyBefore()
                     + "\nEnergy After: "+ lim.getBasalEnergyAfter());
-        }
-   
+        }/**/
+
         return desaturation;
     }
 
@@ -179,7 +183,7 @@ public class GenerateDescriptors extends AlgorithmAdapter {
             fluxLimitation.setType(Type.APNEA);
         else
             fluxLimitation.setType(Type.HIPOAPNEA);
-  
+
         List<LimitacionAnotacion> abdomenAnnotationList = limitationAnnotation.getAbdomenList();
         for (LimitacionAnotacion abdomenAnnotationLimitation : abdomenAnnotationList) {
             AbdominalMovementLimutation abdomenLimitation = generateAbdomenLimitation(abdomenAnnotationLimitation);
@@ -203,7 +207,6 @@ public class GenerateDescriptors extends AlgorithmAdapter {
      */
     private AbdominalMovementLimutation generateAbdomenLimitation(LimitacionAnotacion abdominalLimitationAnnotation) {
         AbdominalMovementLimutation abdominalLimitation = new AbdominalMovementLimutation();
-        //@Emma generar aqui todos los episodios DONE
         abdominalLimitation.setAbsoluteBeginingTime(abdominalLimitationAnnotation.getMarkTime());
         abdominalLimitation.setDuration(abdominalLimitationAnnotation.getEndTime()-abdominalLimitationAnnotation.getMarkTime());
         abdominalLimitation.setEnergy(calculateEnergy(abdomen,
@@ -232,7 +235,6 @@ public class GenerateDescriptors extends AlgorithmAdapter {
      */
     private ThoracicMovementLimutation generateThoraxLimitation(LimitacionAnotacion thoraxLimitacionAnotacion) {
         ThoracicMovementLimutation thoraxLimitacion = new ThoracicMovementLimutation();
-        //@Emma generar aqui todos los episodios DONE
         thoraxLimitacion.setAbsoluteBeginingTime(thoraxLimitacionAnotacion.getMarkTime());
         thoraxLimitacion.setDuration(thoraxLimitacionAnotacion.getEndTime()-thoraxLimitacionAnotacion.getMarkTime());
         thoraxLimitacion.setEnergy(calculateEnergy(thorax,
@@ -265,11 +267,11 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         if(begin<0)             begin = 0;
         if(end>signal.length)   end = signal.length;
 
-        for(int i=begin; i<=end; i++)
+        for(int i=begin; i<=end&&i<signal.length; i++)
                 energy += signal[i]*signal[i];
         energy = energy/(end-begin+1);
-        
-        return energy;
+
+        return (float)Math.sqrt(energy);
     }
 
     /**
@@ -285,7 +287,8 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         float min = Float.MAX_VALUE;
 
         for(int i = begin; i<=end; i++)
-            if(signal[i]<min)     min = signal[i];
+            //evitar artefactos
+            if(signal[i]<min && signal[i] > 20)     min = signal[i];
 
         return min;
     }
@@ -304,7 +307,8 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         float min = Float.MAX_VALUE;
 
         for(int i = begin; i<=end; i++)
-            if(signal[i]<min){
+            //el = es para que coja la ultima muestra Si hay 1 zona plana en El minimo
+            if(signal[i]<=min && signal[i] > 20){
                 pos = i;
                 min = signal[i];
             }
@@ -343,7 +347,12 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         for(int i = begin;i<=end;i++)//Suma de Riemann
             areaAux += signal[i];
 
-        return area-areaAux;
+        float a = area-areaAux;
+        if (a<0) {
+            System.out.println("");
+        }
+        return a;
+        //@bug a vecesdtan negativo
     }
 
      /**
@@ -359,12 +368,12 @@ public class GenerateDescriptors extends AlgorithmAdapter {
         float min = 100,max1,max2=signal[begin];
 
         while(i<=end){
-            for(;signal[i]<=min;i++)                    min = signal[i];
-            
+            for(;signal[i]<=min && i<=end;i++)                    min = signal[i];
+
             max1 = min;
 
             for(;signal[i]>=max1 && i<=end; i++)        max1 = signal[i];
-            
+
             if(1.9<=max1-min && 1.9<=max2-min)          num++;
 
             max2 = max1;

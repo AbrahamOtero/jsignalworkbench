@@ -21,10 +21,8 @@ import research.apneas.LimitacionFlujo;
  */
 public class LimitacionFlujoMark extends DefaultIntervalMark {
     private String title;
-    private Color color;
     private final int extraheightPixels = 10;
     private LimitacionFlujo limitacionFlujo;
-
 
     /**
      * La limitacionFlujo se le pasa por referencia; si es modificada se modificara en el entorno.
