@@ -11,7 +11,8 @@ public class SaveInfo {
     //Nivel de detalle a emplear al generar la informacion
     private DETAILLEVEL level;
     private TreeSet<Desaturation> desatTree;
-    private String fileName = "C:\\tmp.txt";
+    private String fileName = "C:\\tmp.csv";
+    private long beginingRecording;
     //si vale true indica que debe de incluirse el tipo de episodio correspondiente
     //en la informacion generada; en caso contrario nos incluiran los episodios
     //correspondientes
@@ -30,9 +31,14 @@ public class SaveInfo {
      */
     public String genrateDescriptors() {
         String descriptors = "";
-
         for(Desaturation desaturation: desatTree){
-            descriptors += desaturation.genrateDescriptors(level);
+            //Sólo desaturaciones bien identificadas y asociadas con una
+            //única limitacion de flujo
+            if (desaturation.getDesaturatedArea()<= 0 ||
+                    desaturation.getLimitations().size() == 0) {
+                continue;
+            }
+            descriptors += desaturation.genrateDescriptors(level, beginingRecording);
         }
         return descriptors;
     }
@@ -42,6 +48,7 @@ public class SaveInfo {
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(f);
+            printHead(pw);
             pw.print(this.genrateDescriptors());
             pw.close();
         } catch (FileNotFoundException ex) {
@@ -55,6 +62,18 @@ public class SaveInfo {
                                           JOptionPane.ERROR_MESSAGE);
 
         }
+    }
+
+    private void printHead(PrintWriter pw) {
+        pw.print("timeDesat	tBeginingDesat	DurationDesat	minValueDesat"+
+                 "	meanValueDesat	beginValueDesat	endValueDesat	fallValueDesat"+
+                 "	riseValueDesat	fallDurationDesat	riseDurationDesat"+
+                 "	fallSlopeDesat	riseSlopeDesat	desaturatedArea	timeFlux"+
+                 "	tBeginingFlux	durationFlux	A|H	energyFlux"+
+                 "	basalEnergyBefore	BasalEnergyAfter	CompositeEvent	NumLimitations	tBeginingBegining"+
+                 "	tEndMin	tEndEnd" +
+                 "	Age	Weight	BMI	AHI	Afternoon	MeanDurationAp	MeanDurationHy"+
+                 "	MeanDurationDesat	MeandValSpO2Com	BasalSpO2Com	MeandValSpO2	BasalSpO2	Diagnostic	ID\n");
     }
 
     public boolean isIncludeAbdomen() {
@@ -75,6 +94,10 @@ public class SaveInfo {
 
     public DETAILLEVEL getLevel() {
         return level;
+    }
+
+    public long getBeginingRecording() {
+        return beginingRecording;
     }
 
     public void setFileName(String fileName) {
@@ -99,5 +122,9 @@ public class SaveInfo {
 
     public void setLevel(DETAILLEVEL level) {
         this.level = level;
+    }
+
+    public void setBeginingRecording(long beginingRecording) {
+        this.beginingRecording = beginingRecording;
     }
 }

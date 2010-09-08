@@ -71,7 +71,8 @@ public class BasicSaver extends SaverAdapter {
                         pw.print(data[index2][index]);
                         flag = true;
                     }
-                    pw.print("\t");
+                   if (!flag) continue;
+                   if (index2!= data.length-1) pw.print("\t");
                 }
                 pw.println();
             }

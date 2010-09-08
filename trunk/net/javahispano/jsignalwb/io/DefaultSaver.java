@@ -116,7 +116,7 @@ public class DefaultSaver extends SaverAdapter {
                 for (Signal s : signals) {
                     values = s.getValues();
                     if (index < values.length) {
-                        pw.print((int) values[index]);
+                        pw.print(values[index]);
                     }
                     pw.print("\t");
                     if (s.hasEmphasisLevel() && index < s.getEmphasisLevel().length) {

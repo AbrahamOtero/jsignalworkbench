@@ -2,10 +2,11 @@ package research.beats.hrv;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.io.BasicLoader;
+import net.javahispano.jsignalwb.plugins.MarkPlugin;
 
 /**
  * <p>Title: </p>
@@ -20,7 +21,7 @@ import net.javahispano.jsignalwb.io.BasicLoader;
  * @version 0.5
  */
 public class HRVLoader extends BasicLoader {
-    private String[] nombres = {"ULF", "VLF", "LF", "HF", "LF/HF", "HRV"};
+    private String[] nombres = {"ULF", "VLF", "LF", "HF", "LF/HF", "HRV","FC"};
     public String getName() {
         return "HRVLoader";
     }
@@ -50,9 +51,10 @@ public class HRVLoader extends BasicLoader {
             if (s == null) {
                 return false;
             }
-            Signal newSignal = new Signal(nombres[i], s.getValues());
+            Signal newSignal = new Signal(nombres[i], corrigeInicioYFin(f,s,sm));
             newSignal.setFrecuency(fs);
             newSignal.setStart((new Date(100, 1, 1, 0, 0, 0)).getTime());
+            alinearConECG(sm,newSignal,s);
             sm.removeSignal(s.getName());
             sm.addSignal(newSignal);
             newSignal.adjustVisibleRange();
@@ -64,9 +66,79 @@ public class HRVLoader extends BasicLoader {
         return flag;
     }
 
+    private void alinearConECG(SignalManager sm, Signal newSignal, Signal oldSignal) {
+        Signal ecg = sm.getSignal("ECG");
+        if (ecg == null) {//no hay ECG; estamos abriendo directamente un registro hrv y no añadiendo
+            return;
+        }
+        List<MarkPlugin> beats =ecg.getAllMarks();
+        MarkPlugin primerLatido = buscarPrimerLatido(beats);
+
+        long posicionPrimerLatido = primerLatido.getMarkTime();
+        posicionPrimerLatido += (primerLatido.getEndTime()-primerLatido.getMarkTime())/2;
+        long origenOldSignal = oldSignal.getStart();
+        float desplazamientoEnSegundos = (posicionPrimerLatido-origenOldSignal)/(1000F);
+        int desplazamientoEnMuestras = Math.round (desplazamientoEnSegundos * newSignal.getSRate());
+
+
+        float[] oldValues = newSignal.getValues();
+        float[] newValues = new float[oldValues.length+desplazamientoEnMuestras];
+        int i =0;
+        for (; i < desplazamientoEnMuestras; i++) {
+            newValues[i]=0;
+        }
+        for (i=0; i < oldValues.length; i++) {
+            newValues[desplazamientoEnMuestras+i]=oldValues[i];
+        }
+        newSignal.setValues(newValues);
+    }
+
+    private MarkPlugin buscarPrimerLatido(List<MarkPlugin> m) {
+        MarkPlugin primerLatido=m.get(0);
+        for (MarkPlugin markPlugin : m) {
+            if (primerLatido.getMarkTime()>markPlugin.getMarkTime()) {
+                primerLatido=markPlugin;
+            }
+        }
+        return primerLatido;
+    }
+
+    private float[] corrigeInicioYFin(File f, Signal s, SignalManager sm) {
+        Signal ecg = sm.getSignal("ECG");
+        if (ecg == null) {//no hay ECG; estamos abriendo directamente un registro hrv y no añadiendo
+            return s.getValues();
+        }
+        float ventana = extraerVentanaEnSegundos(f);
+        float fs = obtenerFS(f);
+        int muestras = Math.round(ventana*fs);
+        float[] oldValues = s.getValues();
+        float[] newValues = new float[oldValues.length+muestras];
+        int numCerosPrincipioYFinal= muestras/2 + muestras%2;
+        int i =0;
+        for (; i < numCerosPrincipioYFinal; i++) {
+            newValues[i]=0;
+        }
+        for (i=0; i < oldValues.length; i++) {
+            newValues[numCerosPrincipioYFinal+i]=oldValues[i];
+        }
+        for (i=numCerosPrincipioYFinal+i; i < newValues.length; i++) {
+            newValues[i]=0;
+        }
+        return newValues;
+    }
+
+    private float extraerVentanaEnSegundos(File f) throws NumberFormatException {
+        String nombreArchivo = f.getName();
+        int indicePrincipioVentana = nombreArchivo.indexOf('_');
+        int indiceFinalVentana = nombreArchivo.lastIndexOf('_');
+        String ventanaEnSegundosString = nombreArchivo.substring(indicePrincipioVentana + 1, indiceFinalVentana);
+        float ventanaEnSegundos = Float.parseFloat(ventanaEnSegundosString);
+        return ventanaEnSegundos;
+    }
+
     private float obtenerFS(File f) {
         String n = f.getName();
-        int i = n.indexOf('_');
+        int i = n.lastIndexOf('_');
 
         int i2 = n.indexOf('.');
         String s2 = n.substring(i + 1, i2);

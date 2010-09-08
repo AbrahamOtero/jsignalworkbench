@@ -103,6 +103,7 @@ public class ControladorInterfaz {
         if (archivoAbierto != null) {
             this.dialogoAbrir.setCurrentDirectory(archivoAbierto);
         }
+
         int opc = dialogoAbrir.showOpenDialog(panelPrincipal);
 
         if (opc == JFileChooser.APPROVE_OPTION) {

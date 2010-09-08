@@ -34,6 +34,7 @@ public class ExportarLatiods extends AlgorithmAdapter {
     private BasicSaver basicSaver;
     private float rr[];
     private boolean error = true;
+    private boolean exportRHRV = true;
 
     public ExportarLatiods() {
         basicSaver = new BasicSaver();
@@ -162,40 +163,39 @@ public class ExportarLatiods extends AlgorithmAdapter {
                              List<SignalIntervalProperties> signals,
             AlgorithmRunner ar) {
         Signal signal;
-        System.out.println(""+signals.size());
-      /*  if (signals.size() != 1) {
+
+        /*  if (signals.size() != 1) {
+              this.errorMensaje();
+              error = true;
+              return;
+          }*/
+        //    else{
+        List<MarkPlugin> l;
+        SignalIntervalProperties interval = signals.get(0);
+        signal = interval.getSignal();
+        if (signals.get(0).isFullSignal()) {
+            l = signal.getAllMarks();
+        } else {
+            l = new LinkedList<MarkPlugin>();
+            for (SignalIntervalProperties e : signals) {
+                List<MarkPlugin> kk = signal.getMarks(e.getStartTime(), e.getEndTime());
+                l.addAll(kk);
+            }
+        }
+        List<DefaultIntervalMark> beatMarks = new LinkedList();
+        for (MarkPlugin mark : l) {
+            if (mark instanceof DefaultIntervalMark && ((DefaultIntervalMark) mark).getComentary().equals("0")) {
+                beatMarks.add((DefaultIntervalMark) mark);
+            }
+        }
+        if (beatMarks.size() == 0) {
             this.errorMensaje();
             error = true;
             return;
-        }*/
-    //    else{
-        List<MarkPlugin> l ;
-        SignalIntervalProperties interval = signals.get(0);
-        signal = interval.getSignal();
-            if (signals.get(0).isFullSignal()) {
-                l = signal.getAllMarks();
-            }
-            else{
-                l = new LinkedList<MarkPlugin>();
-                for (SignalIntervalProperties e : signals) {
-                List<MarkPlugin> kk = signal.getMarks(e.getStartTime(), e.getEndTime());
-                l.addAll(kk);
-                }
-            }
-            List<DefaultIntervalMark> beatMarks = new LinkedList();
-            for (MarkPlugin mark : l) {
-                if (mark instanceof DefaultIntervalMark && ((DefaultIntervalMark) mark).getComentary().equals("0")) {
-                    beatMarks.add((DefaultIntervalMark) mark);
-                }
-            }
-            if (beatMarks.size() == 0) {
-                this.errorMensaje();
-                error = true;
-                return;
-            }
-            Collections.sort(beatMarks);
-            generateRR(signal, beatMarks);
-       // }
+        }
+        Collections.sort(beatMarks);
+        generateRR(signal, beatMarks);
+        // }
         error = false;
     }
 
@@ -208,6 +208,16 @@ public class ExportarLatiods extends AlgorithmAdapter {
             rr[i] = refinedRR - signal.getStart();
             rr[i] /= 1000;
             i++;
+        }
+        if (!this.exportRHRV) {
+            for (int j = rr.length - 1; j > 0; j--) {
+                rr[j] = rr[j] - rr[j - 1];
+            }
+            float [] nrr = new float[rr.length-1];
+            for (int j = 0; j < nrr.length; j++) {
+                nrr[j] = rr[j+1];
+            }
+            rr=nrr;
         }
     }
 
@@ -310,8 +320,15 @@ public class ExportarLatiods extends AlgorithmAdapter {
             File f = jf.getSelectedFile();
             ultimoDirectorioAbierto = jf.getCurrentDirectory().getAbsolutePath();
             String n = f.getAbsolutePath();
-            if (!n.endsWith(".beats")) {
-                n = n.concat(".beats");
+            if (this.exportRHRV) {
+                if (!n.endsWith(".beats")) {
+                    n = n.concat(".beats");
+                }
+
+            } else {
+                if (!n.endsWith(".dat")) {
+                    n = n.concat(".dat");
+                }
             }
             f = new File(n);
             float tmp[][] = new float[1][rr.length];
@@ -325,6 +342,23 @@ public class ExportarLatiods extends AlgorithmAdapter {
                 errorGuardarMensaje();
             }
         }
+    }
+
+    /**
+     * Por defecto no proporciona interfaz propia de ejecucion.
+     *
+     * @return boolean
+     */
+    public boolean hasOwnExecutionGUI() {
+        return true;
+    }
+
+    public void launchExecutionGUI(JSWBManager jswbManager) {
+        DialogKubiosRHRV d = new DialogKubiosRHRV(null, "Seleciona Formato", true);
+        d.setVisible(true);
+        exportRHRV = d.isExportRHRV();
+        super.launchExecutionGUI(jswbManager);
+
     }
 
     private void errorGuardarMensaje() throws HeadlessException {

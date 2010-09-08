@@ -9,6 +9,12 @@ import javax.swing.JFrame;
 
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
+import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
+import java.awt.Graphics2D;
+import java.awt.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.UIManager;
+import javax.swing.ToolTipManager;
 
 /**
  * <p>Title: </p>
@@ -27,7 +33,6 @@ public class LimitacionAnotacion extends DefaultIntervalMark {
     A = -1, V = -2, P = -3, TV = -4, Vrt = -5, Prt = -6;
     private int tipo = 1;
     private boolean automatica = false;
-
     public LimitacionAnotacion() {
         super();
     }
@@ -70,16 +75,55 @@ public class LimitacionAnotacion extends DefaultIntervalMark {
         return automatica;
     }
 
+    public String getToolTipText() {
+        UIManager.put("ToolTip.foreground", new ColorUIResource(Color.black));
+            UIManager.put("ToolTip.background", new ColorUIResource(Color.CYAN ));
+
+            ToolTipManager.sharedInstance().setDismissDelay(10000);
+         // Show tool tips immediately
+    ToolTipManager.sharedInstance().setInitialDelay(600);
+        return "<html>Desaturation<br>Possibility: 1.0<br>"+
+                "<ul><li>Drop: 18</li><li>Span: 49 sec.</li><li>Maximum value: 98</li>"+
+                "<li>Minimum value: 80</li><li>Mean value: 89</li></ul></html>";
+    }
+
+  /* */ public void paint(Graphics2D g2d, MarkPaintInfo markPaintInfo) {
+        super.paint(g2d, markPaintInfo);
+        if (!isAutomatica()) {
+            g2d.setColor(Color.GREEN);
+            Point p = markPaintInfo.getPoint();
+            int radio = 10;
+            int x = p.x + markPaintInfo.getWidth()/2 -  radio/2;
+            int y = p.y +  2*markPaintInfo.getHeight()/3 - radio;
+            g2d.fillOval(x, y, radio, radio);
+        }
+        if (this.getSignal().getName().equals("Flujo") ) {
+            g2d.setColor(Color.BLACK);
+            Point p = markPaintInfo.getPoint();
+            int maxY = (int) Math.max(markPaintInfo.getPoint().getY(),
+                                  markPaintInfo.getMaxValueY());
+            int x = p.x + markPaintInfo.getWidth()/2 - 2;
+            int y = maxY  -16;
+            if (this.tipo == APNEA) {
+                //g2d.drawString("A", x, y);
+            }
+            if (this.tipo == HIPOAPNEA) {
+                //g2d.drawString("H", x, y);
+            }
+
+        }
+    }/**/
+
     public void setTipo(int tipo) {
         this.tipo = tipo;
         this.setComentary(tipo + "");
         if (tipo == LimitacionAnotacion.APNEA ||
             tipo <= 0) {
-            this.setColor(Color.RED);
+          //  this.setColor(Color.RED);
         } else if (tipo == LimitacionAnotacion.HIPOAPNEA) {
-            this.setColor(Color.YELLOW);
+          //  this.setColor(Color.YELLOW);
         } else {
-            this.setColor(Color.BLUE);
+          //  this.setColor(Color.BLUE);
         }
 
     }

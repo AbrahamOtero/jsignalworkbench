@@ -298,6 +298,13 @@ public class Signal {
         properties.setVisible(visible);
     }
 
+
+    public boolean isVisible() {
+         return properties.isVisible();
+    }
+
+
+
     public void setDataColor(Color color) {
         properties.setDataColor(color);
     }
@@ -343,6 +350,15 @@ public class Signal {
     public boolean setVisibleRange(float abscissaValue, float maxValue) {
         return setVisibleRange(abscissaValue, maxValue, 1);
     }
+
+    public float getAbscissaValue() {
+       return properties.getAbscissaValue();
+    }
+
+    public float getMaxValue() {
+   return properties.getMaxValue();
+}
+
 
     /**
      * adjustVisibleRange

@@ -66,6 +66,7 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         if (numberSignals < 0) {
             jButton3.setEnabled(false);
         }
+        jSpinner1.setValue(1);
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
@@ -445,7 +446,7 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         }
     } //GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton3ActionPerformed
+    public void jButton3ActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_jButton3ActionPerformed
         int intervalsNumber = 0;
         int signalsNumber = 0;
         if (selectInterval.isSelected()) {
@@ -526,7 +527,10 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
         }
     } //GEN-LAST:event_jButton1ActionPerformed
 
-
+    public void setIntervalMode(boolean activate){
+        this.selectInterval.setSelected(activate);
+        this.selectSignals.setSelected(!activate);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

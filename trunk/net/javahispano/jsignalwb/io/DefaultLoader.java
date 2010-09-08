@@ -340,7 +340,7 @@ public class DefaultLoader extends LoaderAdapter {
                     ec.addException(new Exception("The plugin " + pluginKey + " is not registered"));
                 }
             }
-            ec.showExceptions("The next errors founded loading the plugins data");
+          //  ec.showExceptions("The next errors founded loading the plugins data");
             return fileValues;
         } catch (NumberFormatException ex) {
             throw new Exception("Error loading xml(invalid number format): " + ex.getMessage(), ex);

@@ -63,7 +63,6 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
         splitPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, false, leftPanel, channels);
         splitPanel.setOneTouchExpandable(true);
         splitPanel.setDividerSize(8);
-        splitPanel.setDividerLocation(100);
         splitPanel3 = new AnnotationsSplitPanel(jsmProperties, channels.getHLeftOffsetScale());
         splitPanel2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, false, splitPanel3, splitPanel);
         splitPanel2.setOneTouchExpandable(true);
@@ -76,7 +75,7 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
         setLayout(new BorderLayout());
         add(jScrollBar, BorderLayout.SOUTH);
         add(splitPanel2, BorderLayout.CENTER);
-
+        splitPanel.setDividerLocation(120);
     }
 
     public void printSignals(int orientation) {
@@ -110,9 +109,16 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
     }
 
     public void setScrollValue(long scrollValue) {
-        if (scrollValue <= jsmProperties.getMaxTime() && scrollValue >= jsmProperties.getScrollBaseTime()) {
-            jScrollBar.setValue(Math.round(((scrollValue - jsmProperties.getScrollBaseTime()) * jsmProperties.getFrec()) /
-                                           1000f));
+        if (scrollValue <= jsmProperties.getMaxTime() &&
+            scrollValue >= jsmProperties.getScrollBaseTime()) {
+            int newValue = Math.round(((scrollValue -
+                 jsmProperties.getScrollBaseTime()) * jsmProperties.getFrec()) /1000f);
+            jScrollBar.setValue(newValue);
+            if (jScrollBar.getValue()!=newValue) {
+                //hay que aplicar correcci+n por culpa del VisibleAmount
+                jScrollBar.setMaximum(newValue+jScrollBar.getVisibleAmount());
+                 jScrollBar.setValue(newValue);
+            }
             refreshData();
         }
     }
@@ -153,8 +159,9 @@ class JSignalMonitorPanel extends JPanel implements AdjustmentListener, JSignalM
         Runnable uiUpdateRunnable = new Runnable() {
             public void run() {
                 splitPanel3.refreshCategories();
-                refreshScrollBar();
+
                 refreshData();
+                refreshScrollBar();
                 refreshLeftPanel();
                 channels.refreshGridsConfig();
             }

@@ -865,7 +865,6 @@ public class JSWBManager implements JSignalMonitorDataSource,
      */
     public boolean loadChannels(String loaderName, File f) {
         try {
-            System.out.println("aaaaaaaaaa" + this.deleteSignalsInNextLoad);
             if (!iOManager.loadSignals(f, loaderName, deleteSignalsInNextLoad)) {
                 JOptionPane.showMessageDialog(getParentWindow(), "Alguna senhal no se ha cargado");
             }
@@ -1348,8 +1347,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
         /*@todo bug
                  a veces se llama a este metodo como un valor de pos1 de -2147483648
          */
-        if (pos2 <= pos1 || pos1 < 0 || pos2 < 0) {
-            System.out.println("pos1 " + pos1 + " pos2 " + pos2);
+        if (pos2 <= pos1 || pos1 < 0 || pos2 < 0|| pos2 - pos1 > 10000000) {
             return new float[1];
         }
         float[] partialValues = new float[pos2 - pos1];

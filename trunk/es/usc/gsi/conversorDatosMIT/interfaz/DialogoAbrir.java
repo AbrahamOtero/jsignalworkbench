@@ -23,7 +23,14 @@ public class DialogoAbrir extends JFileChooser {
     public boolean isTraversable(File f) {
         boolean res = super.isTraversable(f);
         if (f.getName().indexOf(".hea") != -1) {
-            this.changeToParentDirectory(); // Si es un directorio, el valor de res podria cambiar.
+
+            Runnable uiUpdateRunnable = new Runnable() {
+                public void run() {
+                    changeToParentDirectory(); // Si es un directorio, el valor de res podria cambiar.
+                }
+            };
+            javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
+
         }
 
         return res;
