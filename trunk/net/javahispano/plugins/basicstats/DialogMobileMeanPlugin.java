@@ -50,6 +50,7 @@ public class DialogMobileMeanPlugin extends JDialog {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+        this.ajustarSlider(window);
         jSlider1.setValue(window);
         this.oldWindow = window;
         this.setSize(500, 250);
@@ -110,11 +111,20 @@ public class DialogMobileMeanPlugin extends JDialog {
     public void textDuration_actionPerformed(ActionEvent e) {
         try {
             int valor = Integer.parseInt(textDuration.getText());
+            ajustarSlider(valor);
             jSlider1.setValue(valor);
         } catch (NumberFormatException ex) {
             textDuration.requestFocus();
             textDuration.selectAll();
         }
+    }
+
+    private void ajustarSlider(int valorMax) {
+            if (valorMax > jSlider1.getMaximum()) {
+                jSlider1.setMaximum(valorMax*2);
+
+        jSlider1.setMajorTickSpacing(valorMax/10);
+            }
     }
 
     public void textDuration_focusLost(FocusEvent focusEvent) {
