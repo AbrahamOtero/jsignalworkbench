@@ -24,6 +24,8 @@ import tmp.*;
 import research.mining.tmp.Media;
 import net.javahispano.jsignalwb.plugins.calculator.CalculatorAlgorithm;
 import research.descriptors.SeverityDescriptorsGenerator;
+import tmp.AdjustSignalsSartsAndEnds;
+import research.beats.hrv.ApneaEpisodeGenerator;
 
 /**
  *
@@ -55,9 +57,18 @@ public class DebugPluginsManager {
                                            new research.apneas.grid.SnoringGrid()));
            plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Default",
                                            new research.apneas.grid.GridGris()));
+         /**/
+         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
+                                         new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
+           plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Generador de episodios de apnea",
+                                         new ApneaEpisodeGenerator ()));
 
-                plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
-                                       new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
+
+
+         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Interpolar en hueco",
+                                       new FillInterval()));
+         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Ajustar principio y fin de las senhales",
+                                       new AdjustSignalsSartsAndEnds()));
         /**/
 
 
