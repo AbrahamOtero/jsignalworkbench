@@ -16,43 +16,23 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
 import java.awt.*;
+import java.util.Arrays;
 
-/**
- * <p>Title: </p>
- *
- * <p>Description: </p>
- *
- * <p>Copyright: Copyright (c) 2007</p>
- *
- * <p>Company: </p>
- *
- * @author Abraham Otero
- * @version 0.5
- */
 public class SeverityDescriptorsGenerator extends AlgorithmAdapter {
 
     private Signal sato2Signal, fluxSignal;
     private float[] sato2;
-    //Frecuencia de muestreo
-    private float sato2SamplingRate;
+    private final int minValueSpO2Aceptable = 20;
     //variables para guardar los datos
     private float apneaPercentage;
     private float hipoapneaPercentage;
     private float apneaAndHipoapneaPercentage;
     private float desaturationPercentage;
     private float meanValueSato2;
-    private float BasalValueSato2;
+    private float basalValueSato2;
     private float areaSato2;
+    private float deltaSato2;
 
-
-    /**
-     * Este es el metodo de JSignalWorkbench llamara desde el boton que creara
-     * en la barra de tareas para este algoritmo.
-     *
-     * @param sm SignalManager
-     * @param signals List
-     * @param ar AlgorithmRunner
-     */
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
         initialize(sm);
@@ -62,8 +42,20 @@ public class SeverityDescriptorsGenerator extends AlgorithmAdapter {
         TreeSet<LimitacionAnotacion> apneas = new TreeSet<LimitacionAnotacion>();
         TreeSet<LimitacionAnotacion> hipoapneas = new TreeSet<LimitacionAnotacion>();
 
-        TreeSet<LimitacionAnotacion> desatTree = new TreeSet<LimitacionAnotacion>();
-        for (LimitacionAnotacion anotation : allHipoventilations) {
+        separateApneasAndHypopneas(allHipoventilations, apneas, hipoapneas);
+        float[] sato2WithoutCeros=calculateStO2WithoutCeros();
+        calculateTimes(allDesaturations, apneas, hipoapneas, sato2WithoutCeros);
+        this.meanValueSato2 = calculateMeanValueSato2(sato2WithoutCeros);
+        this.basalValueSato2 = calculateBasalValueSato2(sato2WithoutCeros);
+        this.areaSato2 = calculaArea(sato2WithoutCeros);
+        deltaSato2 = this.basalValueSato2 - this.meanValueSato2;
+
+        putDataInClipBoard();
+    }
+
+    private void separateApneasAndHypopneas(TreeSet<LimitacionAnotacion> allHipoventilations,
+            TreeSet<LimitacionAnotacion> apneas, TreeSet<LimitacionAnotacion> hipoapneas) {
+            for (LimitacionAnotacion anotation : allHipoventilations) {
             if (anotation.getTipo() == LimitacionAnotacion.APNEA) {
                 apneas.add(anotation);
 
@@ -71,18 +63,97 @@ public class SeverityDescriptorsGenerator extends AlgorithmAdapter {
                 hipoapneas.add(anotation);
             }
         }
-
         assert (hipoapneas.size() + apneas.size() == allHipoventilations.size());
-
-//esto lo que mide cada una de las anotaciones, en milisegundos
-        // anotation.getEndTime()- anotation.getMarkTime()
-
-        putDataInClipBoard();
-
     }
+
+
+    private float[] calculateStO2WithoutCeros() {
+        float[] sato2WithoutCeros = null;
+        int start =0;
+        for (start = 0; start < sato2.length; start++) {
+            if (sato2[start]!=0) {
+                break;
+            }
+        }
+        int end =0;
+        for (end = sato2.length-1; end >0 ; end--) {
+            if (sato2[end]!=0) {
+                break;
+            }
+        }
+        sato2WithoutCeros = new float[end-start];
+        for (int i = start; i < end; i++) {
+            sato2WithoutCeros[i-start] = sato2[i];
+        }
+        return sato2WithoutCeros;
+    }
+
+    private void calculateTimes(TreeSet<LimitacionAnotacion> allDesaturations, TreeSet<LimitacionAnotacion> apneas,
+            TreeSet<LimitacionAnotacion> hipoapneas, float[] sato2WithoutCeros) {
+        int timeApneas=calculaTiempoApneasInSeconds(apneas);
+        int timeHipoapneas=calculaTiempoApneasInSeconds(hipoapneas);
+        int timeDesaturations=calculaTiempoApneasInSeconds(allDesaturations);
+        int timeApneasHipoapneas=timeApneas+timeHipoapneas;
+        float totalTime= sato2WithoutCeros.length/sato2Signal.getSRate();
+        apneaPercentage =100*timeApneas/totalTime;
+        hipoapneaPercentage =100*timeHipoapneas/totalTime;
+        desaturationPercentage =100*timeDesaturations/totalTime;
+        apneaAndHipoapneaPercentage =100*timeApneasHipoapneas/totalTime;
+    }
+
+    private int calculaTiempoApneasInSeconds(TreeSet<LimitacionAnotacion> apneas) {
+        long tiempoTotal =0;
+        for (LimitacionAnotacion anotation : apneas){
+            tiempoTotal+=anotation.getEndTime()- anotation.getMarkTime();
+        }
+        return (int)(tiempoTotal/1000);
+    }
+
+    private float calculateMeanValueSato2(float[] sato2WithoutCeros) {
+        float mean=0;
+        int counter=0;
+        for (int i = 0; i < sato2WithoutCeros.length; i++) {
+            if (sato2WithoutCeros [i] > minValueSpO2Aceptable && sato2WithoutCeros [i] < 101) {
+                mean += sato2WithoutCeros [i];
+                counter++;
+            }
+        }
+        return mean/counter;
+    }
+
+    private float calculateBasalValueSato2(float[] sato2WithoutCeros) {
+        float[] copia =Arrays.copyOf(sato2WithoutCeros,sato2WithoutCeros.length);
+        Arrays.sort(copia);
+        int start = copia.length*90/100;
+        int ends = copia.length*95/100;
+        float media=0;
+        int contador=0;
+        for (int i = start; i < ends; i++) {
+            if (copia [i]>minValueSpO2Aceptable && copia [i]<101) {
+                media += copia [i];
+                contador++;
+            }
+        }
+        return media/contador;
+    }
+
+  private float calculaArea(float[] sato2WithoutCeros) {
+        float area=0;
+        int contador=0;
+        for (int i = 0; i < sato2WithoutCeros.length; i++) {
+            float delta = basalValueSato2-sato2WithoutCeros [i];
+            if (sato2WithoutCeros [i]>20&&delta>=0) {
+                area += delta;
+                contador++;
+            }
+        }
+        return sato2Signal.getSRate()*3600*area/contador;
+    }
+
 
     private void putDataInClipBoard() throws HeadlessException {
         String data = generateStringWithData();
+        System.out.println(data);
         StringSelection stringSelection = new StringSelection(data);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, new ClipboardOwner() {
@@ -94,33 +165,21 @@ public class SeverityDescriptorsGenerator extends AlgorithmAdapter {
     }
 
     private String generateStringWithData() {
-        String data = apneaPercentage + "; " + hipoapneaPercentage + "; " +
-                      apneaAndHipoapneaPercentage + "; " +
-                      desaturationPercentage + "; " + meanValueSato2 + "; " +
-                      BasalValueSato2 + "; " + areaSato2;
+        String data = apneaPercentage + "," + hipoapneaPercentage + "," +
+                      apneaAndHipoapneaPercentage + "," +
+                      desaturationPercentage + "," + meanValueSato2 + "," +
+                      basalValueSato2 + "," + deltaSato2 + "," + areaSato2   +",";
         return data;
     }
 
 
-    /**
-     * Usando la API de JSignalWorkbench obtiene las cuatro senhales, junto con
-     * sus correspondientes arrays de datos, sobre los que vamos a trabajar.
-     * Tambien obtiene la frecuencia de muestreo de las senhales. Todos estos
-     * datos se guardan en atributos de la clase.
-     *
-     * @param sm SignalManager
-     */
     private void initialize(SignalManager sm) {
-        //Obtenemos las señales que necesitamos
         sato2Signal = sm.getSignal("Sat02");
         fluxSignal = sm.getSignal("Flujo");
         sato2 = sato2Signal.getValues();
-        //Frecuencia de muestreo
-        sato2SamplingRate = sato2Signal.getSRate();
     }
 
 
-//**************Lo que hay aqui abajo no es relevante para ti ******************
      private TreeSet<LimitacionAnotacion> getMarksAsTree(Signal signal) {
          List<MarkPlugin> listMarkPlugins = signal.getAllMarks();
          TreeSet<LimitacionAnotacion> limTree = new TreeSet<LimitacionAnotacion>();
@@ -134,7 +193,6 @@ public class SeverityDescriptorsGenerator extends AlgorithmAdapter {
     public boolean hasOwnExecutionGUI() {
         return true;
     }
-
 
     public void launchExecutionGUI(JSWBManager jswbManager) {
         this.runAlgorithm(jswbManager.getSignalManager(), null, null);
