@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import net.javahispano.jsignalwb.*;
 import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
+import javax.swing.Icon;
+import java.awt.Color;
+import net.javahispano.jsignalwb.plugins.Plugin;
 
 /**
  * <p>Title: </p>
@@ -44,7 +47,7 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
     }
 
     public int numberOfSignalsNeeded() {
-        return 1;
+        return 9;
     }
 
     /**
@@ -55,7 +58,19 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
     public void runAlgorithm(SignalManager sm,
                              List<SignalIntervalProperties> signals,
             AlgorithmRunner ar) {
-        Signal signal = signals.get(0).getSignal();
+      for (SignalIntervalProperties signali : signals) {
+         Signal s = signali.getSignal();
+         Signal newSignal = generateSmoothSignal(sm, s);
+         sm.addSignal(newSignal);
+      }
+
+    }
+
+    int deslizamientoParaCadaMediana = 500;
+    boolean resample = true;
+    int ventanaResampleEnSegundos =300;
+
+    private Signal generateSmoothSignal(SignalManager sm, Signal signal) {
         float[] data = signal.getValues();
         float[] newData;
         int numberOfSamples = Math.round(this.window * signal.getSRate());
@@ -65,9 +80,10 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
                 newData = MediaMovil.calculaMediaMovilClone(data, numberOfSamples);
             } catch (MediaMovilException ex) {
                 ex.printStackTrace();
-                return;
+                return null;
             }
-        } else {
+        }
+        else {
             int medium;
             float[] dataOnWindow;
             if (numberOfSamples % 2 != 0) {
@@ -81,13 +97,17 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
             for (int i = 0; i < medium; i++) {
                 newData[i] = data[i];
             }
-            for (int i = medium; i < data.length - medium; i++) {
+
+            for (int i = medium; i < data.length - medium; i+=deslizamientoParaCadaMediana) {
                 int c = 0;
                 for (int j = i - medium; j < i - medium + dataOnWindow.length; j++) {
                     dataOnWindow[c++] = data[j];
                 }
                 Arrays.sort(dataOnWindow);
-                newData[i] = dataOnWindow[medium];
+                for (int j = i; j < i+deslizamientoParaCadaMediana; j++) {
+                    newData[j] = dataOnWindow[medium];
+                }
+
             }
         }
         //si hay que eliminar los huecos
@@ -99,16 +119,52 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
             }
         }
 
-        Signal newSignal = new Signal(signal.getName() + "_Suave1_" + this.window, newData,
+
+
+        Signal newSignal;
+
+        if (resample) {
+            int ventana = (int) (ventanaResampleEnSegundos*signal.getSRate()+1);
+            float[] resampledData = new float[newData.length/ventana];
+            for (int i = 0; i < resampledData.length; i++) {
+                float media=0;
+                for (int j = i*ventana; j < (i+1)*ventana; j++) {
+                    media += newData[j];
+                }
+                media /= ventana;
+                resampledData [i]= media;
+            }
+            float nuevaFs = 1.0F/ventanaResampleEnSegundos;
+            newSignal= new Signal(signal.getName() + "_Suave1_" + this.window, resampledData,
+                                      nuevaFs, signal.getStart(),
+                                      signal.getMagnitude());
+        }
+        else {
+            newSignal= new Signal(signal.getName() + "_Suave1_" + this.window, newData,
                                       signal.getSRate(), signal.getStart(),
                                       signal.getMagnitude());
-        sm.addSignal(newSignal);
+        }
+        return newSignal;
     }
 
     public boolean hasDataToSave() {
         return false;
     }
 
+
+
+    public boolean showInGUIOnthe(GUIPositions gUIPositions) {
+        if (gUIPositions == GUIPositions.MENU) {
+            return true;
+        } else if (gUIPositions == GUIPositions.TOOLBAR) {
+            return true;
+        }
+        return false;
+    }
+
+    public Icon getIcon() {
+        return super.generateImageSimple("AV", Color.blue);
+    }
 
     public String getName() {
         return "Media movil";
