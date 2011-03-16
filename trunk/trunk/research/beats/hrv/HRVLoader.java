@@ -44,6 +44,14 @@ public class HRVLoader extends BasicLoader {
     protected boolean load(File f, SignalManager sm) throws Exception {
         boolean flag = true;
         float fs = obtenerFS(f);
+        Object[] signalArray= sm.getSignals().toArray();
+        Date baseDate;
+        if (signalArray.length>0) {
+            baseDate = new Date(((Signal)signalArray [0]).getStart());
+        } else {
+             baseDate = new Date(100, 1, 1, 0, 0, 0);
+        }
+
         super.load(f, sm);
         int numberOfSignals = sm.getSignalsSize();
         for (int i = 0; i < numberOfSignals; i++) {
@@ -53,7 +61,7 @@ public class HRVLoader extends BasicLoader {
             }
             Signal newSignal = new Signal(nombres[i], corrigeInicioYFin(f,s,sm));
             newSignal.setFrecuency(fs);
-            newSignal.setStart((new Date(100, 1, 1, 0, 0, 0)).getTime());
+            newSignal.setStart(baseDate.getTime());
             alinearConECG(sm,newSignal,s);
             sm.removeSignal(s.getName());
             sm.addSignal(newSignal);
@@ -130,7 +138,7 @@ public class HRVLoader extends BasicLoader {
     private float extraerVentanaEnSegundos(File f) throws NumberFormatException {
         String nombreArchivo = f.getName();
         int indicePrincipioVentana = nombreArchivo.indexOf('_');
-        int indiceFinalVentana = nombreArchivo.lastIndexOf('_');
+        int indiceFinalVentana = nombreArchivo.lastIndexOf('.');
         String ventanaEnSegundosString = nombreArchivo.substring(indicePrincipioVentana + 1, indiceFinalVentana);
         float ventanaEnSegundos = Float.parseFloat(ventanaEnSegundosString);
         return ventanaEnSegundos;
