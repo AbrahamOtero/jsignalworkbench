@@ -58,6 +58,7 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
     public void runAlgorithm(SignalManager sm,
                              List<SignalIntervalProperties> signals,
             AlgorithmRunner ar) {
+        sm.hideAllSignals();
       for (SignalIntervalProperties signali : signals) {
          Signal s = signali.getSignal();
          Signal newSignal = generateSmoothSignal(sm, s);
@@ -67,13 +68,13 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
     }
 
     int deslizamientoParaCadaMediana = 500;
-    boolean resample = true;
+    boolean resample = false;
     int ventanaResampleEnSegundos =300;
 
     private Signal generateSmoothSignal(SignalManager sm, Signal signal) {
         float[] data = signal.getValues();
         float[] newData;
-        int numberOfSamples = Math.round(this.window * signal.getSRate());
+        int numberOfSamples = this.window ;
 
         if (!this.mediana) {
             try {

@@ -26,6 +26,7 @@ import net.javahispano.jsignalwb.plugins.calculator.CalculatorAlgorithm;
 import research.descriptors.SeverityDescriptorsGenerator;
 import tmp.AdjustSignalsSartsAndEnds;
 import research.beats.hrv.ApneaEpisodeGenerator;
+import research.mining.*;
 
 /**
  *
@@ -58,6 +59,7 @@ public class DebugPluginsManager {
            plugins.add(new DebugPluginInfo(PluginTypes.GRID, "Default",
                                            new research.apneas.grid.GridGris()));
          /**/
+         /**/
          plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Media movil",
                                          new net.javahispano.plugins.basicstats.MobileMeanPlugin()));
            plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Generador de episodios de apnea",
@@ -85,6 +87,7 @@ public class DebugPluginsManager {
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Detector de latidos",
                                         new TestDeteccion()));
+         /**/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "ExportarLatidos",
                                         new ExportarLatiods()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Asociar Eventos",
@@ -149,12 +152,13 @@ public class DebugPluginsManager {
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Latido normal",
                                         new LatidoAnotacion()));
 
-        /**/
-
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Borrar marcas",
                                         new BorrarMarcasEnIntervalo()));
 
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cerdo",
+
+        /**/
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Diuresis",
                                         new PigAlg()));
 
         plugins.add(new DebugPluginInfo(PluginTypes.MARK, "Pico",
@@ -165,8 +169,8 @@ public class DebugPluginsManager {
                                         new AreaCerdo()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Visualizador de datos del cerdo",
                                         new VisualizadorDatosCerdo()));
-        /**/plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "X",
-                                            new ExportarParametros())); /**/
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Exportar parmetros cerdo",
+                                            new ExportarParametros()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculadora de parametros",
                                         new CalculatorAlgorithm()));
 
@@ -174,6 +178,12 @@ public class DebugPluginsManager {
                                         new NetWork()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Caracterizar la gravedad del paciente",
                                         new SeverityDescriptorsGenerator()));
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Frecuencia cardiaca de las ratas",
+                                        new FCRatas()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Diuresis error",
+                                        new DiuresisEstimador()));
+/**/
 
         /*/
                plugins.add(new DebugPluginInfo("algorithm","Concurrencia",

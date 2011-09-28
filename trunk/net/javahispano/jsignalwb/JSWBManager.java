@@ -20,6 +20,8 @@ import net.javahispano.jsignalwb.plugins.framework.PluginManager;
 import net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog;
 import net.javahispano.jsignalwb.ui.JSWBStatusBar;
 import net.javahispano.jsignalwb.utilities.TimePositionConverter;
+import net.javahispano.jsignalwb.ui.AlgorithmAction;
+import java.awt.event.*;
 
 /**
  * Esta clase actua a modo de fachada del framework, permitiendo acceder a la
@@ -208,6 +210,15 @@ public class JSWBManager implements JSignalMonitorDataSource,
             jToolBarItems = new ArrayList<Component>();
         }
         JButton button = new JButton(action);
+        if (action instanceof AlgorithmAction) {
+
+
+        AlgorithmAction a = (AlgorithmAction)action;
+        if (a.getAlgorithmName().endsWith("Interpolar en hueco")) {
+            button.setMnemonic(KeyEvent.VK_A);
+
+        }
+        }
         button.setText("");
         jToolBarItems.add(button);
         refreshJToolBar();
@@ -774,7 +785,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
             intervals.add(new SignalIntervalProperties(
                     signalManager.getSignal(signals.nextElement().toString())));
         }
-        runAlgorithm(alg, intervals);
+        runAlgorithmP(alg, intervals);
         return true;
     }
 
@@ -811,7 +822,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
                         interval.getEndTime(), signal.getSRate())));
             }
         }
-        runAlgorithm(alg, signals);
+        runAlgorithmP(alg, signals);
         return true;
     }
 
@@ -820,7 +831,7 @@ public class JSWBManager implements JSignalMonitorDataSource,
      * Metodo que se encarga de lanzar definitivamente el algoritmo a traves de
      * {@link AlgorithmExecutionJDialog}
      */
-    private void runAlgorithm(Algorithm alg, ArrayList<SignalIntervalProperties> intervals) {
+    private void runAlgorithmP(Algorithm alg, ArrayList<SignalIntervalProperties> intervals) {
         new AlgorithmExecutionJDialog(alg, intervals, this);
         setSaved(false);
         refreshJSM(false);
@@ -1539,16 +1550,13 @@ public class JSWBManager implements JSignalMonitorDataSource,
         for (SessionListener elem : sessionListenetList) {
             //si la sesion no es nueva Pero esta guardada es que acabamos de cargarla
             if (newSessionCreatedEvent.isNewSession()) {
-                System.out.println("Lanzando dentro de nueva sesi+n");
                 elem.sessionCreated(newSessionCreatedEvent);
             }
             if (newSessionCreatedEvent.isSaved()
                     /*&&!newSessionCreatedEvent.isNewSession()*/) {
-                System.out.println("Lanzando evento de sesi\u2665n salvada");
                 elem.sessionSaved(newSessionCreatedEvent);
             }
             if (newSessionCreatedEvent.isNoSession()) {
-                System.out.println("Lanzando evento de no sesin");
                 elem.sessionDestroyed(newSessionCreatedEvent);
             }
         }

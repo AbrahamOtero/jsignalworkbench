@@ -89,11 +89,21 @@ public class MedidaDroga {
         this.areaRatio = areaRatio;
     }
 
-    public String toString () {
-        return droga + "," + parametro + "," + duracionTotal + "," + duracionCaida + ","
-                + duracionRecuperacion + "," +
-                caida + ","+ caida/valorBasal + "," + valorMinimo + "," + valorBasal + "," + area + "," + areaRatio;
+    public String toString (boolean human) {
+        if (!human) {
+            return droga + "," + parametro + "," + duracionTotal + "," + duracionCaida + ","
+                    + duracionRecuperacion + "," +
+                    caida + ","+ caida/valorBasal + "," + valorMinimo + "," + valorBasal + "," + area + "," + areaRatio;
 
+        }
+        String texto= "Subida";
+if (caida <0) {
+    texto = "Caída";
+}
+        return "Duración total: " + duracionTotal + "\nDuración "+ texto+ ": " + duracionCaida + "\nDuración Recuperación: "
+                + duracionRecuperacion + "\n"+ texto+ ": " + caida + "\n"+ texto+ "/ValorBasal: "+ caida/valorBasal +
+                "\nValor Mínimo: " + valorMinimo + "\nValor basal: " + valorBasal +
+                "\nÁrea: " + area + "\nÁrea ratio:" + areaRatio;
 
     }
 }

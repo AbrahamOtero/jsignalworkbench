@@ -126,8 +126,16 @@ public class JSWBFrame extends javax.swing.JFrame {
         jswbManager.addJToolBarButton(new GenericPluginAction(jswbManager,
                 "JSWTextProcessorPlugin",
                 GenericPluginAction.LAUNCH_ACTION));
+
         //jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
         jswbManager.addJToolBarButton(new PrintAction());
+
+        jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
+
+        jswbManager.addJToolBarButton(new GenericPluginAction(jswbManager,
+                "SignalOrganizerPlugin",
+                GenericPluginAction.LAUNCH_ACTION));
+
         jswbManager.addJToolBarComponent(Box.createHorizontalStrut(8));
         jswbManager.addJToolBarSeparator();
         HashMap<String, ArrayList<String>> plugins = pluginManager.getRegisteredPlugins();

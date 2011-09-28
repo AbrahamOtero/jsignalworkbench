@@ -91,8 +91,9 @@ public class DefaultAlgorithmConfiguration extends javax.swing.JPanel implements
     }
 
 
-    private void selectIntervals(int number) {
+    public void selectIntervals(int number) {
         intervalsNeeded = number;
+        selectInterval.setSelected(true);
         if (intervalsNeeded > 0) {
             jswbManager.selectInterval(this);
         } else {

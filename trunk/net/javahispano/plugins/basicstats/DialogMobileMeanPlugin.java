@@ -197,7 +197,7 @@ public class DialogMobileMeanPlugin extends JDialog {
 
     public void setMediana(boolean mediana) {
         this.mediana = mediana;
-        this.jCheckBox1.setSelected(true);
+        this.jCheckBox1.setSelected(mediana);
     }
 
     public void setValorRelleno(float valorRelleno) {

@@ -16,18 +16,6 @@ import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
 import net.javahispano.jsignalwb.utilities.TimePositionConverter;
 import net.javahispano.jsignalwb.jsignalmonitor.TimeRepresentation;
 
-/**
- * <p>Title: </p>
- *
- * <p>Description: </p>
- *
- * <p>Copyright: Copyright (c) 2007</p>
- *
- * <p>Company: </p>
- *
- * @author Abraham Otero
- * @version 0.5
- */
 public class ExportarLatiods extends AlgorithmAdapter {
     private String ultimoDirectorioAbierto = null;
     private JFileChooser jf;
@@ -45,97 +33,37 @@ public class ExportarLatiods extends AlgorithmAdapter {
         return 0;
     }
 
-    /**
-     * Proporciona datos de configuracion del algoritmo que deben de ser
-     * guardados por el entorno.
-     *
-     * @return cadena de caracteres con los datos que debe guardar el
-     *   entorno. Si el entorno no debe de guardar ninguna informacion sobre
-     *   el plugin el valor de retorno sera null.
-     */
     public String getDataToSave() {
         return ultimoDirectorioAbierto;
     }
 
-    /**
-     * Devuelve una decision textual mas amplia de la funcionalidad del
-     * plugin.
-     *
-     * @return descripcion textual larga
-     */
     public String getDescription() {
         return "Permite Generar una serie de intervalos RR a partir de anotaciones de latido";
     }
-
-    /**
-     * Devuelve un icono que sera empleado en varios sitios de la interfaz de
-     * usuario para representar al plugin.
-     *
-     * @return icono que representa al plugin
-     * @todo Implement this net.javahispano.jsignalwb.plugins.Plugin method
-     */
     public Icon getIcon() {
         return this.generateImage("RR");
     }
 
-    /**
-     * Proporciona el hombre del plugin.
-     *
-     * @return Nombre del plugin
-     */
     public String getName() {
         return "ExportarLatidos";
     }
 
-    /**
-     * Devuelve la version del plugin.
-     *
-     * @return Version del plugin
-     */
     public String getPluginVersion() {
         return "0.5";
     }
 
-    /**
-     * Devuelve una de extincion textual corta sobre la funcionalidad del
-     * plugin.
-     *
-     * @return descripcion textual corta
-     */
     public String getShortDescription() {
         return "Genera una serie de intervalos RR";
     }
 
-    /**
-     * Devuelve ciertos y el plugin tiene datos se desea que el entorno
-     * guarde y le devuelva la proxima vez que se ejecute la herramienta.
-     *
-     * @return ciertos y el entorno debe guardar de datos, falso en caso
-     *   contrario.
-     */
     public boolean hasDataToSave() {
         return true;
     }
 
-    /**
-     * Indica si el plugin tiene una interfaz grafica propia para
-     * configurarse.
-     *
-     * @return devuelve cierto si tiene interfaz y falso en caso contrario
-     */
     public boolean hasOwnConfigureGUI() {
         return false;
     }
 
-
-    /**
-     * Este metodo es invocado por el entorno al cargar el plugin para
-     * pasarle una cadena de caracteres con los datos que el plugin le pidio
-     * que almacenarse en la ultima ejecucion.
-     *
-     * @param data datos que el plugin pidio al entorno que almacenarse en
-     *   la ultima ejecucion
-     */
     public void setSavedData(String data) {
         ultimoDirectorioAbierto = data;
         jf = new JFileChooser(ultimoDirectorioAbierto);
@@ -160,16 +88,8 @@ public class ExportarLatiods extends AlgorithmAdapter {
     }
 
     public void runAlgorithm(SignalManager sm,
-                             List<SignalIntervalProperties> signals,
-            AlgorithmRunner ar) {
+                             List<SignalIntervalProperties> signals, AlgorithmRunner ar) {
         Signal signal;
-
-        /*  if (signals.size() != 1) {
-              this.errorMensaje();
-              error = true;
-              return;
-          }*/
-        //    else{
         List<MarkPlugin> l;
         SignalIntervalProperties interval = signals.get(0);
         signal = interval.getSignal();
@@ -195,16 +115,15 @@ public class ExportarLatiods extends AlgorithmAdapter {
         }
         Collections.sort(beatMarks);
         generateRR(signal, beatMarks);
-        // }
         error = false;
     }
 
     private void generateRR(Signal signal, List<DefaultIntervalMark> beatMarks) {
         rr = new float[beatMarks.size()];
-        boolean useMax = decideOnMaxMin(beatMarks);
+        boolean useMax = decideOnMaxMin(beatMarks,signal);
         int i = 0;
         for (MarkPlugin m : beatMarks) {
-            long refinedRR = ajustarPrincipios(m, useMax);
+            long refinedRR = ajustarPrincipios(m, useMax,signal);
             rr[i] = refinedRR - signal.getStart();
             rr[i] /= 1000;
             i++;
@@ -219,18 +138,17 @@ public class ExportarLatiods extends AlgorithmAdapter {
             }
             rr=nrr;
         }
+        //@chapuza
+     //   else{
+            for (int j = 0; j < rr.length; j++) {
+                rr[j] /= 1F;
+            }
+
+        //}
     }
 
-    /**
-     * Decide si la parte positiva o negativa del QRS es mas pronunciada.
-     *
-     * @param beatMarks List
-     * @return boolean cierto si debe usarse la parte positiva
-     */
-    private boolean decideOnMaxMin(List<DefaultIntervalMark> beatMarks) {
+    private boolean decideOnMaxMin(List<DefaultIntervalMark> beatMarks,Signal e) {
         int counter = 0;
-        SignalManager sm = JSWBManager.getSignalManager();
-        Signal e = sm.getSignal("ECG");
         float[] ec = e.getValues();
         float min = 0, max = 0;
         for (MarkPlugin m : beatMarks) {
@@ -260,17 +178,7 @@ public class ExportarLatiods extends AlgorithmAdapter {
         }
     }
 
-    /**
-     * Busca la parte mas positiva o la mas negativa del QRS, dependiendo del
-     * valor del segundo parametro.
-     *
-     * @param m MarkPlugin
-     * @param useMax boolean
-     * @return long
-     */
-    private long ajustarPrincipios(MarkPlugin m, boolean useMax) {
-        SignalManager sm = JSWBManager.getSignalManager();
-        Signal e = sm.getSignal("ECG");
+    private long ajustarPrincipios(MarkPlugin m, boolean useMax, Signal e) {
         float[] ec = e.getValues();
         int begining = TimePositionConverter.timeToPosition(m.getMarkTime(), e);
         int end = TimePositionConverter.timeToPosition(m.getEndTime(), e);

@@ -110,7 +110,15 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
             AlgorithmRunner ar) {
         //Signal signal = sm.getSignal((String) signals.nextElement());
         Signal signal = signals.get(0).getSignal();
+        SignalIntervalProperties in = ((SignalIntervalProperties)signals.get(0));
+        int ini = in.getFirstArrayPosition();
+        int fi = in.getLastArrayPosition();
         float[] data = signal.getValues();
+        float [] datos= new float[fi-ini];
+        for (int i = ini; i < fi; i++) {
+            datos [i-ini]=data [i];
+        }
+        data= datos;
         long principio = signal.getStart();
         String inicio = TimeRepresentation.timeToString(principio, true, true, false);
         String fin = TimeRepresentation.timeToString(principio +
@@ -301,6 +309,14 @@ public class BasicStatisticsPlugin extends AlgorithmAdapter implements Plugin {
         return true;
     }
 
+    public boolean showInGUIOnthe(GUIPositions gUIPositions) {
+        if (gUIPositions == GUIPositions.MENU) {
+            return true;
+        } else if (gUIPositions == GUIPositions.TOOLBAR) {
+            return true;
+        }
+        return false;
+    }
     public void launchResultsGUI(JSWBManager jswbManager) {
         NewStatisticsDialog d = new NewStatisticsDialog(this,
                 statistics.getResultados(), jswbManager.getParentWindow(), true);

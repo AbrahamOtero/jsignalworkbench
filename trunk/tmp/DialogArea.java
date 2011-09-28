@@ -81,6 +81,12 @@ public class DialogArea extends JDialog {
         jButton2.setBounds(new Rectangle(343, 312, 118, 25));
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new DialogArea_jButton2_actionAdapter(this));
+        jTextFieldPeso.setVisible(false);
+        jLabel2.setVisible(false);
+        jLabel3.setVisible(false);
+        jComboBoxDroga.setVisible(false);
+        jLabel4.setVisible(false);
+        jComboBoxParametro.setVisible(false);
         this.getContentPane().add(panel1, null);
         jLabel2.setForeground(Color.blue);
         jLabel2.setText("Peso del cerdo:");
