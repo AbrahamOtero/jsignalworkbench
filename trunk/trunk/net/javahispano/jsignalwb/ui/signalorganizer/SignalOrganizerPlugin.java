@@ -47,11 +47,15 @@ public class SignalOrganizerPlugin extends GenericPluginAdapter implements Signa
     }
 
     public void signalSizeActionPerformed(SignalSizeEvent event) {
-        if (event.isSignalAdded()) {
+        if (event.isSignalsReset()) {
+            return;
+        }
+       if (event.isSignalAdded()) {
             System.out.println("Anhadiendo senhal con nombre: " + event.getSignal().getName());
         } else {
             System.out.println("Eliminando senhal con nombre: " + event.getSignal().getName());
         }
+
     }
 
 //no debera ser necesario tocarlo de aqui abajo
