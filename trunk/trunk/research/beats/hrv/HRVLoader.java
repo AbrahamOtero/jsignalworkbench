@@ -21,7 +21,15 @@ import net.javahispano.jsignalwb.plugins.MarkPlugin;
  * @version 0.5
  */
 public class HRVLoader extends BasicLoader {
-    private String[] nombres = {"ULF", "VLF", "LF", "HF", "LF/HF", "HRV","FC"};
+     private String[] nombres = {"ULF", "VLF", "LF", "HF", "LF/HF", "HRV","FC"};
+    //  private String[] nombres = {"Diuresis","F. riñón","F. carótida","P. arterial",
+      // "P. pulmonar","F. corteza","F. médula","F. corteza+médula"};
+   //  private String[] nombres = {"Presión arterial", "Flujo carótida"};
+
+    // private String[] nombres = {"I", "II", "III"};
+
+
+
     public String getName() {
         return "HRVLoader";
     }
@@ -43,7 +51,7 @@ public class HRVLoader extends BasicLoader {
 
     protected boolean load(File f, SignalManager sm) throws Exception {
         boolean flag = true;
-        float fs = obtenerFS(f);
+        float fs = 250;//obtenerFS(f);
         Object[] signalArray= sm.getSignals().toArray();
         Date baseDate;
         if (signalArray.length>0) {
@@ -62,7 +70,7 @@ public class HRVLoader extends BasicLoader {
             Signal newSignal = new Signal(nombres[i], corrigeInicioYFin(f,s,sm));
             newSignal.setFrecuency(fs);
             newSignal.setStart(baseDate.getTime());
-            alinearConECG(sm,newSignal,s);
+            //alinearConECG(sm,newSignal,s);
             sm.removeSignal(s.getName());
             sm.addSignal(newSignal);
             newSignal.adjustVisibleRange();

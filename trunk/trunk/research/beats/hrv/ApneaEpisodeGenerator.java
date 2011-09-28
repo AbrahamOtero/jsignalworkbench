@@ -103,12 +103,12 @@ if ( pesoHipoapnea !=1) {
                 texto = (int) (i / fs) + ";" + tamanoVentana + ";" + "NOR;"+ porcentaje+ "\n";
                 defaultIntervalAnnotation.setColor(Color.blue);
                 defaultIntervalAnnotation.setFontColor(Color.blue);
-                defaultIntervalAnnotation.setTitle("No apnea: " + (int) (porcentaje) + "%");
+                defaultIntervalAnnotation.setTitle("Normal: " + (int) (porcentaje) + "%");
             } else if (porcentaje <= limitePorcentaje2){
                 texto = (int) (i / fs) + ";" + tamanoVentana + ";" + "NOR;"+ porcentaje+ "\n";
                 defaultIntervalAnnotation.setColor(Color.GREEN);
                 defaultIntervalAnnotation.setFontColor(Color.GREEN);
-                defaultIntervalAnnotation.setTitle("Frontera: " + (int) (porcentaje) + "%");
+                defaultIntervalAnnotation.setTitle("Bordeline: " + (int) (porcentaje) + "%");
             }else {
                 texto = (int) (i / fs) + ";" + tamanoVentana + ";" + "HYP;"+ porcentaje+ "\n";
                 defaultIntervalAnnotation.setColor(Color.red);

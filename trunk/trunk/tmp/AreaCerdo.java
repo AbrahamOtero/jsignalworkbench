@@ -27,7 +27,7 @@ public class AreaCerdo extends AlgorithmAdapter {
     public void runAlgorithm(SignalManager sm, List<SignalIntervalProperties>
             signals, AlgorithmRunner ar) {
 
-        if (sm.getSignal("F. carótida suavizado") == null) {
+        if (sm.getSignal("F suavizado") == null) {
             VisualizadorDatosCerdo.generarFlujos(sm, 100);
         }
         if (sm.getSignal("P. arterial Sist.") == null) {
@@ -40,13 +40,13 @@ public class AreaCerdo extends AlgorithmAdapter {
         Signal signal = signalInterval.getSignal();
 
         String n = signal.getName();
-        if (!n.contains("P.") && !n.contains("F.")) {
+        if (!n.contains("P.") && !n.contains("suavizado")) {
             if (n.contains("Presión")) {
                 JOptionPane.showMessageDialog(JSWBManager.getParentWindow(),
                                               "Por favor, seleccione la presión sistólica o diastólica", "Error",
                                               JOptionPane.ERROR_MESSAGE);
             } else {
-                String nuevoNombre = "F. " + n.substring(6, n.length()) + " suavizado";
+                String nuevoNombre = "Flujo suavizado";
                 System.out.println(nuevoNombre);
                 Signal nuevaSignal = sm.getSignal(nuevoNombre);
                 SignalIntervalProperties nuevoSignalInterval = new SignalIntervalProperties(nuevaSignal,
@@ -238,7 +238,7 @@ public class AreaCerdo extends AlgorithmAdapter {
         if (dialogArea.cancelado) {
             return;
         }
-        peso = Float.parseFloat(dialogArea.jTextFieldPeso.getText());
+        peso = 1;//Float.parseFloat(dialogArea.jTextFieldPeso.getText());
         caida = dialogArea.jCheckBoxValle.isSelected();
         droga = (String) dialogArea.jComboBoxDroga.getSelectedItem();
         parametro = (String) dialogArea.jComboBoxParametro.getSelectedItem();
@@ -275,7 +275,7 @@ public class AreaCerdo extends AlgorithmAdapter {
 
     public void launchResultsGUI(JSWBManager jswbManager) {
         DialogResultadosMedida d = new DialogResultadosMedida(null, "Resultado", true);
-        d.jTextAreaMedida.setText(medidaActual.toString());
+        d.jTextAreaMedida.setText(medidaActual.toString(true));
         d.setSize(450, 400);
         d.setLocationRelativeTo(jswbManager.getParentWindow());
         d.setVisible(true);

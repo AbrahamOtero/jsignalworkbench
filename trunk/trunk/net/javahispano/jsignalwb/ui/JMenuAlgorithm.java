@@ -15,6 +15,7 @@ import javax.swing.JMenuItem;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.plugins.Algorithm;
 import net.javahispano.jsignalwb.plugins.framework.PluginManager;
+import java.awt.event.*;
 
 /**
  *

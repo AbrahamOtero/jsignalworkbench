@@ -65,4 +65,8 @@ public class AlgorithmAction extends AbstractAction {
                                           " Should be restart the application");
         }
     }
+
+    public String getAlgorithmName() {
+        return algorithmName;
+    }
 }

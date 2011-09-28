@@ -9,6 +9,10 @@ import net.javahispano.jsignalwb.plugins.AlgorithmAdapter;
 import javax.swing.Icon;
 import java.awt.Color;
 import net.javahispano.jsignalwb.plugins.Plugin;
+import javax.swing.JPanel;
+import javax.swing.JDialog;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.plugins.defaults.DefaultAlgorithmConfiguration;
 
 /**
  * <p>Title: </p>
@@ -36,7 +40,8 @@ public class FillInterval extends AlgorithmAdapter {
         int inicio = i.getFirstArrayPosition();
         int fin =  i.getLastArrayPosition();
 
-        int ventana = (int) (120* signal.getSRate());
+        int ventana = (int) (5* signal.getSRate());
+        ventana = Math.max(ventana,1);
         float valorMedioAntes = calcularValorMedio2MinAntes(datos, inicio, ventana);
         float valorMedioDespues = calcularValorMedio2MinDespues(datos, fin, ventana);
         float incremento = (valorMedioDespues- valorMedioAntes)/(fin-inicio);
@@ -65,6 +70,21 @@ public class FillInterval extends AlgorithmAdapter {
     }
 
 
+
+    public void launchExecutionGUI(JSWBManager jswbManager) {
+        JDialog conf = new JDialog(jswbManager.getParentWindow(), "Execution GUI");
+
+        conf.setModal(true);
+        DefaultAlgorithmConfiguration jPane = new DefaultAlgorithmConfiguration(this,
+                jswbManager, conf);
+        jPane.selectIntervals(1);
+        jPane.jButton3ActionPerformed(null);
+        /*conf.getContentPane().add(jPane);
+        conf.setSize(jPane.getPreferredSize());
+        conf.setResizable(false);
+        conf.setLocationRelativeTo(conf.getParent());
+        conf.setVisible(true);*/
+    }
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
         if (gUIPositions == GUIPositions.MENU) {
             return true;

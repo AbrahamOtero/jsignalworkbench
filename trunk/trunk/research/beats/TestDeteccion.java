@@ -62,7 +62,7 @@ public class TestDeteccion extends AlgorithmAdapter {
         m.setTitle("N");
         final long time = (long) (s.getStart() + (SampleRate.getMsPerSample() * (posicion - 4)));
         m.setMarkTime(time);
-        m.setEndTime(s.getStart() + (int) ((SampleRate.getMsPerSample() * (posicion + 4))));
+        m.setEndTime(s.getStart() + (int) ((SampleRate.getMsPerSample() *(posicion + 4))));
         m.setColor(Color.RED);
         m.setAutomatica(true);
         s.addMark(m);

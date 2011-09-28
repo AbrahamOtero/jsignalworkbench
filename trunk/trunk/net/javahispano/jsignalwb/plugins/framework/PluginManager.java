@@ -14,6 +14,7 @@ import net.javahispano.jsignalwb.framework.ExceptionsCollector;
 import net.javahispano.jsignalwb.plugins.*;
 import net.javahispano.jsignalwb.plugins.debug.DebugPluginInfo;
 import net.javahispano.jsignalwb.plugins.defaults.*;
+import net.javahispano.jsignalwb.ui.signalorganizer.SignalOrganizerPlugin;
 
 
 /**
@@ -88,6 +89,11 @@ public class PluginManager {
                               "net.javahispano.jsignalwb.plugins.defaults.AxesGridPlugin");
         pluginAssociation.put("generic:JSWTextProcessorPlugin",
                               "net.javahispano.jsignalwb.ui.texteditor.JSWTextProcessorPlugin");
+
+        pluginAssociation.put("generic:SignalOrganizerPlugin",
+                              "net.javahispano.jsignalwb.ui.signalorganizer.SignalOrganizerPlugin");
+
+
 
         //iconsAssociation.put("algorithm:Mark Negative Values","notAvailable.jpg");
         factoryPlugin = new FactoryPlugin(pluginAssociation);
