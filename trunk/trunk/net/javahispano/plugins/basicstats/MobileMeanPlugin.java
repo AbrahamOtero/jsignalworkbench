@@ -55,26 +55,25 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
      * @param sm SignalManager
      * @param signals Enumeration
      */
-    public void runAlgorithm(SignalManager sm,
-                             List<SignalIntervalProperties> signals,
+    public void runAlgorithm(SignalManager sm,  List<SignalIntervalProperties> signals,
             AlgorithmRunner ar) {
         sm.hideAllSignals();
-      for (SignalIntervalProperties signali : signals) {
-         Signal s = signali.getSignal();
-         Signal newSignal = generateSmoothSignal(sm, s);
-         sm.addSignal(newSignal);
-      }
+        for (SignalIntervalProperties signali : signals) {
+            Signal s = signali.getSignal();
+            Signal newSignal = generateSmoothSignal(sm, s);
+            sm.addSignal(newSignal);
+        }
 
     }
 
     int deslizamientoParaCadaMediana = 500;
-    boolean resample = false;
-    int ventanaResampleEnSegundos =300;
+    boolean resample = true;
+    int ventanaResampleEnSegundos = 300;
 
     private Signal generateSmoothSignal(SignalManager sm, Signal signal) {
         float[] data = signal.getValues();
         float[] newData;
-        int numberOfSamples = this.window ;
+        int numberOfSamples = this.window;
 
         if (!this.mediana) {
             try {
@@ -83,8 +82,7 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
                 ex.printStackTrace();
                 return null;
             }
-        }
-        else {
+        } else {
             int medium;
             float[] dataOnWindow;
             if (numberOfSamples % 2 != 0) {
@@ -99,13 +97,13 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
                 newData[i] = data[i];
             }
 
-            for (int i = medium; i < data.length - medium; i+=deslizamientoParaCadaMediana) {
+            for (int i = medium; i < data.length - medium; i += deslizamientoParaCadaMediana) {
                 int c = 0;
                 for (int j = i - medium; j < i - medium + dataOnWindow.length; j++) {
                     dataOnWindow[c++] = data[j];
                 }
                 Arrays.sort(dataOnWindow);
-                for (int j = i; j < i+deslizamientoParaCadaMediana; j++) {
+                for (int j = i; j < i + deslizamientoParaCadaMediana; j++) {
                     newData[j] = dataOnWindow[medium];
                 }
 
@@ -120,30 +118,27 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
             }
         }
 
-
-
         Signal newSignal;
 
         if (resample) {
-            int ventana = (int) (ventanaResampleEnSegundos*signal.getSRate()+1);
-            float[] resampledData = new float[newData.length/ventana];
+            int ventana = (int) (ventanaResampleEnSegundos * signal.getSRate() + 1);
+            float[] resampledData = new float[newData.length / ventana];
             for (int i = 0; i < resampledData.length; i++) {
-                float media=0;
-                for (int j = i*ventana; j < (i+1)*ventana; j++) {
+                float media = 0;
+                for (int j = i * ventana; j < (i + 1) * ventana; j++) {
                     media += newData[j];
                 }
                 media /= ventana;
-                resampledData [i]= media;
+                resampledData[i] = media;
             }
-            float nuevaFs = 1.0F/ventanaResampleEnSegundos;
-            newSignal= new Signal(signal.getName() + "_Suave1_" + this.window, resampledData,
-                                      nuevaFs, signal.getStart(),
-                                      signal.getMagnitude());
-        }
-        else {
-            newSignal= new Signal(signal.getName() + "_Suave1_" + this.window, newData,
-                                      signal.getSRate(), signal.getStart(),
-                                      signal.getMagnitude());
+            float nuevaFs = 1.0F / ventanaResampleEnSegundos;
+            newSignal = new Signal(signal.getName() + "_Suave1_" + this.window, resampledData,
+                                   nuevaFs, signal.getStart(),
+                                   signal.getMagnitude());
+        } else {
+            newSignal = new Signal(signal.getName() + "_Suave1_" + this.window, newData,
+                                   signal.getSRate(), signal.getStart(),
+                                   signal.getMagnitude());
         }
         return newSignal;
     }
@@ -153,12 +148,11 @@ public class MobileMeanPlugin extends AlgorithmAdapter {
     }
 
 
-
     public boolean showInGUIOnthe(GUIPositions gUIPositions) {
         if (gUIPositions == GUIPositions.MENU) {
             return true;
         } else if (gUIPositions == GUIPositions.TOOLBAR) {
-            return true;
+            return false;
         }
         return false;
     }

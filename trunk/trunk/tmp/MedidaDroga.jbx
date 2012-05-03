@@ -1,0 +1,15 @@
+[PropertyInfo]
+area,float,false,false, , ,false,<default>
+caida,float,false,false, , ,false,<default>
+droga,String,false,false, , ,true,<default>
+duracionCaida,float,false,false, , ,false,<default>
+duracionRecuperacion,float,false,false, , ,false,<default>
+duracionTotal,float,false,false, , ,false,<default>
+parametro,String,false,false, , ,false,<default>
+valorBasal,float,false,false, , ,false,<default>
+valorMinimo,float,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

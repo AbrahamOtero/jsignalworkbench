@@ -141,7 +141,7 @@ public class ExportarLatiods extends AlgorithmAdapter {
         //@chapuza
      //   else{
             for (int j = 0; j < rr.length; j++) {
-                rr[j] /= 1F;
+                rr[j] /= 2F;
             }
 
         //}

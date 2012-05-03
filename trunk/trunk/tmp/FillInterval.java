@@ -89,7 +89,7 @@ public class FillInterval extends AlgorithmAdapter {
         if (gUIPositions == GUIPositions.MENU) {
             return true;
         } else if (gUIPositions == GUIPositions.TOOLBAR) {
-            return true;
+            return false;
         }
         return false;
     }

@@ -3,6 +3,7 @@ package net.javahispano.jsignalwb.plugins;
 import java.io.File;
 
 import net.javahispano.jsignalwb.*;
+import java.util.Date;
 
 /**
  * clase que implementa {@link Loader} proporcionando una implementacion por
@@ -57,17 +58,26 @@ public abstract class LoaderAdapter extends PluginAdapter implements Loader {
         Object[] signals = sm.getSignals().toArray();
         Signal sr = null;
         if (signals.length > 0) {
-          sr=(Signal) signals[0];
+            sr = (Signal) signals[0];
         }
         if (values != null) {
             int i = 0;
             for (float[] val : values) {
                 Signal s = new Signal("Signal" + i, val);
                 s.setFrecuency(1);
+
                 i++;
                 if (sr != null) {
                     s.setStart(sr.getStart());
                     s.setFrecuency(sr.getSRate());
+                } else {
+                    Date d = new Date();
+                    d.setHours(0);
+                    d.setMinutes(0);
+                    d.setSeconds(0);
+                    System.out.print(d);
+                    s.setStart(d.getTime());
+
                 }
                 if (!sm.addSignal(s)) {
                     flag = false;
