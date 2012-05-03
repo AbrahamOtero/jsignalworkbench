@@ -149,7 +149,7 @@ public class CalculatorAlgorithm extends AlgorithmAdapter {
     }
 
     public Icon getIcon() {
-        return super.generateImage("CA");
+        return new javax.swing.ImageIcon(getClass().getResource("calc.gif"));
     }
 
     public String getName() {

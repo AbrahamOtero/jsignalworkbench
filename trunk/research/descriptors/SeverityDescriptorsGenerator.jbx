@@ -1,0 +1,21 @@
+[PropertyInfo]
+apneaAndHipoapneaPercentage,float,false,false, , ,false,<default>
+apneaPercentage,float,false,false, , ,false,<default>
+areaSato2,float,false,false, , ,false,<default>
+BasalValueSato2,float,false,false, , ,false,<default>
+desaturationPercentage,float,false,false, , ,false,<default>
+description,String,false,false, , ,true,<default>
+fluxSignal,net.javahispano.jsignalwb.Signal,false,false, , ,false,<default>
+hipoapneaPercentage,float,false,false, , ,false,<default>
+icon,javax.swing.Icon,false,false, , ,true,<default>
+meanValueSato2,float,false,false, , ,false,<default>
+name,String,false,false, , ,true,<default>
+sato2,float[],false,false, , ,false,<default>
+sato2SamplingRate,float,false,false, , ,false,<default>
+sato2Signal,net.javahispano.jsignalwb.Signal,false,false, , ,false,<default>
+shortDescription,String,false,false, , ,true,<default>
+[IconNames]
+
+
+
+

@@ -1,0 +1,14 @@
+[PropertyInfo]
+beginingRecording,long,false,false, , ,false,<default>
+desatTree,java.util.TreeSet,false,false, , ,false,<default>
+fileName,String,false,false, , ,true,<default>
+includeAbdomen,boolean,false,false, , ,true,<default>
+includeDesat,boolean,false,false, , ,true,<default>
+includeFlux,boolean,false,false, , ,true,<default>
+includeThorax,boolean,false,false, , ,true,<default>
+level,research.mining.TemporalEvent.DETAILLEVEL,false,false, , ,true,<default>
+[IconNames]
+
+
+
+

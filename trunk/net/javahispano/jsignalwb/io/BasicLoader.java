@@ -58,7 +58,6 @@ public class BasicLoader extends LoaderAdapter {
             String line;
             StringTokenizer st;
             int index1 = 0;
-            //int signal = 0;
             int pos = 0;
             String temp = "";
             while ((line = input.readLine()) != null) {
@@ -83,10 +82,8 @@ public class BasicLoader extends LoaderAdapter {
             input = new BufferedReader(fr);
 
             index1 = 0;
-            //int signal = 0;
             pos = 0;
             temp = "";
-            int c =0;
             while ((line = input.readLine()) != null) {
                 st = new StringTokenizer(line, "; \t");
                 while (st.hasMoreTokens()) {
@@ -97,10 +94,6 @@ public class BasicLoader extends LoaderAdapter {
                 }
                 pos = 0;
                 index1++;
-                c++;
-                if (c>280000) {
-                 //   System.out.println(""+c);
-                }
             }
 
         } finally {
