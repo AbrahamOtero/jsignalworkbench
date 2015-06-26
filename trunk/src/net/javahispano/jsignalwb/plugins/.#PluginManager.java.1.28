@@ -1,0 +1,580 @@
+package net.javahispano.jsignalwb.plugins;
+
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import net.javahispano.jsignalwb.utilities.ExceptionsCollector;
+import java.net.*;
+
+
+
+/**
+ * Esta clase hace fachada para toda la funcionaria relacionadas con los plugin
+ * cargados en el entorno. Permite cargar plugins, obtener una instancia de
+ * cualquier plugin cargado, etctera.
+ *
+ *  * @author Román Segador y Abraham Otero
+ *    Copyright 2006-2007. This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/).
+ */
+public class PluginManager {
+
+    //private static PluginManager pm = null;
+    private FactoryPlugin factoryPlugin;
+    private HashMap<String, Object> pluginAssociation;
+    private HashMap<String, String> iconsAssociation;
+    private ClassLoader classLoader;
+    private String defaultDirectory = "data/plugins";
+
+    /**
+     * Crea una instancia de la clase indicando un directorio que contiene
+     * plugins que deben ser registrados, aunque no cargados hasta que sea
+     * necesario, por la instancia.
+     *
+     * @param pluginsPath directorio con plugins que deben ser registrados.
+     */
+    public PluginManager(String pluginsPath) {
+        this();
+        defaultDirectory = pluginsPath;
+
+    }
+
+    /**
+     * crea una instancia de la clase empleando un directorio de carga de
+     * plugins por defecto.
+     */
+    public PluginManager() {
+        /*if (pm != null) {
+            throw new RuntimeException(
+                    "PluginManager had been initialized before");
+        }*/
+        classLoader = ClassLoader.getSystemClassLoader();
+        pluginAssociation = new HashMap<String, Object>();
+        iconsAssociation = new HashMap<String, String>();
+        pluginAssociation.put("loader:defaultLoader",
+                              "net.javahispano.jsignalwb.io.DefaultLoader");
+        pluginAssociation.put("loader:basicLoader",
+                              "net.javahispano.jsignalwb.io.BasicLoader");
+        pluginAssociation.put("saver:defaultSaver",
+                              "net.javahispano.jsignalwb.io.DefaultSaver");
+        pluginAssociation.put("saver:basicSaver",
+                              "net.javahispano.jsignalwb.io.BasicSaver");
+        pluginAssociation.put("mark:Default Instant Mark",
+                              "net.javahispano.jsignalwb.plugins.DefaultInstantMark");
+        pluginAssociation.put("mark:Default Interval Mark",
+                              "net.javahispano.jsignalwb.plugins.DefaultIntervalMark");
+        pluginAssociation.put("mark:Default Interval Mark Yellow",
+                              "net.javahispano.jsignalwb.plugins.DefaultIntervalMarkYellow");
+        pluginAssociation.put("mark:Instant Icon Mark",
+                              "net.javahispano.jsignalwb.plugins.InstantIconMark");
+        iconsAssociation.put("algorithm:Mark Negative Values","notAvailable.jpg");
+        factoryPlugin = new FactoryPlugin(pluginAssociation);
+        //ClassLoader cl=classLoader;
+        //classLoader=PluginBrowser.search(pluginAssociation,classLoader,new File(defaultDirectory));
+        //System.out.println(cl.equals(classLoader));
+    }
+
+
+    void registerIcon(String pluginType, String pluginName, String icon) {
+        iconsAssociation.put(pluginType + ":" + pluginName, icon);
+    }
+
+
+    boolean isIconRegistered(String pluginType, String pluginName) {
+        return isIconRegistered(pluginType + ":" + pluginName);
+    }
+
+    boolean isIconRegistered(String key) {
+        return iconsAssociation.containsKey(key);
+    }
+
+    /**
+     * Devuelve el icono asociado con un determinado plugin.
+     *
+     * @param pluginType tipo del plugin.
+     * @param pluginName nombre del plugin.
+     * @param height altura del icono.
+     * @param width ancho del icono.
+     * @return icono asociado con el plugin requerido y con el tamaño
+     *   especificado.
+     */
+    public Icon getIcon(String pluginType, String pluginName, int height,
+                        int width) {
+        ImageIcon ii = (ImageIcon) (getIcon(pluginType, pluginName));
+        if (ii != null) {
+            return new ImageIcon(ii.getImage().getScaledInstance(width, height,
+                    Image.SCALE_SMOOTH));
+        }
+        return null;
+    }
+
+   /*
+    * Devuelve el icono asociado con un determinado plugin.
+    *
+    * @param pluginType tipo del plugin.
+    * @param pluginName nombre del plugin.
+    * @return icono asociado con el plugin requerido.
+     */
+    /**
+     * getIcon
+     *
+     * @param pluginType String
+     * @param pluginName String
+     * @return Icon
+     * @throws {@link PluginLoadException}
+     */
+    public Icon getIcon(String pluginType, String pluginName) {
+        try {
+            if (isIconRegistered(pluginType, pluginName)) {
+                if (isPluginLoaded(pluginType, pluginName)) {
+                    return new ImageIcon(Toolkit.getDefaultToolkit().
+                                         createImage(pluginAssociation.get(
+                            pluginType + ":" + pluginName).getClass().
+                            getResource(iconsAssociation.get(pluginType + ":" +
+                            pluginName))));
+                } else {
+                    URL url = classLoader.loadClass((
+                            String) (pluginAssociation.get(pluginType + ":" +
+                            pluginName))).getResource(iconsAssociation.get(
+                            pluginType + ":" + pluginName));
+
+                   if (url !=null) {
+                       Image image = Toolkit.getDefaultToolkit().
+                                             createImage(url);
+                        return new ImageIcon(image);
+                    }
+                    else{
+
+                        return new ImageIcon(
+                               this.getClass().getResource(
+                                        "images/notAvailable.jpg"));
+                    }
+                }
+            } else {
+                return this.getPlugin(pluginType+":"+pluginName).getIcon();
+            }
+        } catch (ClassNotFoundException ex) {
+            throw new PluginLoadException("Error loading icon from " +
+                                          pluginName, ex);
+        }
+    }
+
+
+    /**
+     * Registra el plugin indicado.
+     *
+     * @param pluginType tipo de plugin a registrar.
+     * @param pluginName nombre del plugin.
+     * @param pluginBaseClass URL apuntando a la clase del plugin, esto es, la
+     *   clase que se debe cargar para crear el plugin.
+     * @return boolean true si el plugin se ha registrado correctamente,
+     *   false en caso contrario.
+     */
+    public boolean registerPlugin(String pluginType, String pluginName,
+                                  String pluginBaseClass) {
+        String key = pluginType + ":" + pluginName;
+        return registerPlugin(key, pluginBaseClass);
+    }
+
+    /**
+     * Registra el plugin indicado.
+     *
+     * @param key Clave asociada con este plugin. Las claves se forman
+     *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
+     * @param pluginBaseClass URL apuntando a la clase del plugin, esto es, a la
+     *   clase que se ha de cargar para crear instancias del plugin.
+     * @return boolean true si el plugin se ha registrado correctamente,
+     *   false en caso contrario.
+     */
+    public boolean registerPlugin(String key, String pluginBaseClass) {
+        if (!isPluginRegistered(key)) {
+            pluginAssociation.put(key, pluginBaseClass);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Registra el plugin indicado.
+     *
+     * @param key Clave asociada con este plugin. Las claves se forman
+     *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
+     * @param plugin {@link  Plugin} a registrar.
+     * @return boolean true si el plugin se ha registrado correctamente,
+     *   false en caso contrario.
+     */
+    public boolean registerPlugin(String key, Plugin plugin) {
+        if (!isPluginRegistered(key)) {
+            pluginAssociation.put(key, plugin);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Elimina un plugin.
+     *
+     * @param pluginType tipo de plugin a registrar.
+     * @param pluginName nombre del plugin.
+     * @return boolean
+     */
+    public boolean unregisterPlugin(String pluginType, String pluginName) {
+        String key = pluginType + ":" + pluginName;
+        return unregisterPlugin(key);
+    }
+
+    /**
+     * Elimina un plugin.
+     *
+     * @param key Clave asociada con este plugin. Las claves se forman
+     *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
+     * @return boolean
+     */
+    public boolean unregisterPlugin(String key) {
+        if (isPluginRegistered(key)) {
+            pluginAssociation.remove(key);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Permite averiguar si un plugi está o no registrado.
+     *
+     * @param pluginType tipo de plugin a registrar.
+     * @param pluginName nombre del plugin.
+     * @return boolean true si el plugin est\u2193 registrado,
+     * false en caso contrario
+     */
+    public boolean isPluginRegistered(String pluginType, String pluginName) {
+        return isPluginRegistered(pluginType + ":" + pluginName);
+    }
+
+    /**
+     * Permite averiguar si un plugin está o aún no registrado.
+     *
+     * @param key Clave asociada con este plugin. Las claves se forman
+     *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
+     * @return boolean true si el plugin est\u2193 registrado,
+     * false en caso contrario
+     */
+
+    public boolean isPluginRegistered(String key) {
+        return pluginAssociation.containsKey(key);
+    }
+
+    /**
+     * Permite averiguar si un plugin está o no cargado en el entorno.
+     *
+     * @param pluginType tipo de plugin a registrar.
+     * @param pluginName nombre del plugin.
+     * @return boolean true si el plugin est\u2193 registrado,
+     * false en caso contrario
+     */
+
+    public boolean isPluginLoaded(String pluginType, String pluginName) {
+        return isPluginLoaded(pluginType + ":" + pluginName);
+    }
+
+    /**
+     * Permite averiguar si un plugin está o no cargado en el entorno.
+     *
+     * @param key Clave asociada con este plugin. Las claves se forman
+     *   concatenando el tipo del plugin con ":" y con el nombre del plugin.
+     * @return boolean true si el plugin est\u2193 registrado,
+     * false en caso contrario
+     */
+    public boolean isPluginLoaded(String key) {
+        return!(pluginAssociation.get(key) instanceof String);
+    }
+
+    /**
+     * Establece el directorio donde se deben buscar los plugin.
+     *
+     * @param defaultDirectory String
+     */
+    public void setDefaultDirectory(String defaultDirectory){
+        this.defaultDirectory=defaultDirectory;
+        searchPlugins();
+    }
+
+
+    /**
+     * Registra los plugins que se encuentren en el directorio por defecto.
+     */
+    public void searchPlugins() {
+        searchPlugins(defaultDirectory, new ExceptionsCollector(new JFrame()));
+    }
+
+    /**
+     * Registra los plugin del directorio por defecto y los que se le pasen como segundo parámetro.
+     * Sólo se usa para desarrollar plugins.
+     *
+     * @param names String[] nombres de los plugin a registrar
+     * @param types String[] tipos de los plugin a registrar
+     * @param plugins Object[] plugings a registrar
+     */
+    public void searchPlugins(String[] names, String[] types, Object[] plugins) {
+        searchPlugins();
+        for (int i = 0; i < names.length; i++) {
+            pluginAssociation.put(types[i] + ":" + names[i], plugins[i]);
+        }
+
+    }
+
+
+    private void searchPlugins(String directory, ExceptionsCollector ec) {
+        classLoader = PluginBrowser.search(this, classLoader,
+                                           new File(directory), ec);
+        ec.showExceptions(
+                "The following errors appeared while looking for plugins:");
+    }
+
+    /**
+     * Devuelve el plugin asociado con la clave que se pasa como argumento.
+     *
+     * @param key Clave del plugin. Las claves se forman concatenando el tipo
+     *   del plugin con ":" y con el nombre del plugin.
+     * @return {@link Plugin} solicitado. un
+     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+     */
+    public Plugin getPlugin(String key)  throws PluginLoadException {
+        Object p = factoryPlugin.getPlugin(key, classLoader);
+        if (p != null && p instanceof Plugin) {
+            return (Plugin) p;
+        } else {
+            return null;
+        }
+    }
+
+
+    /**
+     * Proporciona el {@link Loader} registrado con el nombre name.
+     *
+     * @param name nombre del plugin.
+     * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+     * @return {@link Loader} asociado con el nombre que paso como parámetro.
+     */
+    public Loader getLoader(String name) throws PluginLoadException {
+        Object l = factoryPlugin.getPlugin("loader:" + name, classLoader);
+        if (l != null && l instanceof Loader) {
+            return (Loader) l;
+        } else {
+            return null;
+        }
+        //return FactoryLoader.getFactoryLoaderInstance().getLoader(name);
+    }
+
+    /**
+     * Devuelve una lista con todos los objetos {@link Loader} registrados. Para
+     * que todos aquellos {@link Loader} registrados en el entorno pero no cargados se
+     * carguen.
+     *
+     * @return Lista con todos los objetos {@link Loader}.
+     */
+    public ArrayList<Loader> getAllLoaders(){
+        ArrayList<Loader> loaders=new ArrayList<Loader>();
+        ArrayList<String> names=new ArrayList<String>();
+        Iterator<String> it=pluginAssociation.keySet().iterator();
+        while(it.hasNext()){
+            String plugin=it.next();
+            if(plugin.startsWith("loader:"))
+                names.add(plugin);
+        }
+        for (String plugin :names)
+             try {
+                    loaders.add((Loader) getPlugin(plugin));
+        //haremos un esfuerzo para cargar la mayor parte de los plugin posible
+        //si alguno falla no notificamos ya que el usuario puede no ser consciente
+        //de esta operación. Tampoco avisamos al código cliente
+        //porque no hay nada que éste pueda hacer para solucionar el fallo
+        } catch (PluginLoadException ex) {
+            System.out.println("Error intentar cargar un plugin");
+            ex.printStackTrace();
+        }
+        return loaders;
+    }
+
+    /**
+ * Proporciona el {@link Saver} registrado con el nombre name.
+ *
+ * @param name nombre del plugin.
+ * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+ * @return {@link Saver} asociado con el nombre que paso como parámetro.
+ */
+
+    public Saver getSaver(String name) throws PluginLoadException {
+        Object s = factoryPlugin.getPlugin("saver:" + name, classLoader);
+        if (s != null && s instanceof Saver) {
+            return (Saver) s;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Devuelve una lista con todos los objetos {@link Loader} registrados. Para
+     * que todos aquellos {@link Saver} registrados en el entorno pero no cargados se
+     * carguen.
+     *
+     * @return Lista con todos los objetos {@link Saver}.
+     */
+     public ArrayList<Saver> getAllSavers(){
+        ArrayList<Saver> savers=new ArrayList<Saver>();
+        ArrayList<String> names=new ArrayList<String>();
+        Iterator<String> it=pluginAssociation.keySet().iterator();
+        while(it.hasNext()){
+            String plugin=it.next();
+            if(plugin.startsWith("saver:"))
+                names.add(plugin);
+        }
+        for(String plugin:names)
+            try {
+                savers.add((Saver) getPlugin(plugin));
+                //haremos un esfuerzo para cargar la mayor parte de los plugin posible
+                //si alguno falla no notificamos ya que el usuario puede no ser consciente
+                //de esta operación. Tampoco avisamos al código cliente
+        //porque no hay nada que éste pueda hacer para solucionar el fallo
+            } catch (PluginLoadException ex) {
+                System.out.println("Error intentar cargar un plugin");
+            ex.printStackTrace();
+            }
+        return savers;
+    }
+
+    /**
+ * Proporciona el {@link Grid} registrado con el nombre name.
+ *
+ * @param name nombre del plugin.
+ * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+ * @return {@link Grid} asociado con el nombre que paso como parámetro.
+ */
+    public Grid getGrid(String name) throws PluginLoadException {
+        Object g = factoryPlugin.getPlugin("grid:" + name, classLoader);
+        if (g != null && g instanceof Grid) {
+            return (Grid) g;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+ * Proporciona el {@link Algorithm} registrado con el nombre name.
+ *
+ * @param name nombre del plugin.
+ * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+ * @return {@link Algorithm} asociado con el nombre que paso como parámetro.
+ */
+    public Algorithm getAlgorithm(String name) throws PluginLoadException {
+        Object a = factoryPlugin.getPlugin("algorithm:" + name, classLoader);
+        if (a != null && a instanceof Algorithm) {
+            return (Algorithm) a;
+        } else {
+            return null;
+        }
+    }
+
+  /**
+  * Proporciona el {@link Generic} registrado con el nombre name.
+  *
+  * @param name nombre del plugin.
+  * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+  * @return {@link Generic} asociado con el nombre que paso como parámetro.
+ */
+    public GenericPlugin getGeneric(String name) throws PluginLoadException {
+        Object g = factoryPlugin.getPlugin("generic:" + name, classLoader);
+        if (g != null && g instanceof GenericPlugin) {
+            return (GenericPlugin) g;
+        } else {
+            return null;
+        }
+    }
+
+  /**
+  * Proporciona el {@link MarkPlugin} registrado con el nombre name.
+  *
+  * @param name nombre del plugin.
+  * @throws PluginLoadException Si ha habido algún error al cargar el plugin.
+  * @return {@link MarkPlugin} asociado con el nombre que paso como parámetro.
+  */
+    public MarkPlugin getMarkPlugin(String name) throws PluginLoadException {
+        Object m = factoryPlugin.getPlugin("mark:" + name, classLoader);
+        if (m != null && m instanceof MarkPlugin) {
+            try {
+                return (MarkPlugin) m.getClass().newInstance();
+            } catch (IllegalAccessException ex) {
+                throw new PluginLoadException("Error instantiation mark",ex);
+            } catch (InstantiationException ex) {
+                throw new PluginLoadException("Error instantiation mark",ex);
+            }
+        } else {
+            return null;
+        }
+    }
+
+    /** Devuelve un {@link List}<String> que contiene el nombre de los {@link
+     *  MarkPlugin} registrados en el sistema.
+     *  @return {@link List}<String> listado de {@link MarkPlugin} registrados.
+     */
+    public List<String> getRegisteredMarks(){
+         return getRegisteredPlugins().get("mark");
+    }
+
+    /**
+     * Devuelve un listado con los nombres de todos los plugin registrados en el entorno.
+     * Agrupados por categorias.No provocará que se carguen todos los plugin.
+     *
+     * @return HashMap donde las claves son los distintos tipos de plugin y el
+     *   valor asociado con cada clave es un ArrayList<String> con un listado de
+     *   los nombres de todos los plugins de esa categoria registrados.
+     */
+
+    public HashMap<String, ArrayList<String>> getRegisteredPlugins() {
+        HashMap<String, ArrayList<String>>
+                plugins = new HashMap<String, ArrayList<String>>();
+        Iterator<String> it = pluginAssociation.keySet().iterator();
+        while (it.hasNext()) {
+            String s = it.next();
+            String pluginType = s.substring(0, s.indexOf(":"));
+            if (!plugins.containsKey(pluginType)) {
+                plugins.put(pluginType, new ArrayList<String>());
+            }
+           // try {
+            plugins.get(pluginType).add(s.substring(s.lastIndexOf(":") + 1));
+            //} catch (Exception ex) {
+            //    System.out.println("Error intentar cargar un plugin");
+            //ex.printStackTrace();
+            //}
+        }
+        return plugins;
+    }
+
+    /**
+     * Devuelve una lista con todas las claves de los plugins cargados
+     * actualmente en el entorno(Los que solo estan registrados no seran devueltos).
+     * No provoca que se cargue ningún plugin.
+     *
+     * @return Lista con todas las claves de los plugin cargados.
+     */
+    public ArrayList<String> getKeysOfLoadedPlugins() {
+        ArrayList<String> plugins = new ArrayList<String>();
+        Iterator<String> it = pluginAssociation.keySet().iterator();
+        while (it.hasNext()) {
+            String s = it.next();
+            if (isPluginLoaded(s)) {
+                plugins.add(s);
+            }
+        }
+        return plugins;
+    }
+}

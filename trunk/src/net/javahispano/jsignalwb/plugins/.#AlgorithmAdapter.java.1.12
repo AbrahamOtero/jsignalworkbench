@@ -1,0 +1,182 @@
+/*
+ * AlgorithmAdapter.java
+ *
+ * Created on 11 de abril de 2007, 13:28
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
+package net.javahispano.jsignalwb.plugins;
+
+import java.util.ArrayList;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.SignalIntervalProperties;
+import net.javahispano.jsignalwb.SignalManager;
+import java.util.*;
+import java.lang.reflect.*;
+
+/**
+ *
+ * @author Roman
+ */
+public abstract class AlgorithmAdapter extends PluginAdapter implements
+        Algorithm {
+
+
+    /** Por defecto no proporciona interfaz de usuario */
+    public boolean hasOwnExecutionGUI() {
+        return false;
+    }
+
+    /** Por defecto lanzara una excepcion
+     * @todo bug(Corregido, tambin sucedia en AlgorithmExecutionJDialog)*/
+    public void launchExecutionGUI(JSWBManager jswbManager) {
+        final JDialog conf = new JDialog(jswbManager.getParentWindow(),
+                                         "Execution GUI");
+        final JPanel jPane = new DefaultAlgorithmConfiguration(this,
+                jswbManager, conf);
+        conf.setModal(true);
+        conf.getContentPane().add(jPane);
+        conf.setSize(jPane.getPreferredSize());
+        conf.setResizable(false);
+        conf.setLocationRelativeTo(conf.getParent());
+/*
+        final Runnable uiUpdateRunnable = new Runnable() {
+            public void run() {
+
+                conf.setVisible(true);
+            }
+        };
+
+        javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
+*/
+        // a veces lanza una excepcin en esta linea.
+        //   Por problemas de concurrencia en Swing. Ya te lo explico cuando hablemos.
+        conf.setVisible(true);
+        /**
+         *
+         java.lang.ArrayIndexOutOfBoundsException: No such child: 0
+          at java.awt.Container.getComponent(Container.java:281)
+          at javax.swing.JComponent.rectangleIsObscured(JComponent.java:4319)
+          at javax.swing.JComponent.paint(JComponent.java:1020)
+          at javax.swing.JComponent.paintToOffscreen(JComponent.java:5104)
+          at javax.swing.BufferStrategyPaintManager.paint(BufferStrategyPaintManager.java:285)
+          at javax.swing.RepaintManager.paint(RepaintManager.java:1132)
+          at javax.swing.JComponent._paintImmediately(JComponent.java:5052)
+          at javax.swing.JComponent.paintImmediately(JComponent.java:4862)
+         at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:727)
+         at javax.swing.RepaintManager.paintDirtyRegions(RepaintManager.java:683)
+         at javax.swing.RepaintManager.seqPaintDirtyRegions(RepaintManager.java:663)
+          at javax.swing.SystemEventQueueUtilities$ComponentWorkRequest.run(SystemEventQueueUtilities.java:128)
+          at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:209)
+          at java.awt.EventQueue.dispatchEvent(EventQueue.java:597)
+          at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:273)
+          at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:183)
+          at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:177)
+          at java.awt.Dialog$1.run(Dialog.java:1039)
+          at java.awt.Dialog$3.run(Dialog.java:1091)
+          at java.security.AccessController.doPrivileged(Native Method)
+          at java.awt.Dialog.show(Dialog.java:1089)
+          at java.awt.Component.show(Component.java:1419)
+          at java.awt.Component.setVisible(Component.java:1372)
+          at java.awt.Window.setVisible(Window.java:801)
+          at java.awt.Dialog.setVisible(Dialog.java:979)
+          at net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog.<init>(AlgorithmExecutionJDialog.java:42)
+         at net.javahispano.jsignalwb.JSWBManager.runAlgorithm(JSWBManager.java:681)
+         at net.javahispano.jsignalwb.JSWBManager.runAlgorithm(JSWBManager.java:631)
+          at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.jButton3ActionPerformed(DefaultAlgorithmConfiguration.java:441)
+          at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.access$000(DefaultAlgorithmConfiguration.java:28)
+          at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration$1.actionPerformed(DefaultAlgorithmConfiguration.java:135)
+         at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1995)
+         at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2318)
+          at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
+         at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:242)
+          at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:236)
+          at java.awt.Component.processMouseEvent(Component.java:6038)
+          at javax.swing.JComponent.processMouseEvent(JComponent.java:3260)
+          at java.awt.Component.processEvent(Component.java:5803)
+          at java.awt.Container.processEvent(Container.java:2058)
+          at java.awt.Component.dispatchEventImpl(Component.java:4410)
+          at java.awt.Container.dispatchEventImpl(Container.java:2116)
+          at java.awt.Component.dispatchEvent(Component.java:4240)
+         at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4322)
+         at java.awt.LightweightDispatcher.processMouseEvent(Container.java:3986)
+          at java.awt.LightweightDispatcher.dispatchEvent(Container.java:3916)
+          at java.awt.Container.dispatchEventImpl(Container.java:2102)
+          at java.awt.Window.dispatchEventImpl(Window.java:2429)
+          at java.awt.Component.dispatchEvent(Component.java:4240)
+          at java.awt.EventQueue.dispatchEvent(EventQueue.java:599)
+          at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:273)
+          at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:183)
+          at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:177)
+          at java.awt.Dialog$1.run(Dialog.java:1039)
+          at java.awt.Dialog$3.run(Dialog.java:1091)
+          at java.security.AccessController.doPrivileged(Native Method)
+          at java.awt.Dialog.show(Dialog.java:1089)
+          at java.awt.Component.show(Component.java:1419)
+          at java.awt.Component.setVisible(Component.java:1372)
+          at java.awt.Window.setVisible(Window.java:801)
+          at java.awt.Dialog.setVisible(Dialog.java:979)
+          at net.javahispano.jsignalwb.plugins.AlgorithmAdapter.launchExecutionGUI(AlgorithmAdapter.java:45)
+          at net.javahispano.jsignalwb.JSWBManager.showPluginExecution(JSWBManager.java:554)
+          at net.javahispano.jsignalwb.ui.AlgorithmAction.actionPerformed(AlgorithmAction.java:54)
+         at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1995)
+         at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2318)
+          at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
+         at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:242)
+          at javax.swing.AbstractButton.doClick(AbstractButton.java:357)
+         at javax.swing.plaf.basic.BasicMenuItemUI.doClick(BasicMenuItemUI.java:1170)
+          at javax.swing.plaf.basic.BasicMenuItemUI$Handler.menuDragMouseReleased(BasicMenuItemUI.java:1274)
+         at javax.swing.JMenuItem.fireMenuDragMouseReleased(JMenuItem.java:568)
+         at javax.swing.JMenuItem.processMenuDragMouseEvent(JMenuItem.java:465)
+          at javax.swing.JMenuItem.processMouseEvent(JMenuItem.java:411)
+          at javax.swing.MenuSelectionManager.processMouseEvent(MenuSelectionManager.java:304)
+          at javax.swing.plaf.basic.BasicPopupMenuUI$MouseGrabber.eventDispatched(BasicPopupMenuUI.java:802)
+         at java.awt.Toolkit$SelectiveAWTEventListener.eventDispatched(Toolkit.java:2360)
+         at java.awt.Toolkit$ToolkitEventMulticaster.eventDispatched(Toolkit.java:2252)
+          at java.awt.Toolkit.notifyAWTEventListeners(Toolkit.java:2210)
+          at java.awt.Component.dispatchEventImpl(Component.java:4308)
+          at java.awt.Container.dispatchEventImpl(Container.java:2116)
+          at java.awt.Component.dispatchEvent(Component.java:4240)
+         at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4322)
+         at java.awt.LightweightDispatcher.processMouseEvent(Container.java:3986)
+          at java.awt.LightweightDispatcher.dispatchEvent(Container.java:3916)
+          at java.awt.Container.dispatchEventImpl(Container.java:2102)
+          at java.awt.Window.dispatchEventImpl(Window.java:2429)
+          at java.awt.Component.dispatchEvent(Component.java:4240)
+          at java.awt.EventQueue.dispatchEvent(EventQueue.java:599)
+          at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:273)
+          at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:183)
+          at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:173)
+         at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:168)
+         at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:160)
+          at java.awt.EventDispatchThread.run(EventDispatchThread.java:121)
+
+         */
+    }
+
+    public boolean hasResultsGUI() {
+        return false;
+    }
+
+    public void launchResultsGUI(JSWBManager jswbManager) {
+        throw new UnsupportedOperationException("No results GUI defined");
+    }
+
+    public void runAlgorithm(SignalManager sm,
+                             List<SignalIntervalProperties> signals) {
+    }
+
+    public void runAlgorithm(SignalManager sm,
+                             List<SignalIntervalProperties> signals,
+            AlgorithmRunner ar) {
+        runAlgorithm(sm, signals);
+    }
+
+    public int numberOfSignalsNeeded() {
+        return 0;
+    }
+}

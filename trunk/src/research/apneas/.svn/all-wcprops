@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/47/trunk/trunk/research/apneas
+END
+ReduccionFlujo.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/27/trunk/trunk/research/apneas/ReduccionFlujo.java
+END
+Loggeer.java
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/27/trunk/trunk/research/apneas/Loggeer.java
+END
+Utilidades.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/27/trunk/trunk/research/apneas/Utilidades.java
+END
+SliderTextField.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/9/trunk/trunk/research/apneas/SliderTextField.java
+END
+DesatDetector.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/28/trunk/trunk/research/apneas/DesatDetector.java
+END
+EraseInterval.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/27/trunk/trunk/research/apneas/EraseInterval.java
+END
+Intervalo.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/27/trunk/trunk/research/apneas/Intervalo.java
+END
+EpisodioDesaturacion.jbx
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/63/trunk/trunk/research/apneas/EpisodioDesaturacion.jbx
+END
+LimitacionFlujo.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/27/trunk/trunk/research/apneas/LimitacionFlujo.java
+END
+SnoreAlgorithm.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/27/trunk/trunk/research/apneas/SnoreAlgorithm.java
+END
+C.java
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/27/trunk/trunk/research/apneas/C.java
+END
+FiltroNasal.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/27/trunk/trunk/research/apneas/FiltroNasal.java
+END
+ApneaYDesaturacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/27/trunk/trunk/research/apneas/ApneaYDesaturacion.java
+END
+Derivada.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/63/trunk/trunk/research/apneas/Derivada.java
+END
+HipoapneaDesaturacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/27/trunk/trunk/research/apneas/HipoapneaDesaturacion.java
+END
+ConfigurarDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/27/trunk/trunk/research/apneas/ConfigurarDialog.java
+END
+EpisodioDesaturacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/28/trunk/trunk/research/apneas/EpisodioDesaturacion.java
+END

@@ -1,0 +1,55 @@
+[PropertyInfo]
+allAnnotations,java.util.List,false,false, , ,true,<default>
+availableCategoriesOfAnnotations,java.util.ArrayList,false,false, , ,true,<default>
+availableKindsOfGrids,java.util.List,false,false, , ,true,<default>
+availableKindsOfInstantAnnotations,java.util.List,false,false, , ,true,<default>
+availableKindsOfInstantMarks,java.util.List,false,false, , ,true,<default>
+availableKindsOfIntervalAnnotations,java.util.List,false,false, , ,true,<default>
+availableKindsOfIntervalMarks,java.util.List,false,false, , ,true,<default>
+bigFont,java.awt.Font,false,false, , ,false,<default>
+debugModeOnRestart,boolean,false,false, , ,true,<default>
+deleteSignalsInNextLoad,boolean,false,false, , ,false,<default>
+fontColor,java.awt.Color,false,false, , ,false,<default>
+intervalSelectedListeners,java.util.ArrayList,false,false, , ,false,<default>
+IOManager,net.javahispano.jsignalwb.io.IOManager,false,false, , ,true,<default>
+JMenuBar,javax.swing.JMenuBar,false,false, , ,true,<default>
+jMenuBar,javax.swing.JMenuBar,false,false, , ,false,<default>
+JMenuBarItems,java.util.ArrayList,false,false, , ,false,<default>
+JSignalMonitor,net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor,false,false, , ,true,<default>
+JSMChannelHeight,int,false,false, , ,true,<default>
+JSMFrecuency,float,false,false, , ,true,<default>
+JSMIgnoreRepaintMode,boolean,false,false, , ,true,<default>
+JSMLeftPanelConfigurationString,String,false,false, , ,true,<default>
+JSMMaxTime,long,false,false, , ,true,<default>
+JSMPanel,javax.swing.JPanel,false,false, , ,true,<default>
+JSMScrollBaseTime,long,false,false, , ,true,<default>
+JSMScrollValue,long,false,false, , ,true,<default>
+jswbManagerInstance,net.javahispano.jsignalwb.JSWBManager,false,false, , ,false,<default>
+JSWBPanel,javax.swing.JPanel,false,false, , ,true,<default>
+jswbPanel,javax.swing.JPanel,false,false, , ,false,<default>
+JToolBar,javax.swing.JToolBar,false,false, , ,true,<default>
+jToolBar,javax.swing.JToolBar,false,false, , ,false,<default>
+JToolBarItems,java.util.ArrayList,false,false, , ,true,<default>
+jToolBarItems,java.util.ArrayList,false,false, , ,false,<default>
+leftComponent,javax.swing.JComponent,false,false, , ,true,<default>
+lowerComponent,javax.swing.JComponent,false,false, , ,true,<default>
+normalFont,java.awt.Font,false,false, , ,false,<default>
+parentWindow,java.awt.Window,false,false, , ,true,<default>
+pfm,net.javahispano.jsignalwb.PropertiesFileManager,false,false, , ,false,<default>
+pluginManager,net.javahispano.jsignalwb.plugins.PluginManager,false,false, , ,true,<default>
+pluginNames,java.util.HashMap,false,false, , ,true,<default>
+projectSaved,boolean,false,false, , ,true,<default>
+propertiesFileManager,net.javahispano.jsignalwb.PropertiesFileManager,false,false, , ,true,<default>
+rightComponent,javax.swing.JComponent,false,false, , ,true,<default>
+sessionInfo,net.javahispano.jsignalwb.SessionInfo,false,false, , ,true,<default>
+sessionListenetList,java.util.List,false,false, , ,false,<default>
+signalManager,net.javahispano.jsignalwb.SignalManager,false,false, , ,true,<default>
+smallFont,java.awt.Font,false,false, , ,false,<default>
+statusBar,net.javahispano.jsignalwb.ui.JSWBStatusBar,false,false, , ,false,<default>
+statusBarPanel,javax.swing.JPanel,false,false, , ,true,<default>
+upperComponent,javax.swing.JComponent,false,false, , ,true,<default>
+[IconNames]
+
+
+
+

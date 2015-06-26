@@ -1,0 +1,152 @@
+/*
+ * DefaultIntervalMark.java
+ *
+ * Created on 5 de julio de 2007, 21:22
+ */
+
+package net.javahispano.jsignalwb.plugins;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Window;
+import java.awt.image.BufferedImage;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.Signal;
+import net.javahispano.jsignalwb.jsignalmonitor.marks.MarkPaintInfo;
+import java.awt.*;
+import java.awt.geom.RoundRectangle2D.*;
+
+/**
+ *
+ * @author Román Segador
+ */
+public class DefaultIntervalMark extends MarkPluginAdapter{
+    private long markTime;
+    private long endTime;
+    private Signal signal;
+    private String title;
+    private String comentary;
+    private Color color;
+    private BufferedImage im;
+    private JSWBManager jswbManager;
+    public DefaultIntervalMark() {
+        markTime=0;
+        endTime=0;
+        title="Write here the mark title...";
+        comentary="Write here your comentary....";
+        color=Color.GREEN;
+        jswbManager=null;
+        refreshBufferedImage();
+    }
+     public String getName() {
+        return "Default Interval Mark";
+    }
+
+    public void setMarkTime(long markTime) {
+        this.markTime=markTime;
+    }
+
+    public long getMarkTime() {
+        return markTime;
+    }
+    public void setSignal(Signal signal){
+        this.signal=signal;
+    }
+    public void setEndTime(long endTime) {
+        this.endTime=endTime;
+    }
+
+    public boolean isInterval() {
+        return true;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setJSWBManager(JSWBManager jswbManager) {
+        this.jswbManager=jswbManager;
+    }
+
+    public void showMarkInfo(Window owner) {
+        new DefaultIntervalMarkInfoPanel(signal,this).showJWindow(owner);
+    }
+
+    public Image getImage() {
+        return im;
+    }
+
+    public boolean isOwnPainted() {
+        return true;
+    }
+
+    public void paint(Graphics2D g2d, MarkPaintInfo markPaintInfo) {
+        Stroke oldStroke = g2d.getStroke();
+        Color color2=new Color(color.getRed(),color.getGreen(),color.getBlue(),50);
+        int maxY=(int)Math.max(markPaintInfo.getPoint().getY(),markPaintInfo.getMaxValueY());
+        int minY=(int)Math.min(markPaintInfo.getPoint().getY()+markPaintInfo.getEight(),markPaintInfo.getMinValueY());
+        //g2d.fillRect((int)markPaintInfo.getPoint().getX(),maxY,markPaintInfo.getWidth(),minY-maxY);
+        g2d.setColor(color2);
+        g2d.setStroke(new BasicStroke(10));
+      //  g2d.drawRect(markPaintInfo.getPoint().x,maxY,markPaintInfo.getWidth(),minY-maxY);
+      g2d.draw3DRect(markPaintInfo.getPoint().x,maxY,markPaintInfo.getWidth(),minY-maxY, true);
+      // g2d.draw(new java.awt.geom.RoundRectangle2D.Float (markPaintInfo.getPoint().x,maxY,markPaintInfo.getWidth(),minY-maxY,25,25));
+        //g2d.fillRect(markPaintInfo.getPoint().x,maxY,markPaintInfo.getWidth(),minY-maxY);
+    }
+
+    public JSWBManager getJSWBManager(){
+        return jswbManager;
+    }
+     public void setTitle(String title){
+        this.title=title;
+    }
+
+    public void setComentary(String comentary){
+        this.comentary=comentary;
+    }
+
+    public String getComentary(){
+        return comentary;
+    }
+    public String getTitle(){
+        return title;
+    }
+     public boolean hasDataToSave() {
+        return true;
+    }
+
+    public String getDataToSave() {
+        return "title:"+ title + "|| comentary:"+comentary+"|| color:"+color.getRGB();
+    }
+
+
+    public void setSavedData(String data) {
+        data=data.substring(data.indexOf("title:")+6);
+        title=data.substring(0,data.indexOf("||"));
+        data=data.substring(data.indexOf("comentary:")+10);
+        comentary=data.substring(0,data.indexOf("||"));
+        data=data.substring(data.indexOf("color:")+6);
+        color=new Color(Integer.parseInt(data));
+        refreshBufferedImage();
+    }
+
+    public String getToolTipText() {
+        return title;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+        refreshBufferedImage();
+    }
+    private void refreshBufferedImage(){
+        im=new BufferedImage(5,15,BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2d=im.createGraphics();
+        g2d.setColor(color);
+        g2d.fillRect(0,0,5,15);
+    }
+}

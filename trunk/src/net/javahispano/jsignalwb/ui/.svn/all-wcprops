@@ -1,0 +1,449 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/62/trunk/trunk/net/javahispano/jsignalwb/ui
+END
+ShowJSMPropertiesAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ShowJSMPropertiesAction.java
+END
+ChangePositionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ChangePositionAction.java
+END
+JRadioButtonMenuItemDebugModeOnRestart.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemDebugModeOnRestart.java
+END
+SaverExecutionJDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SaverExecutionJDialog.java
+END
+LoaderExecutionJDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/LoaderExecutionJDialog.java
+END
+AlgorithmExecutionJDialog.form
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/AlgorithmExecutionJDialog.form
+END
+ShowPropertiesAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ShowPropertiesAction.java
+END
+AlgorithmAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/jsignalwb/ui/AlgorithmAction.java
+END
+JMenuFile.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuFile.java
+END
+JMenuAbout.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuAbout.java
+END
+PrintAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/PrintAction.java
+END
+ConfigureGridAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ConfigureGridAction.java
+END
+ShowEmphasisLevelAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ShowEmphasisLevelAction.java
+END
+SetGridAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SetGridAction.java
+END
+JMenuZoom.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuZoom.java
+END
+ConfigureJSM.form
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/ConfigureJSM.form
+END
+RemoveAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/RemoveAction.java
+END
+JMenuPlugins.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuPlugins.java
+END
+JToggleButtonAddMarks.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JToggleButtonAddMarks.java
+END
+LookAndFeelAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/LookAndFeelAction.java
+END
+ConfigureSignalPanel.form
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/ConfigureSignalPanel.form
+END
+EraseAllAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/EraseAllAction.java
+END
+JMenuSignal.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuSignal.java
+END
+OpenFileAndAddSignalsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/OpenFileAndAddSignalsAction.java
+END
+DebugModeOnRestartAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/DebugModeOnRestartAction.java
+END
+JSWBStatusBar.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JSWBStatusBar.java
+END
+SaverExecutionJDialog.form
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/SaverExecutionJDialog.form
+END
+LoaderExecutionJDialog.form
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/LoaderExecutionJDialog.form
+END
+VisibleAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/VisibleAction.java
+END
+SignalDataColorAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SignalDataColorAction.java
+END
+LooKAndFeelDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/LooKAndFeelDialog.java
+END
+OtherPluginsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/OtherPluginsAction.java
+END
+JMenuAbscissaOffset.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuAbscissaOffset.java
+END
+SaveAsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SaveAsAction.java
+END
+SetSignalImaginaryAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SetSignalImaginaryAction.java
+END
+JMenuGrids.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuGrids.java
+END
+GenericPluginAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/GenericPluginAction.java
+END
+InvadeNearChannelsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/InvadeNearChannelsAction.java
+END
+RemoveAllMarksAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/RemoveAllMarksAction.java
+END
+LookAndFeelCombobox.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/LookAndFeelCombobox.java
+END
+JMenuOtherPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuOtherPlugin.java
+END
+JRadioButtonMenuItemAddMarks.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemAddMarks.java
+END
+AlgorithmAction.jbx
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/AlgorithmAction.jbx
+END
+AdjustSignalVisibleRangeAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/AdjustSignalVisibleRangeAction.java
+END
+ShowXYPointsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ShowXYPointsAction.java
+END
+JRadioButtonMenuItemShowEmphasisLevel.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemShowEmphasisLevel.java
+END
+JRadioButtonMenuItemXY.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemXY.java
+END
+NewAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/NewAction.java
+END
+ExitAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ExitAction.java
+END
+FileChooserFileFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/FileChooserFileFilter.java
+END
+ShowPluginManagerAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ShowPluginManagerAction.java
+END
+JRadioButtonMenuItemSetSignalImaginary.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemSetSignalImaginary.java
+END
+JMenuSignals.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuSignals.java
+END
+JMenuGenericPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuGenericPlugin.java
+END
+JRadioButtonMenuItemInvadeNearChannels.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemInvadeNearChannels.java
+END
+JRadioButtonMenuItemVisible.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JRadioButtonMenuItemVisible.java
+END
+RemoveAllAnnotationsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/RemoveAllAnnotationsAction.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/ui/package.html
+END
+EraseAllEmphasisLevelsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/EraseAllEmphasisLevelsAction.java
+END
+MenuListenerAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/MenuListenerAdapter.java
+END
+JMenuActions.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuActions.java
+END
+JSWFileChooser.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JSWFileChooser.java
+END
+JToggleButtonXY.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JToggleButtonXY.java
+END
+AlgorithmExecutionJDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/AlgorithmExecutionJDialog.java
+END
+ZoomAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ZoomAction.java
+END
+JMenuAlgorithm.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuAlgorithm.java
+END
+JMenuChangePosition.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JMenuChangePosition.java
+END
+SelectMarksAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SelectMarksAction.java
+END
+OpenFileAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/OpenFileAction.java
+END
+JSWBFrame.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/jsignalwb/ui/JSWBFrame.java
+END
+ConfigureSignalPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/ConfigureSignalPanel.java
+END
+SaveAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/SaveAction.java
+END
+AbscissaOffsetAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/AbscissaOffsetAction.java
+END
+JTextFieldDate.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/ui/JTextFieldDate.java
+END

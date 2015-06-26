@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil
+END
+PTBM.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/PTBM.java
+END
+PTB.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/PTB.java
+END
+Restriccion.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/Restriccion.java
+END
+RestriccionInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/RestriccionInterface.java
+END
+PTBInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/PTBInterface.java
+END
+PTBMInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/PTBMInterface.java
+END
+PtoSig.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/PtoSig.java
+END
+PtoSigInterface.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/Perfil/PtoSigInterface.java
+END

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/47/trunk/trunk/net/javahispano/jsignalwb/io
+END
+XMLChannelProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLChannelProperties.java
+END
+XMLJSignalMonitor.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLJSignalMonitor.java
+END
+XMLSignal.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLSignal.java
+END
+XMLGrid.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLGrid.java
+END
+XMLProperty.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLProperty.java
+END
+XMLPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLPlugin.java
+END
+IOManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/IOManager.java
+END
+XMLAnnotation.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLAnnotation.java
+END
+SessionNotSavedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3/trunk/trunk/net/javahispano/jsignalwb/io/SessionNotSavedException.java
+END
+XMLMark.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/io/XMLMark.java
+END
+BasicLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/io/BasicLoader.java
+END

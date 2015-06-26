@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/28/trunk/trunk/es/usc/gsi/conversorDatosMIT/ficheros/lectura
+END
+LeeFicheroDat.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/28/trunk/trunk/es/usc/gsi/conversorDatosMIT/ficheros/lectura/LeeFicheroDat.java
+END
+CacheMITDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/conversorDatosMIT/ficheros/lectura/CacheMITDB.java
+END
+BufferedRandomAccessFile.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/conversorDatosMIT/ficheros/lectura/BufferedRandomAccessFile.java
+END

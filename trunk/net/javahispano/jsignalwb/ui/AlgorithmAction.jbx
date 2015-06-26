@@ -1,9 +1,0 @@
-[PropertyInfo]
-action,int,false,false, , ,false,<default>
-algorithmName,String,false,false, , ,false,<default>
-jswbm,net.javahispano.jsignalwb.JSWBManager,false,false, , ,false,<default>
-[IconNames]
-
-
-
-

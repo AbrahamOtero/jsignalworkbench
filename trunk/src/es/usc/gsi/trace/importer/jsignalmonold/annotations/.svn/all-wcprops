@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations
+END
+Annotation.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/Annotation.java
+END
+Mark.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/Mark.java
+END
+Attribute.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/Attribute.java
+END
+Therapy.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/Therapy.java
+END
+ClinicalEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/ClinicalEvent.java
+END
+Diagnostic.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/Diagnostic.java
+END
+Manifestacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/jsignalmonold/annotations/Manifestacion.java
+END

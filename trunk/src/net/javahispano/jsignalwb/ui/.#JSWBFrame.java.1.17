@@ -1,0 +1,218 @@
+/*
+ * testFrame.java
+ *
+ * Created on 13 de febrero de 2007, 22:13
+ */
+
+package net.javahispano.jsignalwb.ui;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.*;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.JSWBWindowListener;
+import net.javahispano.jsignalwb.jsignalmonitor.MoveScrollPanel;
+
+/**
+ * ventana principal de la aplicación.No diseñado como parte del API.
+ *
+ * @author Roman
+ */
+public class JSWBFrame extends javax.swing.JFrame{
+    private javax.swing.JMenuBar jMenuBar;
+    private JToolBar jToolBar;
+    private JPanel centerPanel;
+    private JPanel statusBarPanel;
+    //private JMenu jMenuPlugins;
+    //private JSignalMonitorPanel jsmPanel;
+    //private PluginManager pm;
+    /** Creates new form testFrame */
+    public JSWBFrame(JSWBManager jswbManager) {
+        this.setTitle("JSignalWorkBench");
+        this.setIconImage(Toolkit.getDefaultToolkit().createImage(
+                       JSWBManager.class.getResource("images/jswIcon.jpg")));
+        jswbManager.setParentWindow(this);
+        jswbManager.loadPreviouslyFile();
+        centerPanel=jswbManager.getJSWBPanel();
+        jswbManager.addJMenuBarItem(new JMenuFile());
+        jswbManager.addJMenuBarItem(new JMenuSignals(jswbManager));
+        jswbManager.addJMenuBarItem(new JMenuPlugins(jswbManager));
+        jswbManager.addJMenuBarItem(new JMenuActions(jswbManager));
+        jMenuBar=jswbManager.getJMenuBar();
+        initJToolBar(jswbManager);
+        jToolBar=jswbManager.getJToolBar();
+        statusBarPanel=jswbManager.getStatusBarPanel();
+        initComponents();
+        Dimension d=Toolkit.getDefaultToolkit().getScreenSize();
+        this.setSize((int)(d.getWidth()*0.8),(int)(d.getHeight()*0.8));
+        this.setLocation((int)(d.getWidth()*0.1),(int)(d.getHeight()*0.1));
+        //jswbManager.setJSWBFrame(this);
+        jswbManager.refreshJSM(false);
+
+        this.addWindowListener(
+                new JSWBWindowListener(jswbManager));
+        Runnable uiUpdateRunnable = new Runnable() {
+            public void run() {
+                setVisible(true);
+            }
+        };
+        javax.swing.SwingUtilities.invokeLater(uiUpdateRunnable);
+
+
+    }
+    /*public void addMenu(JMenu jMenu){
+        jMenuBar.add(jMenu);
+    }
+    public void addMenuItem(JMenuItem jmItem){
+        jMenuBar.add(jmItem);
+    }
+
+    public void addJToolBarItem(Action action){
+        addJToolBarItem(action,false);
+    }
+    public void addJToolBarItem(Action action,boolean separator){
+        jToolBar.add(action);
+        if(separator)
+            jToolBar.addSeparator();
+    }
+    public void addJToolBarItem(Component comp){
+        jToolBar.add(comp);
+    }
+    public void addJToolBarSeparator(){
+        jToolBar.addSeparator();
+    }
+    public void cleanJToolBar(){
+        jToolBar.removeAll();
+    }
+    public void removeJToolBarItem(Component comp){
+        jToolBar.remove(comp);
+    }
+    public void setLeftComponent(JComponent panel){
+        //si ya hubiese algo en esa posicion lo eliminamos
+        Component component = ((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.WEST);
+        if (component != null) {
+            this.remove(component);
+        }
+        add(panel,BorderLayout.WEST);
+    }
+    public void setLowerComponent(JComponent panel){
+        //si ya hubiese algo en esa posicion lo eliminamos
+        Component component = ((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.SOUTH);
+        if (component != null) {
+            this.remove(component);
+        }
+        add(panel,BorderLayout.SOUTH);
+    }
+    public void setRightComponent(JComponent panel){
+        //si ya hubiese algo en esa posicion lo eliminamos
+        Component component = ((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.EAST);
+        if (component != null) {
+            this.remove(component);
+        }
+        add(panel,BorderLayout.EAST);
+    }
+    public void setUpperComponent(JComponent panel){
+        //si ya hubiese algo en esa posicion lo eliminamos
+        Component component = ((BorderLayout) this.getLayout()).getLayoutComponent(BorderLayout.NORTH);
+        if (component != null) {
+            this.remove(component);
+        }
+        add(panel,BorderLayout.NORTH);
+    }*/
+    private void initComponents(){
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setJMenuBar(jMenuBar);
+        setLayout(new BorderLayout());
+        add(centerPanel,BorderLayout.CENTER);
+        add(jToolBar,BorderLayout.NORTH);
+        add(statusBarPanel,BorderLayout.SOUTH);
+
+        pack();
+    }
+    /**
+     *
+     * que se ejecute adecuadamente aunque no haya parámetros de la consola
+     * @todo obtener los plugin de desarrollo de un modo adecuado
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+
+                //String path = null;
+                //pluginsPath = ".";
+                boolean develop = false; //cierto sólo si se está usando el framework para el desarrollo de plugings
+                try {
+                    develop = Boolean.parseBoolean(args[0]);
+                    //path = args[1];
+                    //pluginsPath = args[1];
+                } catch (Exception ex) {
+                    //no se proporciona parmetro y se usa el valor por defecto
+                }
+
+                JSWBManager jswbManager = JSWBManager.getJSWBManagerInstance(develop);
+
+                /* if(path!=null)
+                    jswbManager.loadChannels(
+                         "defaultLoader", new File(path));*/
+
+                new JSWBFrame(jswbManager);
+                /*Signal s1=new Signal("a",new float[1000]);
+                Signal s2=new Signal("a1",new float[1000]);
+                Signal s3=new Signal("a2",new float[1000]);
+                Signal s4=new Signal("a3",new float[1000]);
+                Signal s5=new Signal("a4",new float[1000]);
+                Signal s6=new Signal("a5",new float[1000]);
+                jswbManager.getSignalManager().addSignal(s1);
+                jswbManager.getSignalManager().addSignal(s2);
+                jswbManager.getSignalManager().addSignal(s3);
+                jswbManager.getSignalManager().addSignal(s4);
+                jswbManager.getSignalManager().addSignal(s5);
+                jswbManager.getSignalManager().addSignal(s6);*/
+                //jswbManager.refreshJToolBar();
+                //jswbManager.getJSignalMonitor().repaintChannels();
+
+
+            }
+        });
+    }
+    private void initJToolBar(JSWBManager jswbManager) {
+
+        jswbManager.addJToolBarButton(new OpenFileAction(jswbManager));
+        jswbManager.addJToolBarButton(new SaveAction(jswbManager));
+        HashMap<String, ArrayList<String>> plugins =
+                jswbManager.getPluginManager().getRegisteredPlugins();
+        ArrayList<String> algorithms = plugins.get("algorithm");
+        if (algorithms != null) {
+            jswbManager.addJToolBarSeparator();
+            jswbManager.addJToolBarButton(new JLabel(" Algorithms: "));
+            for (String algorithm : algorithms) {
+                jswbManager.addJToolBarButton(new AlgorithmAction(algorithm,
+                        AlgorithmAction.RUN_ACTION, jswbManager));
+            }
+
+        }
+
+        ArrayList<String> genericPlugins = plugins.get("generic");
+        if (genericPlugins != null) {
+            jswbManager.addJToolBarSeparator();
+            jswbManager.addJToolBarButton(new JLabel(" Generics: "));
+            for (String genericPlugin : genericPlugins) {
+                jswbManager.addJToolBarButton(new GenericPluginAction(jswbManager,genericPlugin,
+                        GenericPluginAction.LAUNCH_ACTION));
+            }
+        }
+
+        jswbManager.addJToolBarSeparator();
+        jswbManager.addJToolBarButton(new AdjustSignalVisibleRangeAction(jswbManager));
+        jswbManager.addJToolBarSeparator();
+        jswbManager.addJToolBarButton(new JToggleButtonXY(jswbManager.getJSignalMonitor()));
+        jswbManager.addJToolBarButton(new JToggleButtonAddMarks(jswbManager.getJSignalMonitor()));
+        jswbManager.addJToolBarSeparator();
+        jswbManager.addJToolBarButton(new MoveScrollPanel(jswbManager.getJSignalMonitor()));
+    }
+}

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/62/trunk/trunk/net/javahispano/jsignalwb
+END
+SessionListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/SessionListener.java
+END
+JSWBManager.jbx
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/JSWBManager.jbx
+END
+SessionEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/SessionEvent.java
+END
+SessionInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/SessionInfo.java
+END
+EnvironmentConfiguration.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/EnvironmentConfiguration.java
+END
+SignalIntervalProperties.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/SignalIntervalProperties.java
+END
+PropertiesFileManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/PropertiesFileManager.java
+END
+SignalSizeListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/3/trunk/trunk/net/javahispano/jsignalwb/SignalSizeListener.java
+END
+IntervalSelectedEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/IntervalSelectedEvent.java
+END
+SessionEvent.jbx
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/jsignalwb/SessionEvent.jbx
+END
+JSWBManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/jsignalwb/JSWBManager.java
+END
+JSWBWindowListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/JSWBWindowListener.java
+END
+SignalNotFoundException.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/SignalNotFoundException.java
+END
+IntervalSelectedListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/IntervalSelectedListener.java
+END
+SignalSizeEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/SignalSizeEvent.java
+END

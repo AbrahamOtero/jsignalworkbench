@@ -1,0 +1,356 @@
+package net.javahispano.jsignalwb.io;
+
+import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.Signal;
+import net.javahispano.jsignalwb.SignalManager;
+import net.javahispano.jsignalwb.plugins.LoaderAdapter;
+import net.javahispano.jsignalwb.plugins.MarkPlugin;
+import net.javahispano.jsignalwb.plugins.Plugin;
+import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.utilities.ExceptionsCollector;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+
+/**
+  * {@link Saver} que utiliza JSignalWorkbench por defecto. Implementa el patrón
+  * template method permitiendo que el usuario defina sólo un formato diferente
+  * para el archivo que contiene las señales muestreadas y conserve el formato
+  * XML de JSignalWorkbench donde se almacena la configuración del entorno,
+  * anotaciones, información de los plugin y demás; o viceversa.
+  *
+  * @author This software is under the Apache License Version 2.0
+  *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+  *   Abraham Otero
+  */
+public class DefaultLoader extends LoaderAdapter {
+    private ArrayList<String> extensions;//Almacena las extensiones en que es capaz de almacenar senales el plugin
+    private float frecuency;
+    private long scrollValue;
+
+    /** crea una nueva instancia del plugin */
+
+    public DefaultLoader() {
+        extensions = new ArrayList<String>();
+        extensions.add("jsw");
+        frecuency=-1;
+        scrollValue=-1;
+    }
+
+    public String getName() {
+        return "defaultLoader";
+    }
+
+    public String getShortDescription(){
+        return "Proyectos JSignalWorkBench";
+    }
+
+    /**
+     * Este método está implementado siguiendo el patron template. Los otros
+     * métodos involucrados en el patrón son {@link loadXML(File
+     * f,ArrayList<Signal> signals,SignalManager sm,PluginManager pm)} y {@link
+     * loadValues(File f, ArrayList<Signal> signals)}. El primero se encarga de
+     * cargar la información relativa a la configuración del entorno, la
+     * información de los plugins y los nombres, frecuencias de muestreo,
+     * unidades, etc. de las señales. El segundo es el que se encarga de cargar
+     * los valores (arrays de datos) de las señales.
+     *
+     * @param file File
+     * @param sm {@link SignalManager}.
+     * @param pm {@link PluginManager}.
+     * @throws Exception
+     * @return true si la carga se realiza correctamente, fase en caso
+     *   contrario.
+     */
+    public boolean load(File file, JSWBManager jswbManager) throws
+            Exception {
+        PluginManager pm=jswbManager.getPluginManager();
+        SignalManager sm=jswbManager.getSignalManager();
+        if(file!=null &&file.getName().toLowerCase().endsWith(".jsw"))
+            file=file.getParentFile();
+        FileFilter ff=new FileFilter() {
+                public boolean accept(File f) {
+
+                    if (f.getName().toLowerCase().endsWith(".jsw")) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+        if(file!=null&&file.isDirectory()&&file.listFiles(ff)!=null&&file.listFiles(ff).length>0){
+                file=file.listFiles(ff)[0];
+                ArrayList<Signal> signals = new ArrayList<Signal>();
+                if (loadValues(loadXml(file, signals, jswbManager), signals)) {
+                    boolean flag = true;
+                    for (Signal s : signals) {
+                        if (!sm.addSignal(s)) {
+                            flag = false;
+                        }
+                    }
+                    jswbManager.setJSMFrecuency(frecuency);
+                    jswbManager.setJSMScrollValue(scrollValue);
+                    //JSWBManager.getJSWBManagerInstance().getJSM().repaintAll();
+                    return flag;
+                } else {
+                    return false;
+                }
+        }else return false;
+    }
+
+
+    public ArrayList<String> getAvalaibleExtensions() {
+        return extensions;
+    }
+
+    /**
+     *  <p>Objetivo --> Cargar todas las propiedades de cada una de las senales que
+     * se desean obtener, salvo los valores en si mismo de la senal. Tambien
+     * indicara la ubicacion del archivo que almacena los valores.</p>
+     *
+     * <p>Precondiciones --> El argumento f debe corresponder a un fichero en
+     * formato XML especifico de la aplicacion. </p>
+     *
+     * <p> Postcondiciones --> El metodo
+     * almacenara en el array signals proporcionado las senales con sus
+     * caracteristicas, ademas proporcionara una variable file que indica el
+     * fichero en el cual estan contenidos los valores de las senales. </p>
+     *
+     * @param f File
+     * @param signals ArrayList
+     * @param jswbManager {@link JSWBManager}
+     * @throws Exception
+     * @return archivo que contiene los datos.
+     */
+    protected File loadXml(File f,ArrayList<Signal> signals,JSWBManager jswbManager) throws Exception{
+        try {
+            ExceptionsCollector ec=new ExceptionsCollector(jswbManager.getParentWindow());
+            PluginManager pm=jswbManager.getPluginManager();
+            SAXBuilder builder=new SAXBuilder();
+            Document doc=builder.build(f);
+            Element root=doc.getRootElement();
+
+            File fileValues=new File(f.getParent()+"/"+root.getAttribute("path").getValue());
+            List signalsXML=root.getChildren("Signal");
+
+            Iterator i=signalsXML.iterator();
+            while(i.hasNext()) {
+                Element signal=(Element)i.next();
+                Signal s;
+                if (Boolean.valueOf(signal.getAttribute("HasPosibility").getValue())) {
+                    s = new Signal(signal.getAttribute("Name").getValue(),
+                            new float[Integer.parseInt(signal.getAttribute(
+                            "Size").getValue())],
+                            Float.parseFloat(signal.getAttribute("Frecuency").
+                            getValue()),
+                            Long.parseLong(signal.getAttribute("Start").
+                            getValue()),
+                            signal.getAttribute("Magnitude").getValue(),
+                            new short[Integer.parseInt(signal.getAttribute(
+                            "Size").getValue())]);
+                    //s.setHasColors(true);
+                } else {
+                    s = new Signal(signal.getAttribute("Name").getValue(),
+                            new float[Integer.parseInt(signal.getAttribute(
+                            "Size").getValue())],
+                            Float.parseFloat(signal.getAttribute("Frecuency").
+                            getValue()),
+                            Long.parseLong(signal.getAttribute("Start").
+                            getValue()),
+                            signal.getAttribute("Magnitude").getValue());
+                    //s.setHasColors(false);
+                }
+                Iterator propertiesList = signal.getChildren("ChannelProperties").
+                        iterator();
+                Element properties;
+                if (propertiesList.hasNext()) {
+                    properties = (Element) propertiesList.next();
+                    s.getProperties().setZoom(Float.valueOf(properties.getAttribute(
+                            "Zoom").getValue()));
+                    s.getProperties().setDataColor(new Color(Integer.valueOf(
+                            properties.getAttribute("DataColor").getValue()), true));
+                    s.getProperties().setAbscissaOffset(Float.valueOf(properties.
+                            getAttribute("AbscissaOffset").getValue()));
+                    s.getProperties().setVisible(Boolean.valueOf(properties.
+                            getAttribute("Visible").getValue()));
+           //         s.getProperties().setAbscissaValue(Float.valueOf(properties.
+             //               getAttribute("AbscissaValue").getValue()));
+                }
+                Iterator marksList = signal.getChildren("Mark").
+                        iterator();
+                Element mark;
+                while(marksList.hasNext()) {
+                    mark = (Element) marksList.next();
+                    String pluginName=mark.getAttribute("Name").getValue();
+                if(pm.isPluginRegistered("mark",pluginName)){
+                    MarkPlugin mp=pm.getMarkPlugin(pluginName);
+                    if(mp.getClass().getCanonicalName().equals(mark.getAttribute("BaseClass").getValue())){
+                        if(mp.getPluginVersion().equals(mark.getAttribute("Version").getValue())){
+                            mp.setMarkTime(Long.parseLong(mark.getAttribute("MarkTime").getValue()));
+                            if(Boolean.parseBoolean(mark.getAttribute("Interval").getValue()))
+                                mp.setEndTime(Long.parseLong(mark.getAttribute("EndTime").getValue()));
+                            if(mp.canSaveData())
+                                mp.setSavedData(mark.getText());
+                            s.addMark(mp);
+                            /*else
+                                ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
+                        }else
+                            ec.addException(new Exception("The version of the plugin "+mp.getName()+" is not the same"));
+                    }else ec.addException(new Exception("The mark plugin "+mp.getName()+" has change and " +
+                            "is imposible to load the saved data"));
+                }else
+                    ec.addException(new Exception("The mark plugin "+pluginName+" is not registered"));
+                }
+                signals.add(s);
+            }
+            Iterator jsmList=root.getChildren("JSignalMonitor").iterator();
+            if(jsmList.hasNext()){
+                Element jsm=(Element)jsmList.next();
+                frecuency=Float.valueOf(jsm.getAttribute("Frecuency").getValue());
+                scrollValue=Long.valueOf(jsm.getAttribute("ScrollPosition").getValue());
+
+
+
+                //JSWBManager.getJSWBManagerInstance().getJSM().repaintAll();
+            }
+
+            Iterator plugins=root.getChildren("Plugin").iterator();
+            while(plugins.hasNext()){
+                Element plugin=(Element)plugins.next();
+                String pluginKey=plugin.getAttribute("Key").getValue();
+                if(pm.isPluginRegistered(pluginKey)){
+                    Plugin p=pm.getPlugin(pluginKey);
+                    if(p.getClass().getCanonicalName().equals(plugin.getAttribute("BaseClass").getValue())||true){
+                        if(p.getPluginVersion().equals(plugin.getAttribute("Version").getValue())){
+                            if(p.canSaveData())
+                                p.setSavedData(plugin.getText());
+                            /*else
+                                ec.addException(new Exception("Imposible to load data in plugin: "+p.getName()));*/
+                        }else
+                            ec.addException(new Exception("The version of the plugin "+p.getName()+" is not the same"));
+                    }else ec.addException(new Exception("The plugin "+p.getName()+" has change and " +
+                            "is imposible to load the saved data"));
+                }else
+                    ec.addException(new Exception("The plugin "+pluginKey+" is not registered"));
+
+            }
+            ec.showExceptions("The next errors founded loading the plugins data");
+            //    "<Plugin Name="Media móvil" BaseClass="net.javahispano.jsignalwb.plugins.basicstats.MobileMeanPlugin">datos para guardar de prueba</Plugin>"
+            return fileValues;
+        } catch (NumberFormatException ex) {
+            throw new Exception("Error loading xml(invalid number format): "+ex.getMessage(),ex);
+        } catch (JDOMException ex) {
+            throw new Exception("Error loading xml(xml malformed): "+ex.getMessage(),ex);
+        } catch (IOException ex) {
+            throw new Exception("Error loading xml: "+ex.getMessage(),ex);
+        }
+    }
+
+    /**
+     * <p>Objetivo --> Cargar los valores apropiados para cada una de las senales
+     * desde fichero</p>
+     *
+     * <p> Precondiciones --> La variable signals debe contener el
+     * numero de senales que se esperan encontrar en el fichero, inicializadas y
+     * con todas sus propiedades ya cargadas a excepcion de los valores de la
+     * senal(Aunque debera indicar cuantos valores va a encontrar. La variable f
+     * debera indicar el fichero en formato de texto especifico del plugin que
+     * contenga los valores de las senales.</p>
+     *
+     * <p> Postcondiciones--> Las senales
+     * quedan almacenadas en la variable signals proporcionada. El metodo
+     * devolvera true en caso de finalizar correctamente y false en caso de
+     * encontrar algun problema</p>
+     *
+     * @param f File
+     * @param signals ArrayList
+     * @throws Exception
+     * @return true si la carrera se realiza correctamente, fase en caso contrario.
+     */
+    protected boolean loadValues(File f, ArrayList<Signal> signals) throws Exception {
+        try {
+
+
+
+                //int numberOfSignals = signals.size();
+                //String file = new String();
+                FileReader fr = new FileReader(f);
+                BufferedReader input = new BufferedReader(fr);
+                try {
+                    String line;
+                    StringTokenizer st;
+                    int index1 = 0;
+                    //int signal = 0;
+                    int pos = 0;
+                    String temp = "";
+                    while ((line = input.readLine()) != null) {
+                        index1 = 0;
+                        st = new StringTokenizer(line, "\t", true);
+                        boolean flag = false;
+                        while (st.hasMoreTokens()) {
+                            temp = st.nextToken();
+                            /*if(temp.equals("\t")){
+                                index1++;
+                                                 }
+                                                 else
+                             signals.get(index1).getValues()[pos]=Float.parseFloat(temp);*/
+                            if (!temp.equals("\t")) {
+                                while (signals.get(index1).getValues().length <= pos) {
+                                    index1++;
+                                }
+                                if (!flag) {
+                                    signals.get(index1).getValues()[pos] = Float.
+                                            parseFloat(temp);
+                                    if (signals.get(index1).hasEmphasisLevel()) {
+                                        flag = true;
+                                    } else {
+                                        index1++;
+                                    }
+                                } else {
+                                    signals.get(index1).getEmphasisLevel()[pos] = Short.
+                                            parseShort(temp);
+                                    flag = false;
+                                    index1++;
+                                }
+                            }
+                        }
+                        pos++;
+                    }
+                } finally {
+                    input.close();
+                    fr.close();
+                }return true;
+
+            /*for(int index3=0;index3<numberOfSignals;index3++) {
+                signals.get(index3).setValues(values.get(index3));
+
+                     }*/
+
+        } catch (NumberFormatException ex) {
+            throw new Exception("Error loading values(invalid number format): "
+                    +ex.getMessage(),ex);
+        } catch (FileNotFoundException ex) {
+            throw new Exception("Error loading values(file not found): "
+                    +ex.getMessage(),ex);
+        } catch (IOException ex) {
+            throw new Exception("Error loading values: "+ex.getMessage(),ex);
+        }
+    }
+
+
+
+
+
+}

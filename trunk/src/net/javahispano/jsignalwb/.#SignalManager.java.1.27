@@ -1,0 +1,593 @@
+package net.javahispano.jsignalwb;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import net.javahispano.jsignalwb.jsignalmonitor.JSignalMonitor;
+import net.javahispano.jsignalwb.plugins.AnnotationPlugin;
+import net.javahispano.jsignalwb.plugins.GridPlugin;
+import net.javahispano.jsignalwb.plugins.MarkPlugin;
+
+/**
+ * Fachada que aglutina a todas las operaciones relacionadas con las señales
+ * cargadas en el entorno. Alguna funcionalidad expuesta a través de esta clase
+ * también puede ser accedida a través de {@link JSWBManager}.
+ * Cualquier operación que se intente realizar sobre una señal que no existe
+ * lanzar a una {@link SignalNotFoundException}. Se recomienda que antes de
+ * intentar realizar cualquier operación sobre una señal se invoque al método
+ * exists() para comprobar si la señal existe o no.
+ *
+ * @author This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   Abraham Otero
+ */
+public class SignalManager {
+
+    private JSignalMonitor jSignalMonitor;
+    /* signals relaciona el nombre de la senal con el objeto Signal que le corresponde
+     * No podra existir mas de una senal con el mismo nombre
+     */
+    private Map<String, Signal> signals;
+    private ArrayList<SignalSizeListener> listeners;
+    private ArrayList<AnnotationPlugin> annotations;
+
+    SignalManager() {
+        signals = Collections.synchronizedMap(new HashMap<String, Signal>());
+        listeners = new ArrayList<SignalSizeListener>();
+        annotations=new ArrayList<AnnotationPlugin>();
+    }
+    SignalManager(JSignalMonitor jsm) {
+        this();
+        this.jSignalMonitor=jsm;
+    }
+
+    void addListener(SignalSizeListener listener) {
+        listeners.add(listener);
+    }
+
+
+    /**
+     * Carga en el sistema una nueva señal que se crea a partir de los datos
+     * proporcionados. En caso de que exista una señal previa con el mismo
+     * nombre devuelve false. Si se carga correctamente devuelve el valor true.
+     *
+     * @param name nombre de la nueva señal.
+     * @param values valores de la señal.
+     * @param sRate frecuencia de muestreo de la señal.
+     * @param start instante de comienzo de la señal medido en milisegundos
+     *   desde 00:00:00 01/01/1970 del cual se requiere los valores de la
+     *   señal. Ver {@link TimePositionConverter}.
+     * @param magnitude magnitud  de la señal.
+     * @return True si la operación se realizó con éxito. False si ya existía
+     *   una señal con el mismo nombre cargada en el entorno.
+     * @todo (Abraham) En el addSignal has mantenido que devuelva un boolean en vez
+     * de lanzar la excepcion.Creo que tambien deberia ser void y lanzar excepcion.
+     * Confirmamelo.
+     */
+    public boolean addSignal(String name, float[] values, float sRate,
+            long start, String magnitude) {
+        if(!exists(name))
+            return addSignal(new Signal(name, values, sRate, start, magnitude));
+        return false;
+    }
+
+    /**
+     * Carga en el sistema la senal. En caso de que exista una señal previa con
+     * el mismo nombre devuelve false. Si se carga correctamente devuelve el
+     * valor true.
+     *
+     * @param signal {@link Signal} a añadir.
+     * @return True si la operación se realizó con éxito. False si ya existía
+     *   una señal con el mismo nombre cargada en el entorno.
+     */
+    public boolean addSignal(Signal signal){
+        if (!exists(signal.getName())) {
+            signals.put(signal.getName(), signal);
+            fireSizeEvent(signal, true);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Comprueba si el sistema tiene cargada una senal con el nombre que se le
+     * pasa como parametro.
+     *
+     * @param signalName nombre de la senal a chequear
+     * @return True si existe la seña, False en caso de que no exista
+     */
+    public boolean exists(String signalName){
+        if(signals.get(signalName)!=null)
+            return true;
+        else
+            return false;
+    }
+    /**
+     * Elimina del entorno la señal que se le indica.
+     *
+     * @param name nombre de la señala a eliminar.
+     * @throws {@link SignalNotFoundException} si la señal a eliminar no
+     *   existe.
+     */
+    public void removeSignal(String name) throws SignalNotFoundException  {
+        if(exists(name)){
+            Signal s = getSignal(name);
+            signals.remove(name);
+            fireSizeEvent(s, false);
+
+        } else throw new SignalNotFoundException(name,
+                "Attempt of deleteting a non existent signal");
+    }
+
+    /**
+     * Cambia el nombre de una señal cargada en el entorno.
+     *
+     * @param oldName nombre de la señal.
+     * @param newName nuevo nombre de la senal.
+     * @throws {@link SignalNotFoundException} si la señal a renombrar no
+     *   existe o existe alguna con el nombre nuevo.
+     */
+    public void renameSignal(String oldName,String newName) throws SignalNotFoundException{
+        if(!exists(oldName))
+            throw new SignalNotFoundException(oldName,
+                    "Attempt of renaming a non existent signal");
+        if(exists(newName))
+            throw new SignalNotFoundException(oldName,
+                    "Attempt of set a existent name renaming a signal");
+        if(!oldName.equals(newName)){
+            Signal signal = getSignal(oldName);
+            removeSignal(oldName);
+            signal.setName(newName);
+            addSignal(signal);
+        }
+    }
+
+
+    /**
+     * Muestra o oculta la señal indicada, dependiendo del valor del segundo
+     * parámetro.
+     *
+     * @param signalName nombre de la señal.
+     * @param visible true si la señal debe mostrarse, false en caso contrario.
+     *   Si se intenta mostrar una señal que ya se está mostrando, o ocultar
+     *   una que ya está oculta, no se realice ninguna acción.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalVisible(String signalName,boolean visible) throws SignalNotFoundException{
+
+        if(!exists(signalName))
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+        if(!(isSignalVisible(signalName)==visible)){
+            Signal s=signals.get(signalName);
+            s.setVisible(visible);
+            fireSizeEvent(s,visible);
+        }
+    }
+
+    /**
+     * Modifica la magnitud de la señal indicada.
+     *
+     * @param signalName nombre de la señal.
+     * @param magnitude nueva magnitud.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalMagnitude(String signalName,String magnitude) throws SignalNotFoundException{
+        if(!exists(signalName))
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+        signals.get(signalName).setMagnitude(magnitude);
+    }
+
+    /**
+     * modifica la frecuencia de la señal indicada.
+     *
+     * @param signalName nombre de la señal.
+     * @param frecuency nueva frecuencia.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalFrecuency(String signalName,float frecuency) throws SignalNotFoundException{
+        if(!exists(signalName))
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+        signals.get(signalName).setFrecuency(frecuency);
+    }
+
+    /**
+     * Modifica el zoom de la señal indicada.
+     *
+     * @param signalName nombre de la señal.
+     * @param zoom nuevo zoom.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalZoom(String signalName,float zoom) throws SignalNotFoundException{
+        if(!exists(signalName))
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+        signals.get(signalName).setZoom(zoom);
+    }
+
+    /**
+     * Modifica el instante de comienzo de la señal indicada.
+     *
+     * @param signalName nombre de la señal.
+     * @param startTime instante de comienzo de la señal medido en milisegundos
+     *   desde 00:00:00 01/01/1970 del cual se requiere los valores de la
+     *   señal. Ver {@link TimePositionConverter}.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalStartTime(String signalName,long startTime) throws SignalNotFoundException{
+        Signal s=signals.get(signalName);
+        if(!(s==null)){
+            s.setStart(startTime);
+            if(isSignalVisible(signalName) && jSignalMonitor.getScrollBaseTime()>startTime){
+                jSignalMonitor.setScrollBaseTime(startTime);
+            }
+        }else
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+    }
+
+    /**
+     * Modifica el offset de la señal indicada.
+     *
+     * @param signalName nombre de la señal.
+     * @param abscissaOffset nuevo offset.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalAbscissaOffset(String signalName,float abscissaOffset) throws SignalNotFoundException{
+        Signal s=signals.get(signalName);
+        if(!(s==null))
+            s.setAbscissaOffset(abscissaOffset);
+        else
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+    }
+
+    /**
+     * Devuelve el offset de la señal que se le pasa como parámetro.
+     *
+     * @param signalName señal cuyo offset deseamos conocer.
+     * @return offset.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public float getSignalAbscissaOffset(String signalName) throws SignalNotFoundException{
+        Signal s=signals.get(signalName);
+        if(!(s==null))
+            return s.getProperties().getAbscissaOffset();
+        else
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+    }
+
+    /**
+     * Modifica el valor correspondiente con el eje de abcisas que se dibuja
+     * para la señal que se indica como parámetro.
+     *
+     * @param signalName nombre de la señal.
+     * @param abscissaValue nuevo valor para el eje de abcisas.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalAbscissaValue(String signalName,float abscissaValue) throws SignalNotFoundException{
+        Signal s=signals.get(signalName);
+        if(!(s==null))
+            s.setAbscissaValue(abscissaValue);
+        else
+            throw new SignalNotFoundException(signalName,
+                    "The signal is not loaded");
+    }
+
+    /**
+     * Elimina todas las señales cargadas en el entorno.
+     */
+    public void removeAllSignals() {
+        signals.clear();
+        fireSizeEvent(null, false);
+    }
+
+    /**
+     * Proporciona el nombre de todas las senales cargadas en el sistema
+     *
+     * @return Set
+     */
+    public List<String> getSignalsNames() {
+        ArrayList<String> signalNames=new ArrayList<String>();
+        Set<String> signalsSet=signals.keySet();
+        synchronized(signals) {
+            Iterator<String> i = signalsSet.iterator();
+            while (i.hasNext())
+                signalNames.add(i.next());
+        }
+        return signalNames;
+    }
+
+    /**
+     * Proporciona el numero de senales cargadas en el entorno.
+     *
+     * @return número de señales cargadas en el entorno.
+     */
+    public int getSignalsSize() {
+        return signals.size();
+    }
+
+    /** Proporciona todos los objetos Signal cargados en el sistema */
+    public Collection<Signal> getSignals() {
+        ArrayList<Signal> signalsSync=new ArrayList<Signal>();
+        Collection<Signal> c=signals.values();
+        synchronized(signals){
+            for(Signal s:c)
+                signalsSync.add(s);
+        }
+        return signalsSync;
+    }
+
+    /** Sustituye las senales cargadas en el sistema por las contenidas en "newSignals"
+     * Si todo sucede de manera normal devolvera el valor true, en caso contrario devolvera
+     * el valor false
+     */
+
+    public boolean setSignals(ArrayList<Signal> newSignals) {
+        boolean flag = true;
+        //flag=this.removeAllSignals();
+        removeAllSignals();
+        for (Signal s : newSignals) {
+            if (!this.addSignal(s)) {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * Devuelva el objeto Signal identificado con el parametro name. En caso de
+     * no existir devuelve null
+     *
+     * @param name nombre de la señal.
+     * @return objeto {@link Signal} correspondiente.
+     */
+    public Signal getSignal(String name) {
+        return signals.get(name);
+    }
+
+    /**
+     * Indica si la señal que se le pasa como parámetro se está visualizando.
+     *
+     * @param name nombre de la señal.
+     * @return true si se está visualizando, false en caso contrario.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public boolean isSignalVisible(String name) throws SignalNotFoundException {
+        Signal s=getSignal(name);
+        if(!(s==null))
+            return getSignal(name).getProperties().isVisible();
+        else
+            throw new SignalNotFoundException(name,
+                    "The signal is not loaded");
+    }
+
+    /**
+     * Indica si la señal que se le pasa como parámetro tiene énfasis asociado.
+     *
+     * @param name nombre de la señal.
+     * @return true si tiene énfasis, false en caso contrario.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public boolean hasColorsSignal(String signalName) throws SignalNotFoundException {
+        Signal s=getSignal(signalName);
+        if(!(s==null))
+            return s.hasEmphasisLevel();
+        throw new SignalNotFoundException(signalName,
+                "The signal is not loaded");
+    }
+
+
+
+
+    /**
+     * Establece los valores máximos y mínimos del eje de abcisas de la señal
+     * que se pasa como argumento.
+     *
+     * @param signalName Nombre de la señal.
+     * @param minValue valor mínimo del eje de abcisas.
+     * @param maxValue valor máximo del eje de abcisas.
+     * @param abscissaValue valor de la señal en el q se representara la abscissa.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+    public void setSignalVisibleRange(String signalName,
+            float minValue,float maxValue,float abscissaValue)  throws SignalNotFoundException{
+        Signal s=signals.get(signalName);
+        if(s!=null)
+            s.setVisibleRange(minValue,maxValue,abscissaValue);
+        else
+            throw new SignalNotFoundException(signalName,"Attempt of change settings of a non existent signal");
+    }
+
+    /**
+     * Establece los valores máximos y mínimos del eje de abcisas todas las señales.
+     *
+     * @param minValue valor mínimo del eje de abcisas.
+     * @param maxValue valor máximo del eje de abcisas.
+     * @param abscissaValue valor de la señal en el q se representara la abscissa.
+     * @throws {@link SignalNotFoundException} si la señal no
+     *   existe.
+     */
+
+    public boolean setSignalVisibleRange(float minValue,float maxValue,float abscissaValue){
+        boolean flag=true;
+        synchronized(signals){
+            Iterator<Signal> it=signals.values().iterator();
+            Signal s;
+            while(it.hasNext()){
+                s=it.next();
+                if(!s.setVisibleRange(minValue,maxValue,abscissaValue))
+                    flag=false;
+            }
+        }return flag;
+    }
+
+    /**
+     * Establece como valores máximo y mínimo del eje de abcisas de la señal que
+     * se le pasa como argumento el valor máximo y mínimo de la señal.
+     *
+     * @param signalName nombre de la señal.
+     * @param size tamaño en pixeles que ocupara la representacion de la senal.
+     * @return boolean
+     */
+    public void adjustVisibleRange(String signalName)  throws SignalNotFoundException{
+        Signal s=signals.get(signalName);
+        if(s!=null)
+            s.adjustVisibleRange();
+        else
+            throw new SignalNotFoundException(signalName,"Attempt of change settings of a non existent signal");
+    }
+
+    /**
+     * Establece como valores máximo y mínimo del eje de abcisas de todas las
+     * señales el valor máximo y mínimo de cada señal.
+     *
+     * @param size tamaño en pixeles que ocupara la representacion de cada senal.
+     */
+    public void adjustVisibleRange(){
+        synchronized(signals){
+            Iterator<Signal> it=signals.values().iterator();
+            Signal s;
+            while(it.hasNext()){
+                s=it.next();
+                s.adjustVisibleRange();
+            }
+        }
+    }
+
+    public List<MarkPlugin> getSignalMarks(String signalName,long startTime,long endTime) throws SignalNotFoundException{
+        if(exists(signalName))
+            return signals.get(signalName).getMarks(startTime,endTime);
+        throw new SignalNotFoundException(signalName,"Attempt of get Marks of a non existent signal");
+    }
+
+    public List<MarkPlugin> getAllSignalMarks(String signalName) throws SignalNotFoundException{
+        if(exists(signalName))
+            return signals.get(signalName).getAllMarks();
+        throw new SignalNotFoundException(signalName,"Attempt of get Marks of a non existent signal");
+    }
+
+    public void addSignalMark(String signalName,MarkPlugin mark) throws SignalNotFoundException{
+        if(exists(signalName))
+            signals.get(signalName).addMark(mark);
+        else
+            throw new SignalNotFoundException(signalName,"Attempt of set Marks on a non existent signal");
+    }
+
+    public void removeSignalMark(String signalName,MarkPlugin mark) throws SignalNotFoundException{
+        if(exists(signalName)){
+            signals.get(signalName).removeMark(mark);
+            jSignalMonitor.repaintChannels();
+        }else
+            throw new SignalNotFoundException(signalName,"Attempt of remove Marks on a non existent signal");
+    }
+    public void removeAllSignalMarks(String signalName) throws SignalNotFoundException{
+        if(exists(signalName))
+            signals.get(signalName).removeAllMarks();
+        else
+            throw new SignalNotFoundException(signalName,"Attempt of remove Marks on a non existent signal");
+    }
+
+    public void removeAllMarks(){
+        synchronized(signals){
+            for(Signal s:signals.values())
+                s.removeAllMarks();
+        }
+    }
+    public ArrayList<String> getAnnotationsCategories(){
+        ArrayList<String> cat=new ArrayList<String>();
+        for(AnnotationPlugin ap:annotations){
+            if(!cat.contains(ap.getCategory())){
+                cat.add(ap.getCategory());
+            }
+        }
+        return cat;
+    }
+    public List<AnnotationPlugin> getAnnotations(long startTime,long endTime){
+        ArrayList<AnnotationPlugin> tempAnnotations=new ArrayList<AnnotationPlugin>();
+        for(AnnotationPlugin ap:annotations){
+            if(ap.isInterval()){
+                if(ap.getEndTime()>= startTime && ap.getMarkTime()<endTime)
+                    tempAnnotations.add(ap);
+            }else{
+                if(ap.getMarkTime()>= startTime && ap.getMarkTime()<endTime)
+                    tempAnnotations.add(ap);
+            }
+        }
+        return tempAnnotations;
+    }
+
+    public void addAnnotation(AnnotationPlugin annotationPlugin){
+        if(!annotations.contains(annotationPlugin))
+            annotations.add(annotationPlugin);
+    }
+    public void removeAnnotation(AnnotationPlugin annotationPlugin){
+        annotations.remove(annotationPlugin);
+    }
+    public void removeAllAnnotations(){
+        annotations.clear();
+    }
+    public List<AnnotationPlugin> getAllAnnotations(){
+        return annotations;
+    }
+    private void fireSizeEvent( Signal s, boolean add) {
+        SignalSizeEvent sse = null;
+        if (listeners.size() > 0)
+            sse = new SignalSizeEvent(s, add);
+        for (SignalSizeListener listener : listeners) {
+            listener.signalSizeActionPerformed(sse);
+        }
+
+
+    }
+    public void setSignalColor(String signalName,Color color) throws SignalNotFoundException{
+        if(exists(signalName)){
+            signals.get(signalName).setDataColor(color);
+            jSignalMonitor.repaintChannels();
+        }else
+            throw new SignalNotFoundException(signalName,"Attempt of set data color on a non existent signal");
+    }
+    public Color getSignalColor(String signalName) throws SignalNotFoundException{
+        if(exists(signalName)){
+            return signals.get(signalName).getDataColor();
+        }else
+            throw new SignalNotFoundException(signalName,"Attempt of get data color on a non existent signal");
+    }
+    public GridPlugin getSignalGrid(String signalName) throws SignalNotFoundException{
+        if(exists(signalName)){
+            return signals.get(signalName).getGrid();
+        }else
+            throw new SignalNotFoundException(signalName,"Attempt of set data color on a non existent signal");
+    }
+
+    public void setSignalGrid(String signalName,GridPlugin grid) throws SignalNotFoundException{
+        if(exists(signalName)){
+            signals.get(signalName).setGrid(grid);
+            if(signals.get(signalName).getProperties().isVisible()){
+                jSignalMonitor.setChannelGrid(signalName,grid);
+                jSignalMonitor.repaintAll();
+            }
+        }else
+            throw new SignalNotFoundException(signalName,"Attempt of set data color on a non existent signal");
+    }
+}

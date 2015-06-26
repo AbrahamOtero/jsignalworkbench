@@ -1,0 +1,135 @@
+ package net.javahispano.jsignalwb.io;
+
+import java.io.File;
+import javax.swing.JDialog;
+import net.javahispano.jsignalwb.JSWBManager;
+import net.javahispano.jsignalwb.SignalManager;
+import net.javahispano.jsignalwb.plugins.Loader;
+import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.plugins.Saver;
+import net.javahispano.jsignalwb.ui.LoaderExecutionJDialog;
+
+/**
+ * Fachada para realizar las operaciones de entrada y salida. Para funcionar
+ * correctamente requiere un {@link PluginManager}, para obtener los plugins en los cuales
+ * delegará la carga y el almacenamiento de los datos, y {@link SignalManager}, para poder
+ * modificar las señales y el resto de la información de la sesión de trabajo.
+ */
+public class IOManager {
+    //private File absolutePath;
+    private PluginManager pm;
+    private SignalManager sm;
+    private JSWBManager jswbManager;
+   // private static IOManager ioManager = null;
+
+    /**
+     * Crea una instancia nueva de IOManager.
+     *
+     * @param sm {@link SignalManager}.
+     * @param pm {@link PluginManager}.
+     */
+    public IOManager(JSWBManager jswbManager) {
+        pm=jswbManager.getPluginManager();
+        sm=jswbManager.getSignalManager();
+        this.jswbManager=jswbManager;
+        //absolutePath = new File("data/");
+        /*if (!absolutePath.exists()) {
+            absolutePath.mkdirs();
+        }*/
+    }
+
+
+    /**
+     * <p>Carga en el sistema las senales contenidas en path, descargando todas
+     * aquellas que ya estuviesen cargadas en el sistema si asi se le indica.</p>
+     *
+     * <p> Precondiciones -->
+     * path debe contener la ruta relativa correcta de un fichero que contenga
+     * los datos de las senales a cargar. </p>
+     *
+     * <p> Postcondiciones --> Devolvera true si
+     * las senales son cargadas correctamente y false en caso contrario. </p>
+     *
+     * @param path direccion del archivo cargar.
+     * @param nombre del {@link Loader}a emplear.
+     * @param clear true si se desea borrar todas las señales existentes antes
+     * de realizar la carga, false en caso contrario.
+     * @throws Exception
+     * @return true si la carga se realiza correctamente, false en caso contrario.
+     */
+    public boolean loadSignals(String path, String loaderName, boolean clear) throws
+            Exception {
+        return loadSignals(new File(path), loaderName, clear);
+    }
+
+    /**
+     * <p>Carga en el sistema las senales contenidas en path, descargando todas
+     * aquellas que ya estuviesen cargadas en el sistema.</p>
+     *
+     * <p> Precondiciones -->
+     * path debe contener la ruta relativa correcta de un fichero que contenga
+     * los datos de las senales a cargar. </p>
+     *
+     * <p> Postcondiciones --> Devolvera true si
+     * las senales son cargadas correctamente y false en caso contrario. </p>
+     *
+     * @param f archivo cargar.
+     * @param nombre del {@link Loader}a emplear.
+     * @param clear true si se desea borrar todas las señales existentes antes
+     * de realizar la carga, false en caso contrario.
+     * @throws Exception
+     * @return true si la carga se realiza correctamente, false en caso contrario.
+     */
+    public boolean loadSignals(File f, String loaderName, boolean clear) throws
+            Exception {
+        Loader loader;
+        loader = pm.getLoader(loaderName);
+
+        if (clear) {
+            sm.removeAllSignals();
+        }
+
+        //@todo bug
+        //¿ahora est llamando esto desde fuera del EDT? Porque a veces da problemas de concurrencia de Swing
+
+        JDialog jd= new LoaderExecutionJDialog(loader,f,jswbManager);
+        //jd.setVisible(true);
+        //loader.load(f,jswbManager);
+        return true;
+    }
+
+    /**
+     * Salva los datos cargados en el sistema en un destino cuyo nombre sera
+     * path y cuyo formato vendra determinado por el saver correspondiente, los
+     * almacenara en la ubicacion indicada en absolutePath, con el nombre
+     * indicado en path(y path.xml para el archivo xml)
+     *
+     * @param path dirección del archivo.
+     * @param saverName nombre del {@link Saver a emplear}
+     * @throws Exception
+     */
+    public void saveSignals(String path, String saverName) throws Exception {
+        saveSignals(new File(path),saverName);
+    }
+
+    /**
+     * Salva los datos cargados en el sistema en un destino cuyo nombre sera
+     * path y cuyo formato vendra determinado por el saver correspondiente, los
+     * almacenara en la ubicacion indicada en absolutePath, con el nombre
+     * indicado en path(y path.xml para el archivo xml)
+     *
+     * @param path dirección del archivo.
+     * @param saverName nombre del {@link Saver a emplear}
+     * @throws Exception
+     */
+    public void saveSignals(File f, String saverName) throws Exception {
+        Saver saver;
+        if (sm.getSignalsSize() > 0) {
+            if(pm.isPluginRegistered("saver",saverName)){
+                saver = pm.getSaver(saverName);
+                if(saver!=null)
+                    saver.save(f, jswbManager);
+            }
+        }
+    }
+}

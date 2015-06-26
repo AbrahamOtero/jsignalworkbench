@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/UI
+END
+AllStatisticsDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/UI/AllStatisticsDialog.java
+END
+NewStatisticsDialog.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/UI/NewStatisticsDialog.java
+END
+PanelMostrarEstadisticos.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/UI/PanelMostrarEstadisticos.java
+END
+PanelMostrarCorrelacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/UI/PanelMostrarCorrelacion.java
+END

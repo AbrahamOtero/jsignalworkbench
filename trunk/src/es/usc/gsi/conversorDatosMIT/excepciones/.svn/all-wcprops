@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/26/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones
+END
+FechaFinalMayorOriginalException.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechaFinalMayorOriginalException.java
+END
+FicheroNoEncontradoException.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FicheroNoEncontradoException.java
+END
+FechasIncorrectasException.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechasIncorrectasException.java
+END
+FechaInicialMenorOriginalException.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechaInicialMenorOriginalException.java
+END
+ErrorExportandoException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/ErrorExportandoException.java
+END
+FechaInicialIncorrectaException.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechaInicialIncorrectaException.java
+END
+FechaFinalIncorrectaException.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechaFinalIncorrectaException.java
+END
+FechaFinalMenorInicialException.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechaFinalMenorInicialException.java
+END
+NoParametroSeleccionadoException.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/NoParametroSeleccionadoException.java
+END
+DirectorioVacioException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/DirectorioVacioException.java
+END
+FechaFinalIgualInicialException.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FechaFinalIgualInicialException.java
+END
+ParametroNoValidoException.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/ParametroNoValidoException.java
+END
+FicheroNoValidoException.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/26/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/FicheroNoValidoException.java
+END
+NoPacienteAbiertoException.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/conversorDatosMIT/excepciones/NoPacienteAbiertoException.java
+END

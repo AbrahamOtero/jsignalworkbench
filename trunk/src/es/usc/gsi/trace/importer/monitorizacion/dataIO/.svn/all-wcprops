@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO
+END
+CargarDatosXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO/CargarDatosXML.java
+END
+CargarDatosTxt.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO/CargarDatosTxt.java
+END
+GestorIO.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO/GestorIO.java
+END
+CargarDatos.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO/CargarDatos.java
+END
+CargarDatosMon.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO/CargarDatosMon.java
+END
+PTBM2XML.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/monitorizacion/dataIO/PTBM2XML.java
+END

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/jsignalwb/plugins/framework
+END
+AlgorithmRunner.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/AlgorithmRunner.java
+END
+PluginLoadAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginLoadAction.java
+END
+FactoryPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/FactoryPlugin.java
+END
+PluginDetailAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginDetailAction.java
+END
+PluginManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginManager.java
+END
+PluginManagerPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginManagerPanel.java
+END
+JButtonTableCellEditorAndRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/JButtonTableCellEditorAndRenderer.java
+END
+PluginLoadException.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginLoadException.java
+END
+PluginBrowser.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginBrowser.java
+END
+PluginUninstallAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/PluginUninstallAction.java
+END
+SaverRunner.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/SaverRunner.java
+END
+LoaderRunner.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/LoaderRunner.java
+END
+LoadedTableCellEditorAndRenderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/jsignalwb/plugins/framework/LoadedTableCellEditorAndRenderer.java
+END

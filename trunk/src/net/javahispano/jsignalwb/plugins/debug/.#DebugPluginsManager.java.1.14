@@ -1,0 +1,89 @@
+/*
+ * DebugPluginsManager.java
+ *
+ * Created on 24 de julio de 2007, 1:39
+ */
+
+package net.javahispano.jsignalwb.plugins.debug;
+
+import java.util.ArrayList;
+import net.javahispano.jsignalwb.plugins.PluginManager;
+import net.javahispano.jsignalwb.plugins.signalgeneration.SignalGenerationPlugin;
+import net.javahispano.jsignalwb.temporalseries.TemporalSeriesAlgorithm;
+import demo.Untitled1;
+import net.javahispano.jsignalwb.ui.texteditor.JSWTextProcessorPlugin;
+
+/**
+ *
+ * @author Román Segador
+ */
+public class DebugPluginsManager {
+
+    private DebugPluginsManager() {
+    }
+    public static void registerDebugPlugins(PluginManager pluginManager){
+        // DONT REMOVE THIS CODE
+        ArrayList<DebugPluginInfo> plugins=new ArrayList<DebugPluginInfo>();
+        //plugins=new ArrayList<DebugPluginInfo>();
+
+        /* INSERT HERE THE CODE TO ADD A NEW PLUGIN IN DEBUG MODE
+         * Use this sintaxis
+         * {@code plugins.add(new DebugPluginInfo(pluginType,pluginName,Plugin));}
+         */
+        plugins.add(new DebugPluginInfo("algorithm", "Valor absoluto",
+               new demo.ValorAbsoluto()));
+       plugins.add(new DebugPluginInfo("algorithm", "Valor absoluto2",
+               new demo.ValorAbsoluto2()));
+
+       plugins.add(new DebugPluginInfo("algorithm", "Suma de seno y cuadrado",
+               new demo.SumaSenoCuadrado()));
+
+       plugins.add(new DebugPluginInfo("algorithm", "Suma de seno y cuadrado 2",
+               new demo.SumaSenoCuadradoANuevaSerie()));
+       plugins.add(new DebugPluginInfo("algorithm", "Transformación lineal",
+               new demo.TransformacionLineal()));
+
+/*
+        plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
+               new PruebaDeConcurrenciaParaSwing ()));
+
+        plugins.add(new DebugPluginInfo("algorithm","Concurrencia 2",
+               new PruebaDeConcurrenciaParaSwing2()));
+        plugins.add(new DebugPluginInfo("algorithm","AddSignalPropertiesPlugin",
+               new AddSignalPropertiesPlugin()));
+        plugins.add(new DebugPluginInfo("algorithm","AddSinPlugin",
+               new AddSinPlugin()));
+ */
+        plugins.add(new DebugPluginInfo("algorithm","Derivada",
+              new a.Derivada()));
+
+        plugins.add(new DebugPluginInfo("algorithm","Filtro nasal",
+              new a.FiltroNasal()));
+
+/*
+        plugins.add(new DebugPluginInfo("algorithm","Ejemplo 11",
+              new demo.Untitled1 ()));
+
+        plugins.add(new DebugPluginInfo("algorithm","Ejemplo 2",
+              new demo.Untitled2 ()));
+
+
+        plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
+                new PruebaDeConcurrenciaParaSwing()));
+        plugins.add(new DebugPluginInfo("generic","AddToolBarElementsPlugin",
+                new AddToolBarElementsPlugin()));
+        plugins.add(new DebugPluginInfo("generic","AddComponentPlugin",
+                new AddComponentPlugin()));
+        plugins.add(new DebugPluginInfo("generic","AddJMenuPlugin",
+                new AddJMenuPlugin()));
+         plugins.add(new DebugPluginInfo("generic","ShowSignalsPropertiesPlugin",
+                new ShowSignalsPropertiesPlugin()));
+
+*/
+
+
+        // DONT REMOVE THIS CODE
+        pluginManager.registerDebugPlugins(plugins);
+    }
+
+}

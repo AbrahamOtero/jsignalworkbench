@@ -1,0 +1,66 @@
+package net.javahispano.jsignalwb;
+
+/**
+ * <p>Pequeña clase de utilidad que permite convertir un instante de tiempo medido
+ * en milisegundos desde 00:00:00 01/01/1970 y representado mediante un long en
+ * un índice de un array asociado con una señal que posee una frecuencia de
+ * muestreo determinada. Dentro del framework los instantes de tiempo se
+ * representan como milisegundos segundos a partir de la fecha base indicada.
+ * Sin embargo, al programador a menudo le interesará saber que muestra de la
+ * señal o que intervalo dentro de la señal se corresponde con un par de
+ * instantes temporales. Esta clase permite realizar una traducción de un modo
+ * sencillo entre ambas representaciones.</p>
+ *
+ * <p> Esta clase está orientada a realizar operaciones internas sobre las
+ * señales. Cuando sea necesario solicitar del usuario información relativa a
+ * instantes de tiempo, o presentarle información relativa a instantes de
+ * tiempo, se recomienda emplear la clase {@link TimeRepresentation}, más
+ * adecuada que está para convertir cadenas de caracteres que representen
+ * fechas a instantes de tiempo y viceversa. </p>
+ *
+ * @author Román Segador y Abraham Otero
+ *    Copyright 2006-2007. This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/
+
+ */
+public class TimePositionConverter {
+
+    /**
+     * Convierte un instante de tiempo en un índice de un determinado array
+     * dadas la fecha base del array y su frecuencia de muestreo.
+     *
+     * @param start fecha base del array.
+     * @param time Instante temporal que deseamos convertir índice.
+     * @param sRate frecuencia demuestre a la cual se encuentran los datos
+     *   contenidos en el array.
+     * @return índice del array. Retornar un valor negativo de la posicion del
+     *   array en caso de que el tiempo que se le pasó como argumento sea
+     *   anterior al de inicio de la senal.
+     * @throws RuntimeException si <code>(start<0 || time<0|| sRate<=0
+     *   )</code>
+     */
+    public static int timeToPosition(long start,long time,float sRate) throws RuntimeException{
+//        Estas posiciones negativas son necesarias ya que posteriormente en
+ //el array que se le pasa a JSignalMonitor se substituyen por el valor que represente el eje de abscissa.
+        if(start<0 || time<0|| sRate<=0)
+            throw new RuntimeException("The start value, time or frecuency is less than zero");
+        int i=(int)((((time-start))*sRate)/1000f);
+        return i;
+    }
+
+
+    /**
+     * Devuelve el índice del array del objeto {@link Signal} que se corresponde
+     * con un instante de tiempo que se le pasa como argumento.
+     *
+     * @param time instante de tiempo.
+     * @param signal {@link Signal}
+     * @return índice del array.
+     * @throws RuntimeException si <code>(start<0 || time<0|| sRate<=0 || start> time)</code>
+     */
+    public static int timeToPosition(long time,Signal signal)  throws RuntimeException{
+        return timeToPosition(signal.getStart(), time, signal.getSRate());
+    }
+
+
+}

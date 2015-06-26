@@ -1,0 +1,54 @@
+10
+
+dir
+62
+https://jsignalworkbench.googlecode.com/svn/trunk/trunk/net/javahispano/jsignalwb/ui/signalorganizer
+https://jsignalworkbench.googlecode.com/svn
+
+
+
+2011-09-28T13:05:36.206267Z
+62
+abraham.otero
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+857c5e7a-38bc-11de-a089-7f97fea6ad66
+
+SignalOrganizerPlugin.java
+file
+
+
+
+
+
+edd84b086612ad2b53c1962b8207d63b
+2011-09-28T13:05:36.206267Z
+62
+abraham.otero
+has-props
+
+organize.gif
+file
+
+
+
+
+
+95452aa3ba516dfdaadcc2d479e1b298
+2011-09-28T08:01:53.051395Z
+61
+abraham.otero
+has-props
+

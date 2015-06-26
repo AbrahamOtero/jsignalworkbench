@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/plugins/basicstats
+END
+MyFloat.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/MyFloat.java
+END
+estadisticos.jpg
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/13/trunk/trunk/net/javahispano/plugins/basicstats/estadisticos.jpg
+END
+CorrelacionException.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/9/trunk/trunk/net/javahispano/plugins/basicstats/CorrelacionException.java
+END
+MediaMovilException.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/MediaMovilException.java
+END
+NotPercentilException.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/NotPercentilException.java
+END
+MobileMeanPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/63/trunk/trunk/net/javahispano/plugins/basicstats/MobileMeanPlugin.java
+END
+RutinasEstadisticas.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/RutinasEstadisticas.java
+END
+BasicStatisticsPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/plugins/basicstats/BasicStatisticsPlugin.java
+END
+Estadistico.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/9/trunk/trunk/net/javahispano/plugins/basicstats/Estadistico.java
+END
+ResultadoCorrelacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/ResultadoCorrelacion.java
+END
+MediaMovil.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/MediaMovil.java
+END
+ResultadosEstadisticos.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/plugins/basicstats/ResultadosEstadisticos.java
+END
+DialogMobileMeanPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/60/trunk/trunk/net/javahispano/plugins/basicstats/DialogMobileMeanPlugin.java
+END

@@ -1,0 +1,50 @@
+10
+
+dir
+62
+https://jsignalworkbench.googlecode.com/svn/trunk/trunk/research
+https://jsignalworkbench.googlecode.com/svn
+
+
+
+2011-09-28T08:00:20.786755Z
+60
+abraham.otero
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+857c5e7a-38bc-11de-a089-7f97fea6ad66
+
+
+
+
+
+
+0
+
+apneas
+dir
+
+beats
+dir
+
+descriptors
+dir
+
+mining
+dir
+
+spo2
+dir
+

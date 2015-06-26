@@ -1,0 +1,51 @@
+/*
+ * Grid.java
+ *
+ * Created on 20 de marzo de 2007, 12:09
+ *
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */
+
+package net.javahispano.jsignalwb.jsignalmonitor;
+
+
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Window;
+
+/**
+ *
+ * @author Roman
+ */
+public interface JSignalMonitorGrid {
+
+    /** Se encarga de pintar el Grid
+     *  g2d --> elemento sobre el cual se va a pintar
+     *  p --> representa la esquina superior izquierda del grid
+     *  height --> altura del grid en pixeles
+     *  widht --> anchura del grid en pixeles
+     *  gridconfig -->cualquier información de configuración del grid
+     */
+
+    public void paintGrid(Graphics2D g2d, Point p,
+                          int height, int width, GridConfiguration gridconfig);
+
+    public void launchConfigureGridGUI(Window owner);
+
+    /** este metodo devolverá el número de pixeles que desea que tenga como
+     *  tamaño la leyenda horizontal. Idealmente sera la separación entre las
+     *  marcas mas distantes del grid.
+     */
+    public int getLeyendWidth();
+    /** este metodo devolverá el número de pixeles que desea que tenga como
+     *  tamaño la leyenda vertical. Idealmente sera la separación entre las
+     *  marcas mas distantes del grid.
+     */
+    public int getLeyendEight();
+
+    public String getDataToSave();
+
+    public void setSavedData(String data);
+}
+

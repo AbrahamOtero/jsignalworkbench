@@ -1,0 +1,67 @@
+/*
+ * DebugPluginsManager.java
+ *
+ * Created on 24 de julio de 2007, 1:39
+ */
+
+package net.javahispano.jsignalwb.plugins.debug;
+
+import java.util.ArrayList;
+import net.javahispano.jsignalwb.plugins.PluginManager;
+import test.*;
+import net.javahispano.jsignalwb.plugins.signalgeneration.SignalGenerationPlugin;
+
+/**
+ *
+ * @author Román Segador
+ */
+public class DebugPluginsManager {
+
+    private DebugPluginsManager() {
+    }
+    public static void registerDebugPlugins(PluginManager pluginManager){
+        // DONT REMOVE THIS CODE
+        ArrayList<DebugPluginInfo> plugins=new ArrayList<DebugPluginInfo>();
+        //plugins=new ArrayList<DebugPluginInfo>();
+
+        /* INSERT HERE THE CODE TO ADD A NEW PLUGIN IN DEBUG MODE
+         * Use this sintaxis
+         * {@code plugins.add(new DebugPluginInfo(pluginType,pluginName,Plugin));}
+         */
+        plugins.add(new DebugPluginInfo("algorithm","Estadistico",
+                new net.javahispano.jsignalwb.plugins.basicstats.BasicStatisticsPlugin()));
+
+        plugins.add(new DebugPluginInfo("algorithm","Media movil",
+                new net.javahispano.jsignalwb.plugins.basicstats.MobileMeanPlugin()));
+
+        plugins.add(new DebugPluginInfo("loader","TRACE importer",
+                new es.usc.gsi.trace.importer.TraceImporter()));
+
+        plugins.add(new DebugPluginInfo("generic","Converor datos MIT-BIH",
+                new es.usc.gsi.conversorDatosMIT.ConversorDatosMITPlugin()));
+
+        plugins.add(new DebugPluginInfo("generic","Signal Generation",
+                new SignalGenerationPlugin ()));
+
+
+
+        plugins.add(new DebugPluginInfo("algorithm","Apnea",
+               new a.ApneaAlgorithm()));
+
+        plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
+               new PruebaDeConcurrenciaParaSwing ()));
+
+        plugins.add(new DebugPluginInfo("algorithm","Prueba",
+               new Prueba()));
+
+
+
+        plugins.add(new DebugPluginInfo("algorithm","Concurrencia",
+                new PruebaDeConcurrenciaParaSwing()));
+
+
+        // DONT REMOVE THIS CODE
+        pluginManager.registerDebugPlugins(plugins);
+    }
+
+}

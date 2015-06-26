@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins
+END
+AddComponentPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/AddComponentPlugin.java
+END
+AddSignalPropertiesPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/AddSignalPropertiesPlugin.java
+END
+PruebaDeConcurrenciaParaSwing.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/PruebaDeConcurrenciaParaSwing.java
+END
+AddJMenuPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/AddJMenuPlugin.java
+END
+AddSinPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/AddSinPlugin.java
+END
+AddToolBarElementsPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/AddToolBarElementsPlugin.java
+END
+PruebaDeConcurrenciaParaSwing2.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/PruebaDeConcurrenciaParaSwing2.java
+END
+ShowSignalsPropertiesPlugin.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/ShowSignalsPropertiesPlugin.java
+END
+DebugBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/27/trunk/trunk/net/javahispano/testplugins/DebugBean.java
+END

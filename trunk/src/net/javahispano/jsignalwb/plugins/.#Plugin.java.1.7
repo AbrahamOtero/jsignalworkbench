@@ -1,0 +1,117 @@
+package net.javahispano.jsignalwb.plugins;
+
+import javax.swing.Icon;
+
+import net.javahispano.jsignalwb.JSWBManager;
+
+/**
+ * <p>Interfaz que representa cualquier plugin dentro de JSignalWorkbench.
+ * No se recomienda incrementar directamente esta interfaz; suele ser
+ * preferible extender la clase {@link PluginAdapter}. </p>
+ *
+ * <p> Esta interfaz, además de un conjunto de métodos de utilidad, sólo
+ * permite al plugin lanzar una interfaz gráfica que debería en crearse
+ * únicamente para configurar el plugin. Si se desea crear un plugin genérico
+ * que tenga cierta capacidad para ejecutar ciertas acciones se recomienda
+ * emplear la clase {@link GenericPlugin}.
+ *
+ * @author This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/). Copyright 2006-2007 Román Segador y
+ *   Abraham Otero
+ */
+public interface Plugin {
+    /**
+     * Proporciona el hombre del plugin.
+     *
+     * @return Nombre del plugin
+     */
+    public String getName();
+
+    /**
+     * Devuelve una de extinción textual corta sobre la funcionalidad del
+     * plugin. Será empleada en varios sitios de la interfaz de usuario para
+     * presentar una ayuda al usuario de la aplicación.
+     *
+     * @return descripción textual corta
+     */
+    public String getShortDescription();
+
+    /**
+     * Devuelve una decisión textual más amplia de la funcionalidad del plugin.
+     * Se emplean varios sitios en la interfaz de usuario para presentar una
+     * ayuda al usuario.
+     *
+     * @return descripción textual larga
+     */
+    public String getDescription();
+
+    /**
+     * Devuelve la versión del plugin. La versión puede ser cualquier cadena de
+     * caracteres. Se emplea para realizar un control de versiones de los
+     * plugings.
+     *
+     * @return Versión del plugin
+     */
+    public String getPluginVersion();
+
+    /**
+     * Devuelve un icono que será empleado en varios sitios de la interfaz de
+     * usuario para representar al plugin.
+     *
+     * @return icono que representa al plugin
+     */
+    public Icon getIcon();
+
+    /**
+     * Indica si el plugin tiene una interfaz gráfica propia para configurarse.
+     *
+     * @return devuelve cierto si tiene interfaz y falso en caso contrario
+     */
+    public boolean hasOwnConfigureGUI();
+
+    /** Lanza la interfaz de configuración del plugin*/
+    public void launchConfigureGUI(JSWBManager jswbManager);
+
+    /**
+     * Proporciona datos de configuración del algoritmo que deben de ser
+     * guardados por el entorno.
+     *
+     * @return cadena de caracteres con los datos que debe guardar el entorno.
+     *   Si el entorno no debe de guardar ninguna información sobre el plugin
+     *   el valor de retorno será null.
+     */
+    public String getDataToSave();
+
+    /**
+     * Este método es invocado por el entorno al cargar el plugin para pasarle
+     * una cadena de caracteres con los datos que el plugin le pidió que
+     * almacenarse en la última ejecución.
+     *
+     * @param data datos que el plugin  pidió al entorno que almacenarse en la
+     *   última ejecución
+     */
+    public void setSavedData(String data);
+
+    /**
+     * Devuelve cierto si el plugin tiene datos se desea que el entorno guarde y
+     * le devuelva la próxima vez que se ejecute la herramienta.
+     *
+     * @return ciertos y el entorno debe guardar de datos, falso en caso
+     *   contrario.
+     */
+    public boolean hasDataToSave();
+
+    /**
+     * canSaveData
+     *@todo (d) "¿éste era para plugins que almacenasen cosas a disco?"
+     * Este metodo existe para preguntarle a un plugin si puede guardar datos. Me explico
+     * El metodo hasDataToSave te dice si un plugin tiene informacion que necesita guardar
+     * y si es asi se llama a getDataToSave. En este metodo se le pregunta si el plugin
+     * puede guardar datos que esten almacenados y si es asi se debe llamar a setSavedData.
+     * Lo hice asi porque pense que un plugin puede modificarse de una version a otra por ejemplo
+     * y en caso de que deje de poder guardar informacion y se intente guardar la de la version
+     * anterior puede dar problemas.
+     * @return boolean
+     */
+    public boolean canSaveData();
+}

@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/estadisticos
+END
+CorrelacionException.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/CorrelacionException.java
+END
+MediaMovilException.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/25/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/MediaMovilException.java
+END
+NotPercentilException.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/25/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/NotPercentilException.java
+END
+RutinasEstadisticas.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/RutinasEstadisticas.java
+END
+Estadistico.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/Estadistico.java
+END
+ResultadoCorrelacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/ResultadoCorrelacion.java
+END
+MediaMovil.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/25/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/MediaMovil.java
+END
+Remuestrea.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/26/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/Remuestrea.java
+END
+ResultadosEstadisticos.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/27/trunk/trunk/es/usc/gsi/trace/importer/estadisticos/ResultadosEstadisticos.java
+END

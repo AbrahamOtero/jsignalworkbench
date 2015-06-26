@@ -1,0 +1,500 @@
+package net.javahispano.jsignalwb;
+
+import java.awt.Color;
+import java.util.*;
+import java.util.List;
+
+import net.javahispano.jsignalwb.jsignalmonitor.ChannelProperties;
+import net.javahispano.jsignalwb.plugins.*;
+import org.joda.time.DateTime;
+
+/**
+ * Representa una señal dentro de JSignalWorkbench. Contiene información tanto
+ * sobre las señales si misma como sobre su representación en pantalla.
+ *
+ * @author Román Segador y Abraham Otero
+ *    Copyright 2006-2007. This software is under the Apache License Version 2.0
+ *   (http://www.apache.org/licenses/).
+ */
+public class Signal {
+
+    /** Almacena el nombre de la senal*/
+    private String name;
+    /** Almacena el valor de la senal en cada instante de tiempo*/
+    private float[] values;
+    private short[] emphasis;
+    private List<MarkPlugin> marks;
+    private boolean hasColors;
+    private boolean imaginary;
+    /**Frecuencia de muestreo de la senal*/
+    private float frecuency;
+    /**Instante de inicio de la senal*/
+    private long start;
+    /** Almacena la magnitud de la senal*/
+    private String magnitude;
+    private ChannelProperties properties;
+    private GridPlugin grid;
+    private Map<String,Object> externalProperties;
+    //private boolean ownGrid;
+
+    /**
+     * Crea una nueva instancia de Signal. sName indica el nombre de la senal
+     * mientras que sValues almacena los valores de la senal ordenados para cada
+     * instante de tiempo. Se asigna por defecto 1 al rango de tiempo entre
+     * valores y el instance actual al tiempo de inicio de la senal. Se indica
+     * que la magnitud es desconocida
+     *
+     * @param sName nombre de la señal.
+     * @param sValues valores de la señal.
+     */
+    public Signal(String sName, float[] sValues) {
+        this(sName, sValues, null);
+    }
+
+    /**
+     * Crea una nueva instancia de Signal.
+     *
+     * @param sName nombre de la señal.
+     * @param sValues valores de la señal.
+     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     *   Debe contener valores entre [0, 100].
+     */
+    public Signal(String sName, float[] sValues, short[] emphasis) {
+        this(sName, sValues, 1, new DateTime().getMillis(), "Unknown", emphasis);
+    }
+
+    /**
+     * Crea una nueva instancia de Signal.
+     *
+     * @param sName nombre de la señal.
+     * @param sValues valores de la señal.
+     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     *   Debe contener valores entre [0, 100].
+     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
+     * @param sMagnitude magnitud de la señal.
+     */
+    public Signal(String sName, float[] sValues, float frec, long sStart, String sMagnitude) {
+        this(sName, sValues, frec, sStart, sMagnitude, null);
+    }
+
+    /**
+     * Crea una nueva instancia de Signal.
+     *
+     * @param sName nombre de la señal.
+     * @param sValues valores de la señal.
+     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     *   Debe contener valores entre [0, 100].
+     * @param sStart long instante de inicio de la señal medido en milisegundos desde
+     *   00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
+     * @param sMagnitude magnitud de la señal.
+     * @param emphasis Nivel de énfasis con que se debe representar la señal.
+     *   Debe contener valores entre [0, 100].
+     */
+    public Signal(String sName, float[] sValues, float frec, long sStart, String sMagnitude, short[] emphasis) {
+        name = sName;
+        values = sValues;
+        frecuency = frec;
+        start = sStart;
+        imaginary=false;
+        properties = new ChannelProperties(sName, sStart, frec, sValues.length);
+        setMagnitude(sMagnitude);
+        if (emphasis != null) {
+            this.emphasis = emphasis;
+            if (emphasis.length == sValues.length) {
+                setHasEmphasis(true);
+            } else {
+                setHasEmphasis(false);
+            }
+        } else {
+            setHasEmphasis(false);
+        }
+        marks = new ArrayList<MarkPlugin>();
+        setGrid(new DefaultGridPlugin());
+        externalProperties=Collections.synchronizedMap(new HashMap<String,Object>());
+    }
+
+    /*private short[] getColors(int i) {
+    short[] temp = new short[i];
+    for (int index = 0; index < temp.length; index++) {
+    temp[index] = (short) (index % 100);
+    }
+    return temp;
+    }*/
+    /**
+     * Devuelve el objeto {@link ChannelProperties} asociado con esta señal.
+     *
+     * @return {@link ChannelProperties}
+     */
+    public ChannelProperties getProperties() {
+        return properties;
+    }
+
+    /**
+     * getName
+     *
+     * @return nombre asociado con la señal.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * getSRate
+     *
+     * @return frecuencia de muestreo de la señal medida en hercios.
+     */
+    public float getSRate() {
+        return frecuency;
+    }
+
+    /**
+     * getStart
+     *
+     * @return instante de inicio de la señal medido en milisegundos
+     * desde 00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
+     */
+    public long getStart() {
+        return start;
+    }
+
+    /**
+     * getMagnitude
+     *
+     * @return  magnitud de la señal.
+     */
+    public String getMagnitude() {
+        return magnitude;
+    }
+
+    /**
+     * getValues
+     *
+     * @return valores de la señal.
+     */
+    public float[] getValues() {
+        return values;
+    }
+
+    /**
+     * getEmphasisLevel
+     *
+     * @return Valores de énfasis de la señal. Deben ser números enteros
+     * comprendidos entre [0, 100].
+     */
+    public short[] getEmphasisLevel() {
+        return emphasis;
+    }
+
+    public Color getDataColor() {
+        return properties.getDataColor();
+    }
+
+    /**
+     * setEmphasisLevel
+     *
+     * @param emphasis Valores de énfasis de la señal. Deben ser números
+     * enteros comprendidos entre [0, 100].
+     */
+    public void setEmphasisLevel(short[] emphasis) {
+        this.emphasis = emphasis;
+        setHasEmphasis(true);
+    }
+
+    /**
+     * hasColors
+     *
+     * @return boolean true si tienen niveles de énfasis asociado,
+     * false en caso contrario.
+     */
+    public boolean hasEmphasisLevel() {
+        return hasColors;
+    }
+
+    public boolean setHasEmphasis(boolean hasColors) {
+        if (hasColors && (emphasis == null || emphasis.length != values.length)) {
+            return false;
+        }
+        properties.setHasEmphasis(hasColors);
+        this.hasColors = hasColors;
+        return true;
+    }
+
+    /**
+     * setName
+     *
+     * @param name nombre de la señal.
+     */
+    protected void setName(String name) {
+        this.name = name;
+        properties.setName(name);
+    }
+
+    /**
+     * setFrecuency
+     *
+     * @param frecuency frecuencia de la señal medida en hercios.
+     */
+    public void setFrecuency(float frecuency) {
+        if (this.frecuency != frecuency) {
+            this.frecuency = frecuency;
+            properties.setDataRate(frecuency);
+        }
+    }
+
+    /**
+     * setStart
+     *
+     * @param start instante de inicio de la señal medido en milisegundos
+     * desde 00:00:00 01/01/1970. Ver {@link TimePositionConverter}.
+     */
+    public void setStart(long start) {
+        if (this.start != start) {
+            this.start = start;
+            properties.setStartTime(start);
+        }
+    }
+
+    /**
+     * setMagnitude
+     *
+     * @param magnitude magnitud de la señal.
+     */
+    public void setMagnitude(String magnitude) {
+        if (this.magnitude == null || !this.magnitude.equals(magnitude)) {
+            this.magnitude = magnitude;
+            properties.setMagnitude(magnitude);
+        }
+    }
+
+    /**
+     * setZoom
+     *
+     * @param zoom empleado en la representación en pantalla.
+     */
+    public void setZoom(float zoom) {
+        if (properties.getZoom() != zoom) {
+            properties.setZoom(zoom);
+        }
+    }
+
+    /**
+     * setVisible
+     *
+     * @param visible true si se desea mostrar en pantalla, false en caso
+     * contrario.
+     */
+    public void setVisible(boolean visible) {
+        properties.setVisible(visible);
+    }
+
+    public void setDataColor(Color color) {
+        properties.setDataColor(color);
+    }
+
+    /**
+     * setAbscissaOffset
+     *
+     * @param abscissaOffset el valor de las abcisas en el cual
+     * se debe representar el eje temporal.
+     */
+    public void setAbscissaOffset(float abscissaOffset) {
+        if (properties.getAbscissaOffset() != abscissaOffset) {
+            properties.setAbscissaOffset(abscissaOffset);
+        }
+    }
+
+    /**
+     * setAbscissaValue
+     *
+     * @param abscissaValue obtiene el valor de las abcisas en el cual
+     * se debe representar el eje temporal.
+     */
+    public void setAbscissaValue(float abscissaValue) {
+        if (properties.getAbscissaValue() != abscissaValue) {
+            properties.setAbscissaValue(abscissaValue);
+        }
+    }
+
+    /**
+     * setVisibleRange
+     *
+     * @param minValue float valor mínimo del eje de abcisas.
+     * @param maxValue float valor máximo del eje de artistas. debe cumplirse
+     * que maxValue>minValue.
+     * @param abscissaValue valor en el que se mostrara el eje de abscissas.
+     * @return boolean true si la operación se pudo completar con éxito,
+     * false en caso contrario.
+     */
+    public boolean setVisibleRange(float minValue, float maxValue, float abscissaValue, float range) {
+        return properties.setVisibleRange(minValue, maxValue, abscissaValue, range);
+    }
+
+    public boolean setVisibleRange(float minValue, float maxValue, float abscissaValue) {
+        return setVisibleRange(minValue, maxValue, abscissaValue, 1);
+    }
+
+    /**
+     * adjustVisibleRange
+     *
+     * @param channelHeight altura que se desea tenga el canal en el cual
+     * se visualice esta señal.
+     * @return boolean true si la operación se pudo completar con éxito,
+     * false en caso contrario.
+     */
+    public boolean adjustVisibleRange() {
+        return adjustVisibleRange(1);
+    }
+
+    public boolean adjustVisibleRange(float range) {
+
+        float min = values[0];
+        float max = values[0];
+        for (int index = 0; index < values.length; index++) {
+            if (values[index] < min) {
+                min = values[index];
+            }
+            if (values[index] > max) {
+                max = values[index];
+            }
+        }
+        return setVisibleRange(min, max, properties.getAbscissaValue(), range);
+    }
+
+    public void addMark(MarkPlugin mp) {
+        mp.setSignal(this);
+        marks.add(mp);
+    }
+
+    public void removeMark(MarkPlugin mp) {
+        if (marks.contains(mp)) {
+            marks.remove(mp);
+        }
+    }
+
+    public void removeAllMarks() {
+        marks.clear();
+    }
+
+    public List<MarkPlugin> getMarks(long startTime, long endTime) {
+        /*@todo bug
+                at java.security.AccessController.doPrivileged(Native Method)
+                at java.awt.Dialog.show(Dialog.java:1089)
+                at java.awt.Component.show(Component.java:1419)
+                at java.awt.Component.setVisible(Component.java:1372)
+                at java.awt.Window.setVisible(Window.java:801)
+                at java.awt.Dialog.setVisible(Dialog.java:979)
+                at net.javahispano.jsignalwb.ui.AlgorithmExecutionJDialog.<init>(AlgorithmExecutionJDialog.java:50)
+                at net.javahispano.jsignalwb.JSWBManager.runAlgorithm(JSWBManager.java:725)
+                at net.javahispano.jsignalwb.JSWBManager.runAlgorithm(JSWBManager.java:675)
+                at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.jButton3ActionPerformed(DefaultAlgorithmConfiguration.java:441)
+                at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration.access$000(DefaultAlgorithmConfiguration.java:28)
+                at net.javahispano.jsignalwb.plugins.DefaultAlgorithmConfiguration$1.actionPerformed(DefaultAlgorithmConfiguration.java:135)
+                at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1995)
+                at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2318)
+                at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:387)
+                at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:242)
+                at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:236)
+                at java.awt.Component.processMouseEvent(Component.java:6038)
+                at javax.swing.JComponent.processMouseEvent(JComponent.java:3260)
+                at java.awt.Component.processEvent(Component.java:5803)
+                at java.awt.Container.processEvent(Container.java:2058)
+                at java.awt.Component.dispatchEventImpl(Component.java:4410)
+                at java.awt.Container.dispatchEventImpl(Container.java:2116)
+                at java.awt.Component.dispatchEvent(Component.java:4240)
+                at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4322)
+                at java.awt.LightweightDispatcher.processMouseEvent(Container.java:3986)
+                at java.awt.LightweightDispatcher.dispatchEvent(Container.java:3916)
+                at java.awt.Container.dispatchEventImpl(Container.java:2102)
+                at java.awt.Window.dispatchEventImpl(Window.java:2429)
+                at java.awt.Component.dispatchEvent(Component.java:4240)
+                at java.awt.EventQueue.dispatchEvent(EventQueue.java:599)
+                at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:273)
+                at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:183)
+                at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:177)
+                at java.awt.Dialog$1.run(Dialog.java:1039)
+                at java.awt.Dialog$3.run(Dialog.java:1091)
+
+         */
+        ArrayList<MarkPlugin> tempMarks = new ArrayList<MarkPlugin>();
+        for (MarkPlugin mp : marks) {
+            if (mp.isInterval()) {
+                if (mp.getEndTime() >= startTime && mp.getMarkTime() < endTime) {
+                    tempMarks.add(mp);
+                }
+            } else {
+                if (mp.getMarkTime() >= startTime && mp.getMarkTime() < endTime) {
+                    tempMarks.add(mp);
+                }
+            }
+        }
+        return tempMarks;
+    }
+
+    public List<MarkPlugin> getAllMarks() {
+        return marks;
+    }
+
+    /** Always call first to the hasOwnGrid method
+     *   @return {@link GridPlugin} plugin asociado a la señal
+     */
+    public GridPlugin getGrid() {
+        return grid;
+    }
+
+    public void setGrid(GridPlugin grid) {
+        this.grid = grid;
+        //ownGrid=true;
+    }
+    /* public boolean hasOwnGrid() {
+    return ownGrid;
+    }*/
+
+    public boolean isImaginary() {
+        return imaginary;
+    }
+
+    void setImaginary(boolean imaginary) {
+        this.imaginary = imaginary;
+    }
+
+    public void setValues(float[] values) {
+        this.values = values;
+        this.properties.setDataSize(values.length);
+    }
+
+    public Object setProperty(String property, Object value){
+        synchronized(externalProperties){
+            return externalProperties.put(property,value);
+        }
+    }
+
+    public Object getProperty(String property){
+        synchronized(externalProperties){
+            return externalProperties.get(property);
+        }
+    }
+
+    public void removeProperty(String property){
+        synchronized (externalProperties){
+            if(externalProperties.containsKey(property)){
+                externalProperties.remove(property);
+            }
+        }
+    }
+    public void cleanProperties(){
+        synchronized (externalProperties){
+            externalProperties.clear();
+        }
+    }
+
+    public List<String> getAvailableProperties(){
+        List<String> tempProp=new ArrayList<String>();
+        synchronized(externalProperties){
+            Iterator<String> it=externalProperties.keySet().iterator();
+            while(it.hasNext())
+                tempProp.add(it.next());
+        }
+        return tempProp;
+    }
+}

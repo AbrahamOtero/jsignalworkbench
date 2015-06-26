@@ -1,0 +1,12 @@
+[PropertyInfo]
+abdominalLimitations,java.util.List,false,false, , ,false,<default>
+basalEnergyAfter,float,false,false, , ,false,<default>
+basalEnergyBefore,float,false,false, , ,false,<default>
+energy,float,false,false, , ,false,<default>
+thoracicLimitations,java.util.List,false,false, , ,false,<default>
+type,research.mining.FluxLimitation.Type,false,false, , ,false,<default>
+[IconNames]
+
+
+
+

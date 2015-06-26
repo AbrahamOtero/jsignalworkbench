@@ -1,0 +1,19 @@
+[PropertyInfo]
+description,String,false,false, , ,true,<default>
+diuresis,boolean,false,false, , ,false,<default>
+flujos,boolean,false,false, , ,false,<default>
+flujosDelRinhon,boolean,false,false, , ,false,<default>
+flujosDelRinhonSuavizados,boolean,false,false, , ,false,<default>
+flujosSuavizados,boolean,false,false, , ,false,<default>
+icon,javax.swing.Icon,false,false, , ,true,<default>
+name,String,false,false, , ,true,<default>
+presionA,boolean,false,false, , ,false,<default>
+presionesASuavizadas,boolean,false,false, , ,false,<default>
+presionesPSuavizadas,boolean,false,false, , ,false,<default>
+presionP,boolean,false,false, , ,false,<default>
+shortDescription,String,false,false, , ,true,<default>
+[IconNames]
+
+
+
+
