@@ -1,5 +1,6 @@
 package com.uspceu;
 
+import com.uspceu.sergio.DiuresisAcumuladaBiometrix;
 import java.util.ArrayList;
 import java.util.List;
 import net.javahispano.jsignalwb.JSWBManager;
@@ -30,9 +31,8 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new SquareNewSignal()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nueva señal y detectar",
                 new SquareNewSignalBeatDetect()));
-
-
-
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "\"Calculo de la diuresis acunulada\"",
+                new DiuresisAcumuladaBiometrix()));
 
 
 
