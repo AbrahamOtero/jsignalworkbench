@@ -31,7 +31,7 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new SquareNewSignal()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nueva señal y detectar",
                 new SquareNewSignalBeatDetect()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "\"Calculo de la diuresis acunulada\"",
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis acumulada",
                 new DiuresisAcumuladaBiometrix()));
 
 
