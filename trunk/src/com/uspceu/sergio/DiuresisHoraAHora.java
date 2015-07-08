@@ -24,21 +24,18 @@ public class DiuresisHoraAHora extends SimpleAlgorithm {
         
         System.out.println("fs "+ fs +"  tiempo "+100/fs );
         for (int i = 0; i < 100; i++) {
-            System.out.println(""+datos[i]);
-        }
-        
+            System.out.println(""+datos[i]);}
+       
         //hora a hora
-        float newData[] = new float[datos.length/3600 + 1];
-        for (int i = 0; i < datos.length; i++) {
-            float acumulado = 0;
-            for (int j = i; j < i+3600&&j<datos.length; j++) {
-                acumulado+=datos[j];
-            }
-            newData[i/3600] = acumulado;
-        }
+        float newData[] = new float[datos.length];
         
-         Signal square = new Signal("Hora a hora de " + signal.getName(),
-                             newData, fs/3600, signal.getStart(), "Unidades");
+        for (int i = 60; i < datos.length;) {
+            newData[i] = datos[i]-datos[i-59];
+            i = i + 60;
+        }
+
+        Signal square = new Signal("Hora a hora de " + signal.getName(),
+                              newData, fs , signal.getStart(), "Unidades");
         square.adjustVisibleRange();
         signalManager.addSignal(square);
     }

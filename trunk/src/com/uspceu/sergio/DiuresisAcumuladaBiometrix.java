@@ -29,12 +29,17 @@ public class DiuresisAcumuladaBiometrix  extends SimpleAlgorithm {
        
         //acumulada
         float newData[] = new float[datos.length];
+        float acumulado = 0;
+        
         for (int i = 1; i < datos.length; i++) {
-            newData[i] = datos[i]-datos[i-1];
+          if(datos[i+1]<datos[i]){
+            acumulado = datos[i];
+          }
+          newData[i] = datos[i] + acumulado;
         }
 
         Signal square = new Signal("Acumulado de " + signal.getName(),
-                              newData, fs/60 , signal.getStart(), "Unidades");
+                              newData, fs , signal.getStart(), "Unidades");
         square.adjustVisibleRange();
         signalManager.addSignal(square);
     }      

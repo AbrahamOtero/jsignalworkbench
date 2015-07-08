@@ -1,6 +1,8 @@
 package com.uspceu;
 
 import com.uspceu.sergio.DiuresisAcumuladaBiometrix;
+import com.uspceu.sergio.DiuresisHoraAHora;
+import com.uspceu.sergio.DiuresisMinutoAMinuto;
 import java.util.ArrayList;
 import java.util.List;
 import net.javahispano.jsignalwb.JSWBManager;
@@ -33,7 +35,10 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new SquareNewSignalBeatDetect()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis acumulada",
                 new DiuresisAcumuladaBiometrix()));
-
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis minuto a minutoM",
+                new DiuresisMinutoAMinuto()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis hora a horaH",
+                new DiuresisHoraAHora()));
 
 
         // DONT REMOVE THIS CODE

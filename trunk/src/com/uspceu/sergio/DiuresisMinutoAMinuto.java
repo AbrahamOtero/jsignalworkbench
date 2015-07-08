@@ -6,6 +6,7 @@
 package com.uspceu.sergio;
 
 import com.uspceu.SimpleAlgorithm;
+import javax.swing.Icon;
 import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.SignalManager;
 
@@ -17,6 +18,11 @@ public class DiuresisMinutoAMinuto extends SimpleAlgorithm  {
     
     public String getName() {
            return "Calculo de la diuresis minuto a minuto";
+         
+    }
+    @Override
+    public Icon getIcon(){
+        return null;
     }
     
     @Override
@@ -24,21 +30,20 @@ public class DiuresisMinutoAMinuto extends SimpleAlgorithm  {
         
         System.out.println("fs "+ fs +"  tiempo "+100/fs );
         for (int i = 0; i < 100; i++) {
-            System.out.println(""+datos[i]);
-        }
-        
+            System.out.println(""+datos[i]);}
+       
         //minuto a minuto
-        float newData[] = new float[datos.length/60 +1];
-        for (int i = 0; i < datos.length; i++) {
-           float acumulado = 0;
-           for (int j =i; j < i+60&&j<datos.length; j++) {
-              acumulado+=datos[j];
-           }
-           newData[i/60] = acumulado;
+        float newData[] = new float[datos.length];
+        
+        for (int i = 1; i < datos.length; i++) {
+          if(datos[i+1]<datos[i]){
+            newData[i] = 0;
+          }
+          newData[i] = datos[i]-datos[i-1];
         }
 
         Signal square = new Signal("Minuto a minuto de " + signal.getName(),
-                             newData, fs/60, signal.getStart(), "Unidades");
+                              newData, fs , signal.getStart(), "Unidades");
         square.adjustVisibleRange();
         signalManager.addSignal(square);
     }  

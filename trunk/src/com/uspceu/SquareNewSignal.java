@@ -9,7 +9,7 @@ public class SquareNewSignal extends SimpleAlgorithm {
     public void runAlgorithm(SignalManager signalManager, Signal signal, 
                 float[] datos, float samplingFrquency) {
 
-        float newData[] = new float[datos.length];
+           float newData[] = new float[datos.length];
         for (int i = 1; i < datos.length; i++) {
             newData[i] = datos[i]*datos[i];
         }
