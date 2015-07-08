@@ -37,7 +37,7 @@ public class DiuresisHoraAHora extends SimpleAlgorithm {
             newData[i/3600] = acumulado;
         }
         
-         Signal square = new Signal("Acumulado de" + signal.getName(),
+         Signal square = new Signal("Hora a hora de " + signal.getName(),
                              newData, fs/3600, signal.getStart(), "Unidades");
         square.adjustVisibleRange();
         signalManager.addSignal(square);
