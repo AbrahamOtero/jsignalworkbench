@@ -17,29 +17,22 @@ import net.javahispano.jsignalwb.SignalManager;
 public class DiuresisMinutoAMinuto extends SimpleAlgorithm  {
     
     public String getName() {
-           return "Calculo de la diuresis minuto a minuto";
-         
-    }
-    @Override
-    public Icon getIcon(){
-        return null;
+           return "Calculo de la diuresis minuto a minuto";  
     }
     
     @Override
     public void runAlgorithm(SignalManager signalManager, Signal signal, float[] datos, float fs) {
-        
-        System.out.println("fs "+ fs +"  tiempo "+100/fs );
-        for (int i = 0; i < 100; i++) {
-            System.out.println(""+datos[i]);}
-       
+
         //minuto a minuto
         float newData[] = new float[datos.length];
         
         for (int i = 1; i < datos.length; i++) {
-          if(datos[i+1]<datos[i]){
+            
+          newData[i] = datos[i]-datos[i-1];
+          
+          if(datos[i]<datos[i-1]){
             newData[i] = 0;
           }
-          newData[i] = datos[i]-datos[i-1];
         }
 
         Signal square = new Signal("Minuto a minuto de " + signal.getName(),

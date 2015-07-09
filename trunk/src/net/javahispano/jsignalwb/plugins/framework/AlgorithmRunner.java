@@ -18,7 +18,7 @@ import net.javahispano.jsignalwb.plugins.Algorithm;
  *   (http://www.apache.org/licenses/).
  */
 public class AlgorithmRunner extends SwingWorker<Boolean, Void> {
-    private Algorithm algorithm;
+    private Algorithm algorithm; 
     private JSWBManager jswbManager;
     private ArrayList<SignalIntervalProperties> signals;
     private String task;

@@ -3,6 +3,8 @@ package com.uspceu;
 import com.uspceu.sergio.DiuresisAcumuladaBiometrix;
 import com.uspceu.sergio.DiuresisHoraAHora;
 import com.uspceu.sergio.DiuresisMinutoAMinuto;
+import com.uspceu.sergio.ValorAbsolutoHoras;
+import com.uspceu.sergio.ValorAbsolutoMinutos;
 import java.util.ArrayList;
 import java.util.List;
 import net.javahispano.jsignalwb.JSWBManager;
@@ -39,7 +41,10 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new DiuresisMinutoAMinuto()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis hora a horaH",
                 new DiuresisHoraAHora()));
-
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo del valor absoluto minuto a minuto",
+                new ValorAbsolutoMinutos()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo del valor absoluto hora a hora",
+                new ValorAbsolutoHoras()));
 
         // DONT REMOVE THIS CODE
         JSWBManager.getPluginManager().registerDebugPlugins(plugins);
