@@ -22,20 +22,22 @@ public class ValorAbsolutoHoras extends SimpleAlgorithm {
     @Override
     public void runAlgorithm(SignalManager signalManager, Signal signal, float[] datos, float fs) {
     
-    Signal biometrix = signalManager.getSignal("Hora a Hora de Acumulado de Biometrix");
-    Signal bascula = signalManager.getSignal("Hora a hora de Acumulado de Bascula");
+    Signal biometrix = signalManager.getSignal("Hora a hora de Acumulado de Biometrix");
+    Signal bascula = signalManager.getSignal("Hora a hora de Bascula");
     
-    float [] arrayBiometrix = bascula.getValues();
-    float [] arrayBascula = bascula.getValues();
-    float newData[] = new float[datos.length/60];
+    float arrayBiometrix[];
+    float arrayBascula[];
     
-    for (int i = 59; i < datos.length;) {
-       newData[i/60] = Math.abs(arrayBiometrix[i] - arrayBascula[i]);
-       i = i + 60;
+    arrayBiometrix = biometrix.getValues();
+    arrayBascula = bascula.getValues();
+    float newData[] = new float[arrayBascula.length];
+    
+    for (int i = 0; i < datos.length; i++) {
+       newData[i] = Math.abs(arrayBiometrix[i] - arrayBascula[i]); 
     }
     
-    Signal square = new Signal("Hora a hora de " + signal.getName(),
-                              newData, fs/60 , signal.getStart(), "Unidades");
+    Signal square = new Signal("Error hora a hora",
+                              newData, biometrix.getSRate() , signal.getStart(), "Unidades");
     square.adjustVisibleRange();
     signalManager.addSignal(square);
     }

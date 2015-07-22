@@ -37,9 +37,9 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new SquareNewSignalBeatDetect()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis acumulada",
                 new DiuresisAcumuladaBiometrix()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis minuto a minutoM",
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis minuto a minuto",
                 new DiuresisMinutoAMinuto()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis hora a horaH",
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis hora a hora",
                 new DiuresisHoraAHora()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo del valor absoluto minuto a minuto",
                 new ValorAbsolutoMinutos()));

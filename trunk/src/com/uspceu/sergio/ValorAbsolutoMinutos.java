@@ -23,17 +23,20 @@ public class ValorAbsolutoMinutos extends SimpleAlgorithm{
     public void runAlgorithm(SignalManager signalManager, Signal signal, float[] datos, float fs) {
     
     Signal biometrix = signalManager.getSignal("Minuto a minuto de Acumulado de Biometrix");
-    Signal bascula = signalManager.getSignal("Minuto a minuto de Acumulado de Bascula");
+    Signal bascula = signalManager.getSignal("Minuto a minuto de Bascula");
     
-    float [] arrayBiometrix = bascula.getValues();
-    float [] arrayBascula = bascula.getValues();
+    float arrayBiometrix[];
+    float arrayBascula[];
+    
+    arrayBiometrix = biometrix.getValues();
+    arrayBascula = bascula.getValues();
     float newData[] = new float[datos.length];
     
     for (int i = 0; i < datos.length; i++) {
        newData[i] = Math.abs(arrayBiometrix[i] - arrayBascula[i]);
     }
     
-    Signal square = new Signal("Minuto a minuto de " + signal.getName(),
+    Signal square = new Signal("Error minuto a minuto",
                               newData, fs , signal.getStart(), "Unidades");
     square.adjustVisibleRange();
     signalManager.addSignal(square);
