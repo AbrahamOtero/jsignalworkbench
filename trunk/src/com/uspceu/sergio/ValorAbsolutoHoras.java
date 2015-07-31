@@ -32,11 +32,11 @@ public class ValorAbsolutoHoras extends SimpleAlgorithm {
     arrayBascula = bascula.getValues();
     float newData[] = new float[arrayBascula.length];
     
-    for (int i = 0; i < datos.length; i++) {
-       newData[i] = Math.abs(arrayBiometrix[i] - arrayBascula[i]); 
+    for (int i = 0; i < arrayBascula.length; i++) {
+       newData[i] = Math.abs(arrayBiometrix[i] - arrayBascula[i]);
     }
     
-    Signal square = new Signal("Error hora a hora",
+    Signal square = new Signal("Error absoluto hora a hora",
                               newData, biometrix.getSRate() , signal.getStart(), "Unidades");
     square.adjustVisibleRange();
     signalManager.addSignal(square);
