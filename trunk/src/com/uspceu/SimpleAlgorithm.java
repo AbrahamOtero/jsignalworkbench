@@ -5,6 +5,9 @@ import com.uspceu.sergio.DiuresisHoraAHora;
 import com.uspceu.sergio.DiuresisMinutoAMinuto;
 import com.uspceu.sergio.ValorAbsolutoHoras;
 import com.uspceu.sergio.ValorAbsolutoMinutos;
+import com.uspceu.victoria.DeteccionOndaP;
+import com.uspceu.victoria.ExportarOndaP;
+import com.uspceu.victoria.MarcasP;
 import java.util.ArrayList;
 import java.util.List;
 import net.javahispano.jsignalwb.JSWBManager;
@@ -45,6 +48,13 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new ValorAbsolutoMinutos()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo del valor absoluto hora a hora",
                 new ValorAbsolutoHoras()));
+        
+        //VICTORIA 
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Marcar onda P",
+                new MarcasP()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Deteccion onda P",
+                new DeteccionOndaP()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Exportar P ", new ExportarOndaP()));
 
         // DONT REMOVE THIS CODE
         JSWBManager.getPluginManager().registerDebugPlugins(plugins);
