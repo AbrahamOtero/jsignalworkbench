@@ -1,5 +1,6 @@
 package com.uspceu;
 
+import com.sequencing.Sequencing;
 import com.uspceu.sergio.DiuresisAcumuladaBiometrix;
 import com.uspceu.sergio.DiuresisHoraAHora;
 import com.uspceu.sergio.DiuresisMinutoAMinuto;
@@ -34,9 +35,9 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado",
                 new Square()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nuva señal",
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nuva seï¿½al",
                 new SquareNewSignal()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nueva señal y detectar",
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nueva seï¿½al y detectar",
                 new SquareNewSignalBeatDetect()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis acumulada",
                 new DiuresisAcumuladaBiometrix()));
@@ -48,13 +49,13 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new ValorAbsolutoMinutos()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo del valor absoluto hora a hora",
                 new ValorAbsolutoHoras()));
-        
-        //VICTORIA 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Marcar onda P",
                 new MarcasP()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Deteccion onda P",
                 new DeteccionOndaP()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Exportar P ", new ExportarOndaP()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Detectar picos",
+                new Sequencing()));
 
         // DONT REMOVE THIS CODE
         JSWBManager.getPluginManager().registerDebugPlugins(plugins);
