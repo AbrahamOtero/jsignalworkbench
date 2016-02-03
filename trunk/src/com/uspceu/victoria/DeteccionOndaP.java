@@ -52,8 +52,11 @@ public class DeteccionOndaP extends SimpleAlgorithm{
                 System.out.println("Valor de P: "+max);
                 System.out.println("Posicion de P: "+posicionP);
                 
+                String maximoP = Integer.toString(posicionP);
+                
                 DefaultIntervalMark mark = createIntervalMark(iniMarca, finMarca, signal);
-                mark.setTitle("P");
+                mark.setTitle("P");//posicion maximo en cada onda P
+                mark.setComentary(maximoP);
                 mark.setColor(Color.BLUE);
                 signal.addMark(mark);
                 }
