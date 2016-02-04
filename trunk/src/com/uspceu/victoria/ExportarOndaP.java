@@ -101,10 +101,10 @@ public class ExportarOndaP extends SimpleAlgorithm{
     
     private void generatePP(Signal signal, List<DefaultIntervalMark> ondasP) {
         pp = new float[ondasP.size()];
-        boolean useMax = true;
         int i = 0;
-        for (MarkPlugin m : ondasP) {
-            long refinedRR = ajustarPrincipios(m, useMax, signal);
+        for (DefaultIntervalMark m : ondasP) {
+            
+            long refinedRR = Long.parseLong(m.getComentary());
             pp[i] = refinedRR - signal.getStart();
             if (Math.random()>0.98) pp[i]+=60;
             pp[i] /= 1000;
@@ -123,38 +123,11 @@ public class ExportarOndaP extends SimpleAlgorithm{
 
     }
     
-    private long ajustarPrincipios(MarkPlugin m, boolean useMax, Signal signal) {
-        float[] beats = signal.getValues();
-        int begining = TimePositionConverter.timeToPosition(m.getMarkTime(), signal);
-        int end = TimePositionConverter.timeToPosition(m.getEndTime(), signal);
-        int selectedIndex = 0;
-        if (useMax) {
-            float mv = Float.NEGATIVE_INFINITY;
-            for (int i = begining; i < end; i++) {
-                if (beats[i] > mv) {
-                    mv = beats[i];
-                    selectedIndex = i;
-                }
-            }
-        } else {
-            float mv = Float.POSITIVE_INFINITY;
-            for (int i = begining; i < end; i++) {
-                if (beats[i] < mv) {
-                    mv = beats[i];
-                    selectedIndex = i;
-                }
-            }
-        }
 
-        long ppInterval = TimePositionConverter.positionToTime(selectedIndex, signal);
-        return ppInterval;
-    }
-    
     
     /*public void runAlgorithm(SignalManager signalManager, Signal signal, float[] datos, float fs) {
         
     }*/
-    
     public void runAlgorithm(SignalManager sm, Signal signal, float[]datos, float fs) {
         
         List<DefaultIntervalMark> marcasP = marcasP(sm, signal);

@@ -8,6 +8,7 @@ import net.javahispano.jsignalwb.Signal;
 import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
+import net.javahispano.jsignalwb.utilities.TimePositionConverter;
 
 /**
  *
@@ -52,7 +53,7 @@ public class DeteccionOndaP extends SimpleAlgorithm{
                 System.out.println("Valor de P: "+max);
                 System.out.println("Posicion de P: "+posicionP);
                 
-                String maximoP = Integer.toString(posicionP);
+                String maximoP = Float.toString(max);
                 
                 DefaultIntervalMark mark = createIntervalMark(iniMarca, finMarca, signal);
                 mark.setTitle("P");//posicion maximo en cada onda P
