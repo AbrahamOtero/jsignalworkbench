@@ -50,10 +50,11 @@ public class DeteccionOndaP extends SimpleAlgorithm{
                 int iniMarca = (int) (posicionP-2);
                 int finMarca = (int) (posicionP+2);
                 
-                System.out.println("Valor de P: "+max);
-                System.out.println("Posicion de P: "+posicionP);
+                //System.out.println("Valor de P: "+max);
+                //System.out.println("Posicion de P: "+posicionP);
                 
-                String maximoP = Float.toString(max);
+                long pplong = TimePositionConverter.positionToTime(posicionP, signal);
+                String maximoP = Long.toString(pplong);
                 
                 DefaultIntervalMark mark = createIntervalMark(iniMarca, finMarca, signal);
                 mark.setTitle("P");//posicion maximo en cada onda P

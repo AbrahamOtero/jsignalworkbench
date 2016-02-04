@@ -49,8 +49,8 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new ValorAbsolutoMinutos()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo del valor absoluto hora a hora",
                 new ValorAbsolutoHoras()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Marcar onda P",
-                new MarcasP()));
+        /*plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Marcar onda P",
+                new MarcasP()));*/
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Deteccion onda P",
                 new DeteccionOndaP()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Exportar P ", new ExportarOndaP()));

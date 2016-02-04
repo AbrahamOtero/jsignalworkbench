@@ -12,13 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
-import net.javahispano.jsignalwb.SignalIntervalProperties;
 import net.javahispano.jsignalwb.SignalManager;
 import net.javahispano.jsignalwb.io.BasicSaver;
 import net.javahispano.jsignalwb.plugins.MarkPlugin;
 import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
-import net.javahispano.jsignalwb.plugins.framework.AlgorithmRunner;
-import net.javahispano.jsignalwb.utilities.TimePositionConverter;
 import research.beats.DialogKubiosRHRV;
 
 /**
@@ -104,8 +101,8 @@ public class ExportarOndaP extends SimpleAlgorithm{
         int i = 0;
         for (DefaultIntervalMark m : ondasP) {
             
-            long refinedRR = Long.parseLong(m.getComentary());
-            pp[i] = refinedRR - signal.getStart();
+            long refinedPP = Long.parseLong(m.getComentary());
+            pp[i] = refinedPP - signal.getStart();
             if (Math.random()>0.98) pp[i]+=60;
             pp[i] /= 1000;
             i++;
@@ -187,11 +184,6 @@ public class ExportarOndaP extends SimpleAlgorithm{
         }
     }
 
-    /**
-     * Por defecto no proporciona interfaz propia de ejecucion.
-     *
-     * @return boolean
-     */
     public boolean hasOwnExecutionGUI() {
         return true;
     }
