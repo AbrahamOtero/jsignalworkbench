@@ -39,6 +39,7 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
                 new SquareNewSignal()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Cuadrado nueva se�al y detectar",
                 new SquareNewSignalBeatDetect()));
+
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis acumulada",
                 new DiuresisAcumuladaBiometrix()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Calculo de la diuresis minuto a minuto",
@@ -57,6 +58,15 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Detectar picos",
                 new Sequencing()));
         
+
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "EMG",
+                new com.uspceu.matesanz.EMGAlgorithm()));
+
+
+
+
+
+
 
         // DONT REMOVE THIS CODE
         JSWBManager.getPluginManager().registerDebugPlugins(plugins);
