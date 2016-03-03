@@ -22,6 +22,7 @@ public class EMGAlgorithm extends SimpleAlgorithm {
     public void runAlgorithm(SignalManager signalManager, Signal signal, float[] datos, float fs) {
 
         //La frecuencia de muestreo es 1000
+        //@Todo No se usa para nada
         int anchoVentana = (int) (anchoVentanaSeg * fs);
         int desplazamientoVentana = (int) (desplazamientoVentanaSeg * fs);
 
@@ -34,7 +35,7 @@ public class EMGAlgorithm extends SimpleAlgorithm {
 //        }
         //CUADRADO SENAL
         float newData[] = new float[datos.length];
-
+//@Todo ¿que son estos numeros magicos?
         for (int i = 1; i < datos.length; i++) {
             newData[i] = (datos[i] - 450) * (datos[i] - 450);
         }
@@ -51,9 +52,11 @@ public class EMGAlgorithm extends SimpleAlgorithm {
         float aux=0;
         for (int i = desplazamientoVentana; i < datos.length; i = i + desplazamientoVentana) {
             aux = 0;
+            //@Todo este bucle tendría que ir hasta el ancho de la ventana, no hasta el desplazamiento
             for (int j = i; j != i - desplazamientoVentana; j--) {
                 aux = potencia[j] + aux;
             }
+            //@Todo habría que dividir por el ancho de la ventana
             potenciaPromedioEnVentana[(i-desplazamientoVentana) / desplazamientoVentana] = aux / desplazamientoVentana;
             //potenciaPromedioEnVentana[i/desplazamientoVentana] = aux / desplazamientoVentana; //antes
         }
@@ -73,6 +76,9 @@ public class EMGAlgorithm extends SimpleAlgorithm {
 
         //Maquina de estados
         for (int i = 0; i < potenciaPromedioEnVentana.length; i++) {
+            
+                //@Todo  Ojo que lo logico sería pasar la frecuencia de muestreo de la señal
+            //de potencia promedio
             maquina.funcionaMaquina(potenciaPromedioEnVentana[i],desplazamientoVentana,fs);
             if (maquina.estadoMaquina == Estados.NO_ACTIVIDAD) {
                 actividad[i] = 0;

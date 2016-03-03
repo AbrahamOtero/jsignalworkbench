@@ -20,7 +20,9 @@ class MaquinaDeEstados {
         muestrasEsperaEnActividad = tiempoEsperaEnActividad * fs;
         estadoMaquina = Estados.NO_ACTIVIDAD;
     }
-
+//@Todo no veo en absoluto como se cuentan las muestras de espera para pasar de
+// TRANSICION a ACTIVIDAD Y de ACTIVIDAD a NO ACTIVIDAD
+    
     public void funcionaMaquina(float dato, float muestrasPorVentanaDePotencia, float fs) {
         final float THRESHOLD = 1.5f * threshold.mediana;
         if (estadoMaquina == Estados.NO_ACTIVIDAD) {
@@ -31,13 +33,16 @@ class MaquinaDeEstados {
         if (estadoMaquina == Estados.TRANSICION) {
             if (dato < THRESHOLD) {
                 estadoMaquina = Estados.NO_ACTIVIDAD;
+                //@Todo  No entiendo esta linea
                 muestrasEsperaEnTransicion = tiempoEsperaEnTransicion * fs;
             }
             if (dato >= THRESHOLD) {
                 if (muestrasEsperaEnTransicion <= 0) {
+                //@Todo  No entiendo esta linea
                     muestrasEsperaEnTransicion = tiempoEsperaEnTransicion * fs;
                     estadoMaquina = Estados.ACTIVIDAD;
                 } else {
+                //@Todo  No entiendo esta linea
                     muestrasEsperaEnTransicion = muestrasEsperaEnTransicion - muestrasPorVentanaDePotencia;
                 }
             }
@@ -47,9 +52,11 @@ class MaquinaDeEstados {
                 estadoMaquina = Estados.NO_ACTIVIDAD;//transición?
             }
             if (dato >= THRESHOLD) {
+                //@Todo  No entiendo esta linea
                 muestrasEsperaEnActividad = tiempoEsperaEnActividad * fs;
 
             } else {
+                //@Todo  No entiendo esta linea
                 muestrasEsperaEnActividad = muestrasEsperaEnActividad - muestrasPorVentanaDePotencia;
             }
         }
