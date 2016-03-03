@@ -87,8 +87,16 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
 
     public DefaultIntervalMark createIntervalMark(int start, int end, Signal signal) {
         DefaultIntervalMark mark = new DefaultIntervalMark();
-        mark.setMarkTime(TimePositionConverter.positionToTime(start - 5, signal));
-        mark.setEndTime(TimePositionConverter.positionToTime(end + 5, signal));
+        int delayedStart = start - 5;
+        int advancedEnd = end + 5;
+        if(delayedStart < 0){
+            delayedStart=1;
+        }
+        if (advancedEnd > signal.getValues().length) {
+            advancedEnd =  signal.getValues().length-1;
+        }
+        mark.setMarkTime(TimePositionConverter.positionToTime(delayedStart, signal));
+        mark.setEndTime(TimePositionConverter.positionToTime(advancedEnd, signal));
         return mark;
     }
 
