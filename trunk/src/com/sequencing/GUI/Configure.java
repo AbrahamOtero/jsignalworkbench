@@ -3,8 +3,9 @@ package com.sequencing.GUI;
 
 import com.sequencing.Sequencing;
 import static java.lang.Boolean.FALSE;
+import net.javahispano.jsignalwb.JSWBManager;
 
-public class Configure extends javax.swing.JFrame {
+public class Configure extends javax.swing.JDialog {
 
     /**
      * Creates new form Configure
@@ -14,7 +15,8 @@ public class Configure extends javax.swing.JFrame {
         heightText.setText(Integer.toString(Sequencing.HEIGHT));
         heightSlider.setValue(Sequencing.HEIGHT);
         widthText.setText(Double.toString(Sequencing.WIDTH));
-        conf.show();
+        this.setLocationRelativeTo(JSWBManager.getParentWindow());
+        setVisible(true);
     }
 
     
@@ -35,7 +37,7 @@ public class Configure extends javax.swing.JFrame {
 
         conf.getContentPane().setLayout(new java.awt.GridLayout(0, 2));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       
         getContentPane().setLayout(new java.awt.GridLayout(0, 2));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -98,8 +100,8 @@ public class Configure extends javax.swing.JFrame {
         heightSlider.setValue(Integer.parseInt(heightText.getText()));    }//GEN-LAST:event_heightTextActionPerformed
 
     private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyButtonActionPerformed
-        Sequencing.HEIGHT = Integer.parseInt(heightText.getText());
-        Sequencing.WIDTH = Double.parseDouble(widthText.getText());
+        Sequencing.setHEIGHT(Integer.parseInt(heightText.getText()));
+        Sequencing.setWIDTH(Double.parseDouble(widthText.getText()));
         
         this.setVisible(FALSE);
     }//GEN-LAST:event_modifyButtonActionPerformed
