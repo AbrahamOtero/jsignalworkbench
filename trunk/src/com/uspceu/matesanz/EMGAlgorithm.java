@@ -15,29 +15,21 @@ import net.javahispano.jsignalwb.plugins.defaults.DefaultIntervalMark;
  */
 public class EMGAlgorithm extends SimpleAlgorithm {
 
-    float anchoVentanaSeg = 1;
-    float desplazamientoVentanaSeg = 0.5F;
+    float anchoVentanaSeg = 0.3F;
+    float desplazamientoVentanaSeg = 0.1F;
 
     @Override
     public void runAlgorithm(SignalManager signalManager, Signal signal, float[] datos, float fs) {
 
         //La frecuencia de muestreo es 1000
-        //@Todo No se usa para nada
         int anchoVentana = (int) (anchoVentanaSeg * fs);
         int desplazamientoVentana = (int) (desplazamientoVentanaSeg * fs);
 
-//        //Poner base de la senal a cero
-//        Threshold tsenal = new Threshold(datos);
-//        for (int i = 0; i < datos.length; i++) {
-//            if (datos[i] < tsenal.media + tsenal.quartil1 && datos[i] > tsenal.media - tsenal.quartil1) {
-//                datos[i] = tsenal.media;
-//            }
-//        }
+       Threshold tsenal = new Threshold(datos);
         //CUADRADO SENAL
         float newData[] = new float[datos.length];
-//@Todo ¿que son estos numeros magicos?
         for (int i = 1; i < datos.length; i++) {
-            newData[i] = (datos[i] - 450) * (datos[i] - 450);
+            newData[i] = (datos[i] - tsenal.mediana) * (datos[i] - tsenal.mediana);
         }
 
         Signal square = new Signal("Cuadrado de" + signal.getName(),
@@ -46,29 +38,33 @@ public class EMGAlgorithm extends SimpleAlgorithm {
         signalManager.addSignal(square);
 
         //POTENCIA SENAL
-        float[] potenciaPromedioEnVentana = new float[(datos.length / desplazamientoVentana) +1];//datos entre frecuencia
+        float[] potenciaPromedioEnVentana = new float[(datos.length / desplazamientoVentana) +1];
         float[] potencia = square.getValues();
         
         float aux=0;
-        for (int i = desplazamientoVentana; i < datos.length; i = i + desplazamientoVentana) {
+        int ventana =0;
+        for (int i =anchoVentana; i < datos.length; i = i + desplazamientoVentana) {            
+            
             aux = 0;
-            //@Todo este bucle tendría que ir hasta el ancho de la ventana, no hasta el desplazamiento
-            for (int j = i; j != i - desplazamientoVentana; j--) {
+            for (int j = i; j != i - anchoVentana; j--) {                
+                
                 aux = potencia[j] + aux;
             }
-            //@Todo habría que dividir por el ancho de la ventana
-            potenciaPromedioEnVentana[(i-desplazamientoVentana) / desplazamientoVentana] = aux / desplazamientoVentana;
-            //potenciaPromedioEnVentana[i/desplazamientoVentana] = aux / desplazamientoVentana; //antes
+            
+            //potenciaPromedioEnVentana[(i-desplazamientoVentana) / desplazamientoVentana] = aux / desplazamientoVentana;//antes
+            potenciaPromedioEnVentana[ventana] = aux / anchoVentana;
+            ventana++;
+            
         }
+        final float fsPotencia = 1/desplazamientoVentanaSeg;
 
-        Signal potenciaSenal = new Signal("Potencia de" + signal.getName(), potenciaPromedioEnVentana,
-                1 / desplazamientoVentanaSeg, signal.getStart(), "");
+        Signal potenciaSenal = new Signal("Potencia de" + signal.getName(), potenciaPromedioEnVentana, fsPotencia, signal.getStart(), "");
         potenciaSenal.adjustVisibleRange();
         signalManager.addSignal(potenciaSenal);
 
         //ACTIVACION SENAL
         float[] actividad = new float[datos.length / desplazamientoVentana + 1];
-        MaquinaDeEstados maquina = new MaquinaDeEstados(fs);
+        MaquinaDeEstados maquina = new MaquinaDeEstados(fsPotencia);
         //Threshold
 
         Threshold t1 = new Threshold(potenciaPromedioEnVentana);
@@ -77,9 +73,7 @@ public class EMGAlgorithm extends SimpleAlgorithm {
         //Maquina de estados
         for (int i = 0; i < potenciaPromedioEnVentana.length; i++) {
             
-                //@Todo  Ojo que lo logico sería pasar la frecuencia de muestreo de la señal
-            //de potencia promedio
-            maquina.funcionaMaquina(potenciaPromedioEnVentana[i],desplazamientoVentana,fs);
+            maquina.funcionaMaquina(potenciaPromedioEnVentana[i],desplazamientoVentana);
             if (maquina.estadoMaquina == Estados.NO_ACTIVIDAD) {
                 actividad[i] = 0;
             }
@@ -91,8 +85,7 @@ public class EMGAlgorithm extends SimpleAlgorithm {
             }
         }
 
-        Signal activacion = new Signal("Activacion de" + signal.getName(), actividad,
-                1 / desplazamientoVentanaSeg, signal.getStart(), "");
+        Signal activacion = new Signal("Activacion de" + signal.getName(), actividad, fsPotencia, signal.getStart(), "");
         activacion.adjustVisibleRange();
         signalManager.addSignal(activacion);
     }

@@ -1,10 +1,8 @@
-
 package com.uspceu.matesanz;
 
 import java.util.Arrays;
 
-
-    public class Threshold {
+public class Threshold {
 
     float mediana;
     float quartil1;
@@ -21,7 +19,7 @@ import java.util.Arrays;
         for (int i = 0; i < datos.length; i++) {
             datosOrdenados[i] = datos[i];
         }
-        
+
         Arrays.sort(datosOrdenados);
         int aux = (int) datosOrdenados.length / 4;
         quartil1 = datosOrdenados[aux];
@@ -29,6 +27,7 @@ import java.util.Arrays;
         quartil3 = datosOrdenados[aux * 3];
 
     }
+
     public float getMediana() {
         return mediana;
     }
@@ -60,6 +59,5 @@ import java.util.Arrays;
     public void setMedia(float media) {
         this.media = media;
     }
-    
-}
 
+}

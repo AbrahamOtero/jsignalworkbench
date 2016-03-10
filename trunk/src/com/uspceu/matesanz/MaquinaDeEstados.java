@@ -7,57 +7,55 @@ enum Estados {
 
 class MaquinaDeEstados {
 
-    float tiempoEsperaEnTransicion = 1.0F;
-    float tiempoEsperaEnActividad = 1.0F;
+    float tiempoEsperaEnTransicion = 0.5F;
+    float tiempoEsperaEnActividad =0.5F;
     Estados estadoMaquina;
     float dato;
     Threshold threshold;
-    float muestrasEsperaEnTransicion;
-    float muestrasEsperaEnActividad;
+    final float frecuenciaDePotencia;
+    final float muestrasEsperaEnTransicion;
+    final float muestrasEsperaEnActividad;
+    float muestrasEsperandoEnTransicion;
+    float muestrasEsperandoEnActividad;
 
     MaquinaDeEstados(float fs) {
         muestrasEsperaEnTransicion = tiempoEsperaEnTransicion * fs;
         muestrasEsperaEnActividad = tiempoEsperaEnActividad * fs;
         estadoMaquina = Estados.NO_ACTIVIDAD;
+        this.frecuenciaDePotencia=fs;
     }
-//@Todo no veo en absoluto como se cuentan las muestras de espera para pasar de
-// TRANSICION a ACTIVIDAD Y de ACTIVIDAD a NO ACTIVIDAD
-    
-    public void funcionaMaquina(float dato, float muestrasPorVentanaDePotencia, float fs) {
+
+    public void funcionaMaquina(float dato, float muestrasPorVentanaDePotencia) {
         final float THRESHOLD = 1.5f * threshold.mediana;
         if (estadoMaquina == Estados.NO_ACTIVIDAD) {
             if (dato >= THRESHOLD) {
                 estadoMaquina = Estados.TRANSICION;
             }
         }
-        if (estadoMaquina == Estados.TRANSICION) {
+        else if (estadoMaquina == Estados.TRANSICION) {
             if (dato < THRESHOLD) {
                 estadoMaquina = Estados.NO_ACTIVIDAD;
-                //@Todo  No entiendo esta linea
-                muestrasEsperaEnTransicion = tiempoEsperaEnTransicion * fs;
+                muestrasEsperandoEnTransicion = 0;
             }
-            if (dato >= THRESHOLD) {
-                if (muestrasEsperaEnTransicion <= 0) {
-                //@Todo  No entiendo esta linea
-                    muestrasEsperaEnTransicion = tiempoEsperaEnTransicion * fs;
+            else if (dato >= THRESHOLD) {
+                if (muestrasEsperandoEnTransicion >= muestrasEsperaEnTransicion) {
                     estadoMaquina = Estados.ACTIVIDAD;
+                    muestrasEsperandoEnActividad=0;
                 } else {
-                //@Todo  No entiendo esta linea
-                    muestrasEsperaEnTransicion = muestrasEsperaEnTransicion - muestrasPorVentanaDePotencia;
+                    muestrasEsperandoEnTransicion++;
                 }
             }
         }
-        if (estadoMaquina == Estados.ACTIVIDAD) {
-            if (dato <= THRESHOLD && muestrasEsperaEnActividad <= 0) {
+        else if (estadoMaquina == Estados.ACTIVIDAD) {
+            if (dato <= THRESHOLD && muestrasEsperandoEnActividad >= muestrasEsperaEnActividad) {
                 estadoMaquina = Estados.NO_ACTIVIDAD;//transición?
+                muestrasEsperandoEnActividad=0;
             }
-            if (dato >= THRESHOLD) {
-                //@Todo  No entiendo esta linea
-                muestrasEsperaEnActividad = tiempoEsperaEnActividad * fs;
+            else if (dato >= THRESHOLD) {
+                muestrasEsperandoEnActividad=0;
 
             } else {
-                //@Todo  No entiendo esta linea
-                muestrasEsperaEnActividad = muestrasEsperaEnActividad - muestrasPorVentanaDePotencia;
+                muestrasEsperandoEnActividad++;
             }
         }
 
