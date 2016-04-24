@@ -55,8 +55,10 @@ public abstract class SimpleAlgorithm extends AlgorithmAdapter {
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Deteccion onda P",
                 new DeteccionOndaP()));
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Exportar P ", new ExportarOndaP()));
-        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Detectar picos",
-                new Sequencing()));
+        plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "Deteccion Picos",
+                new Sequencing() {
+
+        }));
         
 
         plugins.add(new DebugPluginInfo(PluginTypes.ALGORITHM, "EMG",
