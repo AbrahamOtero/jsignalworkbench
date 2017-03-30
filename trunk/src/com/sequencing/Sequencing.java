@@ -4,6 +4,7 @@ import com.sequencing.GUI.Configure;
 import com.uspceu.SimpleAlgorithm;
 import java.awt.Color;
 import static java.awt.Color.blue;
+import static java.awt.Color.red;
 import java.util.ArrayList;
 import net.javahispano.jsignalwb.JSWBManager;
 import net.javahispano.jsignalwb.Signal;
@@ -17,23 +18,34 @@ public class Sequencing extends SimpleAlgorithm {
 
     public static int HEIGHT = 140;
     public static Color COLOUR = blue;
-    public static int[] guanine = new int[100000];
-    public static int[] adenine = new int[100000];
-    public static int[] thymine = new int[100000];
-    public static int[] cytosine = new int[100000];
+    public static int LENGTH = 100000;
+    public static int WIDTH = 4;
+    public static int[] guanine;
+    public static int[] adenine;
+    public static int[] thymine;
+    public static int[] cytosine;
 
     @Override
     public void runAlgorithm(SignalManager signalManager, Signal signal, float[] data, float fs) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
         int sequenceLength = 0; // LENGTH OF THE SEQUENCE
-        
+
+        guanine = new int[LENGTH];
+        adenine = new int[LENGTH];
+        thymine = new int[LENGTH];
+        cytosine = new int[LENGTH];
+
+        signalManager.renameSignal("Signal0", "G");
+        signalManager.renameSignal("Signal1", "A");
+        signalManager.renameSignal("Signal2", "T");
+        signalManager.renameSignal("Signal3", "C");
 
         // MARK THE SIGNAL AND OBTAIN THE 0-1 ARRAYS FOR EACH BASE
-        markSignal(signalManager, "Signal0");
-        markSignal(signalManager, "Signal1");
-        markSignal(signalManager, "Signal2");
-        markSignal(signalManager, "Signal3");
+        markSignal(signalManager, "G");
+        markSignal(signalManager, "A");
+        markSignal(signalManager, "T");
+        markSignal(signalManager, "C");
 
 //        // PRINT THE 0-1 ARRAYS ON THE SCREEN
 //        System.out.println("Guanine: ");
@@ -52,17 +64,11 @@ public class Sequencing extends SimpleAlgorithm {
 //        for (int j = 0; j < cytosine.length; j++) {
 //            System.out.print(cytosine[j]);
 //        }
-
-        signalManager.renameSignal("Signal0", "Guanine");
-        signalManager.renameSignal("Signal1", "Adenine");
-        signalManager.renameSignal("Signal2", "Thymine");
-        signalManager.renameSignal("Signal3", "Cytosine");
-
-        int[] orArray1 = new int[guanine.length]; // AUXILLIARY ARRAYS
-        int[] orArray2 = new int[adenine.length];
-        int[] orArray3 = new int[thymine.length];
-        int[] orArray4 = new int[cytosine.length];
-        int[] orArray = new int[guanine.length]; //ARRAY THAT HOLDS THE OR OPERATION OF THE PREVIOUS 4
+        int[] orArray1 = new int[LENGTH]; // AUXILLIARY ARRAYS
+        int[] orArray2 = new int[LENGTH];
+        int[] orArray3 = new int[LENGTH];
+        int[] orArray4 = new int[LENGTH];
+        int[] orArray = new int[LENGTH]; //ARRAY THAT HOLDS THE OR OPERATION OF THE PREVIOUS 4
 
         // FILL THE AUXILLIARY ARRAYS
         for (int j = 0; j < guanine.length; j++) {
@@ -82,47 +88,51 @@ public class Sequencing extends SimpleAlgorithm {
 //        for (int i = 0; i < orArray.length; i++) {
 //            System.out.print(orArray[i]);
 //        }
-        
         // FIND HOW LONG THE SEQUENCE IS
         for (int j = 0; j < orArray.length; j++) {
             if (orArray[j] == 1) {
                 sequenceLength++;
-                j += 5;
+//                j += 1; // Poniendo esto, es mas corta y no pilla todos los picos
             }
         }
 
         // CREATE ARRAYLISTS FOR EACH BASE, AS LONG AS THE SEQUENCE IS
-        ArrayList<String> finalGuanine = new ArrayList<String>(sequenceLength);
-        ArrayList<String> finalAdenine = new ArrayList<String>(sequenceLength);
-        ArrayList<String> finalThymine = new ArrayList<String>(sequenceLength);
-        ArrayList<String> finalCytosine = new ArrayList<String>(sequenceLength);
+        ArrayList<Pico> finalGuanine = new ArrayList<Pico>(sequenceLength);
+        ArrayList<Pico> finalAdenine = new ArrayList<Pico>(sequenceLength);
+        ArrayList<Pico> finalThymine = new ArrayList<Pico>(sequenceLength);
+        ArrayList<Pico> finalCytosine = new ArrayList<Pico>(sequenceLength);
 
-        for (int i = 0; i < sequenceLength; i++) {
-            finalGuanine.add("o");
-            finalAdenine.add("o");
-            finalThymine.add("o");
-            finalCytosine.add("o");
+        for (int i = 0; i < sequenceLength + 5000; i++) {
+            finalGuanine.add(Pico.DUMMY_PICO);
+            finalAdenine.add(Pico.DUMMY_PICO);
+            finalThymine.add(Pico.DUMMY_PICO);
+            finalCytosine.add(Pico.DUMMY_PICO);
         }
-        
-        int aux = 0;
 
+        // CREATE ARRAYS WITH ALL THE VALUES OF THE SIGNAL
+        float[] g = signalManager.getSignal("G").getValues();
+        float[] a = signalManager.getSignal("A").getValues();
+        float[] t = signalManager.getSignal("T").getValues();
+        float[] c = signalManager.getSignal("C").getValues();
+
+        int aux = 0;
         // SET A LETTER IN EACH ARRAY WHERE THERE IS A PEAK OF THAT BASE
-        for (int i = sequenceLength; i > 0; i--) {
+        for (int i = 0; i < sequenceLength; i++) {
             for (int j = aux; j < orArray.length; j++) {
                 if (orArray[j] == 1) {
                     if (guanine[j] == 1) {
-                        finalGuanine.set(sequenceLength - i, "G");
+                        finalGuanine.set(i, new Pico(j, (int) g[j], 'G'));
                     }
                     if (adenine[j] == 1) {
-                        finalAdenine.set(sequenceLength - i, "A");
+                        finalAdenine.set(i, new Pico(j, (int) a[j], 'A'));
                     }
                     if (thymine[j] == 1) {
-                        finalThymine.set(sequenceLength - i, "T");
+                        finalThymine.set(i, new Pico(j, (int) t[j], 'T'));
                     }
                     if (cytosine[j] == 1) {
-                        finalCytosine.set(sequenceLength - i, "C");
+                        finalCytosine.set(i, new Pico(j, (int) c[j], 'C'));
                     }
-                    aux = j+1;
+                    aux = j + 1;
                     break;
                 }
             }
@@ -130,7 +140,7 @@ public class Sequencing extends SimpleAlgorithm {
 
 //        // PRINT THE LETTER ARRAYS
 //        System.out.println("Guanine: ");
-//        for (String finalGuanine1 : finalGuanine) {
+//        for (Pico finalGuanine1 : finalGuanine) {
 //            System.out.print(finalGuanine1);
 //        }
 //        System.out.println("Adenine: ");
@@ -145,72 +155,213 @@ public class Sequencing extends SimpleAlgorithm {
 //        for (String finalCytosine1 : finalCytosine) {
 //            System.out.print(finalCytosine1);
 //        }
-        
         // CREATE AN ARRAY FOR THE FINAL SEQUENCE AND "INITIALIZE" IT
-        ArrayList<String> finalSequence = new ArrayList<String>(sequenceLength);
+        ArrayList<Pico> finalSequence = new ArrayList<Pico>(sequenceLength);
         for (int i = 0; i < sequenceLength; i++) {
-            finalSequence.add("o");
+            finalSequence.add(Pico.DUMMY_PICO);
         }
 
         // FILL THE FINAL SEQUENCE ARRAY
         for (int i = 0; i < sequenceLength; i++) {
 
-            String aux2 = null;
+            Pico aux2 = Pico.DUMMY_PICO;
 
-            if (finalGuanine.get(i).equalsIgnoreCase("G")) {
-                aux2 = "G";
-            }
-            if (finalAdenine.get(i).equalsIgnoreCase("A")) {
-                if (aux2 != null) {
-                    aux2 = "N";
-                } else {
-                    aux2 = "A";
+            Pico picoG = finalGuanine.get(i);
+            if (picoG != Pico.DUMMY_PICO) {
+                if (buscarPicoEnEntornoDe(finalAdenine, i, picoG)) {
+                    if (buscarPicoEnEntornoDe(finalCytosine, i, picoG)) {
+                        if (buscarPicoEnEntornoDe(finalThymine, i, picoG)) {
+                            aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'N');
+                        }
+                        if (aux2 == Pico.DUMMY_PICO) {
+                            aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'V');
+                        }
+                    }
+                    if (buscarPicoEnEntornoDe(finalThymine, i, picoG)) {
+                        aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'D');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'R');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalCytosine, i, picoG)) {
+                    if (buscarPicoEnEntornoDe(finalThymine, i, picoG)) {
+                        aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'B');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'S');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalThymine, i, picoG)) {
+                    aux2 = new Pico(picoG.getPosicion(), picoG.getMaximo(), 'K');
+                }
+                if (aux2 == Pico.DUMMY_PICO) {
+                    aux2 = picoG;
                 }
             }
-            if (finalThymine.get(i).equalsIgnoreCase("T")) {
-                if (aux2 != null) {
-                    aux2 = "N";
-                } else {
-                    aux2 = "T";
+
+            Pico picoA = finalAdenine.get(i);
+            if (picoA != Pico.DUMMY_PICO) {
+                if (buscarPicoEnEntornoDe(finalGuanine, i, picoA)) {
+                    if (buscarPicoEnEntornoDe(finalCytosine, i, picoA)) {
+                        if (buscarPicoEnEntornoDe(finalThymine, i, picoA)) {
+                            aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'N');
+                        }
+                        if (aux2 == Pico.DUMMY_PICO) {
+                            aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'V');
+                        }
+                    }
+                    if (buscarPicoEnEntornoDe(finalThymine, i, picoA)) {
+                        aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'D');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'R');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalCytosine, i, picoA)) {
+                    if (buscarPicoEnEntornoDe(finalThymine, i, picoA)) {
+                        aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'H');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'M');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalThymine, i, picoA)) {
+                    aux2 = new Pico(picoA.getPosicion(), picoA.getMaximo(), 'W');
+                }
+                if (aux2 == Pico.DUMMY_PICO) {
+                    aux2 = picoA;
                 }
             }
-            if (finalCytosine.get(i).equalsIgnoreCase("C")) {
-                if (aux2 != null) {
-                    aux2 = "N";
-                } else {
-                    aux2 = "C";
+
+            Pico picoT = finalThymine.get(i);
+            if (picoT != Pico.DUMMY_PICO) {
+                if (buscarPicoEnEntornoDe(finalGuanine, i, picoT)) {
+                    if (buscarPicoEnEntornoDe(finalAdenine, i, picoT)) {
+                        if (buscarPicoEnEntornoDe(finalCytosine, i, picoT)) {
+                            aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'N');
+                        }
+                        if (aux2 == Pico.DUMMY_PICO) {
+                            aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'D');
+                        }
+                    }
+                    if (buscarPicoEnEntornoDe(finalCytosine, i, picoT)) {
+                        aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'B');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'K');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalAdenine, i, picoT)) {
+                    if (buscarPicoEnEntornoDe(finalCytosine, i, picoT)) {
+                        aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'H');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'W');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalCytosine, i, picoT)) {
+                    aux2 = new Pico(picoT.getPosicion(), picoT.getMaximo(), 'Y');
+                }
+                if (aux2 == Pico.DUMMY_PICO) {
+                    aux2 = picoT;
                 }
             }
+
+            Pico picoC = finalCytosine.get(i);
+            if (picoC != Pico.DUMMY_PICO) {
+                if (buscarPicoEnEntornoDe(finalGuanine, i, picoC)) {
+                    if (buscarPicoEnEntornoDe(finalAdenine, i, picoC)) {
+                        if (buscarPicoEnEntornoDe(finalThymine, i, picoC)) {
+                            aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'N');
+                        }
+                        if (aux2 == Pico.DUMMY_PICO) {
+                            aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'V');
+                        }
+                    }
+                    if (buscarPicoEnEntornoDe(finalThymine, i, picoC)) {
+                        aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'B');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'S');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalAdenine, i, picoC)) {
+                    if (buscarPicoEnEntornoDe(finalThymine, i, picoC)) {
+                        aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'H');
+                    }
+                    if (aux2 == Pico.DUMMY_PICO) {
+                        aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'M');
+                    }
+                }
+                if (buscarPicoEnEntornoDe(finalThymine, i, picoC)) {
+                    aux2 = new Pico(picoC.getPosicion(), picoC.getMaximo(), 'Y');
+                }
+                if (aux2 == Pico.DUMMY_PICO) {
+                    aux2 = picoC;
+                }
+            }
+
             finalSequence.set(i, aux2);
         }
 
-        int k = 0;
-        
-        // ADD ANNOTATIONS
-        for (int i = 0 ; i < orArray.length ; i++) {
-            if(orArray[i]==1){
-                DefaultIntervalAnnotation defaultIntervalAnnotation = new DefaultIntervalAnnotation();
-                defaultIntervalAnnotation.setAnnotationTime(TimePositionConverter.positionToTime(i-5, signal));
-                defaultIntervalAnnotation.setEndTime(TimePositionConverter.positionToTime(i+5, signal));
-                defaultIntervalAnnotation.setTitle(finalSequence.get(k));
-                JSWBManager.getSignalManager().addAnnotation(defaultIntervalAnnotation);
-                k++;
-            }
-        }
-        
-//        for (int i = 0 ; i < orArray.length ; i++){
-//            DefaultInstantAnnotation defaultInstantAnnotation = new DefaultInstantAnnotation();
-//            defaultInstantAnnotation.setAnnotationTime(TimePositionConverter.positionToTime(maxPos[i], signal));
-//            defaultInstantAnnotation.setTitle(finalSequence.get(i));
-//            JSWBManager.getSignalManager().addAnnotation(defaultInstantAnnotation);
-//        }
-        
-//         PRINT THE FINAL SEQUENCE
-        System.out.println("Sequence: ");
+        //         PRINT THE FINAL SEQUENCE
+        System.out.println("\nSequence: ");
         for (int j = 0; j < finalSequence.size(); j++) {
             System.out.print(finalSequence.get(j));
         }
+        
+        int dummies = 0;
+        // DELETE DUMMY PEAKS
+        for (int i = 0; i < finalSequence.size(); i++){
+            if (finalSequence.get(i) == Pico.DUMMY_PICO)
+                dummies ++;
+        }
+        ArrayList<Pico> finalCleanSequence = new ArrayList<Pico>(finalSequence.size()-dummies);
+        for (int i = 0; i < finalSequence.size(); i++) {
+            if (finalSequence.get(i) != Pico.DUMMY_PICO){
+                finalCleanSequence.add(finalSequence.get(i));
+            }
+        }
+        System.out.println("\nClean sequence: ");
+        for (int j = 0; j < finalCleanSequence.size(); j++) {
+            System.out.print(finalCleanSequence.get(j));
+        }
+        
 
+        int k = 0;
+        // ADD ANNOTATIONS
+        for (int i = 0; i < orArray.length; i++) {
+            if (orArray[i] == 1) {
+                DefaultIntervalAnnotation defaultIntervalAnnotation = new DefaultIntervalAnnotation();
+                defaultIntervalAnnotation.setAnnotationTime(TimePositionConverter.positionToTime(i - 3, signal));
+                defaultIntervalAnnotation.setEndTime(TimePositionConverter.positionToTime(i + 3, signal));
+                defaultIntervalAnnotation.setTitle(finalSequence.get(k).toString());
+                if (finalSequence.get(k) != Pico.DUMMY_PICO) {
+                    JSWBManager.getSignalManager().addAnnotation(defaultIntervalAnnotation);
+                }
+                k++;
+            }
+        }
+
+    }
+
+    private static boolean buscarPicoEnEntornoDe(ArrayList<Pico> listaPicos, int i, Pico pico) {
+
+        if (i - 3 > 0 && i + 4 < LENGTH) {
+            for (int j = i; j < i + 3; j++) {
+                if (j > 0 && j < listaPicos.size()) {
+                    if (listaPicos.get(j) != Pico.DUMMY_PICO) {
+                        if (Math.abs(listaPicos.get(j).posicion - pico.posicion) <= 4) {
+                            listaPicos.set(j, Pico.DUMMY_PICO);
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     void markSignal(SignalManager signalManager, String name) {
@@ -244,7 +395,6 @@ public class Sequencing extends SimpleAlgorithm {
 //                derivative, signal.getSRate(), signal.getStart(), "");
 //        signalManager.addSignal(derivedCleanSignal);
 //        derivedCleanSignal.setVisibleRange(0, 10, 400);
-        
         // FIND THE PEAKS(.2) + CREATE ARRAYS
         for (int i = 0; i < derivative.length; i++) {
             aux = false;
@@ -262,13 +412,13 @@ public class Sequencing extends SimpleAlgorithm {
                 mark.setColor(COLOUR);
                 signal.addMark(mark);
 
-                if (signal.getName().equalsIgnoreCase("signal0")) {
+                if (signal.getName().equalsIgnoreCase("G")) {
                     guanine[maxPosition] = 1;
-                } else if (signal.getName().equalsIgnoreCase("signal1")) {
+                } else if (signal.getName().equalsIgnoreCase("A")) {
                     adenine[maxPosition] = 1;
-                } else if (signal.getName().equalsIgnoreCase("signal2")) {
+                } else if (signal.getName().equalsIgnoreCase("T")) {
                     thymine[maxPosition] = 1;
-                } else if (signal.getName().equalsIgnoreCase("signal3")) {
+                } else if (signal.getName().equalsIgnoreCase("C")) {
                     cytosine[maxPosition] = 1;
                 }
 
